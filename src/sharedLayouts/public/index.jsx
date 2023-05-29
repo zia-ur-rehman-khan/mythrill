@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Header, Footer } from "../../components";
+import { Header, Footer, SideBar, Layout } from "../../components";
 
 function PublicSharedLayout({ children }) {
   return (
     <section>
-      <Header />
-      {children}
-      <Footer />
+      <Layout>{children}</Layout>
     </section>
   );
 }

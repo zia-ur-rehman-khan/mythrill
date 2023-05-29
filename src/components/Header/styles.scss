@@ -2,10 +2,20 @@
 
 .main-header {
   width: 100%;
-  padding: 20px 0;
-  background: #fff;
-
-  @media only screen and (max-width: 1025px) {
-    padding: 12px 0;
+  height: 80px;
+  background: master.$theme3-color;
+  display: flex;
+  justify-content: end;
+  .profile {
+    width: 192px;
+    background: master.$dark-color;
+    border-radius: 12px;
+    align-items: flex-start;
+    height: 50px;
+    margin: 13px 21px 0 13px;
+    padding: 5px 10px 5px 10px;
   }
+  // @media only screen and (max-width: 1025px) {
+  //   padding: 12px 0;
+  // }
 }

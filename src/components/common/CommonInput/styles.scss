@@ -1,0 +1,15 @@
+@use "../../../master.scss";
+
+.ant-input-affix-wrapper {
+    background: master.$theme3-color;
+    border: none;
+    input {
+        background: master.$theme3-color;
+        color: #ffffff;
+        opacity: 0.5;
+
+        &::placeholder {
+            color: #ffffff;
+        }
+    }
+}

@@ -1,5 +1,7 @@
-$theme-color: #1862f7;
-$theme2-color: #2098f2;
+$theme-color: #7665c1;
+$theme2-color: #393162;
+$theme3-color: #20232c;
+$dark-color: #1d1f26;
 
 .theme-text {
   color: $theme-color;
@@ -15,7 +17,6 @@ $theme2-color: #2098f2;
   font-size: 22px;
   text-transform: uppercase;
 }
-
 
 .form-input {
   background: #f8f9fb !important;
@@ -79,7 +80,6 @@ $theme2-color: #2098f2;
   color: #ff4d4f;
   font-size: 12px;
 }
-
 
 .form-select {
   border-radius: 10px !important;

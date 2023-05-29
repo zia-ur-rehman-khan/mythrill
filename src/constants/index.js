@@ -1,4 +1,7 @@
 import { Login, Home, Dashboard } from "../modules";
+import { Images } from "../theme";
+
+const { home, share, setting } = Images;
 
 export const ALERT_TIMEOUT = 3000;
 export const DEV_ENV = "dev";
@@ -89,3 +92,9 @@ export const WEB_STRINGS = {
     button: "Back to Home",
   },
 };
+
+export const MENU_LIST = [
+  { title: "Home", url: home },
+  { title: "Share", url: share },
+  { title: "Settings", url: setting },
+];

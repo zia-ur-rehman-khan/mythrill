@@ -13,6 +13,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 
+import { ConfigProvider } from "antd";
+
 function App() {
   const [persistor, setPersistor] = useState(null);
   const [store, setStore] = useState(null);
@@ -20,6 +22,7 @@ function App() {
 
   // const loadingCompleted = () => {
   // };
+
   useEffect(() => {
     const storeConfig = CreateStore(reducers, () => {
       DataHandler.setStore(storeConfig);
@@ -37,27 +40,37 @@ function App() {
 
   return (
     <>
-      {isLoading ? (
-        <div className="loader-wrapper">
-          <BarLoader size={150} color={Colors.theme} />
-        </div>
-      ) : (
-        <Provider store={store}>
-          <PersistGate
-            loading={
-              <div className="loader-wrapper">
-                <BarLoader size={150} color={Colors.theme} />
-              </div>
-            }
-            persistor={persistor}
-          >
-            <Router>
-              <ToastContainer />
-              <PageRoutes />
-            </Router>
-          </PersistGate>
-        </Provider>
-      )}
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: "#7665C1",
+            colorTextPrimary: "#7665C1",
+            colorTextSecondary: "#7665C1",
+          },
+        }}
+      >
+        {isLoading ? (
+          <div className="loader-wrapper">
+            <BarLoader size={150} color={Colors.theme} />
+          </div>
+        ) : (
+          <Provider store={store}>
+            <PersistGate
+              loading={
+                <div className="loader-wrapper">
+                  <BarLoader size={150} color={Colors.theme} />
+                </div>
+              }
+              persistor={persistor}
+            >
+              <Router>
+                <ToastContainer />
+                <PageRoutes />
+              </Router>
+            </PersistGate>
+          </Provider>
+        )}
+      </ConfigProvider>
     </>
   );
 }

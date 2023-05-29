@@ -1,0 +1,35 @@
+@use "../../master.scss";
+
+.main-sideBar {
+    background: master.$theme3-color;
+    width: 210px;
+    min-height: 100vh;
+
+    .logo {
+        margin: 21px 0 0px 21px;
+    }
+    .content {
+        margin: 90px 0 0px 21px;
+    }
+    .logout {
+        margin-top: 200px;
+        padding: 21px;
+    }
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.side-nav-icon {
+    color: #ffff;
+    font-size: 22px;
+}
+
+.mobile {
+    display: none;
+
+    @media (max-width: 1000px) {
+        display: flex;
+    }
+}
