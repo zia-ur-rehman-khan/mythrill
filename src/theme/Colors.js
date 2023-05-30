@@ -59,8 +59,11 @@ const alto2 = "#d5d5d5";
 const silver2 = "#cacaca";
 
 // MAIN COLOR PALETTE - theme colors (dark)
-const theme = "#2098f2";
-const theme2 = "#1862f7";
+const theme = "#7665c1";
+const theme2 = "#393162";
+const theme3 = "#20232c";
+const darkTheme = "#1d1f26";
+
 const themelight = "rgba(32, 152, 242,0.4)";
 
 const background = {
@@ -141,5 +144,7 @@ export default {
   grey4,
   theme,
   theme2,
+  theme3,
   themelight,
+  darkTheme,
 };

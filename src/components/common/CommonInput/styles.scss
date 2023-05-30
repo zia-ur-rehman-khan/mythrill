@@ -2,7 +2,9 @@
 
 .ant-input-affix-wrapper {
     background: master.$theme3-color;
-    border: none;
+    height: 40px;
+    border-color: master.$dark-color;
+
     input {
         background: master.$theme3-color;
         color: #ffffff;
@@ -11,5 +13,23 @@
         &::placeholder {
             color: #ffffff;
         }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .ant-input-affix-wrapper {
+        height: 35px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .ant-input-affix-wrapper {
+        height: 40px;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .ant-input-affix-wrapper {
+        height: 45px;
     }
 }

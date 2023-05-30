@@ -20,16 +20,3 @@
         display: none;
     }
 }
-
-.side-nav-icon {
-    color: #ffff;
-    font-size: 22px;
-}
-
-.mobile {
-    display: none;
-
-    @media (max-width: 1000px) {
-        display: flex;
-    }
-}

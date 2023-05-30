@@ -1,6 +1,30 @@
-.button-parent {
-    button {
-        width: 100%;
-        height: 42px;
+/* Default button styles */
+button.ant-btn {
+    font-size: 12px;
+    height: 40px;
+    width: 100%;
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 767px) {
+    button.ant-btn {
+        font-size: 10px;
+        height: 35px;
+    }
+}
+
+/* Media query for medium screens */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    button.ant-btn {
+        font-size: 12px;
+        height: 40px;
+    }
+}
+
+/* Media query for large screens */
+@media only screen and (min-width: 992px) {
+    button.ant-btn {
+        font-size: 14px;
+        height: 45px;
     }
 }

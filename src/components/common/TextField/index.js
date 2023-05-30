@@ -23,7 +23,7 @@ const CommonTextField = ({
   opacity,
 }) => {
   return (
-    <div className={`${topClass || ""} paragraph-parent`}>
+    <div className={`${topClass || "paragraph-parent"}`}>
       <p
         title={title}
         className={`${className || ""} ${onClick ? "c-pointer" : ""}`}

@@ -2,6 +2,7 @@ $theme-color: #7665c1;
 $theme2-color: #393162;
 $theme3-color: #20232c;
 $dark-color: #1d1f26;
+$light-color: #a2a7b4;
 
 .theme-text {
   color: $theme-color;
@@ -9,6 +10,12 @@ $dark-color: #1d1f26;
 
 .themelight-text {
   color: $theme2-color;
+}
+
+.svg-inline--fa {
+  path {
+    color: $light-color;
+  }
 }
 
 .no-data-available {

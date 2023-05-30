@@ -1,30 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 import CommonTextField from "../common/TextField";
+import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+
 import { Space } from "antd";
-import { Images } from "../../theme";
+import { Drawer } from "antd";
+
+import { AppStyles, Images } from "../../theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { css } from "aphrodite";
+import SideBar from "../SideBar";
 
 const Header = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
   return (
     <header className="main-header">
-      <Space className="profile" align="center">
+      <div className="mobile">
+        <FontAwesomeIcon icon={faBars} onClick={() => setIsMobile(true)} />
+
+        <div className="logo">
+          <img src={Images.logo} width={"132px"} />
+        </div>
+      </div>
+
+      <Space className="profile" align="center" size={20}>
         <img src={Images.profile} width={"33.75px"} height={"33.75px"} />
         <Space direction="vertical" align="baseline">
           <CommonTextField
             text={"Andy Warhol"}
-            fontWeight={700}
             fontSize={"10.5px"}
             lineHeight={"10px"}
+            className={`${css(AppStyles.weight7)}`}
           />
           <CommonTextField
             text={"andywarhol@mail.com"}
-            className={"small"}
             fontSize={"9px"}
             lineHeight={"10px"}
           />
         </Space>
+        <FontAwesomeIcon icon={faEllipsisVertical} />
       </Space>
+
+      <Drawer
+        title={
+          <div className="logo">
+            <img src={Images.logo} width={"132px"} />
+          </div>
+        }
+        placement="left"
+        onClose={() => setIsMobile(false)}
+        open={isMobile}
+        width="50%"
+        className="side-drawer"
+      >
+        <SideBar isDrawer={"drawer"} />
+      </Drawer>
     </header>
   );
 };

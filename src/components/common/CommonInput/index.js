@@ -17,7 +17,7 @@ const CommonInputField = ({
   value,
   errors,
   touch,
-  height = "45px",
+  height,
 }) => {
   return (
     <div>

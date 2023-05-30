@@ -1,15 +1,61 @@
 .paragraph-parent {
     p {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 11px;
+        line-height: 15px;
         color: #ffffff;
     }
 }
 
 .small {
     p {
-        font-size: 14px;
+        font-size: 9px;
         line-height: 20px;
+        color: #ffffff;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .paragraph-parent {
+        p {
+            font-size: 10px;
+            line-height: 14px;
+        }
+    }
+
+    .small {
+        p {
+            font-size: 8px;
+            line-height: 1.4;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .paragraph-parent {
+        p {
+            font-size: 11px;
+            line-height: 15px;
+        }
+    }
+    .small {
+        p {
+            font-size: 9px;
+            line-height: 1.5;
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .paragraph-parent {
+        p {
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+    .small {
+        p {
+            font-size: 10px;
+            line-height: 1.6;
+        }
     }
 }

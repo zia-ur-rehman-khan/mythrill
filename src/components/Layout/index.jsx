@@ -19,28 +19,28 @@ const Layout = ({ children }) => {
 
           <Row gutter={[20, 20]}>
             <Col
-              lg={{ span: 9 }}
-              md={{ span: 9 }}
-              sm={{ span: 8 }}
-              xs={{ span: 8 }}
+              lg={{ span: 8 }}
+              md={{ span: 8 }}
+              sm={{ span: 12 }}
+              xs={{ span: 24 }}
             >
               <Space size={0} direction="vertical">
                 <CommonHeading text={"Welcome Back Andy!"} />
               </Space>
             </Col>
             <Col
-              lg={{ span: 9 }}
-              md={{ span: 9 }}
-              sm={{ span: 6 }}
-              xs={{ span: 8 }}
+              lg={{ span: 10 }}
+              md={{ span: 10 }}
+              sm={{ span: 12 }}
+              xs={{ span: 24 }}
             >
               <CommonInputField placeholder="search..." />
             </Col>
             <Col
               lg={{ span: 6 }}
               md={{ span: 6 }}
-              sm={{ span: 6 }}
-              xs={{ span: 8 }}
+              sm={{ span: 12 }}
+              xs={{ span: 24 }}
             >
               <CommonButton text={"Trending Stock"} />
             </Col>
