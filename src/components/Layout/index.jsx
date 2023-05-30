@@ -45,7 +45,7 @@ const Layout = ({ children }) => {
               <CommonButton text={"Trending Stock"} />
             </Col>
           </Row>
-          {children}
+          <div className="child-layout">{children}</div>
         </div>
       </div>
     </div>

@@ -5,10 +5,9 @@ import SecDetail from "./secDetails";
 import Footer from "./Footer";
 import Loader from "./loader";
 import ConfirmationModal from "./confirmationModal";
-import CommonButton from "./common/CommonButton";
-import CommonHeading from "./common/CommonHeading";
 import SideBar from "./SideBar";
 import Layout from "./Layout";
+import { StockCard, CommonButton, CommonHeading } from "./common";
 
 export {
   ButtonComponent,
@@ -22,4 +21,5 @@ export {
   CommonHeading,
   SideBar,
   Layout,
+  StockCard,
 };

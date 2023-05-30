@@ -1,0 +1,18 @@
+.stockCard-main {
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 0.4px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 0 10px 0;
+    .color-text {
+        border-radius: 61.2328px;
+        padding: 5px;
+    }
+    .red {
+        background: rgba(241, 44, 44, 0.2);
+        color: #f12c2c;
+    }
+    .green {
+        background: rgba(38, 171, 95, 0.2);
+        color: #26ab5f;
+    }
+}
