@@ -147,6 +147,17 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "green",
     id: "1",
+    src: Images.bitCoin,
+  },
+
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "3",
+    src: Images.netflix,
   },
   {
     title: "BTCUSDT",
@@ -155,14 +166,7 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "green",
     id: "2",
-  },
-  {
-    title: "Netflix",
-    name: "Stock",
-    amount: "$738.00",
-    stockUpdate: "+23,6%",
-    color: "red",
-    id: "3",
+    src: Images.bitCoin,
   },
   {
     title: "BTCUSDT",
@@ -171,6 +175,7 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "green",
     id: "4",
+    src: Images.bitCoin,
   },
   {
     title: "Netflix",
@@ -179,6 +184,7 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "red",
     id: "5",
+    src: Images.netflix,
   },
   {
     title: "BTCUSDT",
@@ -187,6 +193,7 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "green",
     id: "6",
+    src: Images.bitCoin,
   },
   {
     title: "Netflix",
@@ -195,6 +202,7 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "red",
     id: "7",
+    src: Images.netflix,
   },
   {
     title: "Netflix",
@@ -203,6 +211,7 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "red",
     id: "8",
+    src: Images.netflix,
   },
   {
     title: "Netflix",
@@ -211,13 +220,15 @@ export const stock_List = [
     stockUpdate: "+23,6%",
     color: "red",
     id: "9",
+    src: Images.netflix,
   },
   {
-    title: "Netflix",
-    name: "Stock",
-    amount: "$738.00",
+    title: "BTCUSDT",
+    name: "Cryptocurrency",
+    amount: "$23,738",
     stockUpdate: "+23,6%",
-    color: "red",
-    id: "10",
+    color: "green",
+    id: "6",
+    src: Images.bitCoin,
   },
 ];

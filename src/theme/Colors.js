@@ -29,6 +29,7 @@ const boulder = "#787878";
 const outerSpace = "#141313";
 const codGrays = "#191818";
 // colors
+const green = "#1ABF17";
 const hotPink = "#ff436d";
 const deepPurple = "#983eeb";
 const pastelBlue = "#47a4ff";
@@ -147,4 +148,5 @@ export default {
   theme3,
   themelight,
   darkTheme,
+  green,
 };

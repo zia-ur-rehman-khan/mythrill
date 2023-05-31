@@ -13,6 +13,7 @@ import {
   CommonHeading,
   CommonModal,
   CommonInputField,
+  CommonTextField,
 } from "./common";
 
 export {
@@ -30,4 +31,5 @@ export {
   StockCard,
   CommonModal,
   CommonInputField,
+  CommonTextField,
 };
