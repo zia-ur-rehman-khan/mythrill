@@ -9,6 +9,11 @@ import CommonButton from "../common/CommonButton";
 import CommonInputField from "../common/CommonInput";
 import { useNavigate } from "react-router-dom";
 import { TRENDING_ROUTE } from "../../constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEllipsisVertical,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -42,7 +47,10 @@ const Layout = ({ children }) => {
               sm={{ span: 12 }}
               xs={{ span: 24 }}
             >
-              <CommonInputField placeholder="search..." />
+              <CommonInputField
+                placeholder="search..."
+                suffix={<FontAwesomeIcon icon={faSearch} />}
+              />
             </Col>
             <Col
               lg={{ span: 6 }}

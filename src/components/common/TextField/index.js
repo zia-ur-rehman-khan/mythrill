@@ -1,5 +1,7 @@
 import React from "react";
 import "./styles.scss";
+import { AppStyles } from "../../../theme";
+import { css } from "aphrodite";
 
 const CommonTextField = ({
   topClass,
@@ -26,7 +28,9 @@ const CommonTextField = ({
     <div className={`${topClass || "paragraph-parent"}`}>
       <p
         title={title}
-        className={`${className || ""} ${onClick ? "c-pointer" : ""}`}
+        className={`${className || ""} ${
+          onClick ? css(AppStyles.pointer) : ""
+        }`}
         style={{
           margin: 0,
           padding: 0,

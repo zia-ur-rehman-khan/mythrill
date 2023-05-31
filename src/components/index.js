@@ -7,7 +7,13 @@ import Loader from "./loader";
 import ConfirmationModal from "./confirmationModal";
 import SideBar from "./SideBar";
 import Layout from "./Layout";
-import { StockCard, CommonButton, CommonHeading } from "./common";
+import {
+  StockCard,
+  CommonButton,
+  CommonHeading,
+  CommonModal,
+  CommonInputField,
+} from "./common";
 
 export {
   ButtonComponent,
@@ -22,4 +28,6 @@ export {
   SideBar,
   Layout,
   StockCard,
+  CommonModal,
+  CommonInputField,
 };

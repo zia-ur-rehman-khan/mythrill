@@ -4,6 +4,7 @@ import profile from "../assets/profile.png";
 import setting from "../assets/sidebar/setting.png";
 import home from "../assets/sidebar/home.png";
 import share from "../assets/sidebar/share.png";
+import add from "../assets/add.png";
 
 export default {
   ErrorBackground2,
@@ -12,4 +13,5 @@ export default {
   setting,
   home,
   share,
+  add,
 };

@@ -3,12 +3,27 @@
 .main-home {
     display: flex;
     gap: 20px;
+    height: 100%;
+
     .left-side {
         background: master.$dark-color;
         width: 30%;
         padding: 10px;
         border-radius: 12px;
+
         .ant-tabs {
+            height: 85%;
+
+            .ant-tabs-content-holder {
+                transition: overflow 3s ease;
+
+                padding: 0 10px 0 10px;
+                overflow: hidden;
+
+                &:hover {
+                    overflow: auto;
+                }
+            }
             .ant-tabs-nav {
                 .ant-tabs-tab {
                     margin: 0;
@@ -44,6 +59,13 @@
         gap: 20px;
         flex-wrap: wrap;
         cursor: pointer;
+        overflow: hidden;
+        transition: overflow-y 0.3s ease;
+
+        &:hover {
+            overflow: auto;
+        }
+
         .box {
             width: 200px;
             height: 200px;

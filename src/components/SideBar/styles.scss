@@ -3,13 +3,23 @@
 .main-sideBar {
     background: master.$theme3-color;
     width: 210px;
-    min-height: 100vh;
 
     .logo {
-        margin: 21px 0 0px 21px;
+        padding: 21px 0 0px 21px;
     }
     .content {
-        margin: 90px 0 0px 21px;
+        padding: 90px 5px 0 5px;
+        .content-list {
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            border-radius: 20px;
+        }
+        .active {
+            background: #1d1f26;
+        }
     }
     .logout {
         margin-top: 200px;

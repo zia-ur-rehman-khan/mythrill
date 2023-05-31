@@ -5,8 +5,10 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import "./styles.scss";
 import { Space } from "antd";
 import { useNavigate } from "react-router-dom";
+import { AppStyles, Images } from "../../../theme";
+import { css } from "aphrodite";
 
-const StockCard = ({ value }) => {
+const StockCard = ({ value, addIcon }) => {
   const { title, name, amount, stockUpdate, color, id } = value;
 
   const navigate = useNavigate();
@@ -16,9 +18,13 @@ const StockCard = ({ value }) => {
   };
 
   return (
-    <Space className="stockCard-main" onClick={() => changeRoute(id)}>
+    <Space className="stockCard-main">
       <Space direction="vertical">
-        <CommonTextField text={title} fontWeight={600} />
+        <CommonTextField
+          text={title}
+          fontWeight={600}
+          onClick={addIcon ? null : () => changeRoute(id)}
+        />
         <CommonTextField text={name} color={"#626D7D"} />
       </Space>
       <Space size={10}>
@@ -28,7 +34,16 @@ const StockCard = ({ value }) => {
             <CommonTextField text={stockUpdate} topClass={"small"} />
           </div>
         </Space>
-        <FontAwesomeIcon icon={faEllipsisVertical} />
+        {addIcon ? (
+          <img
+            src={Images.add}
+            width={"21px"}
+            height={"21px"}
+            className={css(AppStyles.pointer)}
+          />
+        ) : (
+          <FontAwesomeIcon icon={faEllipsisVertical} />
+        )}
       </Space>
     </Space>
   );

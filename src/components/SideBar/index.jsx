@@ -6,12 +6,13 @@ import { Divider, Drawer, List, Space } from "antd";
 import CommonTextField from "../common/TextField";
 import CommonButton from "../common/CommonButton";
 import { MENU_LIST } from "../../constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const changeRoute = (route) => {
     navigate(route);
@@ -26,12 +27,19 @@ const SideBar = ({ isDrawer }) => {
           </div>
         )}
 
-        <Space size={30} direction="vertical" className="content">
+        <Space direction="vertical" className="content">
           {MENU_LIST?.map((t, i) => (
-            <Space key={i} size={20} onClick={() => changeRoute(t.route)}>
+            <div
+              className={`content-list ${
+                location.pathname === t.route ? "active" : ""
+              }`}
+              key={i}
+              size={20}
+              onClick={() => changeRoute(t.route)}
+            >
               <img src={t.src} width={"15px"} height={"15px"} />
               <CommonTextField text={t.title} fontWeight={600} />
-            </Space>
+            </div>
           ))}
         </Space>
 

@@ -1,0 +1,10 @@
+@use "../../../master.scss";
+
+.ant-modal .ant-modal-content {
+    background-color: master.$dark-color;
+}
+.cross {
+    .ant-modal-close {
+        display: none;
+    }
+}
