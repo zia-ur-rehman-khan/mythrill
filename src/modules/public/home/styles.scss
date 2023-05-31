@@ -40,5 +40,14 @@
         width: 70%;
         border-radius: 12px;
         padding: 10px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        cursor: pointer;
+        .box {
+            width: 200px;
+            height: 200px;
+            background: #262635;
+        }
     }
 }

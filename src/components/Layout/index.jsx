@@ -7,8 +7,16 @@ import CommonTextField from "../common/TextField";
 import CommonHeading from "../common/CommonHeading";
 import CommonButton from "../common/CommonButton";
 import CommonInputField from "../common/CommonInput";
+import { useNavigate } from "react-router-dom";
+import { TRENDING_ROUTE } from "../../constants";
 
 const Layout = ({ children }) => {
+  const navigate = useNavigate();
+
+  const changeRoute = (id) => {
+    navigate(TRENDING_ROUTE);
+  };
+
   return (
     <div className="main-layout">
       <SideBar />
@@ -42,7 +50,7 @@ const Layout = ({ children }) => {
               sm={{ span: 12 }}
               xs={{ span: 24 }}
             >
-              <CommonButton text={"Trending Stock"} />
+              <CommonButton text={"Trending Stock"} onClick={changeRoute} />
             </Col>
           </Row>
           <div className="child-layout">{children}</div>

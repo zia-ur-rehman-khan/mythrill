@@ -1,4 +1,11 @@
-import { Login, Home, Dashboard } from "../modules";
+import {
+  Login,
+  Home,
+  Dashboard,
+  Share,
+  Setting,
+  StockDetaile,
+} from "../modules";
 import { Images } from "../theme";
 
 const { home, share, setting } = Images;
@@ -59,6 +66,11 @@ export const lOGIN_ROUTE = "/login";
 // PRIVATE ROUTES
 export const DASHBOARD_ROUTE = "/dashboard";
 
+export const SHARE_ROUTE = "/share";
+export const SETTING_ROUTE = "/setting";
+export const STOCK_DETAILE_ROUTE = "/stock/:id";
+export const TRENDING_ROUTE = "/trending";
+
 export const PAGE_ROUTES = [
   // PUBLIC ROUTES
   {
@@ -82,6 +94,34 @@ export const PAGE_ROUTES = [
     access: ACCESS_TYPES.PRIVATE,
     component: <Dashboard />,
   },
+  {
+    route: SHARE_ROUTE,
+    title: "Share",
+    description: "",
+    access: ACCESS_TYPES.PUBLIC,
+    component: <Share />,
+  },
+  {
+    route: SETTING_ROUTE,
+    title: "Setting",
+    description: "",
+    access: ACCESS_TYPES.PUBLIC,
+    component: <Setting />,
+  },
+  {
+    route: STOCK_DETAILE_ROUTE,
+    title: "Stock",
+    description: "",
+    access: ACCESS_TYPES.PUBLIC,
+    component: <Home />,
+  },
+  {
+    route: TRENDING_ROUTE,
+    title: "Trending",
+    description: "",
+    access: ACCESS_TYPES.PUBLIC,
+    component: <Home />,
+  },
 ];
 export const WEB_STRINGS = {
   ErrorPage: {
@@ -94,7 +134,90 @@ export const WEB_STRINGS = {
 };
 
 export const MENU_LIST = [
-  { title: "Home", url: home },
-  { title: "Share", url: share },
-  { title: "Settings", url: setting },
+  { title: "Home", src: home, route: HOME_ROUTE },
+  { title: "Share", src: share, route: SHARE_ROUTE },
+  { title: "Settings", src: setting, route: SETTING_ROUTE },
+];
+
+export const stock_List = [
+  {
+    title: "BTCUSDT",
+    name: "Cryptocurrency",
+    amount: "$23,738",
+    stockUpdate: "+23,6%",
+    color: "green",
+    id: "1",
+  },
+  {
+    title: "BTCUSDT",
+    name: "Cryptocurrency",
+    amount: "$23,738",
+    stockUpdate: "+23,6%",
+    color: "green",
+    id: "2",
+  },
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "3",
+  },
+  {
+    title: "BTCUSDT",
+    name: "Cryptocurrency",
+    amount: "$23,738",
+    stockUpdate: "+23,6%",
+    color: "green",
+    id: "4",
+  },
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "5",
+  },
+  {
+    title: "BTCUSDT",
+    name: "Cryptocurrency",
+    amount: "$23,738",
+    stockUpdate: "+23,6%",
+    color: "green",
+    id: "6",
+  },
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "7",
+  },
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "8",
+  },
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "9",
+  },
+  {
+    title: "Netflix",
+    name: "Stock",
+    amount: "$738.00",
+    stockUpdate: "+23,6%",
+    color: "red",
+    id: "10",
+  },
 ];
