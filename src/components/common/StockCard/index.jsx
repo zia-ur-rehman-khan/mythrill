@@ -3,10 +3,11 @@ import CommonTextField from "../TextField";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import "./styles.scss";
-import { Space } from "antd";
+import { Dropdown, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 import { AppStyles, Images } from "../../../theme";
 import { css } from "aphrodite";
+import CommonDropdown from "../CommonDropdown";
 
 const StockCard = ({ value, addIcon }) => {
   const { title, name, amount, stockUpdate, color, id } = value;
@@ -16,6 +17,17 @@ const StockCard = ({ value, addIcon }) => {
   const changeRoute = (id) => {
     navigate(`/stock/${id}`);
   };
+
+  const items = [
+    {
+      label: "favorite",
+      key: "0",
+    },
+    {
+      label: "remove",
+      key: "1",
+    },
+  ];
 
   return (
     <Space className="stockCard-main">
@@ -42,7 +54,12 @@ const StockCard = ({ value, addIcon }) => {
             className={css(AppStyles.pointer)}
           />
         ) : (
-          <FontAwesomeIcon icon={faEllipsisVertical} />
+          <CommonDropdown items={items}>
+            <FontAwesomeIcon
+              className={css(AppStyles.pointer)}
+              icon={faEllipsisVertical}
+            />
+          </CommonDropdown>
         )}
       </Space>
     </Space>

@@ -1,0 +1,14 @@
+@use "../../../master.scss";
+
+.ant-dropdown {
+    .ant-dropdown-menu {
+        background-color: master.$theme3-color;
+        .ant-dropdown-menu-item {
+            color: #ffffff;
+
+            &:hover {
+                background: master.$dark-color;
+            }
+        }
+    }
+}

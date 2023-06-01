@@ -14,6 +14,7 @@ import {
   CommonModal,
   CommonInputField,
   CommonTextField,
+  CommonDropdown,
 } from "./common";
 
 export {
@@ -32,4 +33,5 @@ export {
   CommonModal,
   CommonInputField,
   CommonTextField,
+  CommonDropdown,
 };

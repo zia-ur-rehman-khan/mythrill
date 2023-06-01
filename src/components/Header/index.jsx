@@ -10,9 +10,21 @@ import { AppStyles, Images } from "../../theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { css } from "aphrodite";
 import SideBar from "../SideBar";
+import { CommonDropdown } from "../common";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
+
+  const items = [
+    {
+      label: "profile setting",
+      key: "0",
+    },
+    {
+      label: "sign out",
+      key: "1",
+    },
+  ];
 
   return (
     <header className="main-header">
@@ -39,7 +51,13 @@ const Header = () => {
             lineHeight={"10px"}
           />
         </Space>
-        <FontAwesomeIcon icon={faEllipsisVertical} />
+
+        <CommonDropdown items={items}>
+          <FontAwesomeIcon
+            className={css(AppStyles.pointer)}
+            icon={faEllipsisVertical}
+          />
+        </CommonDropdown>
       </Space>
 
       <Drawer
