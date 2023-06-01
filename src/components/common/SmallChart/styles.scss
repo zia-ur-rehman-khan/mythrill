@@ -1,6 +1,11 @@
 .smallChart {
+    background: #121212;
+    border-radius: 10px;
+    padding-top: 20px;
+    height: 250px;
+
     .highcharts-background {
-        fill: #121212;
+        fill: transparent;
     }
     // .highcharts-scrollbar-thumb {
     //     display: none;
@@ -56,9 +61,4 @@
     .highcharts-input-group {
         display: none;
     }
-}
-
-.smallChart > div {
-    height: 230px;
-    border-radius: 10px;
 }
