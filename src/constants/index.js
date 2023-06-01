@@ -148,6 +148,7 @@ export const stock_List = [
     color: "green",
     id: "1",
     src: Images.bitCoin,
+    chartColor: "#1ABF17",
   },
 
   {
@@ -158,6 +159,7 @@ export const stock_List = [
     color: "red",
     id: "3",
     src: Images.netflix,
+    chartColor: "#F12C2C",
   },
   {
     title: "BTCUSDT",
@@ -167,6 +169,7 @@ export const stock_List = [
     color: "green",
     id: "2",
     src: Images.bitCoin,
+    chartColor: "#C6B200",
   },
   {
     title: "BTCUSDT",
@@ -176,6 +179,7 @@ export const stock_List = [
     color: "green",
     id: "4",
     src: Images.bitCoin,
+    chartColor: "#1ABF17",
   },
   {
     title: "Netflix",
@@ -185,6 +189,7 @@ export const stock_List = [
     color: "red",
     id: "5",
     src: Images.netflix,
+    chartColor: "#F12C2C",
   },
   {
     title: "BTCUSDT",
@@ -194,6 +199,7 @@ export const stock_List = [
     color: "green",
     id: "6",
     src: Images.bitCoin,
+    chartColor: "#C6B200",
   },
   {
     title: "Netflix",
@@ -203,6 +209,7 @@ export const stock_List = [
     color: "red",
     id: "7",
     src: Images.netflix,
+    chartColor: "#F12C2C",
   },
   {
     title: "Netflix",
@@ -212,6 +219,7 @@ export const stock_List = [
     color: "red",
     id: "8",
     src: Images.netflix,
+    chartColor: "#F12C2C",
   },
   {
     title: "Netflix",
@@ -221,6 +229,7 @@ export const stock_List = [
     color: "red",
     id: "9",
     src: Images.netflix,
+    chartColor: "#1ABF17",
   },
   {
     title: "BTCUSDT",
@@ -230,5 +239,6 @@ export const stock_List = [
     color: "green",
     id: "6",
     src: Images.bitCoin,
+    chartColor: "#1ABF17",
   },
 ];

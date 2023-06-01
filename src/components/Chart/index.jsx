@@ -151,7 +151,7 @@ const Chart = () => {
   };
 
   return (
-    <div className={css(AppStyles.mTop10)}>
+    <div className={`bigchart ${css(AppStyles.mTop10)}`}>
       <HighchartsReact
         constructorType={"stockChart"}
         highcharts={Highcharts}

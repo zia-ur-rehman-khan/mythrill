@@ -15,6 +15,7 @@ import {
   CommonInputField,
   CommonTextField,
   CommonDropdown,
+  SmallChart,
 } from "./common";
 
 export {
@@ -34,4 +35,5 @@ export {
   CommonInputField,
   CommonTextField,
   CommonDropdown,
+  SmallChart,
 };

@@ -1,10 +1,13 @@
-.bigchart {
+.smallChart {
     .highcharts-background {
-        fill: transparent;
+        fill: #121212;
     }
     // .highcharts-scrollbar-thumb {
     //     display: none;
     // }
+    .highcharts-scrollbar {
+        display: none;
+    }
 
     .highcharts-legend {
         display: none;
@@ -53,4 +56,9 @@
     .highcharts-input-group {
         display: none;
     }
+}
+
+.smallChart > div {
+    height: 230px;
+    border-radius: 10px;
 }

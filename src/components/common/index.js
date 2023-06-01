@@ -5,6 +5,7 @@ import CommonModal from "./CommonModal";
 import CommonInputField from "./CommonInput";
 import CommonTextField from "./TextField";
 import CommonDropdown from "./CommonDropdown";
+import SmallChart from "./SmallChart";
 
 export {
   StockCard,
@@ -14,4 +15,5 @@ export {
   CommonInputField,
   CommonTextField,
   CommonDropdown,
+  SmallChart,
 };
