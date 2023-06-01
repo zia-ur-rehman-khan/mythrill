@@ -10,7 +10,11 @@ import green from "../assets/chart/green.png";
 import yellow from "../assets/chart/yellow.png";
 import red from "../assets/chart/red.png";
 import upSign from "../assets/chart/upSign.png";
+import upSignLarge from "../assets/chartDetaile/upSign.png";
 import netflix from "../assets/chart/netflix.png";
+import fire from "../assets/chartDetaile/fire.png";
+import arrow from "../assets/chartDetaile/arrow.png";
+import backArrow from "../assets/chartDetaile/backArrow.png";
 
 export default {
   ErrorBackground2,
@@ -25,5 +29,9 @@ export default {
   yellow,
   red,
   upSign,
+  upSignLarge,
   netflix,
+  fire,
+  arrow,
+  backArrow,
 };

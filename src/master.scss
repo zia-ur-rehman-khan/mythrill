@@ -4,8 +4,14 @@ $theme3-color: #20232c;
 $dark-color: #1d1f26;
 $light-color: #a2a7b4;
 
-.theme-text {
-  color: $theme-color;
+.theme-color {
+  background: $theme-color;
+}
+.theme2-color {
+  background: $theme2-color;
+}
+.theme3-color {
+  background: $theme3-color;
 }
 
 .themelight-text {

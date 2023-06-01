@@ -1,0 +1,54 @@
+.highcharts-background {
+    fill: transparent;
+}
+// .highcharts-scrollbar-thumb {
+//     display: none;
+// }
+
+.highcharts-legend {
+    display: none;
+}
+
+// .highcharts-navigator-mask-inside {
+//     border: 1px solid #000; /* Specify the desired border properties */
+//     height: 200px;
+// }
+
+.highcharts-navigator-outline {
+    border-bottom: 1px solid black; /* Specify the desired border properties for the bottom side */
+}
+
+.highcharts-navigator {
+    border-bottom: 1px solid black; /* Specify the desired border properties for the bottom side */
+}
+.highcharts-button-normal {
+    .highcharts-button-box {
+        fill: none;
+    }
+    text {
+        fill: #fff !important;
+    }
+}
+
+.highcharts-button-Hover {
+    .highcharts-button-box {
+        fill: #7665c1;
+        opacity: 0.1;
+    }
+    text {
+        fill: #7665c1 !important;
+    }
+}
+.highcharts-button-pressed {
+    .highcharts-button-box {
+        fill: #7665c1;
+        opacity: 0.1;
+    }
+    text {
+        fill: #7665c1 !important;
+    }
+}
+
+.highcharts-input-group {
+    display: none;
+}
