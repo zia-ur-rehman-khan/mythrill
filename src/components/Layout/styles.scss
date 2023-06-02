@@ -7,7 +7,7 @@
         .child-content {
             padding: 36px 35px 35px 35px;
             background: master.$dark-color;
-            height: 100vh;
+            height: calc(100vh - 80px);
 
             .welcome {
                 width: 100%;
@@ -19,7 +19,7 @@
                 border-radius: 30px;
                 margin-top: 10px;
                 padding: 30px 20px 20px 20px;
-                height: 90%;
+                height: calc(100% - 60px);
             }
         }
     }
