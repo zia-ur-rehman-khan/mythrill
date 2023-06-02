@@ -14,7 +14,10 @@ const StockDetailes = () => {
 
   return (
     <>
-      <Space className={css([AppStyles.w100, AppStyles.spaceBetween])}>
+      <Space
+        wrap={true}
+        className={css([AppStyles.w100, AppStyles.spaceBetween])}
+      >
         <Space size={15} direction="vertical">
           <Update />
           <Suggestion />
