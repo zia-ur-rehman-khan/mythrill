@@ -80,10 +80,11 @@ const SmallChart = ({ color }) => {
     series: [
       {
         name: "Price",
-        type: "area",
+        type: "areaspline",
         color: color, // Specify your desired color here
 
-        data: priceData,
+        data: [2, 3, 5, 2, 7, 2, 7, 3, 5, 2, 7, 2],
+
         tooltip: {
           valueDecimals: 2,
         },

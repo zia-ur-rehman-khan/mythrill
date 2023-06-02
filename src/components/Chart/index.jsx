@@ -106,7 +106,7 @@ const Chart = () => {
     series: [
       {
         name: "Price",
-        type: "area",
+        type: "areaspline",
         color: "#1ABF17", // Specify your desired color here
 
         data: priceData,
@@ -119,7 +119,7 @@ const Chart = () => {
     navigator: {
       maskFill: "rgba(118, 101, 193, 0.2)", // Specify the desired color for the Navigator wrapper
       series: {
-        type: "area",
+        type: "areaspline",
       },
       xAxis: {
         labels: {
