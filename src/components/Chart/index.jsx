@@ -18,7 +18,12 @@ const Chart = () => {
 
         labels: {
           formatter: function () {
-            return numberFormat.format(this.value);
+            const number = this.value;
+            if (number >= 1000) {
+              // Convert to "k" form
+              return number / 1000 + "k";
+            }
+            return number;
           },
           //   x: -15,
           style: {
@@ -151,7 +156,7 @@ const Chart = () => {
   };
 
   return (
-    <div className={`bigchart ${css(AppStyles.mTop10)}`}>
+    <div className={`bigchart ${css(AppStyles.mTop20)}`}>
       <HighchartsReact
         constructorType={"stockChart"}
         highcharts={Highcharts}
