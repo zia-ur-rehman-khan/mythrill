@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "orthopaedic-center"
+    "dev": "mythril-9cf7c",
+    "staging": "mythril-staging-9b723",
+    "default": "mythril-prod-e3046"
   }
 }
