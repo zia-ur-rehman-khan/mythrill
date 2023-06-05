@@ -7,6 +7,7 @@ import {
   CommonButton,
   CommonModal,
   CommonInputField,
+  CommonHeading,
 } from "../../../../components";
 import { css } from "aphrodite";
 import { AppStyles } from "../../../../theme";
@@ -55,18 +56,17 @@ const Market = () => {
         background="rgba(118, 101, 193, 0.1)"
         onClick={() => setIsModal(true)}
       />
-      <CommonModal
-        isModalVisible={isModal}
-        crossIcon={false}
-        setIsModalVisible={setIsModal}
-      >
-        <div className={css(AppStyles.pTop20)}>
-          <CommonInputField
-            placeholder="search..."
-            suffix={<FontAwesomeIcon icon={faSearch} />}
-          />
-          <StockListing addIcon={true} />
-        </div>
+      <CommonModal isModalVisible={isModal} setIsModalVisible={setIsModal}>
+        <CommonHeading
+          text={"Add Stock"}
+          textAlign="center"
+          className={css(AppStyles.mBottom10)}
+        />
+        <CommonInputField
+          placeholder="Search..."
+          suffix={<FontAwesomeIcon icon={faSearch} />}
+        />
+        <StockListing addIcon={true} />
       </CommonModal>
     </>
   );

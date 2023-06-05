@@ -68,6 +68,9 @@ const Chart = () => {
     xAxis: {
       type: "date",
       labels: {
+        // formatter: function () {
+        //   return moment(this.value).format("DD MMM");
+        // },
         style: {
           color: "#fff",
           position: "absolute",
@@ -109,7 +112,11 @@ const Chart = () => {
         type: "areaspline",
         color: "#1ABF17", // Specify your desired color here
 
-        data: priceData,
+        data: [
+          200000, 300000, 500000, 200000, 700000, 200000, 700000, 300000,
+          500000, 200000, 700000, 200000, 200000, 300000, 500000, 200000,
+          700000, 200000, 700000, 300000, 500000, 200000, 700000, 200000,
+        ],
         tooltip: {
           valueDecimals: 2,
         },

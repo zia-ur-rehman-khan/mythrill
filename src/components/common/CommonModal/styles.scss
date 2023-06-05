@@ -1,10 +1,17 @@
 @use "../../../master.scss";
 
-.ant-modal .ant-modal-content {
+.ant-modal > .ant-modal-content {
     background-color: master.$dark-color;
-}
-.cross {
+    padding: 20px 0 0 0 !important;
     .ant-modal-close {
-        display: none;
+        .ant-modal-close-x {
+            color: master.$white-color;
+        }
+    }
+    .ant-modal-body {
+        max-height: 400px;
+        overflow-y: auto;
+        margin-top: 30px;
+        padding: 25px;
     }
 }

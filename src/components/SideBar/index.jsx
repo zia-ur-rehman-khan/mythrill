@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles.scss";
 import { AlignLeftOutlined } from "@ant-design/icons";
-import { Images } from "../../theme";
+import { AppStyles, Images } from "../../theme";
 import { Divider, Drawer, List, Space } from "antd";
 import CommonTextField from "../common/TextField";
 import CommonButton from "../common/CommonButton";
@@ -9,6 +9,7 @@ import { MENU_LIST } from "../../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { css } from "aphrodite";
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
@@ -23,7 +24,12 @@ const SideBar = ({ isDrawer }) => {
       <div className={isDrawer ? isDrawer : "main-sideBar"}>
         {!isDrawer && (
           <div className="logo">
-            <img src={Images.logo} width={"132px"} />
+            <img
+              src={Images.logo}
+              width={"132px"}
+              className={css(AppStyles.pointer)}
+              onClick={() => changeRoute("/")}
+            />
           </div>
         )}
         <Space className="sidebar-routes" direction="vertical">

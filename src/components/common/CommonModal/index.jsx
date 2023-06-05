@@ -27,7 +27,6 @@ const CommonModal = ({
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        className={!crossIcon && "cross"}
       >
         {children}
       </Modal>

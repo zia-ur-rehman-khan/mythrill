@@ -67,6 +67,9 @@ const SmallChart = ({ color }) => {
     xAxis: {
       type: "date",
       labels: {
+        // formatter: function () {
+        //   return moment(this.value).format("DD MMM");
+        // },
         style: {
           color: "#fff",
           position: "absolute",
@@ -83,7 +86,10 @@ const SmallChart = ({ color }) => {
         type: "areaspline",
         color: color, // Specify your desired color here
 
-        data: [2, 3, 5, 2, 7, 2, 7, 3, 5, 2, 7, 2],
+        data: [
+          200000, 300000, 500000, 200000, 700000, 200000, 700000, 300000,
+          500000, 200000, 700000, 200000,
+        ],
 
         tooltip: {
           valueDecimals: 2,
