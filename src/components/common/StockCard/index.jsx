@@ -20,11 +20,11 @@ const StockCard = ({ value, addIcon }) => {
 
   const items = [
     {
-      label: "favorite",
+      label: "Favorite",
       key: "0",
     },
     {
-      label: "remove",
+      label: "Remove",
       key: "1",
     },
   ];

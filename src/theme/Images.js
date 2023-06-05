@@ -14,6 +14,7 @@ import upSignLarge from "../assets/chartDetaile/upSign.png";
 import netflix from "../assets/chart/netflix.png";
 import fire from "../assets/chartDetaile/fire.png";
 import arrow from "../assets/chartDetaile/arrow.png";
+import notification from "../assets/header/notification.png";
 import backArrow from "../assets/chartDetaile/backArrow.png";
 
 export default {
@@ -34,4 +35,5 @@ export default {
   fire,
   arrow,
   backArrow,
+  notification,
 };

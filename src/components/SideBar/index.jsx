@@ -26,28 +26,28 @@ const SideBar = ({ isDrawer }) => {
             <img src={Images.logo} width={"132px"} />
           </div>
         )}
+        <Space className="sidebar-routes" direction="vertical">
+          <Space direction="vertical" className="content">
+            {MENU_LIST?.map((t, i) => (
+              <div
+                className={`content-list ${
+                  location.pathname === t.route ? "active" : ""
+                }`}
+                key={i}
+                size={20}
+                onClick={() => changeRoute(t.route)}
+              >
+                <img src={t.src} width={"15px"} height={"15px"} />
+                <CommonTextField text={t.title} />
+              </div>
+            ))}
+            <Divider className="line" />
+          </Space>
 
-        <Space direction="vertical" className="content">
-          {MENU_LIST?.map((t, i) => (
-            <div
-              className={`content-list ${
-                location.pathname === t.route ? "active" : ""
-              }`}
-              key={i}
-              size={20}
-              onClick={() => changeRoute(t.route)}
-            >
-              <img src={t.src} width={"15px"} height={"15px"} />
-              <CommonTextField text={t.title} fontWeight={600} />
-            </div>
-          ))}
+          <div className="logout">
+            <CommonButton text={"Logout"} />
+          </div>
         </Space>
-
-        <Divider />
-
-        <div className="logout">
-          <CommonButton text={"Logout"} />
-        </div>
       </div>
     </>
   );

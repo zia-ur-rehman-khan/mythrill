@@ -14,6 +14,8 @@ import {
   faEllipsisVertical,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
+import { css } from "aphrodite";
+import { AppStyles } from "../../theme";
 
 const Layout = ({ children }) => {
   const navigate = useNavigate();
@@ -48,8 +50,13 @@ const Layout = ({ children }) => {
               xs={{ span: 24 }}
             >
               <CommonInputField
-                placeholder="search..."
-                suffix={<FontAwesomeIcon icon={faSearch} />}
+                placeholder="Search..."
+                suffix={
+                  <FontAwesomeIcon
+                    className={css(AppStyles.cursorPointer)}
+                    icon={faSearch}
+                  />
+                }
               />
             </Col>
             <Col

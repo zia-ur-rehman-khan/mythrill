@@ -28,7 +28,7 @@
                 .ant-tabs-tab {
                     margin: 0;
                     .ant-tabs-tab-btn {
-                        color: master.$light-color;
+                        color: master.$white-color;
                         padding: 4px 10px;
                     }
                 }
@@ -46,6 +46,9 @@
                 }
                 &::before {
                     border-bottom: none;
+                }
+                .ant-tabs-nav-operations {
+                    display: none;
                 }
             }
         }

@@ -19,13 +19,15 @@
       display: flex;
     }
   }
+  .right-side {
+    margin-right: 21px;
+  }
   .profile {
     width: 192px;
     background: master.$dark-color;
     border-radius: 12px;
     align-items: flex-start;
     height: 50px;
-    margin: 13px 21px 0 13px;
     padding: 5px 10px 5px 10px;
 
     svg {
