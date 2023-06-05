@@ -18,12 +18,6 @@ import { css } from "aphrodite";
 import { AppStyles } from "../../theme";
 
 const Layout = ({ children }) => {
-  const navigate = useNavigate();
-
-  const changeRoute = (id) => {
-    navigate(TRENDING_ROUTE);
-  };
-
   return (
     <div className="main-layout">
       <SideBar />
@@ -65,7 +59,7 @@ const Layout = ({ children }) => {
               sm={{ span: 12 }}
               xs={{ span: 24 }}
             >
-              <CommonButton text={"Trending Stock"} onClick={changeRoute} />
+              <CommonButton text={"Trending Stock"} />
             </Col>
           </Row>
           <div className="child-layout">{children}</div>

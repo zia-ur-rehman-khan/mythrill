@@ -8,10 +8,16 @@
     input {
         background: master.$theme3-color;
         color: #ffffff;
-        opacity: 0.5;
 
         &::placeholder {
             color: #ffffff;
+        }
+    }
+    .ant-input-suffix {
+        .svg-inline--fa {
+            path {
+                color: master.$white-color;
+            }
         }
     }
 }

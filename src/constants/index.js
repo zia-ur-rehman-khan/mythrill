@@ -135,8 +135,8 @@ export const WEB_STRINGS = {
 
 export const MENU_LIST = [
   { title: "Home", src: home, route: HOME_ROUTE },
-  { title: "Share", src: share, route: SHARE_ROUTE },
-  { title: "Settings", src: setting, route: SETTING_ROUTE },
+  { title: "Share", src: share },
+  { title: "Settings", src: setting },
 ];
 
 export const stock_List = [

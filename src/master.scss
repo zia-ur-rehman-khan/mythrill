@@ -129,23 +129,25 @@ $white-color: #ffffff;
 ::-webkit-scrollbar {
   height: 5px;
   width: 4px;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar-track {
   background: transparent;
-}
-
-::-webkit-scrollbar-track:hover {
-  background-color: transparent;
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(88, 87, 87);
+  background: #585757;
   border-radius: 3px;
   border: 3px solid transparent;
-}
+  cursor: pointer;
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(88, 87, 87);
-  border: 2px solid transparent;
+  &:hover {
+    background: #9a9898;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
 }

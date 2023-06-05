@@ -41,7 +41,7 @@ const SideBar = ({ isDrawer }) => {
                 }`}
                 key={i}
                 size={20}
-                onClick={() => changeRoute(t.route)}
+                onClick={() => changeRoute(t?.route)}
               >
                 <img src={t.src} width={"15px"} height={"15px"} />
                 <CommonTextField text={t.title} />
