@@ -12,7 +12,91 @@ const Chart = () => {
   const [chartType, setChartType] = useState("areaspline");
   const options = { style: "currency", currency: "USD" };
   const numberFormat = new Intl.NumberFormat("en-US", options);
-  const configPrice = {
+
+  const data = [
+    {
+      x: new Date("2023-06-06T06:29:00"),
+      y: 9792.77,
+    },
+    {
+      x: new Date("2023-06-06T07:29:00"),
+      y: 100,
+    },
+    {
+      x: new Date("2023-06-06T08:29:00"),
+      y: 9764.57,
+    },
+    {
+      x: new Date("2023-06-06T09:29:00"),
+      y: 200,
+    },
+    {
+      x: new Date("2023-06-06T10:29:00"),
+      y: 9734.89,
+    },
+    {
+      x: new Date("2023-06-06T11:29:00"),
+      y: 2000,
+    },
+    {
+      x: new Date("2023-06-06T12:29:00"),
+      y: 9707.19,
+    },
+    {
+      x: new Date("2023-06-06T13:29:00"),
+      y: 100,
+    },
+    {
+      x: new Date("2023-06-06T14:29:00"),
+      y: 9679.49,
+    },
+    {
+      x: new Date("2023-06-06T15:29:00"),
+      y: 9900,
+    },
+    {
+      x: new Date("2023-06-06T16:29:00"),
+      y: 9651.79,
+    },
+    {
+      x: new Date("2023-06-06T17:29:00"),
+      y: 200,
+    },
+    {
+      x: new Date("2023-06-06T18:29:00"),
+      y: 9624.09,
+    },
+    {
+      x: new Date("2023-06-06T19:29:00"),
+      y: 9610.24,
+    },
+    {
+      x: new Date("2023-06-06T20:29:00"),
+      y: 9596.39,
+    },
+    {
+      x: new Date("2023-06-06T21:29:00"),
+      y: 2000,
+    },
+    {
+      x: new Date("2023-06-06T22:29:00"),
+      y: 9568.69,
+    },
+    {
+      x: new Date("2023-06-06T23:29:00"),
+      y: 9554.84,
+    },
+  ];
+
+  const candlestickData = [
+    [moment("2022-01-01").valueOf(), 127.52, 135.62, 125.86, 132.05],
+    [moment("2022-02-01").valueOf(), 131.39, 147.79, 130.23, 146.36],
+    [moment("2022-03-01").valueOf(), 146.05, 153.44, 143.57, 150.52],
+    [moment("2022-04-01").valueOf(), 150.51, 157.26, 149.6, 152.69],
+    [moment("2022-05-01").valueOf(), 153.87, 158.85, 149.77, 155.47],
+  ];
+
+  let configPrice = {
     yAxis: [
       {
         opposite: false,
@@ -115,82 +199,10 @@ const Chart = () => {
       {
         name: "Price",
         type: chartType,
-        color: "#1ABF17", // Specify your desired color here
+        color: "#1ABF17",
+        upColor: "#1ABF17",
 
-        data: [
-          {
-            x: new Date("2023-06-06T06:29:00"),
-            y: 9792.77,
-          },
-          {
-            x: new Date("2023-06-06T07:29:00"),
-            y: 100,
-          },
-          {
-            x: new Date("2023-06-06T08:29:00"),
-            y: 9764.57,
-          },
-          {
-            x: new Date("2023-06-06T09:29:00"),
-            y: 200,
-          },
-          {
-            x: new Date("2023-06-06T10:29:00"),
-            y: 9734.89,
-          },
-          {
-            x: new Date("2023-06-06T11:29:00"),
-            y: 2000,
-          },
-          {
-            x: new Date("2023-06-06T12:29:00"),
-            y: 9707.19,
-          },
-          {
-            x: new Date("2023-06-06T13:29:00"),
-            y: 100,
-          },
-          {
-            x: new Date("2023-06-06T14:29:00"),
-            y: 9679.49,
-          },
-          {
-            x: new Date("2023-06-06T15:29:00"),
-            y: 9900,
-          },
-          {
-            x: new Date("2023-06-06T16:29:00"),
-            y: 9651.79,
-          },
-          {
-            x: new Date("2023-06-06T17:29:00"),
-            y: 200,
-          },
-          {
-            x: new Date("2023-06-06T18:29:00"),
-            y: 9624.09,
-          },
-          {
-            x: new Date("2023-06-06T19:29:00"),
-            y: 9610.24,
-          },
-          {
-            x: new Date("2023-06-06T20:29:00"),
-            y: 9596.39,
-          },
-          {
-            x: new Date("2023-06-06T21:29:00"),
-            y: 2000,
-          },
-          {
-            x: new Date("2023-06-06T22:29:00"),
-            y: 9568.69,
-          },
-          {
-            x: new Date("2023-06-06T23:29:00"),
-            y: 9554.84,
-          },
-        ],
+        data: chartType === "areaspline" ? data : candlestickData,
         tooltip: {
           valueDecimals: 2,
         },
@@ -274,10 +286,10 @@ const Chart = () => {
         </Space>
         <Space
           onClick={() => {
-            chartChange("column");
+            chartChange("candlestick");
           }}
           className={` ${css(AppStyles.pointer)} ${
-            chartType === "column" && "active"
+            chartType === "candlestick" && "active"
           }`}
         >
           <svg
