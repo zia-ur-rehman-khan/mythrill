@@ -16,6 +16,8 @@ import fire from "../assets/chartDetaile/fire.png";
 import arrow from "../assets/chartDetaile/arrow.png";
 import notification from "../assets/header/notification.png";
 import backArrow from "../assets/chartDetaile/backArrow.png";
+import areaChart from "../assets/chart/area.svg";
+import columnChart from "../assets/chart/column.svg";
 
 export default {
   ErrorBackground2,
@@ -36,4 +38,6 @@ export default {
   arrow,
   backArrow,
   notification,
+  areaChart,
+  columnChart,
 };
