@@ -4,6 +4,8 @@
         z-index: 99999;
         position: absolute;
         right: 0;
+        justify-content: space-between;
+        width: 50%;
         .active {
             transition: background 0.3s;
             background: rgba(118, 101, 193, 0.1);
