@@ -1,0 +1,31 @@
+@use "../../../master.scss";
+
+.main {
+    .notification-content {
+        padding: 10px 5px 1px 5px;
+        border-radius: 6px;
+        margin: 10px 0 10px 0;
+        cursor: pointer;
+
+        &:hover {
+            background-color: master.$dark-color;
+        }
+    }
+
+    .border-line {
+        margin: 5px auto;
+        border-color: #ffffff;
+        opacity: 0.1;
+        width: 90%;
+        min-width: 90%;
+    }
+}
+
+.hide {
+    .notification-content {
+        background-color: master.$dark-color;
+    }
+    .border-line {
+        display: none;
+    }
+}

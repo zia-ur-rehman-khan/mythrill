@@ -1,0 +1,13 @@
+@use "../../../master.scss";
+
+.ant-popover {
+    top: 95px !important;
+
+    .ant-popover-inner {
+        background-color: master.$theme3-color;
+    }
+    .ant-popover-inner-content {
+        overflow: auto;
+        height: 300px;
+    }
+}

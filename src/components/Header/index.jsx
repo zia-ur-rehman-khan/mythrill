@@ -3,14 +3,15 @@ import "./styles.scss";
 import CommonTextField from "../common/TextField";
 import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
-import { Space } from "antd";
+import { Divider, Space } from "antd";
 import { Drawer } from "antd";
 
 import { AppStyles, Images } from "../../theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { css } from "aphrodite";
 import SideBar from "../SideBar";
-import { CommonDropdown } from "../common";
+import { CommonDropdown, CommonPopOver } from "../common";
+import NotificationContent from "./NotificationContent";
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -36,7 +37,7 @@ const Header = () => {
         </div>
       </div>
       <Space size={20} className="right-side">
-        <img src={Images.notification} width={"20px"} height={"22px"} />
+        <NotificationContent />
         <Space className="profile" align="center" size={20}>
           <img src={Images.profile} width={"33.75px"} height={"33.75px"} />
           <Space direction="vertical" align="baseline">

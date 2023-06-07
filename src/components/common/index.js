@@ -6,6 +6,7 @@ import CommonInputField from "./CommonInput";
 import CommonTextField from "./TextField";
 import CommonDropdown from "./CommonDropdown";
 import SmallChart from "./SmallChart";
+import CommonPopOver from "./CommonPopOver";
 
 export {
   StockCard,
@@ -16,4 +17,5 @@ export {
   CommonTextField,
   CommonDropdown,
   SmallChart,
+  CommonPopOver,
 };

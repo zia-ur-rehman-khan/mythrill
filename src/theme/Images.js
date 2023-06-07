@@ -20,6 +20,7 @@ import rightArrow from "../assets/chartDetaile/rightArrow.png";
 import areaChart from "../assets/chart/area.svg";
 import freNotification from "../assets/chartDetaile/notification.png";
 import columnChart from "../assets/chart/column.svg";
+import profilePic from "../assets/notification/profile.png";
 
 export default {
   ErrorBackground2,
@@ -44,4 +45,5 @@ export default {
   notification,
   freNotification,
   rightArrow,
+  profilePic,
 };

@@ -1,0 +1,63 @@
+import React from "react";
+import { css } from "aphrodite";
+import { AppStyles, Images } from "../../../theme";
+import { CommonPopOver, CommonTextField } from "../../common";
+import { Divider, Space } from "antd";
+import "./styles.scss";
+
+const NotificationContent = () => {
+  const title = (
+    <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
+      <CommonTextField
+        text={"Notifications"}
+        fontWeight={600}
+        fontSize={"15px"}
+      />
+      <CommonTextField
+        onClick={() => {}}
+        text={"Mark all as read"}
+        topClass={"small"}
+        textDecoration="underline"
+      />
+    </Space>
+  );
+
+  const array = [1, 2, 3, 5, 6, 7, 8];
+
+  const content = array.map((t) => (
+    <div className={`main ${t < 3 && "hide"}`}>
+      <div className={`notification-content }`}>
+        <Space
+          align="start"
+          className={css(AppStyles.w100, AppStyles.spaceBetween)}
+        >
+          <Space align="start">
+            <img src={Images.profilePic} />
+            <Space size={2} direction="vertical">
+              <CommonTextField text={"Bessie Cooper"} fontWeight={600} />
+              <CommonTextField
+                text={"Enrichment will be created"}
+                topClass={"small"}
+              />
+            </Space>
+          </Space>
+          <CommonTextField text={"2 hr ago"} color={"#93969E"} />
+        </Space>
+      </div>
+      <Divider className="border-line" />
+    </div>
+  ));
+
+  return (
+    <CommonPopOver
+      width="400px"
+      content={content}
+      title={title}
+      trigger="click"
+    >
+      <img src={Images.notification} width={"20px"} height={"22px"} />
+    </CommonPopOver>
+  );
+};
+
+export default NotificationContent;
