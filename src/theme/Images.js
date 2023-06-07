@@ -16,7 +16,9 @@ import fire from "../assets/chartDetaile/fire.png";
 import arrow from "../assets/chartDetaile/arrow.png";
 import notification from "../assets/header/notification.png";
 import backArrow from "../assets/chartDetaile/backArrow.png";
+import rightArrow from "../assets/chartDetaile/rightArrow.png";
 import areaChart from "../assets/chart/area.svg";
+import freNotification from "../assets/chartDetaile/notification.png";
 import columnChart from "../assets/chart/column.svg";
 
 export default {
@@ -37,7 +39,9 @@ export default {
   fire,
   arrow,
   backArrow,
-  notification,
   areaChart,
   columnChart,
+  notification,
+  freNotification,
+  rightArrow,
 };
