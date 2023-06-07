@@ -2,7 +2,7 @@
 
 .main-sideBar {
     background: master.$theme3-color;
-    width: 210px;
+    min-width: 190px;
 
     .logo {
         padding: 21px 0 0px 21px;
@@ -33,8 +33,12 @@
                 min-width: 50%;
             }
         }
+
         .logout {
             padding: 0 21px 0 21px;
+        }
+        .profile {
+            display: none;
         }
     }
     @media (max-width: 1000px) {

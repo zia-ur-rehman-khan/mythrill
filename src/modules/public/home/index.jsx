@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./styles.scss";
-import { Button, Input, Space, Switch, Tabs } from "antd";
+import { Button, Grid, Input, Space, Switch, Tabs } from "antd";
 import { CommonButton, CommonHeading, StockCard } from "../../../components";
 import Typography from "antd/es/typography/Typography";
 import CommonTextField from "../../../components/common/TextField";
@@ -10,12 +10,14 @@ import Stock from "./stock";
 import StockDetailes from "./stockDetaile";
 import Trending from "./trending";
 import { HOME_ROUTE, TRENDING_ROUTE } from "../../../constants";
+const { useBreakpoint } = Grid;
 
 const Home = () => {
   const { id } = useParams();
   const location = useLocation();
   const [content, setContent] = useState(null);
   const { pathname } = location;
+  const screens = useBreakpoint();
 
   useEffect(() => {
     setContent(getContentByPathname(pathname, id));
@@ -34,12 +36,23 @@ const Home = () => {
   });
 
   return (
-    <section className="main-home">
-      <div className="left-side">
-        <Market />
-      </div>
-      <div className="right-side">{content}</div>
-    </section>
+    <>
+      {!screens.lg ? (
+        <div className="mobile-view">
+          <div className="left-side">
+            <Market />
+          </div>
+          <div className="right-side">{content}</div>
+        </div>
+      ) : (
+        <div className="main-home">
+          <div className="left-side">
+            <Market />
+          </div>
+          <div className="right-side">{content}</div>
+        </div>
+      )}
+    </>
   );
 };
 

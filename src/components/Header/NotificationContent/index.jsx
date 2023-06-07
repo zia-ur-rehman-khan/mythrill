@@ -55,7 +55,12 @@ const NotificationContent = () => {
       title={title}
       trigger="click"
     >
-      <img src={Images.notification} width={"20px"} height={"22px"} />
+      <img
+        src={Images.notification}
+        width={"20px"}
+        height={"22px"}
+        className={css(AppStyles.pointer)}
+      />
     </CommonPopOver>
   );
 };

@@ -9,7 +9,11 @@ import { MENU_LIST } from "../../constants";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+
 import { css } from "aphrodite";
+import { CommonDropdown } from "../common";
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
@@ -18,6 +22,17 @@ const SideBar = ({ isDrawer }) => {
   const changeRoute = (route) => {
     navigate(route);
   };
+
+  const items = [
+    {
+      label: "profile setting",
+      key: "0",
+    },
+    {
+      label: "sign out",
+      key: "1",
+    },
+  ];
 
   return (
     <>
@@ -53,6 +68,29 @@ const SideBar = ({ isDrawer }) => {
           <div className="logout">
             <CommonButton text={"Logout"} />
           </div>
+          <Space className="profile" align="center" size={20}>
+            <img src={Images.profile} width={"33.75px"} height={"33.75px"} />
+            <Space direction="vertical" align="baseline">
+              <CommonTextField
+                text={"Andy Warhol"}
+                fontSize={"10.5px"}
+                lineHeight={"10px"}
+                className={`${css(AppStyles.weight7)}`}
+              />
+              <CommonTextField
+                text={"andywarhol@mail.com"}
+                fontSize={"9px"}
+                lineHeight={"10px"}
+              />
+            </Space>
+
+            <CommonDropdown items={items}>
+              <FontAwesomeIcon
+                className={css(AppStyles.pointer)}
+                icon={faEllipsisVertical}
+              />
+            </CommonDropdown>
+          </Space>
         </Space>
       </div>
     </>

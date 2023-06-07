@@ -33,8 +33,9 @@ const Header = () => {
         <FontAwesomeIcon icon={faBars} onClick={() => setIsMobile(true)} />
 
         <div className="logo">
-          <img src={Images.logo} width={"132px"} />
+          <img src={Images.logo} />
         </div>
+        <NotificationContent />
       </div>
       <Space size={20} className="right-side">
         <NotificationContent />
