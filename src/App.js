@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { BarLoader } from "react-spinners";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "./App.css";
 
 import { ConfigProvider } from "antd";
+import { fetchToken, requestPermission } from "./firebase";
 
 function App() {
   const [persistor, setPersistor] = useState(null);
@@ -22,6 +23,10 @@ function App() {
 
   // const loadingCompleted = () => {
   // };
+
+  useEffect(async () => {
+    fetchToken();
+  }, []);
 
   useEffect(() => {
     const storeConfig = CreateStore(reducers, () => {
