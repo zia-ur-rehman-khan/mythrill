@@ -75,7 +75,7 @@ export const PAGE_ROUTES = [
   // PUBLIC ROUTES
   {
     route: HOME_ROUTE,
-    access: ACCESS_TYPES.PUBLIC,
+    access: ACCESS_TYPES.PRIVATE,
     component: <Home />,
   },
   // AUTH ROUTES

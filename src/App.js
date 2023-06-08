@@ -24,10 +24,6 @@ function App() {
   // const loadingCompleted = () => {
   // };
 
-  useEffect(async () => {
-    fetchToken();
-  }, []);
-
   useEffect(() => {
     const storeConfig = CreateStore(reducers, () => {
       DataHandler.setStore(storeConfig);

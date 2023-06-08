@@ -7,11 +7,13 @@ import { lOGIN_ROUTE } from "../../constants";
 function PrivateSharedLayout({ children }) {
   const navigate = useNavigate();
   const authenticated = useSelector(({ user }) => user.isAuthenticated);
+  const deviceToken = useSelector(({ user }) => user.deviceToken);
   useEffect(() => {
     if (!authenticated) {
       navigate(lOGIN_ROUTE);
     }
   }, [authenticated]);
+
   return (
     <section className="dashboard-wrapper">
       <Header />

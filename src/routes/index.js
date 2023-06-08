@@ -8,6 +8,8 @@ import {
   AuthSharedLayout,
   PublicSharedLayout,
 } from "../sharedLayouts";
+import { fetchToken } from "../firebase";
+import { useSelector } from "react-redux";
 
 const renderRouteSharedLayout = (title, description, access, component) => (
   <React.Fragment>
@@ -28,10 +30,18 @@ const renderRouteSharedLayout = (title, description, access, component) => (
 );
 
 const PageRoutes = () => {
+  const authenticated = useSelector(({ user }) => user?.isAuthenticated);
+
+  console.log({ authenticated });
+
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  useEffect(() => {
+    fetchToken();
+  }, []);
 
   return (
     <>

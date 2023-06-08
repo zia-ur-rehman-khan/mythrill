@@ -2,6 +2,8 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 import { initializeApp } from "firebase/app";
 import axios from "axios";
+import DataHandler from "./services/DataHandler";
+import { deviceNotificationTokenSuccess } from "./redux/slicers/user";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -40,9 +42,9 @@ export const fetchToken = () => {
         //   console.log(response);
         // });
 
-        // DataHandler.getStore().dispatch(
-        //   deviceNotificationTokenSuccess(currentToken)
-        // );
+        DataHandler.getStore().dispatch(
+          deviceNotificationTokenSuccess(currentToken)
+        );
       }
     })
     .catch((err) => {
