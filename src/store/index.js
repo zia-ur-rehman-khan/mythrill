@@ -4,7 +4,7 @@ import { persistReducer } from "redux-persist";
 import reduxStorage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import sagas from "../redux/sagas";
-import { PROD_ENV } from "../constants";
+import { DEV_ENV, PROD_ENV } from "../constants";
 import logger from "redux-logger";
 export default function (reducers, onComplete) {
   const persistConfig = {
@@ -18,8 +18,8 @@ export default function (reducers, onComplete) {
   const pReducer = persistReducer(persistConfig, reducers);
   const middlewares = [sagaMiddleware];
 
-  if (process.env.REACT_APP_ENV === PROD_ENV) {
-    middlewares.push(logger);
+  if (process.env.REACT_APP_ENV === DEV_ENV) {
+    // middlewares.push(logger);
   }
 
   const store = configureStore({

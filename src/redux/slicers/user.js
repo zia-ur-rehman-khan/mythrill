@@ -8,17 +8,20 @@ const UserReducer = createSlice({
   initialState: {
     data: {},
     profileSections: [],
-    isAuthenticated: true,
+    isAuthenticated: false,
     isError: null,
     deviceToken: "",
+    text: "true",
   },
   reducers: {
     // USER LOGIN
     userLoginRequest(state, action) {
-      // state.isAuthenticated = true;
+      console.log(action, "userLoginRequest");
     },
     userLoginSuccess(state, action) {
+      console.log(action, "userLoginSuccess");
       state.isAuthenticated = true;
+      state.data = action.payload;
     },
     // REFRESH TOKEN
     refreshToken(state, action) {

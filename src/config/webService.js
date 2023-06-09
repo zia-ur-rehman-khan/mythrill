@@ -4,7 +4,7 @@ import { getCurrentAccessToken } from "../services/utils";
 export const API_TIMEOUT = 30000;
 export const ABORT_REQUEST_MESSAGE = "Network failed. Aborted request.";
 
-export const BASE_URL = "https://7219-110-39-172-42.ngrok-free.app";
+export const BASE_URL = "https://5b3b-110-39-172-42.ngrok-free.app";
 // export const BASE_URL = process.env.REACT_APP_BACKEND_DEV_URL;
 // export const BASE_URL = process.env.REACT_APP_BACKEND_STAGGING_URL;
 // export const BASE_URL = process.env.REACT_APP_BACKEND_PROD_URL;

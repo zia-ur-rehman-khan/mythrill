@@ -30,10 +30,6 @@ const renderRouteSharedLayout = (title, description, access, component) => (
 );
 
 const PageRoutes = () => {
-  const authenticated = useSelector(({ user }) => user?.isAuthenticated);
-
-  console.log({ authenticated });
-
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);

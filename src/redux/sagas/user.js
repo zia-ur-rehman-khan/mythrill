@@ -24,9 +24,10 @@ function* userLogin() {
         "",
         {}
       );
+
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(userLoginSuccess(response));
+        yield put(userLoginSuccess(response?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
