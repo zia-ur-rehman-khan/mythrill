@@ -5,6 +5,12 @@ import {
   Share,
   Setting,
   StockDetaile,
+  Forgot,
+  EmailVerification,
+  ResetPassword,
+  Register,
+  NumberVerification,
+  Subscripton,
 } from "../modules";
 import { Images } from "../theme";
 
@@ -63,6 +69,13 @@ export const ALERT_TYPES = {
 export const HOME_ROUTE = "/";
 // AUTH ROUTES
 export const lOGIN_ROUTE = "/login";
+export const FORGOT_ROUTE = "/forgot";
+export const EMAIL_VERIFICATION_ROUTE = "/email";
+export const RESET_PASSWORD_ROUTE = "/reset-password";
+export const REGISTER_ROUTE = "/register";
+export const NUMBER_VERIFICATION_ROUTE = "/number";
+export const SUBSCRIPTION_ROUTE = "/packages";
+
 // PRIVATE ROUTES
 export const DASHBOARD_ROUTE = "/dashboard";
 
@@ -85,6 +98,48 @@ export const PAGE_ROUTES = [
     description: "",
     access: ACCESS_TYPES.AUTH,
     component: <Login />,
+  },
+  {
+    route: FORGOT_ROUTE,
+    title: "Forgot",
+    description: "",
+    access: ACCESS_TYPES.AUTH,
+    component: <Forgot />,
+  },
+  {
+    route: EMAIL_VERIFICATION_ROUTE,
+    title: "Email Verification",
+    description: "",
+    access: ACCESS_TYPES.AUTH,
+    component: <EmailVerification />,
+  },
+  {
+    route: RESET_PASSWORD_ROUTE,
+    title: "Reset Password",
+    description: "",
+    access: ACCESS_TYPES.AUTH,
+    component: <ResetPassword />,
+  },
+  {
+    route: REGISTER_ROUTE,
+    title: "Register",
+    description: "",
+    access: ACCESS_TYPES.AUTH,
+    component: <Register />,
+  },
+  {
+    route: NUMBER_VERIFICATION_ROUTE,
+    title: "Number Verification",
+    description: "",
+    access: ACCESS_TYPES.AUTH,
+    component: <NumberVerification />,
+  },
+  {
+    route: SUBSCRIPTION_ROUTE,
+    title: "Package",
+    description: "",
+    access: ACCESS_TYPES.AUTH,
+    component: <Subscripton />,
   },
   // PRIVATE ROUTE
   {

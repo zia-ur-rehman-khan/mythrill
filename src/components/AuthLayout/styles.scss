@@ -1,0 +1,56 @@
+@use "../../master.scss";
+
+.auth-box {
+    background-image: url("../../assets/auth/backgound.png");
+    position: relative;
+    .left-side {
+        background: master.$dark-color;
+        border-radius: 0px 41px 41px 0px;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        padding: 60px 20px;
+        align-items: center;
+        min-height: 100vh;
+        @media (max-width: 1000px) {
+            width: 100%;
+            border-radius: 0;
+        }
+        .content {
+            background: master.$theme3-color;
+            border-radius: 30px;
+            padding: 20px 50px 20px 50px;
+            width: 70%;
+            @media (max-width: 500px) {
+                width: 100%;
+                padding: 20px;
+            }
+        }
+        .copy-right {
+            position: absolute;
+            bottom: 0;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+    }
+
+    .image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(0, -50%);
+        @media (max-width: 1000px) {
+            display: none;
+        }
+    }
+    .email {
+        left: 48% !important;
+    }
+    .login {
+        left: 45% !important;
+    }
+    .number {
+        left: 52%;
+    }
+}

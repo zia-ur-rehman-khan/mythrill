@@ -23,16 +23,18 @@ const CommonTextField = ({
   title,
   lineHeight,
   opacity,
+  width,
+  margin = 0,
 }) => {
   return (
-    <div className={`${topClass || "paragraph-parent"}`}>
+    <div className={`${topClass && topClass}  paragraph-parent`}>
       <p
         title={title}
         className={`${className || ""} ${
           onClick ? css(AppStyles.pointer) : ""
         }`}
         style={{
-          margin: 0,
+          margin: margin,
           padding: 0,
           fontFamily: font,
           fontSize,
@@ -48,6 +50,7 @@ const CommonTextField = ({
           textDecoration,
           whiteSpace: "pre-wrap",
           opacity,
+          width,
         }}
         onClick={onClick}
       >

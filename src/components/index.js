@@ -7,6 +7,8 @@ import Loader from "./loader";
 import ConfirmationModal from "./confirmationModal";
 import SideBar from "./SideBar";
 import Layout from "./Layout";
+import AuthLayout from "./AuthLayout";
+
 import {
   StockCard,
   CommonButton,
@@ -38,4 +40,5 @@ export {
   CommonDropdown,
   SmallChart,
   CommonPopOver,
+  AuthLayout,
 };

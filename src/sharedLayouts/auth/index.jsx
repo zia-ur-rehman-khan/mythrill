@@ -34,7 +34,7 @@ function AuthSharedLayout({ children }) {
 
   return (
     <section className="auth-wrapper">
-      <Header />
+      {/* <Header /> */}
       {children}
     </section>
   );
