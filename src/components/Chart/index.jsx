@@ -6,7 +6,7 @@ import moment from "moment";
 import "./styles.scss";
 import { css } from "aphrodite";
 import { AppStyles, Images } from "../../theme";
-import { Checkbox, Radio, Space, Switch } from "antd";
+import { Checkbox, Grid, Radio, Space, Switch } from "antd";
 import {
   CommonButton,
   CommonHeading,
@@ -15,9 +15,12 @@ import {
   CommonTextField,
 } from "../common";
 import ExtraDetailes from "./extraDetailes";
+const { useBreakpoint } = Grid;
 
 const Chart = () => {
   const [chartType, setChartType] = useState("areaspline");
+
+  const screens = useBreakpoint();
 
   const options = { style: "currency", currency: "USD" };
   const numberFormat = new Intl.NumberFormat("en-US", options);
@@ -122,6 +125,7 @@ const Chart = () => {
           },
           //   x: -15,
           style: {
+            // fontSize: "8px",
             color: "#fff",
             position: "absolute",
           },
@@ -168,6 +172,7 @@ const Chart = () => {
         //   return moment(this.value).format("DD MMM");
         // },
         style: {
+          // fontSize: "8px",
           color: "#fff",
           position: "absolute",
         },
@@ -246,26 +251,20 @@ const Chart = () => {
         },
       },
     },
-    // responsive: {
-    //   rules: [
-    //     {
-    //       condition: {
-    //         maxWidth: 500,
-    //       },
-    //       chartOptions: {
-    //         chart: {
-    //           height: 300,
-    //         },
-    //         subtitle: {
-    //           text: null,
-    //         },
-    //         navigator: {
-    //           enabled: false,
-    //         },
-    //       },
-    //     },
-    //   ],
-    // },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 500,
+          },
+          chartOptions: {
+            chart: {
+              height: 400,
+            },
+          },
+        },
+      ],
+    },
   };
 
   const chartChange = (type) => {
@@ -285,10 +284,26 @@ const Chart = () => {
   );
 
   return (
-    <div className={`bigchart ${css(AppStyles.mTop20)}`}>
-      <ExtraDetailes chartChange={chartChange} chartType={chartType} />
-      {chartType && chartComponent}
-    </div>
+    <>
+      {!screens.lg && (
+        <Space
+          className={css(
+            AppStyles.w100,
+            AppStyles.justifyEnd,
+            AppStyles.mTop10
+          )}
+        >
+          <img src={Images.green} width={"30px"} height={"30px"} />
+          <img src={Images.yellow} width={"30px"} height={"30px"} />
+          <img src={Images.red} width={"30px"} height={"30px"} />
+        </Space>
+      )}
+
+      <div className={`bigchart ${css(AppStyles.mTop20)}`}>
+        <ExtraDetailes chartChange={chartChange} chartType={chartType} />
+        {chartType && chartComponent}
+      </div>
+    </>
   );
 };
 

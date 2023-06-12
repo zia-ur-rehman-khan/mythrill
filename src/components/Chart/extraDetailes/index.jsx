@@ -7,10 +7,12 @@ import {
   CommonModal,
   CommonTextField,
 } from "../../common";
-import { Radio, Space } from "antd";
+import { Grid, Radio, Space } from "antd";
+const { useBreakpoint } = Grid;
 
 const ExtraDetailes = ({ chartChange, chartType }) => {
   const [isModal, setIsModal] = useState(false);
+  const screens = useBreakpoint();
 
   const radio = [
     "Every Minutes",
@@ -31,12 +33,14 @@ const ExtraDetailes = ({ chartChange, chartType }) => {
           <CommonTextField text="Every Minutes" />
           <img src={Images.rightArrow} />
         </Space>
-        <Space>
-          <Space>
+        {screens.lg && (
+          <Space className="hide-web">
             <img src={Images.green} width={"30px"} height={"30px"} />
             <img src={Images.yellow} width={"30px"} height={"30px"} />
             <img src={Images.red} width={"30px"} height={"30px"} />
           </Space>
+        )}
+        <Space>
           <Space
             onClick={() => {
               chartChange("areaspline");

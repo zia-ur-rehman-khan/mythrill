@@ -14,21 +14,26 @@ const Update = () => {
   };
 
   return (
-    <Space size={20} wrap={true}>
+    <Space
+      wrap={true}
+      className={css([AppStyles.w100, AppStyles.spaceBetween])}
+    >
       <Space>
-        <img
-          src={Images.backArrow}
-          onClick={changeRoute}
-          className={css(AppStyles.pointer)}
-        />
-        <img src={Images.bitCoin} width={"36px"} height={"36px"} />
-      </Space>
-      <Space>
-        <Space size={3} direction="vertical">
-          <CommonTextField text={"Bitcoin"} fontWeight={600} />
-          <CommonTextField text={"$23,568"} opacity={0.5} />
+        <Space>
+          <img
+            src={Images.backArrow}
+            onClick={changeRoute}
+            className={css(AppStyles.pointer)}
+          />
+          <img src={Images.bitCoin} width={"36px"} height={"36px"} />
         </Space>
-        <img src={Images.upSignLarge} width={"24px"} height={"20px"} />
+        <Space>
+          <Space size={3} direction="vertical">
+            <CommonTextField text={"Bitcoin"} fontWeight={600} />
+            <CommonTextField text={"$23,568"} opacity={0.5} />
+          </Space>
+          <img src={Images.upSignLarge} width={"24px"} height={"20px"} />
+        </Space>
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={"Last"} />

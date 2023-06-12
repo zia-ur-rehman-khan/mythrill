@@ -416,6 +416,9 @@ const styles = StyleSheet.create({
   justifyCenter: {
     justifyContent: "center",
   },
+  justifyEnd: {
+    justifyContent: "flex-end",
+  },
   h3Style1: {
     fontSize: "16px",
     fontWeight: "600",
