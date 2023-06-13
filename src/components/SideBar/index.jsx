@@ -72,17 +72,9 @@ const SideBar = ({ isDrawer }) => {
             <Divider className="line" />
           </Space>
 
-          <div className="logout">
-            <CommonButton
-              onClick={() => {
-                logout("/login");
-              }}
-              text={"Logout"}
-            />
-          </div>
-          <Space className="profile" align="center" size={20}>
+          <Space className="profile" align="center" size={10}>
             <img src={Images.profile} width={"33.75px"} height={"33.75px"} />
-            <Space direction="vertical" align="baseline">
+            <Space direction="vertical" size={2} align="baseline">
               <CommonTextField
                 text={"Andy Warhol"}
                 fontSize={"10.5px"}
@@ -95,14 +87,16 @@ const SideBar = ({ isDrawer }) => {
                 lineHeight={"10px"}
               />
             </Space>
-
-            <CommonDropdown items={items}>
-              <FontAwesomeIcon
-                className={css(AppStyles.pointer)}
-                icon={faEllipsisVertical}
-              />
-            </CommonDropdown>
           </Space>
+
+          <div className="logout">
+            <CommonButton
+              onClick={() => {
+                logout("/login");
+              }}
+              text={"Logout"}
+            />
+          </div>
         </Space>
       </div>
     </>

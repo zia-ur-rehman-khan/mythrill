@@ -42,6 +42,7 @@ const Login = () => {
 
   return (
     <AuthLayout
+      arrow
       className="login"
       image={<img src={Images.card3} height={"636px"} />}
     >
@@ -51,6 +52,7 @@ const Login = () => {
             <img src={Images.authLogo} width={"50px"} height={"58px"} />
           </Space>
           <CommonHeading
+            level={3}
             textAlign={"center"}
             text={"Let’s login to your Mythril account first"}
           />

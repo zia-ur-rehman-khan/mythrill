@@ -32,6 +32,7 @@ import reset from "../assets/auth/reset.png";
 import register from "../assets/auth/register.png";
 import number from "../assets/auth/number.png";
 import sidebar from "../assets/header/sideBar.png";
+import back from "../assets/auth/backArrow.png";
 
 export default {
   ErrorBackground2,
@@ -68,4 +69,5 @@ export default {
   register,
   number,
   sidebar,
+  back,
 };

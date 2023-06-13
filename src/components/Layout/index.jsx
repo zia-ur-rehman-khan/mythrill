@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
           <div className="top-section">
             <CommonTextField text={"Good Morning"} fontSize={"12px"} />
 
-            <Row gutter={[20, 20]}>
+            <Row gutter={[20, 10]}>
               <Col
                 lg={{ span: 8 }}
                 md={{ span: 8 }}

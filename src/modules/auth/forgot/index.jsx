@@ -28,6 +28,7 @@ const Forgot = () => {
           <img src={Images.authLogo} width={"50px"} height={"58px"} />
         </Space>
         <CommonHeading
+          level={3}
           textAlign={"center"}
           text={"Forgot your Mythril password"}
         />

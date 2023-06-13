@@ -12,12 +12,23 @@ import {
 import { Checkbox, Input, Space } from "antd";
 import { css } from "aphrodite";
 import { Images } from "../../theme";
+import { useNavigate } from "react-router-dom";
 
-const AuthLayout = ({ children, image, className }) => {
+const AuthLayout = ({ children, image, className, arrow }) => {
+  const Navigate = useNavigate();
+  const changeRoute = () => {
+    Navigate(-1);
+  };
   return (
     <div className="auth-box">
       <div className="left-side">
-        <div className="content">{children}</div>
+        <div className="content">
+          {!arrow && (
+            <img src={Images.back} className="arrow" onClick={changeRoute} />
+          )}
+
+          {children}
+        </div>
         <CommonTextField
           topClass={"copy-right"}
           text={"© 2023 Mythril Trends. All rights reserved"}

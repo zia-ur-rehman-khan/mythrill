@@ -3,7 +3,7 @@ import "./styles.scss";
 import CommonTextField from "../common/TextField";
 import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
-import { Divider, Space } from "antd";
+import { Divider, Image, Space } from "antd";
 import { Drawer } from "antd";
 
 import { AppStyles, Images } from "../../theme";
@@ -38,7 +38,7 @@ const Header = () => {
         />
 
         <div className="logo">
-          <img src={Images.logo} />
+          <img src={Images.logo} width={"140px"} />
         </div>
         <NotificationContent />
       </div>
@@ -72,13 +72,13 @@ const Header = () => {
       <Drawer
         title={
           <div className="logo">
-            <img src={Images.logo} width={"132px"} />
+            <Image src={Images.logo} width="140px" />
           </div>
         }
         placement="left"
         onClose={() => setIsMobile(false)}
         open={isMobile}
-        width="50%"
+        width="60%"
         className="side-drawer"
       >
         <SideBar isDrawer={"drawer"} />

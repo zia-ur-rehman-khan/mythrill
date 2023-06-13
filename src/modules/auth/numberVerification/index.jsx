@@ -31,6 +31,7 @@ const NumberVerification = () => {
           <img src={Images.authLogo} width={"50px"} height={"58px"} />
         </Space>
         <CommonHeading
+          level={3}
           textAlign={"center"}
           text={"Phone Number Verification Please Check Your Phone"}
         />

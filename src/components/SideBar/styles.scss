@@ -45,6 +45,20 @@
         display: none;
     }
 }
+.ant-drawer {
+    .ant-drawer-header {
+        padding: 20px 5px;
+
+        .ant-drawer-header-title {
+            flex-direction: row-reverse;
+        }
+    }
+    .ant-drawer-body {
+        @media (max-width: 400px) {
+            padding: 10px;
+        }
+    }
+}
 
 .drawer {
     .sidebar-routes {
@@ -70,6 +84,12 @@
                 opacity: 0.1;
                 width: 50%;
             }
+        }
+        .profile {
+            margin-top: 20px;
+        }
+        .logout {
+            margin-top: 20px;
         }
     }
 }

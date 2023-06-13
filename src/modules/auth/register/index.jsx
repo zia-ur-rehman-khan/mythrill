@@ -30,7 +30,11 @@ const Register = () => {
         <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>
           <img src={Images.authLogo} width={"50px"} height={"58px"} />
         </Space>
-        <CommonHeading textAlign={"center"} text={"Create new account"} />
+        <CommonHeading
+          level={3}
+          textAlign={"center"}
+          text={"Create new account"}
+        />
         <Space direction="vertical" className={css(AppStyles.w100)}>
           <CommonTextField text={"Full Name"} opacity={"0.5"} />
           <CommonInputField className={"auth"} placeholder={"John Smith"} />
@@ -71,20 +75,22 @@ const Register = () => {
         <CommonButton
           text={"Register"}
           onClick={() => changeRoute("/number")}
-          classname={css(AppStyles.mTop20)}
+          classname={css(AppStyles.mTop20, AppStyles.mBottom10)}
         />
-        <CommonTextField textAlign={"center"} text={"or continue with"} />
-        <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
-          <img src={Images.google} width={"45px"} height={"45px"} />
-          <img src={Images.fb} width={"45px"} height={"45px"} />
-        </Space>
-        <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
-          <CommonTextField text={"already have an account?"} />
-          <CommonTextField
-            color="#7665c1"
-            onClick={() => changeRoute("/login")}
-            text={"Login"}
-          />
+        <Space direction="vertical" size={15} className={css(AppStyles.w100)}>
+          <CommonTextField textAlign={"center"} text={"or continue with"} />
+          <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
+            <img src={Images.google} width={"45px"} height={"45px"} />
+            <img src={Images.fb} width={"45px"} height={"45px"} />
+          </Space>
+          <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
+            <CommonTextField text={"already have an account?"} />
+            <CommonTextField
+              color="#7665c1"
+              onClick={() => changeRoute("/login")}
+              text={"Login"}
+            />
+          </Space>
         </Space>
       </Space>
     </AuthLayout>

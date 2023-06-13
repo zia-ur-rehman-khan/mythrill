@@ -23,6 +23,7 @@ const ResetPassword = () => {
   };
   return (
     <AuthLayout
+      arrow
       className="email"
       image={<img src={Images.reset} height={"424px"} />}
     >
@@ -31,6 +32,7 @@ const ResetPassword = () => {
           <img src={Images.authLogo} width={"50px"} height={"58px"} />
         </Space>
         <CommonHeading
+          level={3}
           textAlign={"center"}
           text={"Reset your Password Mythril"}
         />

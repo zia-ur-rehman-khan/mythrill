@@ -21,6 +21,14 @@
             border-radius: 30px;
             padding: 20px 50px 20px 50px;
             width: 70%;
+
+            position: relative;
+            .arrow {
+                position: absolute;
+                left: 30px;
+                top: 26px;
+                cursor: pointer;
+            }
             @media (max-width: 500px) {
                 width: 100%;
                 padding: 20px;
