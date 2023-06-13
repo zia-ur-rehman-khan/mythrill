@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import {
   Login,
   Home,
@@ -375,6 +376,16 @@ export const passwordValidation = (_, value) => {
         "Should contain at least 8 and maximum 30 characters , 1 Upper case, 1 Lower Case and 1 Special Character!"
       )
     );
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const handlePassworMatch = (_, value, name) => {
+  if (!value?.length) {
+    return Promise.reject(new Error("Field is required."));
+  } else if (value && value !== name) {
+    return Promise.reject(new Error("Passwords do not match."));
   } else {
     return Promise.resolve();
   }

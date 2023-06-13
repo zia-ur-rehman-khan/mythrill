@@ -3,6 +3,8 @@
 .auth-box {
     background-image: url("../../assets/auth/backgound.png");
     position: relative;
+    background-position: right;
+
     .left-side {
         background: master.$dark-color;
         border-radius: 0px 41px 41px 0px;
@@ -23,7 +25,7 @@
             width: 70%;
 
             position: relative;
-            .arrow {
+            .back-arrow {
                 position: absolute;
                 left: 30px;
                 top: 26px;

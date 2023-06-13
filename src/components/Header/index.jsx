@@ -12,8 +12,10 @@ import { css } from "aphrodite";
 import SideBar from "../SideBar";
 import { CommonDropdown, CommonPopOver } from "../common";
 import NotificationContent from "./NotificationContent";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const Navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
 
   const items = [
@@ -27,6 +29,10 @@ const Header = () => {
     },
   ];
 
+  const changeRoute = (route) => {
+    Navigate(route);
+  };
+
   return (
     <header className="main-header">
       <div className="mobile">
@@ -38,7 +44,11 @@ const Header = () => {
         />
 
         <div className="logo">
-          <img src={Images.logo} width={"140px"} />
+          <img
+            src={Images.logo}
+            onClick={() => changeRoute("/")}
+            width={"140px"}
+          />
         </div>
         <NotificationContent />
       </div>

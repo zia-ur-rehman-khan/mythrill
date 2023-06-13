@@ -1,0 +1,67 @@
+@use "../../../master.scss";
+
+.react-tel-input {
+    height: 40px;
+
+    &:hover {
+        border: 1px solid #9b8ccf;
+        border-radius: 6px;
+    }
+
+    .form-control {
+        background: #363941;
+        height: 100%;
+        width: 100%;
+        border-color: #363941;
+        border-radius: 6px;
+        font-size: 12px;
+        color: #ffffff;
+
+        &::placeholder {
+            color: #ffffff;
+            opacity: 0.5;
+        }
+    }
+
+    .flag-dropdown {
+        background: #363941;
+        border-color: #363941;
+        border-radius: 6px;
+        .selected-flag {
+            .arrow {
+                border-top: 4px solid #ffffff;
+            }
+            &:hover {
+                background: #363941;
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .react-tel-input {
+        height: 35px;
+        .form-control {
+            font-size: 10px;
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .react-tel-input {
+        height: 40px;
+        .form-control {
+            font-size: 12px;
+        }
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .react-tel-input {
+        height: 45px;
+        .form-control {
+            font-size: 14px;
+        }
+    }
+}

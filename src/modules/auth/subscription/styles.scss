@@ -14,20 +14,5 @@
         flex-wrap: wrap;
         gap: 40px;
         justify-content: center;
-
-        .sub-box {
-            background: master.$theme3-color;
-            border-radius: 30px;
-            padding: 40px 50px;
-            @media (max-width: "400px") {
-                padding: 30px;
-            }
-            li {
-                &::marker {
-                    color: master.$light-color;
-                    opacity: 0.5;
-                }
-            }
-        }
     }
 }

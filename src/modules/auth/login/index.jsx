@@ -21,9 +21,10 @@ import {
 } from "../../../constants";
 import DataHandler from "../../../services/DataHandler";
 import { userLoginSuccess } from "../../../redux/slicers/user";
+import { CommonPhoneInput } from "../../../components/common";
 
 const Login = () => {
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const Navigate = useNavigate();
 
   const changeRoute = (route) => {
@@ -31,10 +32,11 @@ const Login = () => {
   };
 
   const onFinish = (values) => {
+    console.log("Success:", values);
+
     setLoading(true);
     DataHandler.getStore().dispatch(userLoginSuccess());
     changeRoute("/");
-    console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -59,10 +61,8 @@ const Login = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"Phone Number"} opacity={"0.5"} />
 
-            <CommonInputField
+            <CommonPhoneInput
               name={"phone number"}
-              className={"auth"}
-              placeholder={"+0 123 456 7890"}
               rules={[
                 {
                   validator: (_, value) => {
