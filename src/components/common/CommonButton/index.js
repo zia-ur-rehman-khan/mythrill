@@ -20,10 +20,12 @@ const CommonButton = ({
   fontSize,
   padding,
   icon,
+  loading,
 }) => {
   return (
     <div className={`button-parent ${topClass || ""} `}>
       <Button
+        loading={loading}
         icon={icon}
         type={type}
         style={{

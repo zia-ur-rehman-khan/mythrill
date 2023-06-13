@@ -14,6 +14,9 @@ import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 import { css } from "aphrodite";
 import { CommonDropdown } from "../common";
+import DataHandler from "../../services/DataHandler";
+import { userLoginSuccess } from "../../redux/slicers/user";
+import { userSignOutSuccess } from "../../redux/slicers/user";
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
@@ -23,6 +26,10 @@ const SideBar = ({ isDrawer }) => {
     navigate(route);
   };
 
+  const logout = (route) => {
+    DataHandler.getStore().dispatch(userSignOutSuccess());
+    navigate(route);
+  };
   const items = [
     {
       label: "profile setting",
@@ -66,7 +73,12 @@ const SideBar = ({ isDrawer }) => {
           </Space>
 
           <div className="logout">
-            <CommonButton text={"Logout"} />
+            <CommonButton
+              onClick={() => {
+                logout("/login");
+              }}
+              text={"Logout"}
+            />
           </div>
           <Space className="profile" align="center" size={20}>
             <img src={Images.profile} width={"33.75px"} height={"33.75px"} />

@@ -12,6 +12,7 @@ import {
   NumberVerification,
   Subscripton,
 } from "../modules";
+import { checkPasswordValidation, isEmailValid } from "../services/utils";
 import { Images } from "../theme";
 
 const { home, share, setting } = Images;
@@ -297,3 +298,84 @@ export const stock_List = [
     chartColor: "#1ABF17",
   },
 ];
+
+export const validatorField = (_, value, min = 3, max = 80) => {
+  if (!value || value?.length < 1) {
+    return Promise.reject(new Error("Field is required."));
+  } else if (value?.length > 0 && value?.trim() === "") {
+    return Promise.reject(new Error("Cannot accept only white spaces."));
+  } else if (value?.length < min) {
+    return Promise.reject(
+      new Error(`Must be equal or greater than ${min} characters.`)
+    );
+  } else if (value?.length > max) {
+    return Promise.reject(
+      new Error(`Must be less than ${max + 1} characters.`)
+    );
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const EMAIL_RULE = [
+  {
+    validator: (_, value) => {
+      if (!value || value?.length < 1) {
+        return Promise.reject(new Error("Field is required"));
+      } else if (value?.includes(" ")) {
+        return Promise.reject(new Error("Cannot accept whitespaces."));
+      } else if (value && !isEmailValid(value)) {
+        return Promise.reject(new Error("Invalid email address."));
+      } else {
+        return Promise.resolve();
+      }
+    },
+  },
+];
+
+export const numberValidatorField = (_, value) => {
+  if (value === undefined) {
+    return Promise.reject(new Error("Invalid Value."));
+  } else if (value < 1) {
+    return Promise.reject(new Error("Must be equal or greater than 1."));
+  } else if (`${value}`.toLowerCase().includes("e")) {
+    return Promise.reject(new Error("Invalid Value."));
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const phoneValidation = (_, v, __, min = 10, max = 30) => {
+  const value = v?.toString();
+  if (!value || value?.length < 1) {
+    return Promise.reject(new Error("Field is required."));
+  } else if (value?.length > 0 && value?.trim() === "") {
+    return Promise.reject(new Error("Cannot accept white spaces."));
+  } else if (value?.length < min) {
+    return Promise.reject(
+      new Error(`Must be greater than ${min - 1} characters.`)
+    );
+  } else if (value?.length > max) {
+    return Promise.reject(
+      new Error(`Must be less than ${max + 1} characters.`)
+    );
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const passwordValidation = (_, value) => {
+  if (!value?.length) {
+    return Promise.reject(new Error("Field is required."));
+  } else if (value && value?.includes() === "") {
+    return Promise.reject(new Error("Cannot accept whitespace"));
+  } else if (value && !checkPasswordValidation(value)) {
+    return Promise.reject(
+      new Error(
+        "Should contain at least 8 and maximum 30 characters , 1 Upper case, 1 Lower Case and 1 Special Character!"
+      )
+    );
+  } else {
+    return Promise.resolve();
+  }
+};

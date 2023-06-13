@@ -29,18 +29,6 @@ export const fetchToken = () => {
       console.log("currentToken", currentToken);
       if (currentToken) {
         console.log(currentToken);
-        // axios({
-        //   method: "post",
-        //   url: "https://7219-110-39-172-42.ngrok-free.app",
-        //   data: {
-        //     email: "test@viabletree.com",
-        //     password: "test12345",
-        //     platform: "android",
-        //     token: currentToken,
-        //   },
-        // }).then((response) => {
-        //   console.log(response);
-        // });
 
         DataHandler.getStore().dispatch(
           deviceNotificationTokenSuccess(currentToken)

@@ -65,6 +65,13 @@ export const isEmailValid = (email) => {
   return re.test(email.trim());
 };
 
+export const checkPasswordValidation = (pass) => {
+  const regex =
+    /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/;
+
+  return pass.match(regex);
+};
+
 // CHECK IF PASSWORD LENGTH IS VALID
 export const isPasswordValid = (password) => {
   let length = 5; // u can change pass length according to your requirement
