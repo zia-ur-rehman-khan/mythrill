@@ -30,7 +30,12 @@ const Header = () => {
   return (
     <header className="main-header">
       <div className="mobile">
-        <FontAwesomeIcon icon={faBars} onClick={() => setIsMobile(true)} />
+        <img
+          src={Images.sidebar}
+          width={"18px"}
+          height={"18px"}
+          onClick={() => setIsMobile(true)}
+        />
 
         <div className="logo">
           <img src={Images.logo} />

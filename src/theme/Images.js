@@ -31,6 +31,7 @@ import email from "../assets/auth/email.png";
 import reset from "../assets/auth/reset.png";
 import register from "../assets/auth/register.png";
 import number from "../assets/auth/number.png";
+import sidebar from "../assets/header/sideBar.png";
 
 export default {
   ErrorBackground2,
@@ -66,4 +67,5 @@ export default {
   reset,
   register,
   number,
+  sidebar,
 };
