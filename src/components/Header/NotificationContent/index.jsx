@@ -5,7 +5,7 @@ import { CommonPopOver, CommonTextField } from "../../common";
 import { Divider, Space } from "antd";
 import "./styles.scss";
 
-const NotificationContent = () => {
+const NotificationContent = ({ mobile }) => {
   const title = (
     <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
       <CommonTextField
@@ -50,7 +50,7 @@ const NotificationContent = () => {
 
   return (
     <CommonPopOver
-      width="400px"
+      placement={mobile ? "leftBottom" : ""}
       content={content}
       title={title}
       trigger="click"

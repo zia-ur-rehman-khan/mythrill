@@ -10,6 +10,7 @@ const CommonPopOver = ({
   title,
   trigger,
   width,
+  placement,
 }) => {
   return (
     <Popover
@@ -17,6 +18,7 @@ const CommonPopOver = ({
       arrow={arrow}
       content={content}
       title={title}
+      placement={placement}
       overlayStyle={{ width: width }}
       trigger={trigger}
     >

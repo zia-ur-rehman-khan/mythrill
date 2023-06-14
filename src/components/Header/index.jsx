@@ -50,7 +50,7 @@ const Header = () => {
             width={"140px"}
           />
         </div>
-        <NotificationContent />
+        <NotificationContent mobile />
       </div>
       <Space size={20} className="right-side">
         <NotificationContent />
