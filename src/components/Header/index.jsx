@@ -85,7 +85,11 @@ const Header = () => {
             <img
               src={Images.logo}
               width="140px"
-              onClick={() => changeRoute("/")}
+              onClick={() => {
+                console.log("test");
+                setIsMobile(false);
+                changeRoute("/");
+              }}
             />
           </div>
         }

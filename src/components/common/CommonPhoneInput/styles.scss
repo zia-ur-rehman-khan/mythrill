@@ -69,3 +69,14 @@
 .test {
     margin: 4px 0 0 0 !important;
 }
+
+.react-tel-input .country-list .flag {
+    position: absolute;
+    left: 13px;
+    top: 15px;
+}
+
+.react-tel-input .country-list .country {
+    position: relative;
+    padding: 10px 9px 10px 46px;
+}
