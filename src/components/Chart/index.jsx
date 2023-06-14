@@ -181,6 +181,9 @@ const Chart = () => {
       dateGroupingInterval: 1,
     },
     rangeSelector: {
+      buttonTheme: {
+        width: 25, // Change the width of the rangeSelector buttons
+      },
       selected: 5,
 
       buttons: [

@@ -24,7 +24,7 @@ const ExtraDetailes = ({ chartChange, chartType }) => {
   ];
   return (
     <>
-      <Space size={20} className="extra-detailes">
+      <Space className="extra-detailes" wrap={true}>
         <Space
           className={css(AppStyles.pointer)}
           onClick={() => setIsModal(true)}
