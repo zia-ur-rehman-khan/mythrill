@@ -1,21 +1,29 @@
 import React from "react";
-import { StockCard } from "../../../../components";
-import { stock_List } from "../../../../constants";
+import { CommonTextField, StockCard } from "../../../../components";
+import { useSelector } from "react-redux";
+import { Typography } from "antd";
 
-const StockListing = ({ test, addIcon }) => {
-  return (
-    <>
-      {test
-        ? stock_List
-            .filter((d) => d?.name === test)
-            .map((data, i) => (
-              <StockCard addIcon={addIcon} value={data} key={data.id} />
-            ))
-        : stock_List.map((data, i) => (
-            <StockCard addIcon={addIcon} value={data} key={data.id} />
-          ))}
-    </>
-  );
+const StockListing = ({ test, addIcon, ...props }) => {
+	const stocks = useSelector((state) => state?.stocks?.stocks);
+
+	const noStockInTheList = () => {
+		return <CommonTextField text={"No Stocks in the list"} />;
+	};
+
+	const filteredStocks = test
+		? stocks?.filter((d) => d?.type === test)
+		: stocks;
+
+	return (
+		<>
+			{filteredStocks?.length > 0 &&
+				filteredStocks?.map((data) => (
+					<StockCard addIcon={addIcon} value={data} key={data.id} />
+				))}
+
+			{filteredStocks?.length === 0 && noStockInTheList()}
+		</>
+	);
 };
 
 export default StockListing;
