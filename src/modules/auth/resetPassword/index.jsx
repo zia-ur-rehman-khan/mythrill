@@ -46,7 +46,7 @@ const ResetPassword = () => {
       image={<img src={Images.reset} className="reset-image" />}
     >
       <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Space direction="vertical">
+        <Space direction="vertical" className={css(AppStyles.w100)}>
           <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>
             <img src={Images.authLogo} width={"50px"} height={"58px"} />
           </Space>
