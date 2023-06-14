@@ -17,7 +17,7 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Market = () => {
+const Market = ({ width }) => {
   const [isModal, setIsModal] = useState(false);
 
   const items = [
@@ -57,7 +57,7 @@ const Market = () => {
         onClick={() => setIsModal(true)}
       />
       <CommonModal
-        width={"40%"}
+        width={width}
         title={
           <CommonHeading
             text={"Add Stock"}

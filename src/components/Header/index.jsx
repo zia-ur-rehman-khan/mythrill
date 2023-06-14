@@ -82,7 +82,7 @@ const Header = () => {
       <Drawer
         title={
           <div className="logo">
-            <Image src={Images.logo} width="140px" />
+            <img src={Images.logo} width="140px" />
           </div>
         }
         placement="left"

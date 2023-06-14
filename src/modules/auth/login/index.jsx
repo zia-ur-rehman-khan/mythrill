@@ -46,7 +46,7 @@ const Login = () => {
     <AuthLayout
       arrow
       className="login"
-      image={<img src={Images.card3} height={"636px"} />}
+      image={<img src={Images.card3} className="login-image" />}
     >
       <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <Space direction="vertical">

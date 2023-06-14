@@ -35,7 +35,7 @@ const Forgot = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <AuthLayout image={<img src={Images.forgot} height={"446px"} />}>
+    <AuthLayout image={<img src={Images.forgot} className="forgot-image" />}>
       <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <Space direction="vertical">
           <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>

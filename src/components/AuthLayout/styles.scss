@@ -21,9 +21,6 @@
             border-radius: 0;
         }
         .content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
             background: master.$theme3-color;
             border-radius: 30px;
             padding: 20px 50px 20px 50px;
@@ -59,14 +56,23 @@
             display: none;
         }
     }
+    .forgot-image {
+        max-height: 500px;
+    }
     .email {
         left: 48% !important;
         .reset-image {
             max-height: 500px;
         }
+        .email-image {
+            max-height: 440px;
+        }
     }
     .login {
         left: 45% !important;
+        .login-image {
+            max-height: 690px;
+        }
     }
     .number {
         left: 52%;

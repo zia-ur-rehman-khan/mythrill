@@ -40,14 +40,14 @@ const Home = () => {
       {!screens.lg ? (
         <div className="mobile-view">
           <div className="left-side">
-            <Market />
+            <Market width="90%" />
           </div>
           <div className="right-side">{content}</div>
         </div>
       ) : (
         <div className="main-home">
           <div className="left-side">
-            <Market />
+            <Market width="40%" />
           </div>
           <div className="right-side">{content}</div>
         </div>

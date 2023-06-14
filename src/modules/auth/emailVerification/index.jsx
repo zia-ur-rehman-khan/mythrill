@@ -46,7 +46,7 @@ const EmailVerification = () => {
   return (
     <AuthLayout
       className="email"
-      image={<img src={Images.email} height={"374px"} />}
+      image={<img src={Images.email} className="email-image" />}
     >
       <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <Space direction="vertical">
@@ -71,7 +71,7 @@ const EmailVerification = () => {
             rules={[
               {
                 validator: (_, value) => {
-                  return numberValidatorField(_, value);
+                  return validatorField(_, value, 6, 6);
                 },
               },
             ]}
