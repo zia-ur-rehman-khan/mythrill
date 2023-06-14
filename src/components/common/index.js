@@ -8,6 +8,7 @@ import CommonDropdown from "./CommonDropdown";
 import SmallChart from "./SmallChart";
 import CommonPopOver from "./CommonPopOver";
 import CommonPhoneInput from "./CommonPhoneInput";
+import CommonPasswordInput from "./CommonPassword";
 
 export {
   StockCard,
@@ -20,4 +21,5 @@ export {
   SmallChart,
   CommonPopOver,
   CommonPhoneInput,
+  CommonPasswordInput,
 };

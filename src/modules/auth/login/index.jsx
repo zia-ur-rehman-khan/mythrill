@@ -21,7 +21,10 @@ import {
 } from "../../../constants";
 import DataHandler from "../../../services/DataHandler";
 import { userLoginSuccess } from "../../../redux/slicers/user";
-import { CommonPhoneInput } from "../../../components/common";
+import {
+  CommonPasswordInput,
+  CommonPhoneInput,
+} from "../../../components/common";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -74,12 +77,9 @@ const Login = () => {
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"Password"} opacity={"0.5"} />
-            <CommonInputField
+            <CommonPasswordInput
               name={"password"}
               placeholder={"**************"}
-              className={"auth"}
-              type={"password"}
-              suffix={<img src={Images.eye} />}
               rules={[
                 {
                   required: true,

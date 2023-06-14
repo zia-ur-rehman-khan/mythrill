@@ -33,6 +33,7 @@ import register from "../assets/auth/register.png";
 import number from "../assets/auth/number.png";
 import sidebar from "../assets/header/sideBar.png";
 import back from "../assets/auth/backArrow.png";
+import crossEye from "../assets/auth/crossEye.png";
 
 export default {
   ErrorBackground2,
@@ -70,4 +71,5 @@ export default {
   number,
   sidebar,
   back,
+  crossEye,
 };

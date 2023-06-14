@@ -14,7 +14,10 @@ import { Checkbox, Form, Input, Space } from "antd";
 import { css } from "aphrodite";
 import AuthLayout from "../../../components/AuthLayout";
 import { useNavigate } from "react-router-dom";
-import { CommonPhoneInput } from "../../../components/common";
+import {
+  CommonPasswordInput,
+  CommonPhoneInput,
+} from "../../../components/common";
 import DataHandler from "../../../services/DataHandler";
 import {
   checkPasswordValidation,
@@ -107,12 +110,9 @@ const Register = () => {
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"New Password"} opacity={"0.5"} />
-            <CommonInputField
+            <CommonPasswordInput
               name={"password"}
               placeholder={"**************"}
-              className={"auth"}
-              type={"password"}
-              suffix={<img src={Images.eye} />}
               rules={[
                 {
                   validator: (_, value) => {
@@ -124,12 +124,9 @@ const Register = () => {
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"Confirm Password"} opacity={"0.5"} />
-            <CommonInputField
+            <CommonPasswordInput
               name={"new password"}
               placeholder={"**************"}
-              className={"auth"}
-              type={"password"}
-              suffix={<img src={Images.eye} />}
               rules={[
                 {
                   validator: (_, value) => {

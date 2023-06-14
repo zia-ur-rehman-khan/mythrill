@@ -15,6 +15,7 @@ import { Checkbox, Form, Input, Space } from "antd";
 import { css } from "aphrodite";
 import { useNavigate } from "react-router-dom";
 import { handlePassworMatch, passwordValidation } from "../../../constants";
+import { CommonPasswordInput } from "../../../components/common";
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -56,12 +57,9 @@ const ResetPassword = () => {
           />
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"New Password"} opacity={"0.5"} />
-            <CommonInputField
+            <CommonPasswordInput
               name={"password"}
               placeholder={"**************"}
-              className={"auth"}
-              type={"password"}
-              suffix={<img src={Images.eye} />}
               rules={[
                 {
                   validator: (_, value) => {
@@ -73,12 +71,9 @@ const ResetPassword = () => {
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"Confirm Password"} opacity={"0.5"} />
-            <CommonInputField
+            <CommonPasswordInput
               name={"confirm password"}
               placeholder={"**************"}
-              className={"auth"}
-              type={"password"}
-              suffix={<img src={Images.eye} />}
               rules={[
                 {
                   validator: (_, value) => {
