@@ -100,7 +100,7 @@ const Login = () => {
             <Space>
               <CommonTextField
                 onClick={() => changeRoute("/forgot")}
-                text={"Forget Password"}
+                text={"Forgot Password"}
               />
             </Space>
           </Space>

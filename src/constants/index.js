@@ -336,7 +336,7 @@ export const EMAIL_RULE = [
 
 export const numberValidatorField = (_, value) => {
   if (value === undefined) {
-    return Promise.reject(new Error("Invalid Value."));
+    return Promise.reject(new Error("Field is required."));
   } else if (value < 1) {
     return Promise.reject(new Error("Must be equal or greater than 1."));
   } else if (`${value}`.toLowerCase().includes("e")) {

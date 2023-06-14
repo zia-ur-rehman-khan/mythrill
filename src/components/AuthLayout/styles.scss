@@ -4,6 +4,8 @@
     background-image: url("../../assets/auth/backgound.png");
     position: relative;
     background-position: right;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 
     .left-side {
         background: master.$dark-color;
@@ -19,6 +21,9 @@
             border-radius: 0;
         }
         .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background: master.$theme3-color;
             border-radius: 30px;
             padding: 20px 50px 20px 50px;
@@ -56,6 +61,9 @@
     }
     .email {
         left: 48% !important;
+        .reset-image {
+            max-height: 500px;
+        }
     }
     .login {
         left: 45% !important;
