@@ -41,7 +41,6 @@ const ResetPassword = () => {
   const { getFieldValue } = form;
   return (
     <AuthLayout
-      arrow
       className="email"
       image={<img src={Images.reset} className="reset-image" />}
     >

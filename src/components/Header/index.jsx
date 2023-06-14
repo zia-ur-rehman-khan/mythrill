@@ -82,7 +82,11 @@ const Header = () => {
       <Drawer
         title={
           <div className="logo">
-            <img src={Images.logo} width="140px" />
+            <img
+              src={Images.logo}
+              width="140px"
+              onClick={() => changeRoute("/")}
+            />
           </div>
         }
         placement="left"

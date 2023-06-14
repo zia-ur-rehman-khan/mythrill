@@ -13,7 +13,7 @@ const CommonPhoneInput = ({
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
-      <PhoneInput country={"us"} />
+      <PhoneInput country={"us"} dropdownClass="test" />
     </Form.Item>
   );
 };
