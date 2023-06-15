@@ -6,11 +6,31 @@ import { useParams, useLocation } from "react-router-dom";
 import Stock from "./stock";
 import StockDetailes from "./stockDetaile";
 import Trending from "./trending";
-import { HOME_ROUTE, TRENDING_ROUTE } from "../../../constants";
-import { collection, db, getDocs, query, where } from "../../../firebase";
+import {
+	HOME_ROUTE,
+	STOCK_NAME_LIST,
+	TRENDING_ROUTE,
+} from "../../../constants";
+import {
+	collection,
+	db,
+	getDocs,
+	limit,
+	orderBy,
+	query,
+	where,
+} from "../../../firebase";
 import { useDispatch } from "react-redux";
-import { stocksNameManipulator } from "../../../manipulators/stocksName";
-import { setStocksListAction } from "../../../redux/slicers/stocks";
+import {
+	singleStockNameManipulator,
+	stockListManipulator,
+	stocksNameManipulator,
+} from "../../../manipulators/stocksName";
+import {
+	getStocksNameRequest,
+	setStocksDataAction,
+	setStocksListAction,
+} from "../../../redux/slicers/stocks";
 
 const { useBreakpoint } = Grid;
 
@@ -35,24 +55,56 @@ const Home = () => {
 
 	useEffect(() => {
 		getStockList();
+		// dispatch(
+		// 	getStocksNameRequest({
+		// 		responseCallback: () => {
+		// 			setIsLoading(false);
+		// 		},
+		// 	})
+		// );
 	}, []);
 
 	const getStockList = async () => {
-		const stockListCollectionRef = collection(db, "stocks-name");
+		const stockListCollectionRef = collection(db, "stocks");
 		const stocksListQuery = query(
 			stockListCollectionRef,
-			where("name_id", "==", "ethereum")
+			orderBy("date_time", "desc"),
+			limit(20),
+			where("name_id", "in", STOCK_NAME_LIST)
 		);
 		const stocksListDoc = await getDocs(stocksListQuery);
 
 		const stocksList = [];
 
 		stocksListDoc?.forEach((doc) => {
-			console.log(doc.id, " => ", doc.data());
 			stocksList.push(doc.data());
 		});
 
-		dispatch(setStocksListAction(stocksNameManipulator(stocksList)));
+		console.log({ stocksList });
+
+		const stocksDataPayload = {};
+		const stockNamesPayload = [];
+
+		for (const stock of STOCK_NAME_LIST) {
+			const filteredStock = stocksList?.filter(
+				(item) => item.name_id === stock
+			);
+
+			if (filteredStock?.length === 0) continue;
+
+			const stockNameManipulatedData = singleStockNameManipulator(
+				filteredStock?.[0]
+			);
+			const manipulatedData = stockListManipulator(filteredStock);
+
+			stockNamesPayload.push(stockNameManipulatedData);
+			stocksDataPayload[stock] = manipulatedData;
+		}
+
+		console.log({ stockNamesPayload, stocksDataPayload });
+
+		dispatch(setStocksListAction(stockNamesPayload));
+		dispatch(setStocksDataAction(stocksDataPayload));
 		setIsLoading(false);
 	};
 

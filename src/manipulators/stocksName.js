@@ -1,5 +1,38 @@
 import _ from "lodash";
 import { Images } from "../theme";
+import moment from "moment";
+
+export function singleStockNameManipulator(stock = {}) {
+	try {
+		if (_.isEmpty(stock)) return {};
+
+		const payload = {};
+
+		payload.title = stock?.fullName ?? "";
+		payload.type = "Cryptocurrency";
+		payload.slug = stock?.name_id ?? "";
+		payload.nameId = stock?.name_id ?? "";
+		payload.id = stock?.id ?? "";
+		payload.amount = `$${stock?.current_price}`;
+		payload.stockUpdate = `${stock?.change_in_percent}%`;
+		payload.overallTrend = stock?.overall_trend ?? "";
+		payload.src = Images.bitCoin;
+		payload.changeInPrice = stock?.change_in_price ?? 0;
+		payload.changeInPercent = stock?.change_in_percent ?? 0;
+		payload.prevPrice = stock?.prev_price ?? 0;
+		payload.color =
+			stock?.change_in_percent === 0
+				? "yellow"
+				: stock?.change_in_percent > 0
+				? "green"
+				: "red";
+		payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
+
+		return payload;
+	} catch (error) {
+		console.error("singleStockNameManipulator error --->>> ", error);
+	}
+}
 
 export function stocksNameManipulator(list = []) {
 	try {
@@ -25,7 +58,7 @@ export function stocksNameManipulator(list = []) {
 					? "green"
 					: "red";
 
-			stockList.push(payload);
+			payload && stockList.push(payload);
 		}
 
 		return stockList;
@@ -50,7 +83,9 @@ export function stockListManipulator(list = []) {
 			payload.changeInPrice = stock?.change_in_price ?? 0;
 			payload.coin = stock?.coin ?? "";
 			payload.currentPrice = stock?.current_price ?? 0;
-			payload.date = new Date(stock?.date_time?.seconds) ?? new Date();
+			payload.date =
+				moment(new Date(stock?.date_time?.seconds * 1000)).format() ??
+				moment().format();
 			payload.fullName = stock?.fullName ?? "";
 			payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
 			payload.nameId = stock?.name_id ?? "";

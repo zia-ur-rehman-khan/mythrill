@@ -12,6 +12,7 @@ import {
 	where,
 	getDocs,
 	updateDoc,
+	limit,
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import DataHandler from "./services/DataHandler";
@@ -83,4 +84,5 @@ export {
 	updateDoc,
 	fetchToken,
 	requestPermission,
+	limit,
 };

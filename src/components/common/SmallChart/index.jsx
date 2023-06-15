@@ -7,110 +7,113 @@ import "./styles.scss";
 import { css } from "aphrodite";
 import { AppStyles } from "../../../theme";
 
-const SmallChart = ({ color }) => {
-  const options = { style: "currency", currency: "USD" };
-  const numberFormat = new Intl.NumberFormat("en-US", options);
-  const configPrice = {
-    yAxis: [
-      {
-        opposite: false,
-        // offset: 20,
+const SmallChart = ({ color, data }) => {
+	const options = { style: "currency", currency: "USD" };
+	const numberFormat = new Intl.NumberFormat("en-US", options);
+	const configPrice = {
+		yAxis: [
+			{
+				opposite: false,
+				// offset: 20,
 
-        labels: {
-          formatter: function () {
-            const number = this.value;
-            if (number >= 1000) {
-              // Convert to "k" form
-              return number / 1000 + "k";
-            }
-            return number;
-          },
-          //   x: -15,
-          // y: -50,
-          style: {
-            color: "#fff",
-            // position: "absolute",
-            fontSize: "10px",
-          },
-          //   align: "right",
-        },
-      },
-    ],
-    tooltip: {
-      shared: true,
-      formatter: function () {
-        return (
-          numberFormat.format(this.y, 0) +
-          "</b><br/>" +
-          moment(this.x).format("MMMM Do YYYY, h:mm")
-        );
-      },
-    },
-    plotOptions: {
-      series: {
-        showInNavigator: true,
-        gapSize: 0,
-      },
-    },
+				labels: {
+					formatter: function () {
+						const number = this.value;
+						if (number >= 1000) {
+							// Convert to "k" form
+							return number / 1000 + "k";
+						}
+						return number;
+					},
+					//   x: -15,
+					// y: -50,
+					style: {
+						color: "#fff",
+						// position: "absolute",
+						fontSize: "10px",
+					},
+					//   align: "right",
+				},
+			},
+		],
+		tooltip: {
+			shared: true,
+			formatter: function () {
+				return (
+					numberFormat.format(this.y, 0) +
+					"</b><br/>" +
+					moment(this.x).format("MMMM Do YYYY, h:mm")
+				);
+			},
+		},
+		plotOptions: {
+			series: {
+				showInNavigator: true,
+				gapSize: 0,
+			},
+		},
 
-    chart: {
-      height: 300,
-    },
+		chart: {
+			height: 300,
+		},
 
-    credits: {
-      enabled: false,
-    },
+		credits: {
+			enabled: false,
+		},
 
-    legend: {
-      enabled: true,
-    },
-    xAxis: {
-      type: "date",
-      labels: {
-        // formatter: function () {
-        //   return moment(this.value).format("DD MMM");
-        // },
-        style: {
-          color: "#fff",
-          position: "absolute",
-          fontSize: "10px",
-        },
-      },
-    },
-    rangeSelector: {
-      enabled: false,
-    },
-    series: [
-      {
-        name: "Price",
-        type: "areaspline",
-        color: color, // Specify your desired color here
+		legend: {
+			enabled: true,
+		},
+		xAxis: {
+			type: "date",
+			labels: {
+				// formatter: function () {
+				//   return moment(this.value).format("DD MMM");
+				// },
+				style: {
+					color: "#fff",
+					position: "absolute",
+					fontSize: "10px",
+				},
+			},
+		},
+		rangeSelector: {
+			enabled: false,
+		},
+		series: [
+			{
+				name: "Price",
+				type: "areaspline",
+				color: color, // Specify your desired color here
 
-        data: [
-          200000, 300000, 500000, 200000, 700000, 200000, 700000, 300000,
-          500000, 200000, 700000, 200000,
-        ],
+				data: data,
+				//  [
+				// 	200000, 300000, 500000, 200000, 700000, 200000, 700000, 300000,
+				// 	500000, 200000, 700000, 200000,
+				// ],
 
-        tooltip: {
-          valueDecimals: 2,
-        },
-      },
-    ],
+				tooltip: {
+					valueDecimals: 2,
+				},
+			},
+		],
 
-    navigator: {
-      enabled: false,
-    },
-  };
+		navigator: {
+			enabled: false,
+		},
+	};
 
-  return (
-    <div className={`smallChart`}>
-      <HighchartsReact
-        constructorType={"stockChart"}
-        highcharts={Highcharts}
-        options={configPrice}
-      />
-    </div>
-  );
+	return (
+		<div className={`smallChart`}>
+			{data?.length > 0 && (
+				<HighchartsReact
+					constructorType={"stockChart"}
+					highcharts={Highcharts}
+					options={configPrice}
+				/>
+			)}
+		</div>
+	);
 };
 
 export default SmallChart;

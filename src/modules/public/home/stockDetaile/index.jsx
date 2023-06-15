@@ -19,18 +19,15 @@ const StockDetailes = () => {
 	const navigate = useNavigate();
 
 	const getStockData = async () => {
-		const collectionRef = collection(db, "stocks");
-		const stockQuery = query(collectionRef, where("name_id", "==", id));
-		const documents = await getDocs(stockQuery);
-
-		const stockList = [];
-
-		documents.forEach((doc) => {
-			console.log(doc.id, " => ", doc.data());
-			stockList.push(doc.data());
-		});
-
-		const manipulatedData = stockListManipulator(stockList);
+		// const collectionRef = collection(db, "stocks");
+		// const stockQuery = query(collectionRef, where("name_id", "==", id));
+		// const documents = await getDocs(stockQuery);
+		// const stockList = [];
+		// documents.forEach((doc) => {
+		// 	console.log(doc.id, " => ", doc.data());
+		// 	stockList.push(doc.data());
+		// });
+		// const manipulatedData = stockListManipulator(stockList);
 	};
 
 	useMemo(() => {
