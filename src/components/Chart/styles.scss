@@ -1,5 +1,6 @@
 .bigchart {
     position: relative;
+
     .extra-detailes {
         z-index: 1;
         position: absolute;
@@ -82,4 +83,9 @@
     .highcharts-input-group {
         display: none;
     }
+}
+.chart-above-detailes {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
 }

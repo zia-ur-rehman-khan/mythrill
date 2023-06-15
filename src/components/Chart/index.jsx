@@ -158,9 +158,6 @@ const Chart = () => {
         gapSize: 0,
       },
     },
-    rangeSelector: {
-      selected: 1,
-    },
 
     chart: {
       height: 500,
@@ -190,8 +187,10 @@ const Chart = () => {
       dateGroupingInterval: 1,
     },
     rangeSelector: {
+      inputEnabled: false, // Disable the input box
+      buttonEnabled: false,
       buttonTheme: {
-        width: 25, // Change the width of the rangeSelector buttons
+        width: 25,
       },
       selected: 5,
 
@@ -270,6 +269,13 @@ const Chart = () => {
             maxWidth: 500,
           },
           chartOptions: {
+            rangeSelector: {
+              inputEnabled: false, // Disable the input box
+              buttonEnabled: false,
+              buttonTheme: {
+                width: 20,
+              },
+            },
             chart: {
               height: 400,
             },
@@ -298,21 +304,21 @@ const Chart = () => {
   return (
     <>
       {!screens.lg && (
-        <Space
-          className={css(
-            AppStyles.w100,
-            AppStyles.justifyEnd,
-            AppStyles.mTop10
-          )}
-        >
-          <img src={Images.green} width={"30px"} height={"30px"} />
-          <img src={Images.yellow} width={"30px"} height={"30px"} />
-          <img src={Images.red} width={"30px"} height={"30px"} />
-        </Space>
+        <ExtraDetailes
+          className={"chart-above-detailes"}
+          chartChange={chartChange}
+          chartType={chartType}
+        />
       )}
 
       <div className={`bigchart ${css(AppStyles.mTop20)}`}>
-        <ExtraDetailes chartChange={chartChange} chartType={chartType} />
+        {screens.lg && (
+          <ExtraDetailes
+            className="extra-detailes"
+            chartChange={chartChange}
+            chartType={chartType}
+          />
+        )}
         {chartType && chartComponent}
       </div>
     </>

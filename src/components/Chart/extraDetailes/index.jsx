@@ -10,7 +10,7 @@ import {
 import { Form, Grid, Radio, Space } from "antd";
 const { useBreakpoint } = Grid;
 
-const ExtraDetailes = ({ chartChange, chartType }) => {
+const ExtraDetailes = ({ className, chartChange, chartType }) => {
   const [isModal, setIsModal] = useState(false);
   const [frequency, setFrequency] = useState("Every Day");
 
@@ -35,7 +35,7 @@ const ExtraDetailes = ({ chartChange, chartType }) => {
 
   return (
     <>
-      <Space className="extra-detailes" wrap={true}>
+      <Space className={className} wrap={true}>
         <Space
           className={css(AppStyles.pointer)}
           onClick={() => setIsModal(true)}
@@ -44,13 +44,11 @@ const ExtraDetailes = ({ chartChange, chartType }) => {
           <CommonTextField text={frequency} />
           <img src={Images.rightArrow} />
         </Space>
-        {screens.lg && (
-          <Space className="hide-web">
-            <img src={Images.green} width={"30px"} height={"30px"} />
-            <img src={Images.yellow} width={"30px"} height={"30px"} />
-            <img src={Images.red} width={"30px"} height={"30px"} />
-          </Space>
-        )}
+        <Space className="hide-web">
+          <img src={Images.green} width={"30px"} height={"30px"} />
+          <img src={Images.yellow} width={"30px"} height={"30px"} />
+          <img src={Images.red} width={"30px"} height={"30px"} />
+        </Space>
         <Space>
           <Space
             onClick={() => {
