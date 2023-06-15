@@ -13,10 +13,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { HOME_ROUTE } from "../../../../constants";
 import { collection, db, getDocs, query, where } from "../../../../firebase";
 import { stockListManipulator } from "../../../../manipulators/stocksName";
+import { useSelector } from "react-redux";
 
 const StockDetailes = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const { stocks: stocksList, stocksData } = useSelector(
+		(state) => state?.stocks
+	);
+
+	const selectedStock = stocksList.find((stock) => stock.slug === id);
+	const selectedStockData = stocksData[selectedStock?.slug];
 
 	const getStockData = async () => {
 		// const collectionRef = collection(db, "stocks");
@@ -38,6 +45,14 @@ const StockDetailes = () => {
 		}
 	}, []);
 
+	const manipulatedData =
+		selectedStockData?.length > 0
+			? selectedStockData?.map((item) => ({
+					x: new Date(item?.date),
+					y: item?.currentPrice,
+			  }))
+			: [];
+
 	return (
 		<>
 			<Row wrap={true} gutter={[0, 20]} className={css(AppStyles.spaceBetween)}>
@@ -54,7 +69,9 @@ const StockDetailes = () => {
 					<GraphRender />
 				</Col>
 			</Row>
-			<Chart />
+			{manipulatedData?.length > 0 && (
+				<Chart data={manipulatedData} color={selectedStock?.color} />
+			)}
 		</>
 	);
 };

@@ -17,7 +17,7 @@ import {
 import ExtraDetailes from "./extraDetailes";
 const { useBreakpoint } = Grid;
 
-const Chart = () => {
+const Chart = ({ data, color }) => {
 	const [chartType, setChartType] = useState("areaspline");
 
 	const screens = useBreakpoint();
@@ -25,80 +25,80 @@ const Chart = () => {
 	const options = { style: "currency", currency: "USD" };
 	const numberFormat = new Intl.NumberFormat("en-US", options);
 
-	const data = [
-		{
-			x: new Date("2023-06-06T06:29:00"),
-			y: 200000,
-		},
-		{
-			x: new Date("2023-06-06T07:29:00"),
-			y: 300000,
-		},
-		{
-			x: new Date("2023-06-06T08:29:00"),
-			y: 500000,
-		},
-		{
-			x: new Date("2023-06-06T09:29:00"),
-			y: 200000,
-		},
-		{
-			x: new Date("2023-06-06T10:29:00"),
-			y: 700000,
-		},
-		{
-			x: new Date("2023-06-06T11:29:00"),
-			y: 500000,
-		},
-		{
-			x: new Date("2023-06-06T12:29:00"),
-			y: 300000,
-		},
-		{
-			x: new Date("2023-06-06T13:29:00"),
-			y: 500000,
-		},
-		{
-			x: new Date("2023-06-06T14:29:00"),
-			y: 200000,
-		},
-		{
-			x: new Date("2023-06-06T15:29:00"),
-			y: 700000,
-		},
-		{
-			x: new Date("2023-06-06T16:29:00"),
-			y: 200000,
-		},
-		{
-			x: new Date("2023-06-06T17:29:00"),
-			y: 500000,
-		},
-		{
-			x: new Date("2023-06-06T18:29:00"),
-			y: 200000,
-		},
-		{
-			x: new Date("2023-06-06T19:29:00"),
-			y: 700000,
-		},
-		{
-			x: new Date("2023-06-06T20:29:00"),
-			y: 200000,
-		},
-		{
-			x: new Date("2023-06-06T21:29:00"),
-			y: 300000,
-		},
-		{
-			x: new Date("2023-06-06T22:29:00"),
-			y: 500000,
-		},
-		{
-			x: new Date("2023-06-06T23:29:00"),
-			y: 9554.84,
-		},
-	];
+	// const data = [
+	// 	{
+	// 		x: new Date("2023-06-06T06:29:00"),
+	// 		y: 200000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T07:29:00"),
+	// 		y: 300000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T08:29:00"),
+	// 		y: 500000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T09:29:00"),
+	// 		y: 200000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T10:29:00"),
+	// 		y: 700000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T11:29:00"),
+	// 		y: 500000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T12:29:00"),
+	// 		y: 300000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T13:29:00"),
+	// 		y: 500000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T14:29:00"),
+	// 		y: 200000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T15:29:00"),
+	// 		y: 700000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T16:29:00"),
+	// 		y: 200000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T17:29:00"),
+	// 		y: 500000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T18:29:00"),
+	// 		y: 200000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T19:29:00"),
+	// 		y: 700000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T20:29:00"),
+	// 		y: 200000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T21:29:00"),
+	// 		y: 300000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T22:29:00"),
+	// 		y: 500000,
+	// 	},
+	// 	{
+	// 		x: new Date("2023-06-06T23:29:00"),
+	// 		y: 9554.84,
+	// 	},
+	// ];
 
 	const candlestickData = [
 		[moment("2022-01-01").valueOf(), 127.52, 135.62, 125.86, 132.05],
@@ -168,9 +168,9 @@ const Chart = () => {
 		xAxis: {
 			type: "date",
 			labels: {
-				// formatter: function () {
-				//   return moment(this.value).format("DD MMM");
-				// },
+				formatter: function () {
+					return moment(this.value).format("DD MMM");
+				},
 				style: {
 					// fontSize: "8px",
 					color: "#fff",
@@ -178,7 +178,7 @@ const Chart = () => {
 				},
 			},
 			dateFormat: "%Y-%m-%d %H:%M",
-			dateGroupingInterval: 1,
+			dateGroupingInterval: 0.1,
 		},
 		rangeSelector: {
 			selected: 5,
@@ -224,8 +224,8 @@ const Chart = () => {
 			{
 				name: "Price",
 				type: chartType,
-				color: "#1ABF17",
-				upColor: "#1ABF17",
+				color: color,
+				upColor: color,
 
 				data: chartType === "areaspline" ? data : candlestickData,
 				tooltip: {

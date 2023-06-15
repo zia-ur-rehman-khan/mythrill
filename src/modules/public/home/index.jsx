@@ -16,6 +16,7 @@ import {
 	db,
 	getDocs,
 	limit,
+	onSnapshot,
 	orderBy,
 	query,
 	where,
@@ -72,40 +73,45 @@ const Home = () => {
 			limit(20),
 			where("name_id", "in", STOCK_NAME_LIST)
 		);
-		const stocksListDoc = await getDocs(stocksListQuery);
 
-		const stocksList = [];
+		const unSubscribe = onSnapshot(stocksListQuery, (querySnapshot) => {
+			const stocksList = [];
+			querySnapshot.forEach((doc) => {
+				stocksList.push(doc.data());
+			});
 
-		stocksListDoc?.forEach((doc) => {
-			stocksList.push(doc.data());
+			debugger;
+
+			console.log({ stocksList });
+
+			const stocksDataPayload = {};
+			const stockNamesPayload = [];
+
+			for (const stock of STOCK_NAME_LIST) {
+				const filteredStock = stocksList?.filter(
+					(item) => item.name_id === stock
+				);
+
+				if (filteredStock?.length === 0) continue;
+
+				const stockNameManipulatedData = singleStockNameManipulator(
+					filteredStock?.[0]
+				);
+				const manipulatedData = stockListManipulator(filteredStock);
+
+				manipulatedData?.sort((a, b) => new Date(a?.date) - new Date(b?.date));
+				stockNamesPayload.push(stockNameManipulatedData);
+				stocksDataPayload[stock] = manipulatedData;
+			}
+
+			console.log({ stockNamesPayload, stocksDataPayload });
+
+			dispatch(setStocksListAction(stockNamesPayload));
+			dispatch(setStocksDataAction(stocksDataPayload));
+			setIsLoading(false);
 		});
 
-		console.log({ stocksList });
-
-		const stocksDataPayload = {};
-		const stockNamesPayload = [];
-
-		for (const stock of STOCK_NAME_LIST) {
-			const filteredStock = stocksList?.filter(
-				(item) => item.name_id === stock
-			);
-
-			if (filteredStock?.length === 0) continue;
-
-			const stockNameManipulatedData = singleStockNameManipulator(
-				filteredStock?.[0]
-			);
-			const manipulatedData = stockListManipulator(filteredStock);
-
-			stockNamesPayload.push(stockNameManipulatedData);
-			stocksDataPayload[stock] = manipulatedData;
-		}
-
-		console.log({ stockNamesPayload, stocksDataPayload });
-
-		dispatch(setStocksListAction(stockNamesPayload));
-		dispatch(setStocksDataAction(stocksDataPayload));
-		setIsLoading(false);
+		return unSubscribe;
 	};
 
 	return (

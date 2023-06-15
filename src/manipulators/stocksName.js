@@ -2,6 +2,8 @@ import _ from "lodash";
 import { Images } from "../theme";
 import moment from "moment";
 
+const FORMAT = "YYYY-MM-DDTHH:mm:ss";
+
 export function singleStockNameManipulator(stock = {}) {
 	try {
 		if (_.isEmpty(stock)) return {};
@@ -84,8 +86,8 @@ export function stockListManipulator(list = []) {
 			payload.coin = stock?.coin ?? "";
 			payload.currentPrice = stock?.current_price ?? 0;
 			payload.date =
-				moment(new Date(stock?.date_time?.seconds * 1000)).format() ??
-				moment().format();
+				moment(new Date(stock?.date_time?.seconds * 1000)).format(FORMAT) ??
+				moment().format(FORMAT);
 			payload.fullName = stock?.fullName ?? "";
 			payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
 			payload.nameId = stock?.name_id ?? "";
