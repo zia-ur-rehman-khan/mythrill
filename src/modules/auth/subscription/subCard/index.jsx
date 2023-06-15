@@ -24,7 +24,7 @@ const SubcriptionCard = ({ title, amount }) => {
     <Space size={30} direction="vertical" className="sub-box">
       <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
         <img src={Images.authLogo} width={"50px"} height={"58px"} />
-        {amount === "free" ? (
+        {amount === "Free" ? (
           <CommonHeading text={amount} />
         ) : (
           <Space>
