@@ -22,7 +22,7 @@ const Subscripton = () => {
         className={css(AppStyles.mTop10)}
       />
       <div className="sub-content">
-        <SubcriptionCard title="Basic Package" amount="free" />
+        <SubcriptionCard title="Basic Package" amount="Free" />
         <SubcriptionCard title="Premium Package" amount="$575.00" />
       </div>
     </div>
