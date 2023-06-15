@@ -126,26 +126,20 @@ $white-color: #ffffff;
   }
 }
 
-::-webkit-scrollbar,
-::-moz-scrollbar,
-.firebase-v114-scrollbar {
+::-webkit-scrollbar {
   height: 5px;
   width: 4px;
   cursor: pointer;
 }
 
-::-webkit-scrollbar-track,
-::-moz-scrollbar-track,
-.firebase-v114-scrollbar-track {
+::-webkit-scrollbar-track {
   background: transparent;
   &:hover {
     background-color: transparent;
   }
 }
 
-::-webkit-scrollbar-thumb,
-::-moz-scrollbar-thumb,
-.firebase-v114-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #585757;
   border-radius: 3px;
   border: 3px solid transparent;
