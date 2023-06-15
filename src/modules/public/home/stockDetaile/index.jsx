@@ -29,7 +29,12 @@ const StockDetailes = () => {
           <Update />
           <Suggestion />
         </Col>
-        <Col lg={{ span: 8 }} md={{ span: 6 }}>
+        <Col
+          lg={{ span: 8 }}
+          md={{ span: 6 }}
+          sm={{ span: 24 }}
+          xs={{ span: 24 }}
+        >
           <GraphRender />
         </Col>
       </Row>
