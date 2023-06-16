@@ -34,6 +34,9 @@ import number from "../assets/auth/number.png";
 import sidebar from "../assets/header/sideBar.png";
 import back from "../assets/auth/backArrow.png";
 import crossEye from "../assets/auth/crossEye.png";
+import redArrow from "../assets/chart/redArrow.png";
+import yellowArrow from "../assets/chart/yellowArrow.png";
+import greenArrow from "../assets/chart/greenArrow.png";
 
 export default {
   ErrorBackground2,
@@ -72,4 +75,7 @@ export default {
   sidebar,
   back,
   crossEye,
+  redArrow,
+  yellowArrow,
+  greenArrow,
 };

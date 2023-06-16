@@ -2,106 +2,106 @@ import _ from "lodash";
 import { Images } from "../theme";
 import moment from "moment";
 
-const FORMAT = "YYYY-MM-DDTHH:mm";
+const FORMAT = "YYYY-MM-DDTHH:mm:ss";
 
 export function singleStockNameManipulator(stock = {}) {
-	try {
-		if (_.isEmpty(stock)) return {};
+  try {
+    if (_.isEmpty(stock)) return {};
 
-		const payload = {};
+    const payload = {};
 
-		payload.title = stock?.fullName ?? "";
-		payload.type = "Cryptocurrency";
-		payload.slug = stock?.name_id ?? "";
-		payload.nameId = stock?.name_id ?? "";
-		payload.id = stock?.id ?? "";
-		payload.amount = `$${stock?.current_price}`;
-		payload.stockUpdate = `${stock?.change_in_percent}%`;
-		payload.overallTrend = stock?.overall_trend ?? "";
-		payload.src = Images.bitCoin;
-		payload.changeInPrice = stock?.change_in_price ?? 0;
-		payload.changeInPercent = stock?.change_in_percent ?? 0;
-		payload.prevPrice = stock?.prev_price ?? 0;
-		payload.color =
-			stock?.change_in_percent === 0
-				? "yellow"
-				: stock?.change_in_percent > 0
-				? "green"
-				: "red";
-		payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
+    payload.title = stock?.fullName ?? "";
+    payload.type = "Cryptocurrency";
+    payload.slug = stock?.name_id ?? "";
+    payload.nameId = stock?.name_id ?? "";
+    payload.id = stock?.id ?? "";
+    payload.amount = `$${stock?.current_price}`;
+    payload.stockUpdate = `${stock?.change_in_percent}%`;
+    payload.overallTrend = stock?.overall_trend ?? "";
+    payload.src = Images.bitCoin;
+    payload.changeInPrice = stock?.change_in_price ?? 0;
+    payload.changeInPercent = stock?.change_in_percent ?? 0;
+    payload.prevPrice = stock?.prev_price ?? 0;
+    payload.color =
+      stock?.change_in_percent === 0
+        ? "yellow"
+        : stock?.change_in_percent > 0
+        ? "green"
+        : "red";
+    payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
 
-		return payload;
-	} catch (error) {
-		console.error("singleStockNameManipulator error --->>> ", error);
-	}
+    return payload;
+  } catch (error) {
+    console.error("singleStockNameManipulator error --->>> ", error);
+  }
 }
 
 export function stocksNameManipulator(list = []) {
-	try {
-		if (_.isEmpty(list) ?? !list?.length) {
-			return [];
-		}
+  try {
+    if (_.isEmpty(list) ?? !list?.length) {
+      return [];
+    }
 
-		const stockList = [];
-		for (const stock of list) {
-			const payload = {};
+    const stockList = [];
+    for (const stock of list) {
+      const payload = {};
 
-			payload.title = stock?.name ?? "";
-			payload.type = "Cryptocurrency";
-			payload.slug = stock?.name_id ?? "";
-			payload.id = stock?.id ?? "";
-			payload.amount = `$${stock?.current_price}`;
-			payload.stockUpdate = `${stock?.change_in_percent}%`;
-			payload.src = Images.bitCoin;
-			payload.color =
-				stock?.change_in_percent === 0
-					? "yellow"
-					: stock?.change_in_percent > 0
-					? "green"
-					: "red";
+      payload.title = stock?.name ?? "";
+      payload.type = "Cryptocurrency";
+      payload.slug = stock?.name_id ?? "";
+      payload.id = stock?.id ?? "";
+      payload.amount = `$${stock?.current_price}`;
+      payload.stockUpdate = `${stock?.change_in_percent}%`;
+      payload.src = Images.bitCoin;
+      payload.color =
+        stock?.change_in_percent === 0
+          ? "yellow"
+          : stock?.change_in_percent > 0
+          ? "green"
+          : "red";
 
-			payload && stockList.push(payload);
-		}
+      payload && stockList.push(payload);
+    }
 
-		return stockList;
-	} catch (error) {
-		console.error("stocksNameManipulator error --->>>> ", error);
-		return [];
-	}
+    return stockList;
+  } catch (error) {
+    console.error("stocksNameManipulator error --->>>> ", error);
+    return [];
+  }
 }
 
 export function stockListManipulator(list = []) {
-	try {
-		if (_.isEmpty(list) ?? !list?.length) {
-			return [];
-		}
+  try {
+    if (_.isEmpty(list) ?? !list?.length) {
+      return [];
+    }
 
-		const stockList = [];
+    const stockList = [];
 
-		for (const stock of list) {
-			const payload = {};
+    for (const stock of list) {
+      const payload = {};
 
-			payload.changeInPercent = stock?.change_in_percent ?? 0;
-			payload.changeInPrice = stock?.change_in_price ?? 0;
-			payload.coin = stock?.coin ?? "";
-			payload.currentPrice = stock?.current_price ?? 0;
-			payload.date =
-				moment(new Date(stock?.date_time?.seconds * 1000)).format(FORMAT) ??
-				moment().format(FORMAT);
-			payload.fullName = stock?.fullName ?? "";
-			payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
-			payload.nameId = stock?.name_id ?? "";
-			payload.overallTrend = stock?.overall_trend ?? "";
-			payload.prevPrice = stock?.prev_price ?? 0;
+      payload.changeInPercent = stock?.change_in_percent ?? 0;
+      payload.changeInPrice = stock?.change_in_price ?? 0;
+      payload.coin = stock?.coin ?? "";
+      payload.currentPrice = stock?.current_price ?? 0;
+      payload.date =
+        moment(new Date(stock?.date_time?.seconds * 1000)).format(FORMAT) ??
+        moment().format(FORMAT);
+      payload.fullName = stock?.fullName ?? "";
+      payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
+      payload.nameId = stock?.name_id ?? "";
+      payload.overallTrend = stock?.overall_trend ?? "";
+      payload.prevPrice = stock?.prev_price ?? 0;
 
-			stockList.push(payload);
-		}
+      stockList.push(payload);
+    }
 
-		return stockList;
-	} catch (error) {
-		console.error("stockListManipulator error --->>>> ", error);
-		return [];
-	}
+    return stockList;
+  } catch (error) {
+    console.error("stockListManipulator error --->>>> ", error);
+    return [];
+  }
 }
 
 // STOCK NAME OBJECT
