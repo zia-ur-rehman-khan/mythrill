@@ -10,6 +10,8 @@ HighchartsAccessibility(Highcharts);
 import './styles.scss';
 
 function GraphRender({ stock }) {
+  console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
+
   const options = {
     chart: {
       type: 'gauge'
@@ -26,7 +28,7 @@ function GraphRender({ stock }) {
         dataLabels: {
           enabled: false // Disable data labels for all series
         },
-        data: [stock?.amount ?? 0]
+        data: [stock?.currentPrice ?? 0]
       }
     ],
     credits: {

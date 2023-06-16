@@ -321,6 +321,7 @@ const Chart = ({ data, color }) => {
           className={'chart-above-detailes'}
           chartChange={chartChange}
           chartType={chartType}
+          color={color}
         />
       )}
 

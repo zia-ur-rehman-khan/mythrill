@@ -58,7 +58,7 @@ const StockDetailes = () => {
     <>
       <Row
         wrap={true}
-        gutter={[0, 20]}
+        gutter={[20, 20]}
         className={css(AppStyles.justifyCenter)}
       >
         <Col

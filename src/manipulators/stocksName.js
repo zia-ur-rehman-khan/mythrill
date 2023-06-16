@@ -22,6 +22,7 @@ export function singleStockNameManipulator(stock = {}) {
     payload.changeInPrice = stock?.change_in_price ?? 0;
     payload.changeInPercent = stock?.change_in_percent ?? 0;
     payload.prevPrice = stock?.prev_price ?? 0;
+    payload.currentPrice = stock?.current_price ?? 0;
     payload.color =
       stock?.change_in_percent === 0
         ? 'yellow'
@@ -51,6 +52,7 @@ export function stocksNameManipulator(list = []) {
       payload.slug = stock?.name_id ?? '';
       payload.id = stock?.id ?? '';
       payload.amount = `$${stock?.current_price}`;
+      payload.currentPrice = stock?.current_price ?? 0;
       payload.stockUpdate = `${stock?.change_in_percent}%`;
       payload.src = Images.bitCoin;
       payload.color =

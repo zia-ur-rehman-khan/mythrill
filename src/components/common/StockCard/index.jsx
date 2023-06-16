@@ -10,12 +10,12 @@ import { css } from 'aphrodite';
 import CommonDropdown from '../CommonDropdown';
 
 const StockCard = ({ value, addIcon }) => {
-  const { title, name, amount, stockUpdate, color, name_id } = value;
+  const { title, name, amount, stockUpdate, color, name_id, slug } = value;
 
   const navigate = useNavigate();
 
-  const changeRoute = (id) => {
-    navigate(`/stock/${id}`);
+  const changeRoute = () => {
+    navigate(`/stock/${slug}`);
   };
 
   const items = [
