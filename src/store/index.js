@@ -1,25 +1,25 @@
-import createSagaMiddleware from "redux-saga";
-import { configureStore } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
-import reduxStorage from "redux-persist/lib/storage";
-import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
-import sagas from "../redux/sagas";
-import { PROD_ENV } from "../constants";
-import logger from "redux-logger";
+import createSagaMiddleware from 'redux-saga';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistReducer } from 'redux-persist';
+import reduxStorage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import sagas from '../redux/sagas';
+import { DEV_ENV, PROD_ENV } from '../constants';
+import logger from 'redux-logger';
 export default function (reducers, onComplete) {
   const persistConfig = {
-    key: "root",
+    key: 'root',
     storage: reduxStorage,
     stateReconciler: autoMergeLevel2,
-    whitelist: ["user"],
+    whitelist: ['user']
   };
 
   const sagaMiddleware = createSagaMiddleware();
   const pReducer = persistReducer(persistConfig, reducers);
   const middlewares = [sagaMiddleware];
 
-  if (process.env.REACT_APP_ENV === PROD_ENV) {
-    middlewares.push(logger);
+  if (process.env.REACT_APP_ENV === DEV_ENV) {
+    // middlewares.push(logger);
   }
 
   const store = configureStore({
@@ -28,10 +28,10 @@ export default function (reducers, onComplete) {
     middleware: (getDefaultMiddleware) => [
       ...getDefaultMiddleware({
         thunk: false,
-        serializableCheck: false,
+        serializableCheck: false
       }),
-      ...middlewares,
-    ],
+      ...middlewares
+    ]
   });
 
   setTimeout(() => {

@@ -1,5 +1,18 @@
 @use "../../../master.scss";
 
+.auth {
+    background: #363941 !important;
+
+    input {
+        background: #363941 !important;
+
+        &::placeholder {
+            color: #ffffff !important;
+            opacity: 0.5 !important;
+        }
+    }
+}
+
 .ant-input-affix-wrapper {
     background: master.$theme3-color;
     height: 40px;
@@ -8,10 +21,17 @@
     input {
         background: master.$theme3-color;
         color: #ffffff;
-        opacity: 0.5;
+        font-size: 12px;
 
         &::placeholder {
             color: #ffffff;
+        }
+    }
+    .ant-input-suffix {
+        .svg-inline--fa {
+            path {
+                color: master.$white-color;
+            }
         }
     }
 }
@@ -19,17 +39,22 @@
 @media only screen and (max-width: 767px) {
     .ant-input-affix-wrapper {
         height: 35px;
+        font-size: 10px;
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .ant-input-affix-wrapper {
+        font-size: 12px;
+
         height: 40px;
     }
 }
 
 @media only screen and (min-width: 992px) {
     .ant-input-affix-wrapper {
+        font-size: 14px;
+
         height: 45px;
     }
 }

@@ -1,15 +1,15 @@
-import { toast } from "react-toastify";
-import moment from "moment";
+import { toast } from 'react-toastify';
+import moment from 'moment';
 import {
   ALERT_POSITIONS,
   ALERT_THEMES,
   ALERT_TIMEOUT,
-  ALERT_TYPES,
-} from "../constants";
-import ApiHandler from "./ApiHandler";
-import DataHandler from "./DataHandler";
-import { BASE_URL } from "../config/webService";
-import { userSignOutSuccess, refreshToken } from "../redux/slicers/user";
+  ALERT_TYPES
+} from '../constants';
+import ApiHandler from './ApiHandler';
+import DataHandler from './DataHandler';
+import { BASE_URL } from '../config/webService';
+import { userSignOutSuccess, refreshToken } from '../redux/slicers/user';
 import {
   cloneDeep,
   filter,
@@ -19,20 +19,21 @@ import {
   isEqual,
   has,
   findIndex,
-  every,
-} from "lodash";
+  every
+} from 'lodash';
+import { Form } from 'antd';
 
 // GET CURRENT ACCESS TOKEN FROM USER REDUCER
 export const getCurrentAccessToken = () => {
   let token = DataHandler.getStore().getState().user.data.access_token;
-  console.log("token");
+  console.log('token');
   return token;
 };
 
 // GET CURRENT REFRESH TOKEN FROM USER REDUCER
 export const getCurrentRefreshToken = () => {
   let token = DataHandler.getStore().getState().user.data.refresh_token;
-  console.log("ssss");
+  console.log('ssss');
   return token;
 };
 
@@ -65,6 +66,13 @@ export const isEmailValid = (email) => {
   return re.test(email.trim());
 };
 
+export const checkPasswordValidation = (pass) => {
+  const regex =
+    /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/;
+
+  return pass.match(regex);
+};
+
 // CHECK IF PASSWORD LENGTH IS VALID
 export const isPasswordValid = (password) => {
   let length = 5; // u can change pass length according to your requirement
@@ -81,19 +89,19 @@ export const capitalizeFirstLetter = (string) => {
   if (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  return "";
+  return '';
 };
 
 // FORMAT DATE ACCORDING TO PROVIDED FORMAT
 export const getFormattedDateTime = (date, format) => {
   if (date) return moment(date).format(format);
-  return "";
+  return '';
 };
 
 // FORMAT DATE ACCORDING TO PROVIDED FORMAT AND RETURN TO DATE OBJECT
 export const getDateObjectFromString = (date, format) => {
   if (date) return moment(date, format).toDate();
-  return "";
+  return '';
 };
 
 // CHECK IF MOBILE NUMBER IS VALID
@@ -110,10 +118,10 @@ export const isValidMobileNumber = (str) => {
 // CHECK IF MOBILE NUMBER IS OF UK NUMBER FORMAT
 export const isValidUKMobileNumber = (str) => {
   if (!str) return false;
-  str = str.replace(/ /g, "");
-  let mobileNumber = str.replace("+", "");
-  if (mobileNumber.charAt(0) == "4" && mobileNumber.charAt(1) == "4") {
-    mobileNumber = "0" + mobileNumber.slice(2);
+  str = str.replace(/ /g, '');
+  let mobileNumber = str.replace('+', '');
+  if (mobileNumber.charAt(0) == '4' && mobileNumber.charAt(1) == '4') {
+    mobileNumber = '0' + mobileNumber.slice(2);
   }
   return /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/.test(
     mobileNumber
@@ -180,13 +188,13 @@ export const generateGuid = () => {
   return (
     S4() +
     S4() +
-    "-" +
+    '-' +
     S4() +
-    "-" +
+    '-' +
     S4() +
-    "-" +
+    '-' +
     S4() +
-    "-" +
+    '-' +
     S4() +
     S4() +
     S4()
@@ -213,17 +221,17 @@ export const toastAlert = (
     closeOnClick: closeOnClick,
     pauseOnHover: pauseOnHover,
     draggable: draggable,
-    theme: theme,
+    theme: theme
   });
 };
 
 // GENERATE REFRESH TOKEN
 export const refreshAccessToken = async () => {
-  console.log("here in refreshAccessToken");
+  console.log('here in refreshAccessToken');
   let data = {};
   data.token = getCurrentRefreshToken();
-  const method = "POST";
-  const _url = "auth/v1/refresh-token";
+  const method = 'POST';
+  const _url = 'auth/v1/refresh-token';
   try {
     const response = await ApiHandler(method, _url, data, {}, BASE_URL);
     console.log({ newAccessToken: response });

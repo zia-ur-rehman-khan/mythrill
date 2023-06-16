@@ -1,12 +1,14 @@
-import ButtonComponent from "./ButtonComponent";
-import Header from "./Header";
-import BackDrop from "./backdrop";
-import SecDetail from "./secDetails";
-import Footer from "./Footer";
-import Loader from "./loader";
-import ConfirmationModal from "./confirmationModal";
-import SideBar from "./SideBar";
-import Layout from "./Layout";
+import ButtonComponent from './ButtonComponent';
+import Header from './Header';
+import BackDrop from './backdrop';
+import SecDetail from './secDetails';
+import Footer from './Footer';
+import Loader from './loader';
+import ConfirmationModal from './confirmationModal';
+import SideBar from './SideBar';
+import Layout from './Layout';
+import AuthLayout from './AuthLayout';
+
 import {
   StockCard,
   CommonButton,
@@ -16,7 +18,8 @@ import {
   CommonTextField,
   CommonDropdown,
   SmallChart,
-} from "./common";
+  CommonPopOver
+} from './common';
 
 export {
   ButtonComponent,
@@ -36,4 +39,6 @@ export {
   CommonTextField,
   CommonDropdown,
   SmallChart,
+  CommonPopOver,
+  AuthLayout
 };

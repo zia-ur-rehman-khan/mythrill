@@ -16,6 +16,7 @@
     "aphrodite": "^2.4.0",
     "axios": "^0.21.1",
     "firebase": "^9.22.1",
+    "firebase-messaging": "^1.0.6",
     "highcharts": "^11.0.1",
     "highcharts-react-official": "^3.2.0",
     "lodash": "^4.17.21",
@@ -24,6 +25,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-phone-input-2": "^2.15.1",
     "react-redux": "^8.0.2",
     "react-ripples": "^2.2.1",
     "react-router-dom": "^6.3.0",
@@ -45,7 +47,8 @@
     "eject": "react-scripts eject",
     "deploy-prod": "firebase use default && react-scripts build && firebase deploy",
     "deploy-stag": "firebase use staging && react-scripts build && firebase deploy",
-    "deploy-dev":  "firebase use dev && react-scripts build && firebase deploy"
+    "deploy-dev": "firebase use dev && react-scripts build && firebase deploy",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "browserslist": {
     "production": [

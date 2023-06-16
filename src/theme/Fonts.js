@@ -1,8 +1,7 @@
-
 const type = {
-  base: "Roboto",
-  bold: "Roboto",
-  italic: "Roboto",
+  base: 'Roboto',
+  bold: 'Roboto',
+  italic: 'Roboto'
 };
 
 const size = {
@@ -17,10 +16,10 @@ const size = {
   xLarge: 24,
   xxLarge: 30,
   xxxLarge: 36,
-  xxxxLarge: 40,
+  xxxxLarge: 40
 };
 
 export default {
   type,
-  size,
+  size
 };

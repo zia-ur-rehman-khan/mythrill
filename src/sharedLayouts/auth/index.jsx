@@ -1,20 +1,40 @@
-import React, { useEffect } from "react";
-import { Header } from "../../components";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { DASHBOARD_ROUTE } from "../../constants";
+import React, { useEffect } from 'react';
+import { Header } from '../../components';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useNavigate } from 'react-router-dom';
+import { DASHBOARD_ROUTE, HOME_ROUTE } from '../../constants';
+import { userLoginRequest } from '../../redux/slicers/user';
 function AuthSharedLayout({ children }) {
   const navigate = useNavigate();
-  const authenticated = useSelector(({ user }) => user.isAuthenticated);
+  const dispatch = useDispatch();
+  const sss = useSelector(({ user }) => user?.text);
+  const token = useSelector(({ user }) => user?.deviceToken);
+  const isAuthenticated = useSelector(({ user }) => user?.isAuthenticated);
+  const user = useSelector(({ user }) => user);
+
+  console.log({ user });
+
   useEffect(() => {
-    if (authenticated) {
-      navigate(DASHBOARD_ROUTE);
+    if (isAuthenticated) {
+      navigate(HOME_ROUTE);
+    } else {
+      dispatch(
+        userLoginRequest({
+          payloadData: {
+            email: 'test@viabletree.com',
+            password: 'test12345',
+            platform: 'android',
+            token: token
+          }
+        })
+      );
     }
-  }, [authenticated]);
+  }, [isAuthenticated, token]);
 
   return (
     <section className="auth-wrapper">
-      <Header />
+      {/* <Header /> */}
       {children}
     </section>
   );

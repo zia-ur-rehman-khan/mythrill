@@ -4,5 +4,5 @@ export default {
   doubleBaseMargin: 32,
   horizontalLineHeight: StyleSheet.hairlineWidth,
   tabBarHeight: 49,
-  borderRadius: 5,
+  borderRadius: 5
 };
