@@ -24,7 +24,11 @@ const AuthLayout = ({ children, image, className, arrow }) => {
       <div className="left-side">
         <div className="content">
           {!arrow && (
-            <img src={Images.back} className="arrow" onClick={changeRoute} />
+            <img
+              src={Images.back}
+              className="back-arrow"
+              onClick={changeRoute}
+            />
           )}
 
           {children}

@@ -55,7 +55,11 @@ const StockDetailes = () => {
 
 	return (
 		<>
-			<Row wrap={true} gutter={[0, 20]} className={css(AppStyles.spaceBetween)}>
+			<Row
+				wrap={true}
+				gutter={[0, 20]}
+				className={css(AppStyles.justifyCenter)}
+			>
 				<Col
 					lg={{ span: 16 }}
 					md={{ span: 24 }}
@@ -65,7 +69,12 @@ const StockDetailes = () => {
 					<Update stock={selectedStock} />
 					<Suggestion />
 				</Col>
-				<Col lg={{ span: 6 }} md={{ span: 6 }}>
+				<Col
+					lg={{ span: 8 }}
+					md={{ span: 6 }}
+					sm={{ span: 24 }}
+					xs={{ span: 24 }}
+				>
 					<GraphRender stock={selectedStock} />
 				</Col>
 			</Row>

@@ -18,6 +18,7 @@ import ExtraDetailes from "./extraDetailes";
 const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
+	console.log({ stockDetail: data });
 	const [chartType, setChartType] = useState("areaspline");
 
 	const screens = useBreakpoint();
@@ -101,11 +102,20 @@ const Chart = ({ data, color }) => {
 	// ];
 
 	const candlestickData = [
-		[moment("2022-01-01").valueOf(), 127.52, 135.62, 125.86, 132.05],
-		[moment("2022-02-01").valueOf(), 131.39, 147.79, 130.23, 146.36],
-		[moment("2022-03-01").valueOf(), 146.05, 153.44, 143.57, 150.52],
-		[moment("2022-04-01").valueOf(), 150.51, 157.26, 149.6, 152.69],
-		// [moment("2022-05-01").valueOf(), 153.87, 158.85, 149.77, 155.47],
+		[moment("2022-01-02").valueOf(), 131.39, 147.79, 130.23, 146.36],
+		[moment("2022-01-03").valueOf(), 146.05, 153.44, 143.57, 150.52],
+		[moment("2022-01-04").valueOf(), 150.51, 157.26, 149.6, 152.69],
+		[moment("2022-01-05").valueOf(), 153.87, 158.85, 149.77, 155.47],
+		[moment("2022-01-06").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-07").valueOf(), 170.87, 173.85, 162.77, 160.47],
+		[moment("2022-01-08").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-09").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-10").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-11").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-12").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-13").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-14").valueOf(), 156.87, 160.85, 152.77, 160.47],
+		[moment("2022-01-15").valueOf(), 156.87, 160.85, 152.77, 160.47],
 	];
 
 	let configPrice = {
@@ -149,9 +159,6 @@ const Chart = ({ data, color }) => {
 				gapSize: 0,
 			},
 		},
-		rangeSelector: {
-			selected: 1,
-		},
 
 		chart: {
 			height: 500,
@@ -168,9 +175,9 @@ const Chart = ({ data, color }) => {
 		xAxis: {
 			type: "date",
 			labels: {
-				formatter: function () {
-					return moment(this.value).format("DD MMM");
-				},
+				// formatter: function () {
+				//   return moment(this.value).format("DD MMM");
+				// },
 				style: {
 					// fontSize: "8px",
 					color: "#fff",
@@ -178,9 +185,14 @@ const Chart = ({ data, color }) => {
 				},
 			},
 			dateFormat: "%Y-%m-%d %H:%M",
-			dateGroupingInterval: 0.1,
+			dateGroupingInterval: 1,
 		},
 		rangeSelector: {
+			inputEnabled: false, // Disable the input box
+			buttonEnabled: false,
+			buttonTheme: {
+				width: 25,
+			},
 			selected: 5,
 
 			buttons: [
@@ -258,6 +270,13 @@ const Chart = ({ data, color }) => {
 						maxWidth: 500,
 					},
 					chartOptions: {
+						rangeSelector: {
+							inputEnabled: false, // Disable the input box
+							buttonEnabled: false,
+							buttonTheme: {
+								width: 20,
+							},
+						},
 						chart: {
 							height: 400,
 						},
@@ -286,21 +305,21 @@ const Chart = ({ data, color }) => {
 	return (
 		<>
 			{!screens.lg && (
-				<Space
-					className={css(
-						AppStyles.w100,
-						AppStyles.justifyEnd,
-						AppStyles.mTop10
-					)}
-				>
-					<img src={Images.green} width={"30px"} height={"30px"} />
-					<img src={Images.yellow} width={"30px"} height={"30px"} />
-					<img src={Images.red} width={"30px"} height={"30px"} />
-				</Space>
+				<ExtraDetailes
+					className={"chart-above-detailes"}
+					chartChange={chartChange}
+					chartType={chartType}
+				/>
 			)}
 
 			<div className={`bigchart ${css(AppStyles.mTop20)}`}>
-				<ExtraDetailes chartChange={chartChange} chartType={chartType} />
+				{screens.lg && (
+					<ExtraDetailes
+						className="extra-detailes"
+						chartChange={chartChange}
+						chartType={chartType}
+					/>
+				)}
 				{chartType && chartComponent}
 			</div>
 		</>

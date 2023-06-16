@@ -5,7 +5,8 @@ import { CommonPopOver, CommonTextField } from "../../common";
 import { Divider, Space } from "antd";
 import "./styles.scss";
 
-const NotificationContent = () => {
+const NotificationContent = ({ mobile }) => {
+  const { bitCoin, netflix } = Images;
   const title = (
     <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
       <CommonTextField
@@ -22,17 +23,17 @@ const NotificationContent = () => {
     </Space>
   );
 
-  const array = [1, 2, 3, 5, 6, 7, 8];
+  const array = [netflix, bitCoin, netflix, bitCoin, netflix, bitCoin, netflix];
 
-  const content = array.map((t) => (
-    <div className={`main ${t < 3 && "hide"}`}>
+  const content = array.map((t, index) => (
+    <div className={`main ${t < index + 1 === 3 && "hide"}`}>
       <div className={`notification-content }`}>
         <Space
           align="start"
           className={css(AppStyles.w100, AppStyles.spaceBetween)}
         >
           <Space align="start">
-            <img src={Images.profilePic} />
+            <img src={t} />
             <Space size={2} direction="vertical">
               <CommonTextField text={"Bessie Cooper"} fontWeight={600} />
               <CommonTextField
@@ -50,7 +51,7 @@ const NotificationContent = () => {
 
   return (
     <CommonPopOver
-      width="400px"
+      placement={mobile ? "leftBottom" : ""}
       content={content}
       title={title}
       trigger="click"

@@ -2,6 +2,18 @@
 
 .ant-popover {
     top: 95px !important;
+    width: 400px !important;
+    @media (max-width: 1000px) {
+        top: 60px !important;
+
+        width: 300px !important;
+    }
+
+    @media (max-width: 500px) {
+        top: 60px !important;
+
+        width: 250px !important;
+    }
 
     .ant-popover-inner {
         background-color: master.$theme3-color;

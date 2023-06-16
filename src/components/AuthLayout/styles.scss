@@ -3,6 +3,10 @@
 .auth-box {
     background-image: url("../../assets/auth/backgound.png");
     position: relative;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
     .left-side {
         background: master.$dark-color;
         border-radius: 0px 41px 41px 0px;
@@ -23,7 +27,7 @@
             width: 70%;
 
             position: relative;
-            .arrow {
+            .back-arrow {
                 position: absolute;
                 left: 30px;
                 top: 26px;
@@ -52,11 +56,23 @@
             display: none;
         }
     }
+    .forgot-image {
+        max-height: 500px;
+    }
     .email {
         left: 48% !important;
+        .reset-image {
+            max-height: 500px;
+        }
+        .email-image {
+            max-height: 440px;
+        }
     }
     .login {
         left: 45% !important;
+        .login-image {
+            max-height: 690px;
+        }
     }
     .number {
         left: 52%;

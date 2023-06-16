@@ -81,8 +81,6 @@ const Home = () => {
 				stocksList.push(doc.data());
 			});
 
-			console.log({ stocksList });
-
 			const stocksDataPayload = {};
 			const stockNamesPayload = [];
 
@@ -103,8 +101,6 @@ const Home = () => {
 				stocksDataPayload[stock] = manipulatedData;
 			}
 
-			console.log({ stockNamesPayload, stocksDataPayload });
-
 			dispatch(setStocksListAction(stockNamesPayload));
 			dispatch(setStocksDataAction(stocksDataPayload));
 			setIsLoading(false);
@@ -122,14 +118,14 @@ const Home = () => {
 			{!screens.lg ? (
 				<div className="mobile-view">
 					<div className="left-side">
-						<Market isLoading={isLoading} />
+						<Market isLoading={isLoading} width="90%" />
 					</div>
 					<div className="right-side">{getContentByPathname}</div>
 				</div>
 			) : (
 				<div className="main-home">
 					<div className="left-side">
-						<Market isLoading={isLoading} />
+						<Market width="40%" isLoading={isLoading} />
 					</div>
 					<div className="right-side">{getContentByPathname}</div>
 				</div>

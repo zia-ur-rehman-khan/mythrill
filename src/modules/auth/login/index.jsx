@@ -21,9 +21,13 @@ import {
 } from "../../../constants";
 import DataHandler from "../../../services/DataHandler";
 import { userLoginSuccess } from "../../../redux/slicers/user";
+import {
+  CommonPasswordInput,
+  CommonPhoneInput,
+} from "../../../components/common";
 
 const Login = () => {
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const Navigate = useNavigate();
 
   const changeRoute = (route) => {
@@ -31,10 +35,11 @@ const Login = () => {
   };
 
   const onFinish = (values) => {
+    console.log("Success:", values);
+
     setLoading(true);
     DataHandler.getStore().dispatch(userLoginSuccess());
     changeRoute("/");
-    console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -44,10 +49,10 @@ const Login = () => {
     <AuthLayout
       arrow
       className="login"
-      image={<img src={Images.card3} height={"636px"} />}
+      image={<img src={Images.card3} className="login-image" />}
     >
       <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Space direction="vertical">
+        <Space direction="vertical" className={css(AppStyles.w100)}>
           <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>
             <img src={Images.authLogo} width={"50px"} height={"58px"} />
           </Space>
@@ -59,10 +64,8 @@ const Login = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"Phone Number"} opacity={"0.5"} />
 
-            <CommonInputField
+            <CommonPhoneInput
               name={"phone number"}
-              className={"auth"}
-              placeholder={"+0 123 456 7890"}
               rules={[
                 {
                   validator: (_, value) => {
@@ -74,12 +77,9 @@ const Login = () => {
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={"Password"} opacity={"0.5"} />
-            <CommonInputField
+            <CommonPasswordInput
               name={"password"}
               placeholder={"**************"}
-              className={"auth"}
-              type={"password"}
-              suffix={<img src={Images.eye} />}
               rules={[
                 {
                   required: true,
@@ -100,7 +100,7 @@ const Login = () => {
             <Space>
               <CommonTextField
                 onClick={() => changeRoute("/forgot")}
-                text={"Forget Password"}
+                text={"Forgot Password"}
               />
             </Space>
           </Space>

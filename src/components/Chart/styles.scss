@@ -1,12 +1,16 @@
 .bigchart {
     position: relative;
+
     .extra-detailes {
         z-index: 1;
         position: absolute;
         right: 0;
-        justify-content: space-between;
+        justify-content: flex-end;
         width: 50%;
         padding-top: 4px;
+        @media (max-width: 990px) {
+            padding-top: 10px;
+        }
 
         .active {
             transition: background 0.3s;
@@ -79,4 +83,9 @@
     .highcharts-input-group {
         display: none;
     }
+}
+.chart-above-detailes {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
 }

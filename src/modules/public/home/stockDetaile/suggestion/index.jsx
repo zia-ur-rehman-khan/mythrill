@@ -29,7 +29,7 @@ const Suggestion = () => {
 						color={Colors.green}
 					/>
 				</Space>
-				<Space>
+				<Space align="baseline">
 					<CommonTextField text={"More"} />
 					<img src={Images.arrow} />
 				</Space>

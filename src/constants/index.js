@@ -1,3 +1,4 @@
+import { Form } from "antd";
 import {
 	Login,
 	Home,
@@ -335,7 +336,7 @@ export const EMAIL_RULE = [
 
 export const numberValidatorField = (_, value) => {
 	if (value === undefined) {
-		return Promise.reject(new Error("Invalid Value."));
+		return Promise.reject(new Error("Field is required."));
 	} else if (value < 1) {
 		return Promise.reject(new Error("Must be equal or greater than 1."));
 	} else if (`${value}`.toLowerCase().includes("e")) {
@@ -381,3 +382,12 @@ export const passwordValidation = (_, value) => {
 };
 
 export const STOCK_NAME_LIST = ["ethereum"];
+export const handlePassworMatch = (_, value, name) => {
+	if (!value?.length) {
+		return Promise.reject(new Error("Field is required."));
+	} else if (value && value !== name) {
+		return Promise.reject(new Error("Passwords do not match."));
+	} else {
+		return Promise.resolve();
+	}
+};

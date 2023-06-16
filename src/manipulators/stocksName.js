@@ -2,7 +2,7 @@ import _ from "lodash";
 import { Images } from "../theme";
 import moment from "moment";
 
-const FORMAT = "YYYY-MM-DDTHH:mm:ss";
+const FORMAT = "YYYY-MM-DDTHH:mm";
 
 export function singleStockNameManipulator(stock = {}) {
 	try {
@@ -96,8 +96,6 @@ export function stockListManipulator(list = []) {
 
 			stockList.push(payload);
 		}
-
-		console.log({ stockList });
 
 		return stockList;
 	} catch (error) {

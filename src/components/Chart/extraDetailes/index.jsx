@@ -7,11 +7,13 @@ import {
 	CommonModal,
 	CommonTextField,
 } from "../../common";
-import { Grid, Radio, Space } from "antd";
+import { Form, Grid, Radio, Space } from "antd";
 const { useBreakpoint } = Grid;
 
-const ExtraDetailes = ({ chartChange, chartType }) => {
+const ExtraDetailes = ({ className, chartChange, chartType }) => {
 	const [isModal, setIsModal] = useState(false);
+	const [frequency, setFrequency] = useState("Every Day");
+
 	const screens = useBreakpoint();
 
 	const radio = [
@@ -22,24 +24,31 @@ const ExtraDetailes = ({ chartChange, chartType }) => {
 		"Every Week",
 		"Every Month",
 	];
+
+	const onFinish = (values) => {
+		setIsModal(false);
+		setFrequency(values?.frequency);
+	};
+	const onFinishFailed = (errorInfo) => {
+		console.log("Failed:", errorInfo);
+	};
+
 	return (
 		<>
-			<Space size={20} className="extra-detailes">
+			<Space className={className} wrap={true}>
 				<Space
 					className={css(AppStyles.pointer)}
 					onClick={() => setIsModal(true)}
 				>
 					<img src={Images.freNotification} />
-					<CommonTextField text="Every Minutes" />
+					<CommonTextField text={frequency} />
 					<img src={Images.rightArrow} />
 				</Space>
-				{screens.lg && (
-					<Space className="hide-web">
-						<img src={Images.green} width={"30px"} height={"30px"} />
-						<img src={Images.yellow} width={"30px"} height={"30px"} />
-						<img src={Images.red} width={"30px"} height={"30px"} />
-					</Space>
-				)}
+				<Space className="hide-web">
+					<img src={Images.green} width={"30px"} height={"30px"} />
+					<img src={Images.yellow} width={"30px"} height={"30px"} />
+					<img src={Images.red} width={"30px"} height={"30px"} />
+				</Space>
 				<Space>
 					<Space
 						onClick={() => {
@@ -103,22 +112,33 @@ const ExtraDetailes = ({ chartChange, chartType }) => {
 				isModalVisible={isModal}
 				setIsModalVisible={setIsModal}
 			>
-				<Radio.Group className={css(AppStyles.w100)}>
-					{radio.map((t, index) => (
-						<Space
-							className={css([
-								AppStyles.w100,
-								AppStyles.spaceBetween,
-								AppStyles.mBottom20,
-							])}
-							key={index}
-						>
-							<CommonTextField text={t} />
-							<Radio value={index + 1} />
-						</Space>
-					))}
-				</Radio.Group>
-				<CommonButton text={"Save"} />
+				<Form
+					name="basic"
+					initialValues={{ frequency: frequency }}
+					onFinish={onFinish}
+					onFinishFailed={onFinishFailed}
+				>
+					<Form.Item
+						name={"frequency"}
+						rules={[{ required: true, message: "Please input your username!" }]}
+					>
+						<Radio.Group className={css(AppStyles.w100)}>
+							{radio.map((t, index) => (
+								<Space
+									className={css([
+										AppStyles.w100,
+										AppStyles.spaceBetween,
+										AppStyles.mBottom20,
+									])}
+								>
+									<CommonTextField text={t} />
+									<Radio value={t} />
+								</Space>
+							))}
+						</Radio.Group>
+					</Form.Item>
+					<CommonButton text={"Save"} htmlType="submit" />
+				</Form>
 			</CommonModal>
 		</>
 	);

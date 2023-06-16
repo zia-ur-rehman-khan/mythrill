@@ -27,7 +27,6 @@ const Stock = () => {
 						y: item?.currentPrice,
 					}));
 
-					console.log({ data, stock });
 					return (
 						<Col
 							lg={{ span: 12 }}

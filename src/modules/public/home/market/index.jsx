@@ -42,7 +42,7 @@ const items = [
 	},
 ];
 
-const Market = ({ isLoading }) => {
+const Market = ({ isLoading, width }) => {
 	const dispatch = useDispatch();
 	const [isModal, setIsModal] = useState(false);
 
@@ -50,8 +50,6 @@ const Market = ({ isLoading }) => {
 
 	// change tab handler
 	const onChange = (key) => {
-		console.log(key);
-
 		const findItem = items.find((item) => item.key === key);
 
 		if (findItem) setCurrentKey(findItem);
@@ -72,7 +70,7 @@ const Market = ({ isLoading }) => {
 				onClick={() => setIsModal(true)}
 			/>
 			<CommonModal
-				width={"40%"}
+				width={width}
 				title={
 					<CommonHeading
 						text={"Add Stock"}

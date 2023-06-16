@@ -13,8 +13,6 @@ const Update = ({ stock }) => {
 		navigate(HOME_ROUTE);
 	};
 
-	console.log({ stock });
-
 	return (
 		<Space
 			wrap={true}
