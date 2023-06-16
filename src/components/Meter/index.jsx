@@ -12,6 +12,9 @@ import './styles.scss';
 function GraphRender({ stock }) {
   console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
 
+  const meterValue =
+    stock?.color === 'green' ? 0 : stock?.color === 'yellow' ? 37.5 : 75;
+
   const options = {
     chart: {
       type: 'gauge'
@@ -28,7 +31,7 @@ function GraphRender({ stock }) {
         dataLabels: {
           enabled: false // Disable data labels for all series
         },
-        data: [stock?.currentPrice ?? 0]
+        data: [meterValue ?? 0]
       }
     ],
     credits: {
@@ -45,7 +48,7 @@ function GraphRender({ stock }) {
 
     yAxis: {
       min: 0,
-      max: 100,
+      max: 75,
       labels: {
         enabled: false // Disable the axis labels for the Y-axis
       },
@@ -59,18 +62,18 @@ function GraphRender({ stock }) {
         {
           from: 25,
           to: 50,
-          color: '#8FC640',
-          thickness: 15
-        },
-        {
-          from: 50,
-          to: 75,
           color: '#F7EC35',
           thickness: 15
         },
+        // {
+        //   from: 50,
+        //   to: 75,
+        //   color: '#F7EC35',
+        //   thickness: 15
+        // },
         {
-          from: 75,
-          to: 100,
+          from: 50,
+          to: 75,
           color: '#EB2127',
           thickness: 15
         }
