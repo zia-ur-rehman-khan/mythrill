@@ -35,8 +35,7 @@ const db = getFirestore(app);
 
 const fetchToken = () => {
   getToken(messaging, {
-    vapidKey:
-      'BFZ9z9LA3-3WBSgUl-lE8DyDNgj3kDMX3OZYJtAdzV4XwTCXBJvOpttEbhPqo69CQLiHttD_K7vJVhCNM-krdXI'
+    vapidKey: process.env.REACT_APP_VAPID_KEY
   })
     .then((currentToken) => {
       console.log('currentToken', currentToken);

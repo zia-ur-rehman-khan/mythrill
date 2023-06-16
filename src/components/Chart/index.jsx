@@ -174,6 +174,7 @@ const Chart = ({ data, color }) => {
       enabled: true
     },
     xAxis: {
+      minRange: 1,
       type: 'datetime',
       labels: {
         // formatter: function () {
@@ -183,7 +184,7 @@ const Chart = ({ data, color }) => {
         //   return Highcharts.dateFormat("%HH:%M", this.value);
         // },
         formatter: function () {
-          return moment(this.value).format('DD-MM-HH:s');
+          return moment(this.value).format('DD MMM');
         },
         style: {
           // fontSize: "8px",

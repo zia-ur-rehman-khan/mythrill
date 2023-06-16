@@ -71,7 +71,6 @@ const Home = () => {
     const stocksListQuery = query(
       stockListCollectionRef,
       orderBy('date_time', 'desc'),
-      limit(200),
       where('name_id', 'in', STOCK_NAME_LIST)
     );
 
