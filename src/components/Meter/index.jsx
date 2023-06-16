@@ -9,73 +9,72 @@ HighchartsMore(Highcharts);
 HighchartsAccessibility(Highcharts);
 import "./styles.scss";
 
-const options = {
-	chart: {
-		type: "gauge",
-	},
-	title: {
-		text: "BUY",
-		style: {
-			color: "#1ABF17", // Specify your desired color here
+function GraphRender({ stock }) {
+	const options = {
+		chart: {
+			type: "gauge",
 		},
-	},
-
-	series: [
-		{
-			dataLabels: {
-				enabled: false, // Disable data labels for all series
+		title: {
+			text: "BUY",
+			style: {
+				color: "#1ABF17", // Specify your desired color here
 			},
-			data: [80],
 		},
-	],
-	credits: {
-		enabled: false,
-	},
 
-	pane: {
-		startAngle: -90,
-		endAngle: 89.9,
-		background: null,
-		center: ["50%", "80%"],
-		size: "200%",
-	},
-
-	yAxis: {
-		min: 0,
-		max: 100,
-		labels: {
-			enabled: false, // Disable the axis labels for the Y-axis
-		},
-		plotBands: [
+		series: [
 			{
-				from: 0,
-				to: 25,
-				color: "#3DB54A",
-				thickness: 15,
-			},
-			{
-				from: 25,
-				to: 50,
-				color: "#8FC640",
-				thickness: 15,
-			},
-			{
-				from: 50,
-				to: 75,
-				color: "#F7EC35",
-				thickness: 15,
-			},
-			{
-				from: 75,
-				to: 100,
-				color: "#EB2127",
-				thickness: 15,
+				dataLabels: {
+					enabled: false, // Disable data labels for all series
+				},
+				data: [stock?.amount ?? 0],
 			},
 		],
-	},
-};
+		credits: {
+			enabled: false,
+		},
 
-function GraphRender() {
+		pane: {
+			startAngle: -90,
+			endAngle: 89.9,
+			background: null,
+			center: ["50%", "80%"],
+			size: "200%",
+		},
+
+		yAxis: {
+			min: 0,
+			max: 100,
+			labels: {
+				enabled: false, // Disable the axis labels for the Y-axis
+			},
+			plotBands: [
+				{
+					from: 0,
+					to: 25,
+					color: "#3DB54A",
+					thickness: 15,
+				},
+				{
+					from: 25,
+					to: 50,
+					color: "#8FC640",
+					thickness: 15,
+				},
+				{
+					from: 50,
+					to: 75,
+					color: "#F7EC35",
+					thickness: 15,
+				},
+				{
+					from: 75,
+					to: 100,
+					color: "#EB2127",
+					thickness: 15,
+				},
+			],
+		},
+	};
 	return (
 		<div className="meter">
 			<HighchartsReact highcharts={Highcharts} options={options} />

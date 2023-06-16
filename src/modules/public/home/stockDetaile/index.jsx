@@ -62,11 +62,11 @@ const StockDetailes = () => {
 					sm={{ span: 24 }}
 					xs={{ span: 24 }}
 				>
-					<Update />
+					<Update stock={selectedStock} />
 					<Suggestion />
 				</Col>
 				<Col lg={{ span: 6 }} md={{ span: 6 }}>
-					<GraphRender />
+					<GraphRender stock={selectedStock} />
 				</Col>
 			</Row>
 			{manipulatedData?.length > 0 && (

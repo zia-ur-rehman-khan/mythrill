@@ -32,6 +32,7 @@ import {
 	setStocksDataAction,
 	setStocksListAction,
 } from "../../../redux/slicers/stocks";
+import { Loader } from "../../../components";
 
 const { useBreakpoint } = Grid;
 
@@ -70,7 +71,7 @@ const Home = () => {
 		const stocksListQuery = query(
 			stockListCollectionRef,
 			orderBy("date_time", "desc"),
-			limit(20),
+			limit(200),
 			where("name_id", "in", STOCK_NAME_LIST)
 		);
 
@@ -79,8 +80,6 @@ const Home = () => {
 			querySnapshot.forEach((doc) => {
 				stocksList.push(doc.data());
 			});
-
-			debugger;
 
 			console.log({ stocksList });
 
@@ -113,6 +112,10 @@ const Home = () => {
 
 		return unSubscribe;
 	};
+
+	if (isLoading) {
+		return <Loader />;
+	}
 
 	return (
 		<>

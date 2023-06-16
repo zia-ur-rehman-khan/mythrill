@@ -1,155 +1,155 @@
 @use "../../../master.scss";
 
 .main-home {
-    display: flex;
-    gap: 20px;
-    height: 100%;
+	display: flex;
+	gap: 20px;
+	height: 100%;
 
-    .left-side {
-        background: master.$dark-color;
-        width: 30%;
-        padding: 10px;
-        border-radius: 12px;
+	.left-side {
+		background: master.$dark-color;
+		width: 30%;
+		padding: 10px;
+		border-radius: 12px;
 
-        .ant-tabs {
-            height: calc(100% - 63px);
+		.ant-tabs {
+			height: calc(100% - 63px);
 
-            .ant-tabs-content-holder {
-                transition: overflow 3s ease;
+			.ant-tabs-content-holder {
+				transition: overflow 3s ease;
 
-                padding: 0 10px 10px 10px;
-                // overflow: hidden;
+				padding: 0 10px 10px 10px;
+				// overflow: hidden;
 
-                // &:hover {
-                overflow: auto;
-                // }
-            }
-            .ant-tabs-nav {
-                .ant-tabs-nav-wrap {
-                    width: 100%;
-                    justify-content: center;
-                    .ant-tabs-nav-list {
-                        justify-content: space-between;
-                        width: 100%;
-                        overflow-x: scroll;
-                    }
-                }
-                .ant-tabs-tab {
-                    margin: 0;
-                    .ant-tabs-tab-btn {
-                        color: master.$white-color;
-                        padding: 4px 10px;
-                    }
-                }
-                .ant-tabs-tab-active {
-                    .ant-tabs-tab-btn {
-                        color: master.$theme-color;
-                    }
-                }
-                .ant-tabs-ink-bar {
-                    height: 60%;
-                    background: #7665c1;
-                    opacity: 0.1;
-                    border-radius: 10px;
-                    top: 11px;
-                }
-                &::before {
-                    border-bottom: none;
-                }
-                .ant-tabs-nav-operations {
-                    display: none;
-                }
-            }
-        }
-    }
-    .right-side {
-        background: master.$dark-color;
-        width: 70%;
-        border-radius: 12px;
-        padding: 15px;
-        // overflow: hidden;
-        // transition: overflow-y 0.3s ease;
+				// &:hover {
+				overflow: auto;
+				// }
+			}
+			.ant-tabs-nav {
+				.ant-tabs-nav-wrap {
+					width: 100%;
+					justify-content: center;
+					.ant-tabs-nav-list {
+						justify-content: space-between;
+						width: 100%;
+						overflow-x: scroll;
+					}
+				}
+				.ant-tabs-tab {
+					margin: 0;
+					.ant-tabs-tab-btn {
+						color: master.$white-color;
+						padding: 4px 10px;
+					}
+				}
+				.ant-tabs-tab-active {
+					.ant-tabs-tab-btn {
+						color: master.$theme-color;
+					}
+				}
+				.ant-tabs-ink-bar {
+					height: 60%;
+					background: #7665c1;
+					opacity: 0.1;
+					border-radius: 10px;
+					top: 11px;
+				}
+				&::before {
+					border-bottom: none;
+				}
+				.ant-tabs-nav-operations {
+					display: none;
+				}
+			}
+		}
+	}
+	.right-side {
+		background: master.$dark-color;
+		width: 70%;
+		border-radius: 12px;
+		padding: 15px;
+		// overflow: hidden;
+		// transition: overflow-y 0.3s ease;
 
-        // &:hover {
-        overflow-y: auto;
-        // }
-    }
+		// &:hover {
+		overflow-y: auto;
+		// }
+	}
 }
 
 .mobile-view {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	height: 100%;
 
-    .left-side {
-        background: master.$dark-color;
-        width: 100%;
-        padding: 10px;
-        border-radius: 12px;
-        height: 400px;
+	.left-side {
+		background: master.$dark-color;
+		width: 100%;
+		padding: 10px;
+		border-radius: 12px;
+		height: 400px;
 
-        .ant-tabs {
-            height: calc(100% - 63px);
+		.ant-tabs {
+			height: calc(100% - 63px);
 
-            .ant-tabs-content-holder {
-                transition: overflow 3s ease;
+			.ant-tabs-content-holder {
+				transition: overflow 3s ease;
 
-                padding: 0 10px 10px 10px;
-                // overflow: hidden;
+				padding: 0 10px 10px 10px;
+				// overflow: hidden;
 
-                // &:hover {
-                overflow: auto;
-                // }
-            }
-            .ant-tabs-nav {
-                .ant-tabs-nav-wrap {
-                    width: 100%;
-                    justify-content: center;
-                    .ant-tabs-nav-list {
-                        justify-content: space-between;
-                        width: 100%;
-                        overflow-x: scroll;
-                    }
-                }
-                .ant-tabs-tab {
-                    margin: 0;
-                    .ant-tabs-tab-btn {
-                        color: master.$white-color;
-                        padding: 4px 10px;
-                    }
-                }
-                .ant-tabs-tab-active {
-                    .ant-tabs-tab-btn {
-                        color: master.$theme-color;
-                    }
-                }
-                .ant-tabs-ink-bar {
-                    height: 60%;
-                    background: #7665c1;
-                    opacity: 0.1;
-                    border-radius: 10px;
-                    top: 11px;
-                }
-                &::before {
-                    border-bottom: none;
-                }
-                .ant-tabs-nav-operations {
-                    display: none;
-                }
-            }
-        }
-    }
-    .right-side {
-        background: master.$dark-color;
-        width: 100%;
-        border-radius: 12px;
-        padding: 15px;
-        // overflow: hidden;
-        // transition: overflow-y 0.3s ease;
+				// &:hover {
+				overflow: auto;
+				// }
+			}
+			.ant-tabs-nav {
+				.ant-tabs-nav-wrap {
+					width: 100%;
+					justify-content: center;
+					.ant-tabs-nav-list {
+						justify-content: space-between;
+						width: 100%;
+						overflow-x: scroll;
+					}
+				}
+				.ant-tabs-tab {
+					margin: 0;
+					.ant-tabs-tab-btn {
+						color: master.$white-color;
+						padding: 4px 10px;
+					}
+				}
+				.ant-tabs-tab-active {
+					.ant-tabs-tab-btn {
+						color: master.$theme-color;
+					}
+				}
+				.ant-tabs-ink-bar {
+					height: 60%;
+					background: #7665c1;
+					opacity: 0.1;
+					border-radius: 10px;
+					top: 11px;
+				}
+				&::before {
+					border-bottom: none;
+				}
+				.ant-tabs-nav-operations {
+					display: none;
+				}
+			}
+		}
+	}
+	.right-side {
+		background: master.$dark-color;
+		width: 100%;
+		border-radius: 12px;
+		padding: 15px;
+		// overflow: hidden;
+		// transition: overflow-y 0.3s ease;
 
-        // &:hover {
-        overflow-y: auto;
-        // }
-    }
+		// &:hover {
+		overflow-y: auto;
+		// }
+	}
 }
