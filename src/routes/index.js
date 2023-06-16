@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { Error } from "../modules";
-import { PAGE_ROUTES, ACCESS_TYPES } from "../constants";
-import Helmet from "react-helmet";
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { Error } from '../modules';
+import { PAGE_ROUTES, ACCESS_TYPES } from '../constants';
+import Helmet from 'react-helmet';
 import {
   PrivateSharedLayout,
   AuthSharedLayout,
-  PublicSharedLayout,
-} from "../sharedLayouts";
-import { fetchToken } from "../firebase";
-import { useSelector } from "react-redux";
+  PublicSharedLayout
+} from '../sharedLayouts';
+import { fetchToken } from '../firebase';
+import { useSelector } from 'react-redux';
 
 const renderRouteSharedLayout = (title, description, access, component) => (
   <React.Fragment>
     <Helmet>
       <title>
-        {title ? `${title} |` : ""} {process.env.REACT_APP_WEB_TITLE}
+        {title ? `${title} |` : ''} {process.env.REACT_APP_WEB_TITLE}
       </title>
       {description && <meta name="description" content={description} />}
     </Helmet>

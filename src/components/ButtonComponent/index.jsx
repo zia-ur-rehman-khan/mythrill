@@ -1,21 +1,21 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Ripples from "react-ripples";
-import { Colors, AppStyles } from "../../theme";
-import { BeatLoader } from "react-spinners";
-import { Link } from "react-router-dom";
-import { css } from "aphrodite";
-import styles from "./styles";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Ripples from 'react-ripples';
+import { Colors, AppStyles } from '../../theme';
+import { BeatLoader } from 'react-spinners';
+import { Link } from 'react-router-dom';
+import { css } from 'aphrodite';
+import styles from './styles';
 const ButtonComponent = ({
-  text = "",
+  text = '',
   onClick,
   disabled,
   isLoading,
-  className = "",
+  className = '',
   isCapitalize = false,
   isLink = false,
   ripple = true,
-  link = "",
+  link = ''
 }) => {
   const linkSec = () => (
     <>
@@ -24,7 +24,7 @@ const ButtonComponent = ({
           to={link}
           className={`${className} ${css([
             styles.buttonStyle,
-            isCapitalize && AppStyles.uppercase,
+            isCapitalize && AppStyles.uppercase
           ])} `}
         >
           {innerSec()}
@@ -36,7 +36,7 @@ const ButtonComponent = ({
           onClick={onClick}
           className={`${className} ${css([
             styles.buttonStyle,
-            isCapitalize && AppStyles.uppercase,
+            isCapitalize && AppStyles.uppercase
           ])} `}
         >
           {innerSec()}
@@ -73,6 +73,6 @@ ButtonComponent.propTypes = {
   ripple: PropTypes.bool,
   isCapitalize: PropTypes.bool,
   isLink: PropTypes.bool,
-  link: PropTypes.string,
+  link: PropTypes.string
 };
 export default ButtonComponent;

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { Form, Input } from "antd";
-import "./styles.scss";
-import { AppStyles, Images } from "../../../theme";
-import { css } from "aphrodite";
+import React from 'react';
+import { Form, Input } from 'antd';
+import './styles.scss';
+import { AppStyles, Images } from '../../../theme';
+import { css } from 'aphrodite';
 
 const CommonPasswordInput = ({
   placeholder,
@@ -11,7 +11,7 @@ const CommonPasswordInput = ({
   className,
   type,
   height,
-  rules,
+  rules
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
@@ -21,7 +21,7 @@ const CommonPasswordInput = ({
         }
         style={{ height }}
         type={type}
-        className={`ad-input  ${className || ""}`}
+        className={`ad-input  ${className || ''}`}
         placeholder={placeholder}
       />
     </Form.Item>

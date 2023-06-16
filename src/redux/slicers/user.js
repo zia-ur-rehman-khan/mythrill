@@ -1,25 +1,25 @@
 // @flow
-import _ from "lodash";
-import { createSlice } from "@reduxjs/toolkit";
-import { cloneDeepItem } from "../../services/utils";
+import _ from 'lodash';
+import { createSlice } from '@reduxjs/toolkit';
+import { cloneDeepItem } from '../../services/utils';
 
 const UserReducer = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     data: {},
     profileSections: [],
     isAuthenticated: false,
     isError: null,
-    deviceToken: "",
-    text: "true",
+    deviceToken: '',
+    text: 'true'
   },
   reducers: {
     // USER LOGIN
     userLoginRequest(state, action) {
-      console.log(action, "userLoginRequest");
+      console.log(action, 'userLoginRequest');
     },
     userLoginSuccess(state, action) {
-      console.log(action, "userLoginSuccess");
+      console.log(action, 'userLoginSuccess');
       state.isAuthenticated = true;
       state.data = action.payload;
     },
@@ -53,8 +53,8 @@ const UserReducer = createSlice({
     },
     deviceNotificationTokenSuccess(state, action) {
       state.deviceToken = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const {
@@ -65,7 +65,7 @@ export const {
   userSignOutRequest,
   userSignOutSuccess,
   deviceNotificationTokenSuccess,
-  userLoginSuccess,
+  userLoginSuccess
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

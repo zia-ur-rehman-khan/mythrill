@@ -1,9 +1,9 @@
-import React from "react";
-import { css } from "aphrodite";
-import styles from "./styles";
-import { AppStyles, Images } from "../../theme";
-import { HOME_ROUTE, WEB_STRINGS } from "../../constants";
-import { ButtonComponent } from "../../components";
+import React from 'react';
+import { css } from 'aphrodite';
+import styles from './styles';
+import { AppStyles, Images } from '../../theme';
+import { HOME_ROUTE, WEB_STRINGS } from '../../constants';
+import { ButtonComponent } from '../../components';
 
 const Error = () => {
   const { ErrorPage } = WEB_STRINGS;
@@ -13,16 +13,16 @@ const Error = () => {
         styles.Error,
         AppStyles.flexBox,
         AppStyles.justifyCenter,
-        AppStyles.alignItemsCenter,
+        AppStyles.alignItemsCenter
       ])}
     >
       <div
         className={css(styles.ErrorBg)}
         style={{
-          backgroundImage: `url(${Images.ErrorBackground2})`,
+          backgroundImage: `url(${Images.ErrorBackground2})`
         }}
       />
-      <div style={{ width: 700, maxWidth: "100%" }}>
+      <div style={{ width: 700, maxWidth: '100%' }}>
         <h2 className={`poppin-font ${css(styles.Title)}`}>
           {ErrorPage.title}
         </h2>

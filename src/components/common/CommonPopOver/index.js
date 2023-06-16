@@ -1,6 +1,6 @@
-import React from "react";
-import "./styles.scss";
-import { Popover } from "antd";
+import React from 'react';
+import './styles.scss';
+import { Popover } from 'antd';
 
 const CommonPopOver = ({
   className,
@@ -10,7 +10,7 @@ const CommonPopOver = ({
   title,
   trigger,
   width,
-  placement,
+  placement
 }) => {
   return (
     <Popover

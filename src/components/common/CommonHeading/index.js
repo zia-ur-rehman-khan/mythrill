@@ -1,6 +1,6 @@
-import { Typography } from "antd";
-import React from "react";
-import "./styles.scss";
+import { Typography } from 'antd';
+import React from 'react';
+import './styles.scss';
 
 const { Title } = Typography;
 
@@ -23,13 +23,13 @@ const CommonHeading = ({
   title,
   lineHeight,
   level,
-  width,
+  width
 }) => {
   return (
     <Title
       level={level}
       title={title}
-      className={`${className || ""} ${onClick ? "cp" : ""}`}
+      className={`${className || ''} ${onClick ? 'cp' : ''}`}
       style={{
         width,
         margin: 0,
@@ -46,7 +46,7 @@ const CommonHeading = ({
         lineHeight,
         paddingLeft,
         textDecoration,
-        whiteSpace: "pre-wrap",
+        whiteSpace: 'pre-wrap'
       }}
       onClick={onClick}
     >

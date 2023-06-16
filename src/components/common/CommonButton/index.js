@@ -1,6 +1,6 @@
-import { Button } from "antd";
-import React, { Children } from "react";
-import "./styles.scss";
+import { Button } from 'antd';
+import React, { Children } from 'react';
+import './styles.scss';
 
 const CommonButton = ({
   text,
@@ -16,14 +16,14 @@ const CommonButton = ({
   onClick,
   htmlType,
   disabled,
-  type = "primary",
+  type = 'primary',
   fontSize,
   padding,
   icon,
-  loading,
+  loading
 }) => {
   return (
-    <div className={`button-parent ${topClass || ""} `}>
+    <div className={`button-parent ${topClass || ''} `}>
       <Button
         loading={loading}
         icon={icon}
@@ -36,7 +36,7 @@ const CommonButton = ({
           borderRadius,
           color,
           border,
-          padding,
+          padding
         }}
         className={classname}
         onClick={onClick}

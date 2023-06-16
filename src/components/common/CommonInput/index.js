@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { Form, Input } from "antd";
-import "./styles.scss";
+import React from 'react';
+import { Form, Input } from 'antd';
+import './styles.scss';
 
 const CommonInputField = ({
   placeholder,
@@ -19,7 +19,7 @@ const CommonInputField = ({
   // touch,
   height,
   suffix,
-  rules,
+  rules
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
@@ -30,7 +30,7 @@ const CommonInputField = ({
         addonBefore={addonBefore}
         showCount={showCount}
         maxLength={maxLength}
-        className={`ad-input  ${className || ""}`}
+        className={`ad-input  ${className || ''}`}
         placeholder={placeholder}
         // onChange={onChange}
         // onBlur={onBlur}

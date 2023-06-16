@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Header } from "../../components";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import { Header } from '../../components';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useNavigate } from "react-router-dom";
-import { DASHBOARD_ROUTE, HOME_ROUTE } from "../../constants";
-import { userLoginRequest } from "../../redux/slicers/user";
+import { useNavigate } from 'react-router-dom';
+import { DASHBOARD_ROUTE, HOME_ROUTE } from '../../constants';
+import { userLoginRequest } from '../../redux/slicers/user';
 function AuthSharedLayout({ children }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,11 +22,11 @@ function AuthSharedLayout({ children }) {
       dispatch(
         userLoginRequest({
           payloadData: {
-            email: "test@viabletree.com",
-            password: "test12345",
-            platform: "android",
-            token: token,
-          },
+            email: 'test@viabletree.com',
+            password: 'test12345',
+            platform: 'android',
+            token: token
+          }
         })
       );
     }

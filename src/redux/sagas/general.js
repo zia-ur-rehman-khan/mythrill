@@ -1,14 +1,14 @@
-import { take, put, call, fork } from "redux-saga/effects";
-import { contactUsForm } from "../slicers/general";
-import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from "../../constants";
-import { callRequest, CONTACT_US } from "../../config/webService";
-import { toastAlert } from "../../services/utils";
+import { take, put, call, fork } from 'redux-saga/effects';
+import { contactUsForm } from '../slicers/general';
+import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from '../../constants';
+import { callRequest, CONTACT_US } from '../../config/webService';
+import { toastAlert } from '../../services/utils';
 
 function* contactUs() {
   while (true) {
     // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
     const { payload } = yield take(contactUsForm.type);
-    console.log("contactUs", payload);
+    console.log('contactUs', payload);
     // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
     const { payloadData, responseCallback } = payload;
     try {
@@ -16,8 +16,8 @@ function* contactUs() {
         callRequest,
         CONTACT_US,
         payloadData,
-        "",
-        "",
+        '',
+        '',
         {}
       );
       if (response.status) {

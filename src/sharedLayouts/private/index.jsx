@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { Header, Layout } from "../../components";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { lOGIN_ROUTE } from "../../constants";
+import React, { useEffect } from 'react';
+import { Header, Layout } from '../../components';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { lOGIN_ROUTE } from '../../constants';
 
 function PrivateSharedLayout({ children }) {
   const navigate = useNavigate();
