@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Chart from '../../../../components/Chart';
 import { CommonTextField } from '../../../../components';
 import { Col, Row, Space } from 'antd';
@@ -38,13 +38,11 @@ const StockDetailes = () => {
     // const manipulatedData = stockListManipulator(stockList);
   };
 
-  useMemo(() => {
-    if (id) {
-      getStockData();
-    } else {
+  useEffect(() => {
+    if (!selectedStock) {
       navigate(HOME_ROUTE);
     }
-  }, []);
+  }, [selectedStock]);
 
   const manipulatedData =
     selectedStockData?.length > 0

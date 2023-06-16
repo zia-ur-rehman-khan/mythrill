@@ -2,7 +2,11 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './styles.scss';
 import { Col, Row, Space } from 'antd';
-import { CommonTextField, SmallChart } from '../../../../components';
+import {
+  CommonHeading,
+  CommonTextField,
+  SmallChart
+} from '../../../../components';
 import { css } from 'aphrodite';
 import { AppStyles, Colors } from '../../../../theme';
 import { Images } from '../../../../theme';
@@ -125,6 +129,16 @@ const Stock = () => {
             </Col>
           );
         })}
+
+      {stocksList?.length === 0 && (
+        <div style={{ width: '100%', marginTop: '30px' }}>
+          <CommonHeading
+            level={3}
+            text={'No Stocks to show'}
+            textAlign={'center'}
+          />
+        </div>
+      )}
     </Row>
   );
 };
