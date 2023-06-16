@@ -1,15 +1,93 @@
-import React, { Component } from "react";
-import Highcharts from "highcharts/highstock";
-import HighchartsReact from "highcharts-react-official";
-import priceData from "../../../assets/json/btcdata.json";
-import moment from "moment";
-import "./styles.scss";
-import { css } from "aphrodite";
-import { AppStyles } from "../../../theme";
+import React, { Component } from 'react';
+import Highcharts from 'highcharts/highstock';
+import HighchartsReact from 'highcharts-react-official';
+import priceData from '../../../assets/json/btcdata.json';
+import moment from 'moment';
+import './styles.scss';
+import { css } from 'aphrodite';
+import { AppStyles } from '../../../theme';
 
-const SmallChart = ({ color }) => {
-  const options = { style: "currency", currency: "USD" };
-  const numberFormat = new Intl.NumberFormat("en-US", options);
+const SmallChart = ({ color, data }) => {
+  const options = { style: 'currency', currency: 'USD' };
+  const numberFormat = new Intl.NumberFormat('en-US', options);
+
+  //   const test = [
+  //     {
+  //       x: new Date("2023-06-06T06:29:00"),
+  //       y: 200000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T07:29:00"),
+  //       y: 300000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T08:29:00"),
+  //       y: 500000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T09:29:00"),
+  //       y: 200000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T10:29:00"),
+  //       y: 700000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T11:29:00"),
+  //       y: 500000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T12:29:00"),
+  //       y: 300000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T13:29:00"),
+  //       y: 500000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T14:29:00"),
+  //       y: 200000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T15:29:00"),
+  //       y: 700000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T16:29:00"),
+  //       y: 200000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T17:29:00"),
+  //       y: 500000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T18:29:00"),
+  //       y: 200000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T19:29:00"),
+  //       y: 700000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T20:29:00"),
+  //       y: 200000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T21:29:00"),
+  //       y: 300000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T22:29:00"),
+  //       y: 500000,
+  //     },
+  //     {
+  //       x: new Date("2023-06-06T23:29:00"),
+  //       y: 9554.84,
+  //     },
+  //   ];
+
+  //   console.log(test, "test");
+
   const configPrice = {
     yAxis: [
       {
@@ -17,89 +95,95 @@ const SmallChart = ({ color }) => {
         // offset: 20,
 
         labels: {
-          formatter: function () {
-            const number = this.value;
-            if (number >= 1000) {
-              // Convert to "k" form
-              return number / 1000 + "k";
-            }
-            return number;
-          },
+          //   formatter: function () {
+          //     const number = this.value;
+          //     if (number >= 1000) {
+          //       // Convert to "k" form
+          //       return number / 1000 + "k";
+          //     }
+          //     return number;
+          //   },
           //   x: -15,
           // y: -50,
           style: {
-            color: "#fff",
+            color: '#fff',
             // position: "absolute",
-            fontSize: "10px",
-          },
+            fontSize: '10px'
+          }
           //   align: "right",
-        },
-      },
+        }
+      }
     ],
     tooltip: {
       shared: true,
       formatter: function () {
         return (
           numberFormat.format(this.y, 0) +
-          "</b><br/>" +
-          moment(this.x).format("MMMM Do YYYY, h:mm")
+          '</b><br/>' +
+          moment(this.x).format('MMMM Do YYYY, h:mm')
         );
-      },
+      }
     },
     plotOptions: {
       series: {
         showInNavigator: true,
-        gapSize: 0,
-      },
+        gapSize: 0
+      }
     },
 
     chart: {
-      height: 300,
+      height: 300
     },
 
     credits: {
-      enabled: false,
+      enabled: false
     },
 
     legend: {
-      enabled: true,
+      enabled: true
     },
     xAxis: {
-      type: "date",
+      type: 'date',
       labels: {
-        style: {
-          color: "#fff",
-          position: "absolute",
-          fontSize: "10px",
+        formatter: function () {
+          return moment(this.value).format('DD MMM HH ss');
         },
+        style: {
+          color: '#fff',
+          position: 'absolute',
+          fontSize: '10px'
+        }
       },
+      //   dateFormat: "%Y-%m-%d %H:%M:%S",
+
+      dateGroupingInterval: 1
     },
     rangeSelector: {
-      enabled: false,
+      enabled: false
     },
     series: [
       {
-        name: "Price",
-        type: "areaspline",
+        name: 'Price',
+        type: 'areaspline',
         color: color, // Specify your desired color here
 
-        data: [2, 3, 5, 2, 7, 2, 7, 3, 5, 2, 7, 2],
+        data: data,
 
         tooltip: {
-          valueDecimals: 2,
-        },
-      },
+          valueDecimals: 2
+        }
+      }
     ],
 
     navigator: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
 
   return (
     <div className={`smallChart`}>
       <HighchartsReact
-        constructorType={"stockChart"}
+        constructorType={'stockChart'}
         highcharts={Highcharts}
         options={configPrice}
       />

@@ -1,0 +1,18 @@
+@use "../../../master.scss";
+
+.sub-parent {
+    background: master.$dark-color;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 20px;
+    .sub-content {
+        margin-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        justify-content: center;
+    }
+}

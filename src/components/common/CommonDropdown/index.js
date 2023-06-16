@@ -1,14 +1,14 @@
-import { Dropdown } from "antd";
-import React from "react";
-import "./styles.scss";
+import { Dropdown } from 'antd';
+import React from 'react';
+import './styles.scss';
 
 const CommonDropdown = ({ children, items }) => {
   return (
     <Dropdown
       menu={{
-        items,
+        items
       }}
-      trigger={["click"]}
+      trigger={['click']}
     >
       {children}
     </Dropdown>

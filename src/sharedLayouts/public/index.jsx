@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Header, Footer, SideBar, Layout } from "../../components";
+import React, { useState } from 'react';
+import { Header, Footer, SideBar, Layout } from '../../components';
 
 function PublicSharedLayout({ children }) {
   return (

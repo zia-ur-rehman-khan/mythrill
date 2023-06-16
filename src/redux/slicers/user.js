@@ -1,28 +1,34 @@
 // @flow
-import _ from "lodash";
-import { createSlice } from "@reduxjs/toolkit";
-import Immutable from "seamless-immutable";
-import { cloneDeepItem } from "../../services/utils";
+import _ from 'lodash';
+import { createSlice } from '@reduxjs/toolkit';
+import { cloneDeepItem } from '../../services/utils';
 
 const UserReducer = createSlice({
-  name: "user",
-  initialState: Immutable({
+  name: 'user',
+  initialState: {
     data: {},
     profileSections: [],
     isAuthenticated: false,
     isError: null,
-  }),
+    deviceToken: '',
+    text: 'true'
+  },
   reducers: {
     // USER LOGIN
     userLoginRequest(state, action) {
+      console.log(action, 'userLoginRequest');
+    },
+    userLoginSuccess(state, action) {
+      console.log(action, 'userLoginSuccess');
       state.isAuthenticated = true;
+      state.data = action.payload;
     },
     // REFRESH TOKEN
     refreshToken(state, action) {
       let newData = cloneDeepItem(state.data);
       newData.access_token = action.payload.access_token;
       newData.refresh_token = action.payload.refresh_token;
-      Immutable.merge(state, { data: newData });
+      state.data = { ...state.data, ...newData };
     },
 
     // SET AUTH ERROR
@@ -45,7 +51,10 @@ const UserReducer = createSlice({
     userSignOutSuccess(state, action) {
       state.isAuthenticated = false;
     },
-  },
+    deviceNotificationTokenSuccess(state, action) {
+      state.deviceToken = action.payload;
+    }
+  }
 });
 
 export const {
@@ -55,6 +64,8 @@ export const {
   removeAuthError,
   userSignOutRequest,
   userSignOutSuccess,
+  deviceNotificationTokenSuccess,
+  userLoginSuccess
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

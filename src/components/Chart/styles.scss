@@ -1,4 +1,27 @@
 .bigchart {
+    position: relative;
+
+    .extra-detailes {
+        z-index: 1;
+        position: absolute;
+        right: 0;
+        justify-content: flex-end;
+        width: 50%;
+        padding-top: 4px;
+        @media (max-width: 990px) {
+            padding-top: 10px;
+        }
+
+        .active {
+            transition: background 0.3s;
+            background: rgba(118, 101, 193, 0.1);
+            border-radius: 6px;
+            padding: 0 5px 0 5px;
+            svg > path {
+                fill: #7665c1;
+            }
+        }
+    }
     .highcharts-background {
         fill: transparent;
     }
@@ -22,6 +45,14 @@
     .highcharts-navigator {
         border-bottom: 1px solid black; /* Specify the desired border properties for the bottom side */
     }
+    .highcharts-button-disabled {
+        .highcharts-button-box {
+            fill: none;
+        }
+        text {
+            fill: #575353 !important;
+        }
+    }
     .highcharts-button-normal {
         .highcharts-button-box {
             fill: none;
@@ -30,8 +61,7 @@
             fill: #fff !important;
         }
     }
-
-    .highcharts-button-Hover {
+    .highcharts-button-hover {
         .highcharts-button-box {
             fill: #7665c1;
             opacity: 0.1;
@@ -53,4 +83,9 @@
     .highcharts-input-group {
         display: none;
     }
+}
+.chart-above-detailes {
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-between;
 }
