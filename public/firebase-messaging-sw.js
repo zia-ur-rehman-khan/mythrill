@@ -1,29 +1,29 @@
 importScripts(
-  "https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"
+  'https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js'
 );
 importScripts(
-  "https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js"
+  'https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js'
 );
 
 firebase.initializeApp({
-  apiKey: "__REACT_APP_API_KEY__",
-  authDomain: "__REACT_APP_AUTH_DOMAIN__",
-  databaseURL: "__REACT_APP_DATABASE_URL__",
-  projectId: "__REACT_APP_PROJECT_ID__",
-  storageBucket: "__REACT_APP_STORAGE_BUCKET__",
-  messagingSenderId: "__REACT_APP_MESSAGING_SENDER_ID__",
-  appId: "__REACT_APP_ID__",
-  measurementId: "__REACT_APP_MEASUREMENT_ID__",
+  apiKey: '__REACT_APP_API_KEY__',
+  authDomain: '__REACT_APP_AUTH_DOMAIN__',
+  databaseURL: '__REACT_APP_DATABASE_URL__',
+  projectId: '__REACT_APP_PROJECT_ID__',
+  storageBucket: '__REACT_APP_STORAGE_BUCKET__',
+  messagingSenderId: '__REACT_APP_MESSAGING_SENDER_ID__',
+  appId: '__REACT_APP_ID__',
+  measurementId: '__REACT_APP_MEASUREMENT_ID__'
 });
 
-if ("serviceWorker" in navigator) {
+if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register("../firebase-messaging-sw.js")
+    .register('../firebase-messaging-sw.js')
     .then(function (registration) {
-      console.log("Registration successful, scope is:", registration.scope);
+      console.log('Registration successful, scope is:', registration.scope);
     })
     .catch(function (err) {
-      console.log("Service worker registration failed, error:", err);
+      console.log('Service worker registration failed, error:', err);
     });
 }
 
@@ -58,12 +58,12 @@ if ("serviceWorker" in navigator) {
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
-  console.log("Received background notification ", messaging, payload);
+  console.log('Received background notification ', messaging, payload);
 
   const notificationOptions = {
     body: payload.data?.body || payload.notification?.body,
     tag: payload.data?.title || payload.notification?.body,
-    data: payload,
+    data: payload
   };
 
   self.registration.showNotification(

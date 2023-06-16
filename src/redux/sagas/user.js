@@ -1,18 +1,18 @@
-import { take, put, call, fork } from "redux-saga/effects";
-import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from "../../constants";
+import { take, put, call, fork } from 'redux-saga/effects';
+import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from '../../constants';
 import {
   callRequest,
   CONTACT_US,
-  LOGIN_REQUEST,
-} from "../../config/webService";
-import { toastAlert } from "../../services/utils";
-import { userLoginRequest, userLoginSuccess } from "../slicers/user";
+  LOGIN_REQUEST
+} from '../../config/webService';
+import { toastAlert } from '../../services/utils';
+import { userLoginRequest, userLoginSuccess } from '../slicers/user';
 
 function* userLogin() {
   while (true) {
     // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
     const { payload } = yield take(userLoginRequest.type);
-    console.log("contactUs", payload);
+    console.log('contactUs', payload);
     // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
     const { payloadData, responseCallback } = payload;
     try {
@@ -20,8 +20,8 @@ function* userLogin() {
         callRequest,
         LOGIN_REQUEST,
         payloadData,
-        "",
-        "",
+        '',
+        '',
         {}
       );
 

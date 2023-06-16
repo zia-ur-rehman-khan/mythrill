@@ -1,20 +1,20 @@
-import React, { useMemo } from "react";
-import Chart from "../../../../components/Chart";
-import { CommonTextField } from "../../../../components";
-import { Col, Row, Space } from "antd";
-import { AppStyles, Colors, Images } from "../../../../theme";
-import { css } from "aphrodite";
-import { array } from "prop-types";
-import Suggestion from "./suggestion";
-import Update from "./update";
-import GraphRender from "../../../../components/Meter";
-import styles from "../../../../theme/AppStyles";
-import { useNavigate, useParams } from "react-router-dom";
-import { HOME_ROUTE } from "../../../../constants";
-import { collection, db, getDocs, query, where } from "../../../../firebase";
-import { stockListManipulator } from "../../../../manipulators/stocksName";
-import { useSelector } from "react-redux";
-import moment from "moment";
+import React, { useMemo } from 'react';
+import Chart from '../../../../components/Chart';
+import { CommonTextField } from '../../../../components';
+import { Col, Row, Space } from 'antd';
+import { AppStyles, Colors, Images } from '../../../../theme';
+import { css } from 'aphrodite';
+import { array } from 'prop-types';
+import Suggestion from './suggestion';
+import Update from './update';
+import GraphRender from '../../../../components/Meter';
+import styles from '../../../../theme/AppStyles';
+import { useNavigate, useParams } from 'react-router-dom';
+import { HOME_ROUTE } from '../../../../constants';
+import { collection, db, getDocs, query, where } from '../../../../firebase';
+import { stockListManipulator } from '../../../../manipulators/stocksName';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const StockDetailes = () => {
   const { id } = useParams();
@@ -50,7 +50,7 @@ const StockDetailes = () => {
     selectedStockData?.length > 0
       ? selectedStockData?.map((item) => ({
           x: moment(item?.date).valueOf(),
-          y: item?.currentPrice,
+          y: item?.currentPrice
         }))
       : [];
 

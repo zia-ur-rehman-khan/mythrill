@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { Modal } from "antd";
-import "./styles.scss";
+import { Modal } from 'antd';
+import './styles.scss';
 
 const CommonModal = ({
   setIsModalVisible,
@@ -9,7 +9,7 @@ const CommonModal = ({
   children,
   width,
   title,
-  crossIcon,
+  crossIcon
 }) => {
   const handleOk = () => {
     setIsModalVisible(false);

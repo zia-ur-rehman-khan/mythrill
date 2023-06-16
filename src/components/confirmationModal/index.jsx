@@ -1,11 +1,11 @@
-import React from "react";
-import { Modal } from "antd";
-import "./styles.scss";
+import React from 'react';
+import { Modal } from 'antd';
+import './styles.scss';
 const ConfirmationModal = ({
   handleClose,
   onSubmit,
-  title = "",
-  description = "",
+  title = '',
+  description = ''
 }) => {
   const handleSubmit = () => {
     onSubmit();
@@ -18,7 +18,8 @@ const ConfirmationModal = ({
       centered
       onCancel={handleClose}
       footer={null}
-      className="modal">
+      className="modal"
+    >
       <div className="modal-wrapper">
         <div className="modal-body">
           <div className="modal-confirmation">{description}</div>

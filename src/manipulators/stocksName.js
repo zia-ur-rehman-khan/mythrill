@@ -1,8 +1,8 @@
-import _ from "lodash";
-import { Images } from "../theme";
-import moment from "moment";
+import _ from 'lodash';
+import { Images } from '../theme';
+import moment from 'moment';
 
-const FORMAT = "YYYY-MM-DDTHH:mm:ss";
+const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
 export function singleStockNameManipulator(stock = {}) {
   try {
@@ -10,29 +10,29 @@ export function singleStockNameManipulator(stock = {}) {
 
     const payload = {};
 
-    payload.title = stock?.fullName ?? "";
-    payload.type = "Cryptocurrency";
-    payload.slug = stock?.name_id ?? "";
-    payload.nameId = stock?.name_id ?? "";
-    payload.id = stock?.id ?? "";
+    payload.title = stock?.fullName ?? '';
+    payload.type = 'Cryptocurrency';
+    payload.slug = stock?.name_id ?? '';
+    payload.nameId = stock?.name_id ?? '';
+    payload.id = stock?.id ?? '';
     payload.amount = `$${stock?.current_price}`;
     payload.stockUpdate = `${stock?.change_in_percent}%`;
-    payload.overallTrend = stock?.overall_trend ?? "";
+    payload.overallTrend = stock?.overall_trend ?? '';
     payload.src = Images.bitCoin;
     payload.changeInPrice = stock?.change_in_price ?? 0;
     payload.changeInPercent = stock?.change_in_percent ?? 0;
     payload.prevPrice = stock?.prev_price ?? 0;
     payload.color =
       stock?.change_in_percent === 0
-        ? "yellow"
+        ? 'yellow'
         : stock?.change_in_percent > 0
-        ? "green"
-        : "red";
+        ? 'green'
+        : 'red';
     payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
 
     return payload;
   } catch (error) {
-    console.error("singleStockNameManipulator error --->>> ", error);
+    console.error('singleStockNameManipulator error --->>> ', error);
   }
 }
 
@@ -46,26 +46,26 @@ export function stocksNameManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
 
-      payload.title = stock?.name ?? "";
-      payload.type = "Cryptocurrency";
-      payload.slug = stock?.name_id ?? "";
-      payload.id = stock?.id ?? "";
+      payload.title = stock?.name ?? '';
+      payload.type = 'Cryptocurrency';
+      payload.slug = stock?.name_id ?? '';
+      payload.id = stock?.id ?? '';
       payload.amount = `$${stock?.current_price}`;
       payload.stockUpdate = `${stock?.change_in_percent}%`;
       payload.src = Images.bitCoin;
       payload.color =
         stock?.change_in_percent === 0
-          ? "yellow"
+          ? 'yellow'
           : stock?.change_in_percent > 0
-          ? "green"
-          : "red";
+          ? 'green'
+          : 'red';
 
       payload && stockList.push(payload);
     }
 
     return stockList;
   } catch (error) {
-    console.error("stocksNameManipulator error --->>>> ", error);
+    console.error('stocksNameManipulator error --->>>> ', error);
     return [];
   }
 }
@@ -83,15 +83,15 @@ export function stockListManipulator(list = []) {
 
       payload.changeInPercent = stock?.change_in_percent ?? 0;
       payload.changeInPrice = stock?.change_in_price ?? 0;
-      payload.coin = stock?.coin ?? "";
+      payload.coin = stock?.coin ?? '';
       payload.currentPrice = stock?.current_price ?? 0;
       payload.date =
         moment(new Date(stock?.date_time?.seconds * 1000)).format(FORMAT) ??
         moment().format(FORMAT);
-      payload.fullName = stock?.fullName ?? "";
+      payload.fullName = stock?.fullName ?? '';
       payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
-      payload.nameId = stock?.name_id ?? "";
-      payload.overallTrend = stock?.overall_trend ?? "";
+      payload.nameId = stock?.name_id ?? '';
+      payload.overallTrend = stock?.overall_trend ?? '';
       payload.prevPrice = stock?.prev_price ?? 0;
 
       stockList.push(payload);
@@ -99,7 +99,7 @@ export function stockListManipulator(list = []) {
 
     return stockList;
   } catch (error) {
-    console.error("stockListManipulator error --->>>> ", error);
+    console.error('stockListManipulator error --->>>> ', error);
     return [];
   }
 }

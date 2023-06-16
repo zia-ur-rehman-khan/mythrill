@@ -1,22 +1,23 @@
-import React from "react";
-import "./styles.scss";
+import React from 'react';
+import './styles.scss';
 const SecDetail = ({
-  title = "",
-  description = "",
+  title = '',
+  description = '',
   isScndTitle = false,
-  scndTitle = "",
+  scndTitle = '',
   isDescription = false,
-  isLeft = false,
+  isLeft = false
 }) => {
-  const splitTitle = title.includes("/b") ? title.split("/b") : title;
-  const splitSecTitle = scndTitle.includes("/b")
-    ? scndTitle.split("/b")
+  const splitTitle = title.includes('/b') ? title.split('/b') : title;
+  const splitSecTitle = scndTitle.includes('/b')
+    ? scndTitle.split('/b')
     : scndTitle;
   return (
     <section
       className="title-wrapper"
-      style={{ textAlign: isLeft ? "left" : "center" }}>
-      {title.includes("/b") ? (
+      style={{ textAlign: isLeft ? 'left' : 'center' }}
+    >
+      {title.includes('/b') ? (
         <h2 className="sec-title" data-aos="fade-up">
           {splitTitle[0]}
           <span>{splitTitle[1]}</span>
@@ -29,7 +30,7 @@ const SecDetail = ({
       )}
       {isScndTitle && (
         <>
-          {scndTitle.includes("/b") ? (
+          {scndTitle.includes('/b') ? (
             <h2 className="sec-title" data-aos="fade-up">
               {splitSecTitle[0]}
               <span>{splitSecTitle[1]}</span>

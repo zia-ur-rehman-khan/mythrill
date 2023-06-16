@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import Highcharts from "highcharts/highstock";
-import HighchartsReact from "highcharts-react-official";
-import priceData from "../../../assets/json/btcdata.json";
-import moment from "moment";
-import "./styles.scss";
-import { css } from "aphrodite";
-import { AppStyles } from "../../../theme";
+import React, { Component } from 'react';
+import Highcharts from 'highcharts/highstock';
+import HighchartsReact from 'highcharts-react-official';
+import priceData from '../../../assets/json/btcdata.json';
+import moment from 'moment';
+import './styles.scss';
+import { css } from 'aphrodite';
+import { AppStyles } from '../../../theme';
 
 const SmallChart = ({ color, data }) => {
-  const options = { style: "currency", currency: "USD" };
-  const numberFormat = new Intl.NumberFormat("en-US", options);
+  const options = { style: 'currency', currency: 'USD' };
+  const numberFormat = new Intl.NumberFormat('en-US', options);
 
   //   const test = [
   //     {
@@ -106,84 +106,84 @@ const SmallChart = ({ color, data }) => {
           //   x: -15,
           // y: -50,
           style: {
-            color: "#fff",
+            color: '#fff',
             // position: "absolute",
-            fontSize: "10px",
-          },
+            fontSize: '10px'
+          }
           //   align: "right",
-        },
-      },
+        }
+      }
     ],
     tooltip: {
       shared: true,
       formatter: function () {
         return (
           numberFormat.format(this.y, 0) +
-          "</b><br/>" +
-          moment(this.x).format("MMMM Do YYYY, h:mm")
+          '</b><br/>' +
+          moment(this.x).format('MMMM Do YYYY, h:mm')
         );
-      },
+      }
     },
     plotOptions: {
       series: {
         showInNavigator: true,
-        gapSize: 0,
-      },
+        gapSize: 0
+      }
     },
 
     chart: {
-      height: 300,
+      height: 300
     },
 
     credits: {
-      enabled: false,
+      enabled: false
     },
 
     legend: {
-      enabled: true,
+      enabled: true
     },
     xAxis: {
-      type: "date",
+      type: 'date',
       labels: {
         formatter: function () {
-          return moment(this.value).format("DD MMM HH ss");
+          return moment(this.value).format('DD MMM HH ss');
         },
         style: {
-          color: "#fff",
-          position: "absolute",
-          fontSize: "10px",
-        },
+          color: '#fff',
+          position: 'absolute',
+          fontSize: '10px'
+        }
       },
       //   dateFormat: "%Y-%m-%d %H:%M:%S",
 
-      dateGroupingInterval: 1,
+      dateGroupingInterval: 1
     },
     rangeSelector: {
-      enabled: false,
+      enabled: false
     },
     series: [
       {
-        name: "Price",
-        type: "areaspline",
+        name: 'Price',
+        type: 'areaspline',
         color: color, // Specify your desired color here
 
         data: data,
 
         tooltip: {
-          valueDecimals: 2,
-        },
-      },
+          valueDecimals: 2
+        }
+      }
     ],
 
     navigator: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
 
   return (
     <div className={`smallChart`}>
       <HighchartsReact
-        constructorType={"stockChart"}
+        constructorType={'stockChart'}
         highcharts={Highcharts}
         options={configPrice}
       />

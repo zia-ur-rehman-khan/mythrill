@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import "./styles.scss";
-import { AlignLeftOutlined } from "@ant-design/icons";
-import { AppStyles, Images } from "../../theme";
-import { Divider, Drawer, List, Space } from "antd";
-import CommonTextField from "../common/TextField";
-import CommonButton from "../common/CommonButton";
-import { MENU_LIST } from "../../constants";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import './styles.scss';
+import { AlignLeftOutlined } from '@ant-design/icons';
+import { AppStyles, Images } from '../../theme';
+import { Divider, Drawer, List, Space } from 'antd';
+import CommonTextField from '../common/TextField';
+import CommonButton from '../common/CommonButton';
+import { MENU_LIST } from '../../constants';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faBars, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-import { css } from "aphrodite";
-import { CommonDropdown } from "../common";
-import DataHandler from "../../services/DataHandler";
-import { userLoginSuccess } from "../../redux/slicers/user";
-import { userSignOutSuccess } from "../../redux/slicers/user";
+import { css } from 'aphrodite';
+import { CommonDropdown } from '../common';
+import DataHandler from '../../services/DataHandler';
+import { userLoginSuccess } from '../../redux/slicers/user';
+import { userSignOutSuccess } from '../../redux/slicers/user';
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
@@ -32,25 +32,25 @@ const SideBar = ({ isDrawer }) => {
   };
   const items = [
     {
-      label: "profile setting",
-      key: "0",
+      label: 'profile setting',
+      key: '0'
     },
     {
-      label: "sign out",
-      key: "1",
-    },
+      label: 'sign out',
+      key: '1'
+    }
   ];
 
   return (
     <>
-      <div className={isDrawer ? isDrawer : "main-sideBar"}>
+      <div className={isDrawer ? isDrawer : 'main-sideBar'}>
         {!isDrawer && (
           <div className="logo">
             <img
               src={Images.logo}
-              width={"132px"}
+              width={'132px'}
               className={css(AppStyles.pointer)}
-              onClick={() => changeRoute("/")}
+              onClick={() => changeRoute('/')}
             />
           </div>
         )}
@@ -59,13 +59,13 @@ const SideBar = ({ isDrawer }) => {
             {MENU_LIST?.map((t, i) => (
               <div
                 className={`content-list ${
-                  location.pathname === t.route ? "active" : ""
+                  location.pathname === t.route ? 'active' : ''
                 }`}
                 key={i}
                 size={20}
                 onClick={() => changeRoute(t?.route)}
               >
-                <img src={t.src} width={"15px"} height={"15px"} />
+                <img src={t.src} width={'15px'} height={'15px'} />
                 <CommonTextField text={t.title} />
               </div>
             ))}
@@ -73,18 +73,18 @@ const SideBar = ({ isDrawer }) => {
           </Space>
 
           <Space className="profile" align="center" size={10}>
-            <img src={Images.profile} width={"33.75px"} height={"33.75px"} />
+            <img src={Images.profile} width={'33.75px'} height={'33.75px'} />
             <Space direction="vertical" size={2} align="baseline">
               <CommonTextField
-                text={"Andy Warhol"}
-                fontSize={"10.5px"}
-                lineHeight={"10px"}
+                text={'Andy Warhol'}
+                fontSize={'10.5px'}
+                lineHeight={'10px'}
                 className={`${css(AppStyles.weight7)}`}
               />
               <CommonTextField
-                text={"andywarhol@mail.com"}
-                fontSize={"9px"}
-                lineHeight={"10px"}
+                text={'andywarhol@mail.com'}
+                fontSize={'9px'}
+                lineHeight={'10px'}
               />
             </Space>
           </Space>
@@ -92,9 +92,9 @@ const SideBar = ({ isDrawer }) => {
           <div className="logout">
             <CommonButton
               onClick={() => {
-                logout("/login");
+                logout('/login');
               }}
-              text={"Logout"}
+              text={'Logout'}
             />
           </div>
         </Space>

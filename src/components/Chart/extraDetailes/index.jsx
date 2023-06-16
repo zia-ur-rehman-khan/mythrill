@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { AppStyles, Images } from "../../../theme";
-import { css } from "aphrodite";
+import React, { useState } from 'react';
+import { AppStyles, Images } from '../../../theme';
+import { css } from 'aphrodite';
 import {
   CommonButton,
   CommonHeading,
   CommonModal,
-  CommonTextField,
-} from "../../common";
-import { Form, Grid, Radio, Space } from "antd";
-import { forGreen, forRed, forYellow } from "../../../constants";
+  CommonTextField
+} from '../../common';
+import { Form, Grid, Radio, Space } from 'antd';
+import { forGreen, forRed, forYellow } from '../../../constants';
 const { useBreakpoint } = Grid;
 
 const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
   const [isModal, setIsModal] = useState(false);
-  const [frequency, setFrequency] = useState("Every Day");
+  const [frequency, setFrequency] = useState('Every Day');
 
   const screens = useBreakpoint();
 
   const radio = [
-    "Every Minutes",
-    "Every 30 Minutes",
-    "Every Hour",
-    "Every Day",
-    "Every Week",
-    "Every Month",
+    'Every Minutes',
+    'Every 30 Minutes',
+    'Every Hour',
+    'Every Day',
+    'Every Week',
+    'Every Month'
   ];
 
   const onFinish = (values) => {
@@ -31,7 +31,7 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
     setFrequency(values?.frequency);
   };
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -46,17 +46,17 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
           <img src={Images.rightArrow} />
         </Space>
         <Space className="hide-web">
-          <img src={Images[forGreen(color)]} width={"30px"} height={"30px"} />
-          <img src={Images[forYellow(color)]} width={"30px"} height={"30px"} />
-          <img src={Images[forRed(color)]} width={"30px"} height={"30px"} />
+          <img src={Images[forGreen(color)]} width={'30px'} height={'30px'} />
+          <img src={Images[forYellow(color)]} width={'30px'} height={'30px'} />
+          <img src={Images[forRed(color)]} width={'30px'} height={'30px'} />
         </Space>
         <Space>
           <Space
             onClick={() => {
-              chartChange("areaspline");
+              chartChange('areaspline');
             }}
             className={`${css(AppStyles.pointer)} ${
-              chartType === "areaspline" && "active"
+              chartType === 'areaspline' && 'active'
             }`}
           >
             <svg
@@ -77,10 +77,10 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
           </Space>
           <Space
             onClick={() => {
-              chartChange("candlestick");
+              chartChange('candlestick');
             }}
             className={` ${css(AppStyles.pointer)} ${
-              chartType === "candlestick" && "active"
+              chartType === 'candlestick' && 'active'
             }`}
           >
             <svg
@@ -101,11 +101,11 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
         </Space>
       </Space>
       <CommonModal
-        width={"400px"}
+        width={'400px'}
         title={
           <CommonHeading
-            fontSize={"24px"}
-            text={"Signal Frequency Alert"}
+            fontSize={'24px'}
+            text={'Signal Frequency Alert'}
             textAlign="center"
             className={css(AppStyles.mBottom10)}
           />
@@ -120,8 +120,8 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            name={"frequency"}
-            rules={[{ required: true, message: "Please input your username!" }]}
+            name={'frequency'}
+            rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <Radio.Group className={css(AppStyles.w100)}>
               {radio.map((t, index) => (
@@ -129,7 +129,7 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
                   className={css([
                     AppStyles.w100,
                     AppStyles.spaceBetween,
-                    AppStyles.mBottom20,
+                    AppStyles.mBottom20
                   ])}
                 >
                   <CommonTextField text={t} />
@@ -138,7 +138,7 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
               ))}
             </Radio.Group>
           </Form.Item>
-          <CommonButton text={"Save"} htmlType="submit" />
+          <CommonButton text={'Save'} htmlType="submit" />
         </Form>
       </CommonModal>
     </>

@@ -1,19 +1,19 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import "./styles.scss";
-import { Col, Row, Space } from "antd";
-import { CommonTextField, SmallChart } from "../../../../components";
-import { css } from "aphrodite";
-import { AppStyles, Colors } from "../../../../theme";
-import { Images } from "../../../../theme";
-import { useSelector } from "react-redux";
-import moment from "moment";
+import React from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import './styles.scss';
+import { Col, Row, Space } from 'antd';
+import { CommonTextField, SmallChart } from '../../../../components';
+import { css } from 'aphrodite';
+import { AppStyles, Colors } from '../../../../theme';
+import { Images } from '../../../../theme';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 import {
   forGreen,
   forRed,
   forYellow,
-  signalClass,
-} from "../../../../constants";
+  signalClass
+} from '../../../../constants';
 
 const Stock = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Stock = () => {
           const stockDetailData = stocksData[stock?.nameId];
           const data = stockDetailData?.map((item) => ({
             x: moment(item?.date).valueOf(),
-            y: item?.currentPrice,
+            y: item?.currentPrice
           }));
 
           return (
@@ -55,48 +55,48 @@ const Stock = () => {
                   <Space size={10} wrap={true}>
                     <Space>
                       <CommonTextField text={stock?.title} fontWeight={600} />
-                      <img src={Images.upSign} width={"13px"} height={"12px"} />
+                      <img src={Images.upSign} width={'13px'} height={'12px'} />
                     </Space>
                     <Space>
                       <CommonTextField
-                        text={"Fear & Greed index:"}
-                        fontSize={"8px"}
+                        text={'Fear & Greed index:'}
+                        fontSize={'8px'}
                         opacity={0.5}
                       />
                       <CommonTextField
                         text={stock?.fearGreedIndex}
                         color={Colors.green}
-                        fontSize={"8px"}
+                        fontSize={'8px'}
                       />
                     </Space>
                     <Space>
                       <CommonTextField
-                        text={"Overall Trend:"}
-                        fontSize={"8px"}
+                        text={'Overall Trend:'}
+                        fontSize={'8px'}
                         opacity={0.5}
                       />
                       <CommonTextField
                         text={stock?.overallTrend}
                         color={Colors.green}
-                        fontSize={"8px"}
+                        fontSize={'8px'}
                       />
                     </Space>
                   </Space>
                   <Space size={10} wrap={true}>
-                    <img src={stock?.src} width={"36px"} height={"36px"} />
+                    <img src={stock?.src} width={'36px'} height={'36px'} />
                     <Space size={3} direction="vertical">
-                      <CommonTextField text={"Last"} opacity={0.5} />
+                      <CommonTextField text={'Last'} opacity={0.5} />
                       <CommonTextField text={stock?.prevPrice} opacity={0.5} />
                     </Space>
                     <Space size={3} direction="vertical">
-                      <CommonTextField text={"Chg"} />
+                      <CommonTextField text={'Chg'} />
                       <CommonTextField
                         text={stock?.changeInPrice}
                         color={Colors.green}
                       />
                     </Space>
                     <Space size={3} direction="vertical">
-                      <CommonTextField text={"Chg%"} />
+                      <CommonTextField text={'Chg%'} />
                       <CommonTextField
                         text={stock?.changeInPercent}
                         color={Colors.green}
@@ -105,18 +105,18 @@ const Stock = () => {
                     <Space>
                       <img
                         src={Images[forGreen(stock?.color)]}
-                        width={"21px"}
-                        height={"21px"}
+                        width={'21px'}
+                        height={'21px'}
                       />
                       <img
                         src={Images[forYellow(stock?.color)]}
-                        width={"21px"}
-                        height={"21px"}
+                        width={'21px'}
+                        height={'21px'}
                       />
                       <img
                         src={Images[forRed(stock?.color)]}
-                        width={"21px"}
-                        height={"21px"}
+                        width={'21px'}
+                        height={'21px'}
                       />
                     </Space>
                   </Space>
