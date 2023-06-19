@@ -39,9 +39,9 @@ const manipulateResponse = (response) => {
 };
 const ApiHandler = async (request, url, data, headers, baseUrl) => {
   if (API_LOG) {
-    console.log('url', url);
-    console.log('data', data);
-    console.log('headers', headers);
+    // console.log('url', url);
+    // console.log('data', data);
+    // console.log('headers', headers);
   }
   try {
     const response = await axios({
@@ -53,12 +53,12 @@ const ApiHandler = async (request, url, data, headers, baseUrl) => {
       headers: headers
     });
     if (API_LOG) {
-      console.log('response', response);
+      // console.log('response', response);
     }
     return manipulateResponse(response);
   } catch ({ response }) {
     if (API_LOG) {
-      console.log('response', response);
+      // console.log('response', response);
     }
     if (response.status === 404) {
       toastAlert(ERROR_API_NOT_FOUND, ALERT_TYPES.error);

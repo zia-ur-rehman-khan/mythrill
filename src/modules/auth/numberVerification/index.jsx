@@ -15,10 +15,12 @@ import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import { useNavigate } from 'react-router-dom';
 import { validatorField } from '../../../constants';
+import { useSelector } from 'react-redux';
 
 const NumberVerification = () => {
   const [loading, setLoading] = useState(false);
-
+  const hash = useSelector((state) => state?.user?.hash);
+  console.log('🚀 ~ file: index.jsx:23 ~ NumberVerification ~ hash:', hash);
   const navigate = useNavigate();
 
   const changeRoute = (route) => {

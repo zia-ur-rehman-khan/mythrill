@@ -50,6 +50,12 @@ export const LOGIN_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const REJISTER_REQUEST = {
+  route: 'users/signup',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
 export const GET_STOCK_NAMES = {
   route: '/stock/data/name',
   access_token_required: false,

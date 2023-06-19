@@ -64,7 +64,6 @@ const Home = () => {
       where('name_id', 'in', STOCK_NAME_LIST)
     );
     console.log('stocksListQuery', stocksListQuery);
-    debugger;
     const unSubscribe = onSnapshot(
       stocksListQuery,
       (querySnapshot) => {

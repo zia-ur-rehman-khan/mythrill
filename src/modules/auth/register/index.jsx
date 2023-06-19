@@ -25,15 +25,22 @@ import {
 } from '../../../services/utils';
 import {
   EMAIL_RULE,
+  NUMBER_VERIFICATION_ROUTE,
   handlePassworMatch,
   handlePasswordConfirm,
   passwordValidation,
   phoneValidation,
   validatorField
 } from '../../../constants';
+import {
+  userLoginRequest,
+  userRegisterRequest
+} from '../../../redux/slicers/user';
+import { useDispatch } from 'react-redux';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -42,11 +49,28 @@ const Register = () => {
   };
 
   const onFinish = (values) => {
-    setLoading(true);
+    const { fullName, phoneNumber, password, email } = values;
 
-    console.log('Success:', values);
+    const payloadData = {
+      name: fullName,
+      email: email,
+      phone: '+' + phoneNumber,
+      password: password
+    };
 
-    changeRoute('/number');
+    dispatch(
+      userRegisterRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            setLoading(true);
+            changeRoute(NUMBER_VERIFICATION_ROUTE);
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -73,7 +97,7 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Full Name'} opacity={'0.5'} />
             <CommonInputField
-              name="full name"
+              name="fullName"
               className={'auth'}
               placeholder={'John Smith'}
               rules={[
@@ -98,7 +122,7 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
             <CommonPhoneInput
-              name={'phone number'}
+              name={'phoneNumber'}
               rules={[
                 {
                   validator: (_, value) => {
@@ -125,7 +149,7 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Confirm Password'} opacity={'0.5'} />
             <CommonPasswordInput
-              name={'new password'}
+              name={'newPassword'}
               placeholder={'**************'}
               rules={[
                 {

@@ -9,7 +9,6 @@ function AuthSharedLayout({ children }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const sss = useSelector(({ user }) => user?.text);
-  const token = useSelector(({ user }) => user?.deviceToken);
   const isAuthenticated = useSelector(({ user }) => user?.isAuthenticated);
   const user = useSelector(({ user }) => user);
 
@@ -17,7 +16,7 @@ function AuthSharedLayout({ children }) {
     if (isAuthenticated) {
       navigate(HOME_ROUTE);
     }
-  }, [isAuthenticated, token]);
+  }, [isAuthenticated]);
 
   return (
     <section className="auth-wrapper">

@@ -15,6 +15,7 @@ import { css } from 'aphrodite';
 import AuthLayout from '../../../components/AuthLayout';
 import { useNavigate } from 'react-router-dom';
 import {
+  HOME_ROUTE,
   passwordValidation,
   phoneValidation,
   validatorField
@@ -35,11 +36,11 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const deviceToken = useSelector((state) => state?.user?.deviceToken);
 
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const changeRoute = (route) => {
-    Navigate(route);
+    navigate(route);
   };
 
   const onFinish = (values) => {
@@ -57,6 +58,7 @@ const Login = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
+            setLoading(true);
             console.log(res.status, 'res');
           } else {
             console.log(res.errors, 'error');

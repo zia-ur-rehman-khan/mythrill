@@ -10,7 +10,8 @@ const UserReducer = createSlice({
     profileSections: [],
     isAuthenticated: false,
     isError: null,
-    deviceToken: ''
+    deviceToken: '',
+    hash: ''
   },
   reducers: {
     // USER LOGIN
@@ -51,6 +52,10 @@ const UserReducer = createSlice({
     },
     deviceNotificationTokenSuccess(state, action) {
       state.deviceToken = action.payload;
+    },
+    userRegisterRequest(state, action) {},
+    userRegisterSuccess(state, action) {
+      state.hash = action.payload;
     }
   }
 });
@@ -63,7 +68,9 @@ export const {
   userSignOutRequest,
   userSignOutSuccess,
   deviceNotificationTokenSuccess,
-  userLoginSuccess
+  userLoginSuccess,
+  userRegisterRequest,
+  userRegisterSuccess
 } = UserReducer.actions;
 
 export default UserReducer.reducer;
