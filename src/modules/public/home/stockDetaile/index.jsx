@@ -47,7 +47,7 @@ const StockDetailes = () => {
   const manipulatedData =
     selectedStockData?.length > 0
       ? selectedStockData?.map((item) => ({
-          x: moment(item?.date).valueOf(),
+          x: Date.parse(item?.date),
           y: item?.currentPrice
         }))
       : [];

@@ -174,6 +174,7 @@ const Chart = ({ data, color }) => {
       enabled: true
     },
     xAxis: {
+      minTickInterval: 1,
       minRange: 1,
       type: 'datetime',
       labels: {
@@ -190,9 +191,7 @@ const Chart = ({ data, color }) => {
           // fontSize: "8px",
           color: '#fff',
           position: 'absolute'
-        },
-        allowOverlap: true,
-        enabled: true
+        }
       }
       // Display tick at every data point
       // min: Date.UTC(2022, 5, 6, 6, 29), // Specify the minimum date and time value in UTC
@@ -246,7 +245,7 @@ const Chart = ({ data, color }) => {
     },
     series: [
       {
-        name: 'Price',
+        name: 'Prices',
         type: chartType,
         color: color,
         upColor: color,
@@ -264,10 +263,16 @@ const Chart = ({ data, color }) => {
         type: chartType
       },
       xAxis: {
+        minTickInterval: 1,
+        minRange: 1,
+        type: 'datetime',
         labels: {
           // formatter: function () {
           //   return moment(this.value).format("DD MMM");
           // },
+          formatter: function () {
+            return moment(this.value).format('DD MMM');
+          },
           style: {
             color: '#fff', // Customize the color of the Navigator date text
             opacity: '1'

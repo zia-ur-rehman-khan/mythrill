@@ -34,7 +34,7 @@ const Stock = () => {
         stocksList?.map((stock) => {
           const stockDetailData = stocksData[stock?.nameId];
           const data = stockDetailData?.map((item) => ({
-            x: moment(item?.date).valueOf(),
+            x: Date.parse(item?.date),
             y: item?.currentPrice
           }));
 
