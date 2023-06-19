@@ -56,7 +56,8 @@ const UserReducer = createSlice({
     userRegisterRequest(state, action) {},
     userRegisterSuccess(state, action) {
       state.hash = action.payload;
-    }
+    },
+    NumberVerificationRequest(state, action) {}
   }
 });
 
@@ -70,7 +71,8 @@ export const {
   deviceNotificationTokenSuccess,
   userLoginSuccess,
   userRegisterRequest,
-  userRegisterSuccess
+  userRegisterSuccess,
+  NumberVerificationRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

@@ -44,6 +44,7 @@ const Login = () => {
   };
 
   const onFinish = (values) => {
+    setLoading(true);
     const { phoneNumber, password } = values;
 
     const payloadData = {
@@ -58,9 +59,10 @@ const Login = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            setLoading(true);
+            setLoading(false);
             console.log(res.status, 'res');
           } else {
+            setLoading(false);
             console.log(res.errors, 'error');
           }
         }

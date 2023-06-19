@@ -14,13 +14,19 @@ import {
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import { useNavigate } from 'react-router-dom';
-import { validatorField } from '../../../constants';
-import { useSelector } from 'react-redux';
+import {
+  NUMBER_VERIFICATION_ROUTE,
+  SUBSCRIPTION_ROUTE,
+  validatorField
+} from '../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { NumberVerificationRequest } from '../../../redux/slicers/user';
 
 const NumberVerification = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const hash = useSelector((state) => state?.user?.hash);
-  console.log('🚀 ~ file: index.jsx:23 ~ NumberVerification ~ hash:', hash);
   const navigate = useNavigate();
 
   const changeRoute = (route) => {
@@ -29,10 +35,28 @@ const NumberVerification = () => {
 
   const onFinish = (values) => {
     setLoading(true);
+    const { code } = values;
 
-    console.log('Success:', values);
+    const payloadData = {
+      hash: hash,
+      otp: code
+    };
 
-    changeRoute('/packages');
+    dispatch(
+      NumberVerificationRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(SUBSCRIPTION_ROUTE);
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

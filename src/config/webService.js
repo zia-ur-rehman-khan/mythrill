@@ -56,6 +56,12 @@ export const REJISTER_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const NUMBER_VERIFICATION_REQUEST = {
+  route: 'users/verify-otp',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
 export const GET_STOCK_NAMES = {
   route: '/stock/data/name',
   access_token_required: false,

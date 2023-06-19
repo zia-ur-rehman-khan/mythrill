@@ -49,6 +49,7 @@ const Register = () => {
   };
 
   const onFinish = (values) => {
+    setLoading(true);
     const { fullName, phoneNumber, password, email } = values;
 
     const payloadData = {
@@ -63,9 +64,11 @@ const Register = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            setLoading(true);
             changeRoute(NUMBER_VERIFICATION_ROUTE);
+            setLoading(false);
           } else {
+            setLoading(false);
+
             console.log(res.errors, 'error');
           }
         }
