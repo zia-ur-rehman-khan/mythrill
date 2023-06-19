@@ -38,10 +38,7 @@ const fetchToken = () => {
     vapidKey: process.env.REACT_APP_VAPID_KEY
   })
     .then((currentToken) => {
-      console.log('currentToken', currentToken);
       if (currentToken) {
-        console.log(currentToken);
-
         DataHandler.getStore().dispatch(
           deviceNotificationTokenSuccess(currentToken)
         );

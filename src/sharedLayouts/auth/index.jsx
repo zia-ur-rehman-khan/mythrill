@@ -13,22 +13,9 @@ function AuthSharedLayout({ children }) {
   const isAuthenticated = useSelector(({ user }) => user?.isAuthenticated);
   const user = useSelector(({ user }) => user);
 
-  console.log({ user });
-
   useEffect(() => {
     if (isAuthenticated) {
       navigate(HOME_ROUTE);
-    } else {
-      dispatch(
-        userLoginRequest({
-          payloadData: {
-            email: 'test@viabletree.com',
-            password: 'test12345',
-            platform: 'android',
-            token: token
-          }
-        })
-      );
     }
   }, [isAuthenticated, token]);
 

@@ -4,7 +4,7 @@ import { getCurrentAccessToken } from '../services/utils';
 export const API_TIMEOUT = 30000;
 export const ABORT_REQUEST_MESSAGE = 'Network failed. Aborted request.';
 
-export const BASE_URL = 'https://bc37-110-39-172-42.ngrok-free.app/api/v1';
+export const BASE_URL = 'https://app-dev.mythril.ai/api/v1';
 // export const BASE_URL = process.env.REACT_APP_BACKEND_DEV_URL;
 // export const BASE_URL = process.env.REACT_APP_BACKEND_STAGGING_URL;
 // export const BASE_URL = process.env.REACT_APP_BACKEND_PROD_URL;

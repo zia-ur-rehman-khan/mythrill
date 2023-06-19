@@ -20,26 +20,50 @@ import {
   validatorField
 } from '../../../constants';
 import DataHandler from '../../../services/DataHandler';
-import { userLoginSuccess } from '../../../redux/slicers/user';
+import {
+  userLoginRequest,
+  userLoginSuccess
+} from '../../../redux/slicers/user';
 import {
   CommonPasswordInput,
   CommonPhoneInput
 } from '../../../components/common';
+import { isMobile, userPlatform } from '../../../services/utils';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const deviceToken = useSelector((state) => state?.user?.deviceToken);
+
   const Navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const changeRoute = (route) => {
     Navigate(route);
   };
 
   const onFinish = (values) => {
-    console.log('Success:', values);
+    const { phoneNumber, password } = values;
 
-    setLoading(true);
-    DataHandler.getStore().dispatch(userLoginSuccess());
-    changeRoute('/');
+    const payloadData = {
+      phone: '+' + phoneNumber,
+      password: password,
+      platform: userPlatform(),
+      token: deviceToken
+    };
+
+    dispatch(
+      userLoginRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -65,7 +89,7 @@ const Login = () => {
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
 
             <CommonPhoneInput
-              name={'phone number'}
+              name={'phoneNumber'}
               rules={[
                 {
                   validator: (_, value) => {

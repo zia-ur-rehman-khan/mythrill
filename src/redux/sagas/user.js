@@ -12,7 +12,6 @@ function* userLogin() {
   while (true) {
     // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
     const { payload } = yield take(userLoginRequest.type);
-    console.log('contactUs', payload);
     // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
     const { payloadData, responseCallback } = payload;
     try {

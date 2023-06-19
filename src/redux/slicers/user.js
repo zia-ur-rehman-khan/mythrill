@@ -10,14 +10,12 @@ const UserReducer = createSlice({
     profileSections: [],
     isAuthenticated: false,
     isError: null,
-    deviceToken: '',
-    text: 'true'
+    deviceToken: ''
   },
   reducers: {
     // USER LOGIN
-    userLoginRequest(state, action) {
-      console.log(action, 'userLoginRequest');
-    },
+    userLoginRequest(state, action) {},
+
     userLoginSuccess(state, action) {
       console.log(action, 'userLoginSuccess');
       state.isAuthenticated = true;
