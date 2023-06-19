@@ -90,19 +90,22 @@ const Stock = () => {
                     <img src={stock?.src} width={'36px'} height={'36px'} />
                     <Space size={3} direction="vertical">
                       <CommonTextField text={'Last'} opacity={0.5} />
-                      <CommonTextField text={stock?.prevPrice} opacity={0.5} />
+                      <CommonTextField
+                        text={stock?.prevPrice || ' '}
+                        opacity={0.5}
+                      />
                     </Space>
                     <Space size={3} direction="vertical">
                       <CommonTextField text={'Chg'} />
                       <CommonTextField
-                        text={stock?.changeInPrice}
+                        text={stock?.changeInPrice || ' '}
                         color={Colors.green}
                       />
                     </Space>
                     <Space size={3} direction="vertical">
                       <CommonTextField text={'Chg%'} />
                       <CommonTextField
-                        text={stock?.changeInPercent}
+                        text={stock?.changeInPercent || ' '}
                         color={Colors.green}
                       />
                     </Space>
