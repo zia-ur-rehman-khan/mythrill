@@ -3,18 +3,28 @@ import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from '../../constants';
 import {
   callRequest,
   CONTACT_US,
+  FORGOT_PASSWORD,
   LOGIN_REQUEST,
+  LOGOUT_REQUEST,
   NUMBER_VERIFICATION_REQUEST,
-  REJISTER_REQUEST
+  REJISTER_REQUEST,
+  RESET_PASSWORD,
+  VERIFICATION_REQUEST
 } from '../../config/webService';
 import { toastAlert } from '../../services/utils';
 import {
+  ForgotRequest,
+  LogoutRequest,
   NumberVerificationRequest,
+  ResetPasswordRequest,
+  VerificationRequest,
+  userHash,
   userLoginRequest,
   userLoginSuccess,
   userNumberVerificationRequest,
   userRegisterRequest,
-  userRegisterSuccess
+  userRegisterSuccess,
+  userSignOutSuccess
 } from '../slicers/user';
 
 function* userLogin() {
@@ -64,7 +74,7 @@ function* userRegister() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(userRegisterSuccess(response?.data?.data?.hash));
+        yield put(userHash(response?.data?.data?.hash));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -75,16 +85,16 @@ function* userRegister() {
   }
 }
 
-function* userNumberVerification() {
+function* userVerification() {
   while (true) {
     // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
-    const { payload } = yield take(NumberVerificationRequest.type);
+    const { payload } = yield take(VerificationRequest.type);
     // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
     const { payloadData, responseCallback } = payload;
     try {
       const response = yield call(
         callRequest,
-        NUMBER_VERIFICATION_REQUEST,
+        VERIFICATION_REQUEST,
         payloadData,
         '',
         '',
@@ -103,8 +113,99 @@ function* userNumberVerification() {
     }
   }
 }
+
+function* forgotPassword() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(ForgotRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        FORGOT_PASSWORD,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(userHash(response?.data?.data?.hash));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* ResetPassword() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(ResetPasswordRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        RESET_PASSWORD,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(userHash(response?.data?.data?.hash));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* LogoutPassword() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(LogoutRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        LOGOUT_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(userSignOutSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(userLogin);
   yield fork(userRegister);
-  yield fork(userNumberVerification);
+  yield fork(userVerification);
+  yield fork(forgotPassword);
+  yield fork(ResetPassword);
+  yield fork(LogoutPassword);
 }

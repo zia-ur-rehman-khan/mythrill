@@ -49,15 +49,20 @@ const UserReducer = createSlice({
 
     userSignOutSuccess(state, action) {
       state.isAuthenticated = false;
+      state.deviceToken = '';
+      state.data = {};
     },
     deviceNotificationTokenSuccess(state, action) {
       state.deviceToken = action.payload;
     },
     userRegisterRequest(state, action) {},
-    userRegisterSuccess(state, action) {
+    userHash(state, action) {
       state.hash = action.payload;
     },
-    NumberVerificationRequest(state, action) {}
+    VerificationRequest(state, action) {},
+    ForgotRequest(state, action) {},
+    ResetPasswordRequest(state, action) {},
+    LogoutRequest(state, action) {}
   }
 });
 
@@ -71,8 +76,11 @@ export const {
   deviceNotificationTokenSuccess,
   userLoginSuccess,
   userRegisterRequest,
-  userRegisterSuccess,
-  NumberVerificationRequest
+  userHash,
+  VerificationRequest,
+  ForgotRequest,
+  ResetPasswordRequest,
+  LogoutRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

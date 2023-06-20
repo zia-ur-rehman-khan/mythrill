@@ -56,9 +56,27 @@ export const REJISTER_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
-export const NUMBER_VERIFICATION_REQUEST = {
+export const VERIFICATION_REQUEST = {
   route: 'users/verify-otp',
   access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const FORGOT_PASSWORD = {
+  route: 'users/forget-password',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const RESET_PASSWORD = {
+  route: 'users/reset-password',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const LOGOUT_REQUEST = {
+  route: 'users/logout',
+  access_token_required: true,
   type: REQUEST_TYPE.POST
 };
 

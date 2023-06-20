@@ -13,7 +13,7 @@ import {
 } from '../../../components';
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   EMAIL_RULE,
   handlePassworMatch,
@@ -21,22 +21,50 @@ import {
   passwordValidation,
   phoneValidation,
   validatorField,
-  numberValidatorField
+  numberValidatorField,
+  SUBSCRIPTION_ROUTE,
+  RESET_PASSWORD_ROUTE
 } from '../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { VerificationRequest } from '../../../redux/slicers/user';
 
 const EmailVerification = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const hash = useSelector((state) => state?.user?.hash);
 
   const navigate = useNavigate();
 
-  const changeRoute = (route) => {
-    navigate(route);
+  const changeRoute = (route, code) => {
+    navigate(route, { state: { email: location.state.email, code: code } });
   };
 
   const onFinish = (values) => {
     setLoading(true);
+    const { code } = values;
 
-    changeRoute('/reset-password');
+    const payloadData = {
+      hash: hash,
+      otp: code
+    };
+    changeRoute(RESET_PASSWORD_ROUTE, values?.code);
+
+    // dispatch(
+    //   VerificationRequest({
+    //     payloadData,
+    //     responseCallback: (res) => {
+    //       if (res.status) {
+    //         setLoading(false);
+    //         console.log(res.status, 'res');
+    //       } else {
+    //         setLoading(false);
+    //         console.log(res.errors, 'error');
+    //       }
+    //     }
+    //   })
+    // );
   };
   const onFinishFailed = (errorInfo) => {};
   return (

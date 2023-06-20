@@ -21,7 +21,8 @@ import {
 import DataHandler from '../../../services/DataHandler';
 import {
   checkPasswordValidation,
-  getFieldValue
+  getFieldValue,
+  userPlatform
 } from '../../../services/utils';
 import {
   EMAIL_RULE,
@@ -36,10 +37,12 @@ import {
   userLoginRequest,
   userRegisterRequest
 } from '../../../redux/slicers/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
+  const deviceToken = useSelector((state) => state?.user?.deviceToken);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -56,7 +59,9 @@ const Register = () => {
       name: fullName,
       email: email,
       phone: '+' + phoneNumber,
-      password: password
+      password: password,
+      platform: userPlatform(),
+      token: deviceToken
     };
 
     dispatch(

@@ -20,7 +20,10 @@ import {
   validatorField
 } from '../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { NumberVerificationRequest } from '../../../redux/slicers/user';
+import {
+  NumberVerificationRequest,
+  VerificationRequest
+} from '../../../redux/slicers/user';
 
 const NumberVerification = () => {
   const [loading, setLoading] = useState(false);
@@ -43,7 +46,7 @@ const NumberVerification = () => {
     };
 
     dispatch(
-      NumberVerificationRequest({
+      VerificationRequest({
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
