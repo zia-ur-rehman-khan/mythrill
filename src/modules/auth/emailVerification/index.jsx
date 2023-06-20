@@ -84,7 +84,12 @@ const EmailVerification = () => {
           />
           <Space>
             <CommonTextField text={'john.smith@domain.com'} opacity={'0.5'} />
-            <CommonTextField text={'Not You?'} color="#7665c1" />
+            <CommonTextField
+              text={'Not You?'}
+              color="#7665c1"
+              className={css(AppStyles.pointer)}
+              onClick={() => navigate(-1)}
+            />
           </Space>
           <CommonInputField
             name={'code'}
