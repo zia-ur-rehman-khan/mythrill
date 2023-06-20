@@ -80,6 +80,12 @@ export const LOGOUT_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const RESEND_VERIFICATION_REQUEST = {
+  route: 'users/resend-otp',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
 export const GET_STOCK_NAMES = {
   route: '/stock/data/name',
   access_token_required: false,

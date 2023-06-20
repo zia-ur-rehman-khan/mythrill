@@ -8,6 +8,8 @@ import {
   LOGOUT_REQUEST,
   NUMBER_VERIFICATION_REQUEST,
   REJISTER_REQUEST,
+  RESEND_REQUEST,
+  RESEND_VERIFICATION_REQUEST,
   RESET_PASSWORD,
   VERIFICATION_REQUEST
 } from '../../config/webService';
@@ -16,6 +18,8 @@ import {
   ForgotRequest,
   LogoutRequest,
   NumberVerificationRequest,
+  ResendRequest,
+  ResendVerificationRequest,
   ResetPasswordRequest,
   VerificationRequest,
   userHash,
@@ -201,6 +205,35 @@ function* LogoutPassword() {
   }
 }
 
+function* ResendUserVerification() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(ResendVerificationRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        RESEND_VERIFICATION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userSignOutSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(userLogin);
   yield fork(userRegister);
@@ -208,4 +241,5 @@ export default function* root() {
   yield fork(forgotPassword);
   yield fork(ResetPassword);
   yield fork(LogoutPassword);
+  yield fork(ResendUserVerification);
 }

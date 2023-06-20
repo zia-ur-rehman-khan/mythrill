@@ -15,6 +15,7 @@ import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import { useNavigate } from 'react-router-dom';
 import {
+  ALERT_TYPES,
   NUMBER_VERIFICATION_ROUTE,
   SUBSCRIPTION_ROUTE,
   validatorField
@@ -22,8 +23,10 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import {
   NumberVerificationRequest,
+  ResendVerificationRequest,
   VerificationRequest
 } from '../../../redux/slicers/user';
+import { toastAlert } from '../../../services/utils';
 
 const NumberVerification = () => {
   const [loading, setLoading] = useState(false);
@@ -64,6 +67,23 @@ const NumberVerification = () => {
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const resend = () => {
+    dispatch(
+      ResendVerificationRequest({
+        payloadData: { hash: hash },
+        responseCallback: (res) => {
+          if (res.status) {
+            toastAlert(res.message, ALERT_TYPES.success);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
   return (
     <AuthLayout
       className={'number'}
@@ -93,7 +113,14 @@ const NumberVerification = () => {
             type={'number'}
             className={'auth'}
             placeholder={'5 6 8 9 2 3'}
-            suffix={<CommonTextField text={'Resend'} opacity={'0.5'} />}
+            onClick={resend}
+            suffix={
+              <CommonTextField
+                text={'Resend'}
+                opacity={'0.5'}
+                onClick={resend}
+              />
+            }
             rules={[
               {
                 validator: (_, value) => {

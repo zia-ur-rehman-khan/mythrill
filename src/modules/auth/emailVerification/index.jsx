@@ -23,10 +23,16 @@ import {
   validatorField,
   numberValidatorField,
   SUBSCRIPTION_ROUTE,
-  RESET_PASSWORD_ROUTE
+  RESET_PASSWORD_ROUTE,
+  ALERT_TYPES
 } from '../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { VerificationRequest } from '../../../redux/slicers/user';
+import {
+  ResendRequest,
+  ResendVerificationRequest,
+  VerificationRequest
+} from '../../../redux/slicers/user';
+import { toastAlert } from '../../../services/utils';
 
 const EmailVerification = () => {
   const [loading, setLoading] = useState(false);
@@ -67,6 +73,22 @@ const EmailVerification = () => {
     // );
   };
   const onFinishFailed = (errorInfo) => {};
+
+  const resend = () => {
+    dispatch(
+      ResendVerificationRequest({
+        payloadData: { hash: hash },
+        responseCallback: (res) => {
+          if (res.status) {
+            toastAlert(res.message, ALERT_TYPES.success);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
   return (
     <AuthLayout
       className="email"
@@ -96,7 +118,13 @@ const EmailVerification = () => {
             type={'number'}
             className={'auth'}
             placeholder={'5 6 8 9 2 3'}
-            suffix={<CommonTextField text={'Resend'} opacity={'0.5'} />}
+            suffix={
+              <CommonTextField
+                text={'Resend'}
+                opacity={'0.5'}
+                onClick={resend}
+              />
+            }
             rules={[
               {
                 validator: (_, value) => {

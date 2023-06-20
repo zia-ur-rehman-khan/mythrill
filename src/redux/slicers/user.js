@@ -62,7 +62,8 @@ const UserReducer = createSlice({
     VerificationRequest(state, action) {},
     ForgotRequest(state, action) {},
     ResetPasswordRequest(state, action) {},
-    LogoutRequest(state, action) {}
+    LogoutRequest(state, action) {},
+    ResendVerificationRequest(state, action) {}
   }
 });
 
@@ -80,7 +81,8 @@ export const {
   VerificationRequest,
   ForgotRequest,
   ResetPasswordRequest,
-  LogoutRequest
+  LogoutRequest,
+  ResendVerificationRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;
