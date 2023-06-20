@@ -65,7 +65,7 @@ const ApiHandler = async (request, url, data, headers, baseUrl) => {
       return { status: false };
     }
     if (response.status === 403) {
-      userBlocked(response);
+      // userBlocked(response);
       return { status: false, message: response?.data?.message || 'forbedden' };
     }
     if (response.status === 401) {
