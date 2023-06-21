@@ -25,14 +25,14 @@ import { Form } from 'antd';
 
 // GET CURRENT ACCESS TOKEN FROM USER REDUCER
 export const getCurrentAccessToken = () => {
-  let token = DataHandler.getStore().getState().user.data.access_token;
+  let token = DataHandler.getStore().getState().user?.data?.data?.access_token;
   console.log('token');
   return token;
 };
 
 // GET CURRENT REFRESH TOKEN FROM USER REDUCER
 export const getCurrentRefreshToken = () => {
-  let token = DataHandler.getStore().getState().user.data.refresh_token;
+  let token = DataHandler.getStore().getState().user?.data?.data?.refresh_token;
   console.log('ssss');
   return token;
 };

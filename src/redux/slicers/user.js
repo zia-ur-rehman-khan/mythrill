@@ -61,6 +61,8 @@ const UserReducer = createSlice({
     },
     VerificationRequest(state, action) {},
     ForgotRequest(state, action) {},
+    EmailVerificationRequest(state, action) {},
+
     ResetPasswordRequest(state, action) {},
     LogoutRequest(state, action) {},
     ResendVerificationRequest(state, action) {}
@@ -80,6 +82,8 @@ export const {
   userHash,
   VerificationRequest,
   ForgotRequest,
+  EmailVerificationRequest,
+
   ResetPasswordRequest,
   LogoutRequest,
   ResendVerificationRequest

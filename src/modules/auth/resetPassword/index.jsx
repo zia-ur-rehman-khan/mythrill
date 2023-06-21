@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { AppStyles, Images } from '../../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,7 @@ import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import {
+  HOME_ROUTE,
   NUMBER_VERIFICATION_ROUTE,
   handlePassworMatch,
   lOGIN_ROUTE,
@@ -25,18 +26,27 @@ import {
   ResetPasswordRequest,
   userLoginRequest
 } from '../../../redux/slicers/user';
+import { useDispatch } from 'react-redux';
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const { email, code } = location.state;
+  const { email, code } = location?.state || {};
 
   const changeRoute = (route) => {
     navigate(route);
   };
+
+  useEffect(() => {
+    if (!email && !code) {
+      console.log(email, code);
+      navigate(HOME_ROUTE);
+    }
+  }, [email, code]);
 
   const onFinish = (values) => {
     setLoading(true);
@@ -48,23 +58,21 @@ const ResetPassword = () => {
       otp: code
     };
 
-    changeRoute(lOGIN_ROUTE);
-
-    // dispatch(
-    //   ResetPasswordRequest({
-    //     payloadData,
-    //     responseCallback: (res) => {
-    //       if (res.status) {
-    //         changeRoute(lOGIN_ROUTE);
-    //         setLoading(false);
-    //         console.log(res.status, 'res');
-    //       } else {
-    //         setLoading(false);
-    //         console.log(res.errors, 'error');
-    //       }
-    //     }
-    //   })
-    // );
+    dispatch(
+      ResetPasswordRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(lOGIN_ROUTE);
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
