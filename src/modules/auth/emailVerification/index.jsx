@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { AppStyles, Images } from '../../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,10 +24,12 @@ import {
   numberValidatorField,
   SUBSCRIPTION_ROUTE,
   RESET_PASSWORD_ROUTE,
-  ALERT_TYPES
+  ALERT_TYPES,
+  HOME_ROUTE
 } from '../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  EmailVerificationRequest,
   ResendRequest,
   ResendVerificationRequest,
   VerificationRequest
@@ -55,22 +57,22 @@ const EmailVerification = () => {
       hash: hash,
       otp: code
     };
-    changeRoute(RESET_PASSWORD_ROUTE, values?.code);
 
-    // dispatch(
-    //   VerificationRequest({
-    //     payloadData,
-    //     responseCallback: (res) => {
-    //       if (res.status) {
-    //         setLoading(false);
-    //         console.log(res.status, 'res');
-    //       } else {
-    //         setLoading(false);
-    //         console.log(res.errors, 'error');
-    //       }
-    //     }
-    //   })
-    // );
+    dispatch(
+      EmailVerificationRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(RESET_PASSWORD_ROUTE, values?.code);
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {};
 
