@@ -33,6 +33,7 @@ import {
   setStocksListAction
 } from '../../../redux/slicers/stocks';
 import { Loader } from '../../../components';
+import { socket } from '../../../socket';
 
 const { useBreakpoint } = Grid;
 
@@ -63,7 +64,6 @@ const Home = () => {
       limit(200),
       where('name_id', 'in', STOCK_NAME_LIST)
     );
-    console.log('stocksListQuery', stocksListQuery);
     const unSubscribe = onSnapshot(
       stocksListQuery,
       (querySnapshot) => {
@@ -103,6 +103,18 @@ const Home = () => {
         setIsLoading(false);
       }
     );
+
+    const listener = (...args) => {
+      console.log(args, 'argument');
+    };
+    socket.connect();
+    socket.on('connect', () => {
+      console.log('connect');
+    });
+
+    socket.emit('message', 'hello');
+
+    socket.on('stock_name_updates', listener);
 
     return unSubscribe;
   }, []);
