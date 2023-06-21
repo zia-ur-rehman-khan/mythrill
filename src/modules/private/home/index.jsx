@@ -113,6 +113,7 @@ const Home = () => {
     });
 
     socket.emit('message', 'hello');
+    socket.on('stock_updates', listener);
 
     socket.on('stock_name_updates', listener);
 
