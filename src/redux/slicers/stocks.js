@@ -21,9 +21,8 @@ const GeneralReducer = createSlice({
 
     getAllStocksRequest() {},
     getAllStocksRequestSuccess(state, action) {
-      const unsubscribe = action.payload.filter(
-        (d) => d.stock_subscribe.length === 0
-      );
+      console.log(action, 'action');
+      const unsubscribe = action?.payload?.filter((d) => d.subscribe === 0);
       state.stocksUnSubscribe = unsubscribe;
     },
     getSubscribeStocksRequest() {},

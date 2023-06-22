@@ -21,17 +21,8 @@ const StockDetailes = () => {
   const navigate = useNavigate();
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
 
-  console.log(
-    '🚀 ~ file: index.jsx:27 ~ StockDetailes ~ selectedStockData:',
-    stocksSubscribe
-  );
-
   const selectedStockData = stocksSubscribe.find(
     (stock) => stock.slug === `/stock/${id}`
-  );
-  console.log(
-    '🚀 ~ file: index.jsx:32 ~ StockDetailes ~ selectedStockData:',
-    selectedStockData
   );
 
   const data = selectedStockData?.stocks;

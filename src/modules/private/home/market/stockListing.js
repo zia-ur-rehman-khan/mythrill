@@ -5,6 +5,7 @@ import { Typography } from 'antd';
 
 const StockListing = ({ test, addIcon, ...props }) => {
   const stocks = useSelector((state) => state?.stocks?.stocksSubscribe);
+  const unSubstocks = useSelector((state) => state?.stocks?.stocksUnSubscribe);
 
   const noStockInTheList = () => {
     return <CommonTextField text={'No Stocks in the list'} />;
@@ -16,12 +17,15 @@ const StockListing = ({ test, addIcon, ...props }) => {
 
   return (
     <>
-      {filteredStocks?.length > 0 &&
-        filteredStocks?.map((data) => (
-          <StockCard addIcon={addIcon} value={data} key={data.id} />
-        ))}
-
-      {filteredStocks?.length === 0 && noStockInTheList()}
+      {filteredStocks?.length > 0
+        ? addIcon
+          ? unSubstocks?.map((data) => (
+              <StockCard addIcon={addIcon} value={data} key={data.id} />
+            ))
+          : filteredStocks?.map((data) => (
+              <StockCard value={data} key={data.id} />
+            ))
+        : noStockInTheList()}
     </>
   );
 };

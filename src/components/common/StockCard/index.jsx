@@ -11,6 +11,7 @@ import CommonDropdown from '../CommonDropdown';
 
 const StockCard = ({ value, addIcon }) => {
   const { title, amount, stockUpdate, color, name_id, slug, type } = value;
+  console.log('🚀 ~ file: index.jsx:14 ~ StockCard ~ color:', color);
 
   const navigate = useNavigate();
 
@@ -35,7 +36,7 @@ const StockCard = ({ value, addIcon }) => {
         <CommonTextField
           text={title}
           fontWeight={600}
-          onClick={addIcon ? () => {} : () => changeRoute(name_id)}
+          onClick={addIcon ? () => {} : () => changeRoute()}
         />
         <CommonTextField text={type} color={'#626D7D'} />
       </Space>

@@ -13,11 +13,11 @@ import {
 } from '../../../../components';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../../../theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 import { stocksNameManipulator } from '../../../../manipulators/stocksName';
 import { useDispatch } from 'react-redux';
 import { setStocksListAction } from '../../../../redux/slicers/stocks';
+import AddStock from './addStock';
 
 const items = [
   {
@@ -81,13 +81,7 @@ const Market = ({ isLoading, width }) => {
         isModalVisible={isModal}
         setIsModalVisible={setIsModal}
       >
-        <CommonInputField
-          placeholder="Search..."
-          suffix={<FontAwesomeIcon icon={faSearch} />}
-        />
-        <div className={css(AppStyles.padding10)}>
-          <StockListing addIcon={true} />
-        </div>
+        <AddStock />
       </CommonModal>
     </>
   );

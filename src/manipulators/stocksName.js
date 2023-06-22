@@ -37,6 +37,39 @@ const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 //   }
 // }
 
+export function stocksdataManipulator(list = []) {
+  try {
+    if (_.isEmpty(list) ?? !list?.length) {
+      return [];
+    }
+
+    const stockList = [];
+    for (const stock of list) {
+      const payload = {};
+      payload.subscribe = stock.stock_subscribe.length ?? 0;
+      payload.title = stock?.name;
+      payload.amount = `$${stock?.current_price}`;
+      payload.stockUpdate = `${stock?.change_in_percent}%`;
+      payload.nameId = stock?.name_id ?? '';
+      payload.type = stock?.type;
+      payload.slug = `/stock/${stock?.name_slug}` ?? '';
+      payload.color =
+        stock?.change_in_percent === 0
+          ? 'yellow'
+          : stock?.stocks_name?.change_in_percent > 0
+          ? 'green'
+          : 'red';
+
+      payload && stockList.push(payload);
+    }
+
+    return stockList;
+  } catch (error) {
+    console.error('stocksNameManipulator error --->>>> ', error);
+    return [];
+  }
+}
+
 export function stocksNameManipulator(list = []) {
   try {
     if (_.isEmpty(list) ?? !list?.length) {
@@ -46,7 +79,7 @@ export function stocksNameManipulator(list = []) {
     const stockList = [];
     for (const stock of list) {
       const payload = {};
-
+      payload.stockSubscribe = stock?.stock_subscribe?.length ?? 0;
       payload.changeInPercent = stock?.stocks_name?.change_in_percent ?? 0;
       payload.changeInPrice = stock?.stocks_name?.change_in_price ?? 0;
       payload.coin = stock?.stocks_name?.coin ?? '';

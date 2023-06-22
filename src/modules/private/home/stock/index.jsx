@@ -21,8 +21,8 @@ import {
 
 const Stock = () => {
   const navigate = useNavigate();
-  const stocksData = useSelector((state) => state?.stocks?.stocksData);
-  console.log('🚀 ~ file: index.jsx:25 ~ Stock ~ stocksData:', stocksData);
+  // const stocksData = useSelector((state) => state?.stocks?.stocksData);
+  // console.log('🚀 ~ file: index.jsx:25 ~ Stock ~ stocksData:', stocksData);
   const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
 
   const changeRoute = (id) => {

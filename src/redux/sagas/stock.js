@@ -19,7 +19,10 @@ import {
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess
 } from '../slicers/stocks';
-import { stocksNameManipulator } from '../../manipulators/stocksName';
+import {
+  stocksNameManipulator,
+  stocksdataManipulator
+} from '../../manipulators/stocksName';
 
 function* getStockNames() {
   while (true) {
@@ -41,7 +44,7 @@ function* getStockNames() {
         if (responseCallback) responseCallback(response?.data);
         yield put(
           getAllStocksRequestSuccess(
-            stocksNameManipulator(response?.data?.data)
+            stocksdataManipulator(response?.data?.data)
           )
         );
       } else {
