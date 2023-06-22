@@ -32,26 +32,25 @@ const GeneralReducer = createSlice({
 
     StockSubscribeRequest() {},
     StockSubscribeSuccess(state, action) {
-      console.log(action, 'action');
       const data = state.stocksUnSubscribe;
-      console.log(current(data), 'data');
       const filter = data?.filter(
         (d) => d.stockId !== action?.payload?.stockId
       );
-
-      console.log(filter, 'unsubscribe');
       state.stocksUnSubscribe = filter;
       state.stocksSubscribe = [...state.stocksSubscribe, action.payload];
     },
     StockUnSubscribeRequest() {},
     StockUnSubscribeSuccess(state, action) {
-      console.log(
-        '🚀 ~ file: stocks.js:40 ~ StockUnSubscribeSuccess ~ action:',
-        action
+      console.log(action, 'action');
+      const data = state.stocksSubscribe;
+      console.log(current(data), 'data');
+      const filter = data?.filter(
+        (d) => d.stockId !== action?.payload?.stock_Id
       );
-      const data = state.stocks;
-      filter = data.filter((d) => d.id !== action.payload.id);
-      state.unSubscribe = filter;
+      console.log(current(filter), 'filter');
+
+      state.stocksSubscribe = filter;
+      // state.stocksUnSubscribe = [...state.stocksSubscribe, action.payload];
     }
   }
 });

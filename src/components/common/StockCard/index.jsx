@@ -10,6 +10,7 @@ import { css } from 'aphrodite';
 import CommonDropdown from '../CommonDropdown';
 import {
   StockSubscribeRequest,
+  StockUnSubscribeRequest,
   getSubscribeStocksRequest
 } from '../../../redux/slicers/stocks';
 import { useDispatch } from 'react-redux';
@@ -36,7 +37,6 @@ const StockCard = ({ value, addIcon }) => {
   ];
 
   const subscribe = (stockId) => {
-    console.log(typeof stockId, stockId, 'id');
     const payloadData = { stock_id: stockId };
     dispatch(
       StockSubscribeRequest({
@@ -44,6 +44,22 @@ const StockCard = ({ value, addIcon }) => {
         responseCallback: (res) => {
           if (res.status) {
             console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
+  const unSubscribe = (stockId) => {
+    const payloadData = { stock_id: stockId };
+    dispatch(
+      StockUnSubscribeRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
           } else {
             console.log(res.errors, 'error');
           }
@@ -82,6 +98,7 @@ const StockCard = ({ value, addIcon }) => {
             <FontAwesomeIcon
               className={css(AppStyles.pointer)}
               icon={faEllipsisVertical}
+              onClick={() => unSubscribe(stockId)}
             />
           </CommonDropdown>
         )}

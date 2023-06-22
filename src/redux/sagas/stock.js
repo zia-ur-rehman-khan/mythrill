@@ -4,13 +4,15 @@ import {
   callRequest,
   GET_STOCK_NAMES,
   GET_SUBSCRIBE_STOCKS,
-  STOCK_SUBSCRIBE
+  STOCK_SUBSCRIBE,
+  STOCK_UNSUBSCRIBE
 } from '../../config/webService';
 import { toastAlert } from '../../services/utils';
 import {
   StockSubscribeRequest,
   StockSubscribeSuccess,
   StockUnSubscribeRequest,
+  StockUnSubscribeSuccess,
   getAllStocksRequest,
   getAllStocksRequestSuccess,
   getStocksNameRequest,
@@ -132,19 +134,19 @@ function* StockUnSubscribe() {
     const { payload } = yield take(StockUnSubscribeRequest.type);
     console.log('contactUs', payload);
     // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
-    const { responseCallback } = payload;
+    const { payloadData, responseCallback } = payload;
     try {
       const response = yield call(
         callRequest,
-        GET_STOCK_NAMES,
-        payload,
+        STOCK_UNSUBSCRIBE,
+        payloadData,
         '',
         '',
         {}
       );
       if (response?.data) {
         if (responseCallback) responseCallback(response?.data);
-        // yield put(getStocksNameSuccess(stocksNameManipulator(response?.data)));
+        yield put(StockUnSubscribeSuccess(payloadData));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
