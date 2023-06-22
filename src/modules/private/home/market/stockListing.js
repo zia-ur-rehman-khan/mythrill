@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Typography } from 'antd';
 
 const StockListing = ({ test, addIcon, ...props }) => {
-  const stocks = useSelector((state) => state?.stocks?.stocks);
+  const stocks = useSelector((state) => state?.stocks?.stocksSubscribe);
 
   const noStockInTheList = () => {
     return <CommonTextField text={'No Stocks in the list'} />;

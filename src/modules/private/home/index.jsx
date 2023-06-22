@@ -29,6 +29,7 @@ import {
 } from '../../../manipulators/stocksName';
 import {
   getStocksNameRequest,
+  getSubscribeStocksRequest,
   setStocksDataAction,
   setStocksListAction
 } from '../../../redux/slicers/stocks';
@@ -56,55 +57,69 @@ const Home = () => {
   }, [id, pathname]);
 
   useEffect(() => {
-    const stockListCollectionRef = collection(db, 'stocks');
-    const stocksListQuery = query(
-      stockListCollectionRef,
-      orderBy('date_time', 'desc'),
-      limit(200),
-      where('name_id', 'in', STOCK_NAME_LIST)
-    );
-    console.log('stocksListQuery', stocksListQuery);
-    const unSubscribe = onSnapshot(
-      stocksListQuery,
-      (querySnapshot) => {
-        const stocksList = [];
-        querySnapshot.forEach((doc) => {
-          stocksList.push(doc.data());
-        });
+    // const stockListCollectionRef = collection(db, 'stocks');
+    // const stocksListQuery = query(
+    //   stockListCollectionRef,
+    //   orderBy('date_time', 'desc'),
+    //   limit(200),
+    //   where('name_id', 'in', STOCK_NAME_LIST)
+    // );
+    // console.log('stocksListQuery', stocksListQuery);
+    // const unSubscribe = onSnapshot(
+    //   stocksListQuery,
+    //   (querySnapshot) => {
+    //     const stocksList = [];
+    //     querySnapshot.forEach((doc) => {
+    //       stocksList.push(doc.data());
+    //     });
 
-        const stocksDataPayload = {};
-        const stockNamesPayload = [];
+    //     const stocksDataPayload = {};
+    //     const stockNamesPayload = [];
 
-        for (const stock of STOCK_NAME_LIST) {
-          const filteredStock = stocksList?.filter(
-            (item) => item.name_id === stock
-          );
+    //     for (const stock of STOCK_NAME_LIST) {
+    //       const filteredStock = stocksList?.filter(
+    //         (item) => item.name_id === stock
+    //       );
 
-          if (filteredStock?.length === 0) continue;
+    //       if (filteredStock?.length === 0) continue;
 
-          const stockNameManipulatedData = singleStockNameManipulator(
-            filteredStock?.[0]
-          );
-          const manipulatedData = stockListManipulator(filteredStock);
+    //       const stockNameManipulatedData = singleStockNameManipulator(
+    //         filteredStock?.[0]
+    //       );
+    //       const manipulatedData = stockListManipulator(filteredStock);
 
-          manipulatedData?.sort(
-            (a, b) => new Date(a?.date) - new Date(b?.date)
-          );
-          stockNamesPayload.push(stockNameManipulatedData);
-          stocksDataPayload[stock] = manipulatedData;
+    //       manipulatedData?.sort(
+    //         (a, b) => new Date(a?.date) - new Date(b?.date)
+    //       );
+    //       stockNamesPayload.push(stockNameManipulatedData);
+    //       stocksDataPayload[stock] = manipulatedData;
+    //     }
+
+    //     dispatch(setStocksListAction(stockNamesPayload));
+    //     dispatch(setStocksDataAction(stocksDataPayload));
+    //     setIsLoading(false);
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //     setIsLoading(false);
+    //   }
+    // );
+
+    // return unSubscribe;
+    dispatch(
+      getSubscribeStocksRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            setIsLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setIsLoading(false);
+            console.log(res.errors, 'error');
+          }
         }
-
-        dispatch(setStocksListAction(stockNamesPayload));
-        dispatch(setStocksDataAction(stocksDataPayload));
-        setIsLoading(false);
-      },
-      (error) => {
-        console.error(error);
-        setIsLoading(false);
-      }
+      })
     );
-
-    return unSubscribe;
   }, []);
 
   const getStockList = async () => {

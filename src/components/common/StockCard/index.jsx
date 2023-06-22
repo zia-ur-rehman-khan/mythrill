@@ -10,12 +10,12 @@ import { css } from 'aphrodite';
 import CommonDropdown from '../CommonDropdown';
 
 const StockCard = ({ value, addIcon }) => {
-  const { title, name, amount, stockUpdate, color, name_id, slug } = value;
+  const { title, amount, stockUpdate, color, name_id, slug, type } = value;
 
   const navigate = useNavigate();
 
   const changeRoute = () => {
-    navigate(`/stock/${slug}`);
+    navigate(`${slug}`);
   };
 
   const items = [
@@ -37,7 +37,7 @@ const StockCard = ({ value, addIcon }) => {
           fontWeight={600}
           onClick={addIcon ? () => {} : () => changeRoute(name_id)}
         />
-        <CommonTextField text={name} color={'#626D7D'} />
+        <CommonTextField text={type} color={'#626D7D'} />
       </Space>
       <Space size={10}>
         <Space direction="vertical">
