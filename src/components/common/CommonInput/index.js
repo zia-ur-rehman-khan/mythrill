@@ -12,7 +12,7 @@ const CommonInputField = ({
   showCount,
   addonBefore,
   type,
-  // onChange,
+  onChange,
   // onBlur,
   // value,
   // errors,
@@ -32,7 +32,7 @@ const CommonInputField = ({
         maxLength={maxLength}
         className={`ad-input  ${className || ''}`}
         placeholder={placeholder}
-        // onChange={onChange}
+        onChange={onChange}
         // onBlur={onBlur}
         // value={value}
         suffix={suffix || true}

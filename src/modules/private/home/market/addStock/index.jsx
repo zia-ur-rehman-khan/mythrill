@@ -14,6 +14,7 @@ import {
 const AddStock = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     dispatch(
@@ -39,9 +40,10 @@ const AddStock = () => {
       <CommonInputField
         placeholder="Search..."
         suffix={<FontAwesomeIcon icon={faSearch} />}
+        onChange={(e) => setSearch(e.target.value)}
       />
       <div className={css(AppStyles.padding10)}>
-        <StockListing addIcon={true} />
+        <StockListing addIcon={true} search={search} />
       </div>
     </>
   );
