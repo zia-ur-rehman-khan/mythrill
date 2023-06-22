@@ -4,38 +4,32 @@ import moment from 'moment';
 
 const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
-// export function singleStockNameManipulator(stock = {}) {
-//   try {
-//     if (_.isEmpty(stock)) return {};
+export function stocksdataManipulatorObject(stock = {}) {
+  console.log(stock, 'stock');
+  try {
+    if (_.isEmpty(stock)) return {};
 
-//     const payload = {};
+    const payload = {};
 
-//     payload.title = stock?.fullName ?? '';
-//     payload.type = 'Cryptocurrency';
-//     payload.slug = stock?.name_id ?? '';
-//     payload.nameId = stock?.name_id ?? '';
-//     payload.id = stock?.id ?? '';
-//     payload.amount = `$${stock?.current_price}`;
-//     payload.stockUpdate = `${stock?.change_in_percent}%`;
-//     payload.overallTrend = stock?.overall_trend ?? '';
-//     payload.src = Images.bitCoin;
-//     payload.changeInPrice = stock?.change_in_price ?? 0;
-//     payload.changeInPercent = stock?.change_in_percent ?? 0;
-//     payload.prevPrice = stock?.prev_price ?? 0;
-//     payload.currentPrice = stock?.current_price ?? 0;
-//     payload.color =
-//       stock?.change_in_percent === 0
-//         ? 'yellow'
-//         : stock?.change_in_percent > 0
-//         ? 'green'
-//         : 'red';
-//     payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
+    payload.stockId = stock.id ?? '';
+    payload.title = stock?.name;
+    payload.amount = `$${stock?.current_price}`;
+    payload.stockUpdate = `${stock?.change_in_percent}%`;
+    payload.nameId = stock?.name_id ?? '';
+    payload.type = stock?.type;
+    payload.slug = `/stock/${stock?.name_slug}` ?? '';
+    payload.color =
+      stock?.change_in_percent === 0
+        ? 'yellow'
+        : stock?.stocks_name?.change_in_percent > 0
+        ? 'green'
+        : 'red';
 
-//     return payload;
-//   } catch (error) {
-//     console.error('singleStockNameManipulator error --->>> ', error);
-//   }
-// }
+    return payload;
+  } catch (error) {
+    console.error('singleStockNameManipulator error --->>> ', error);
+  }
+}
 
 export function stocksdataManipulator(list = []) {
   try {
@@ -46,6 +40,7 @@ export function stocksdataManipulator(list = []) {
     const stockList = [];
     for (const stock of list) {
       const payload = {};
+      payload.stockId = stock.id ?? '';
       payload.subscribe = stock.stock_subscribe.length ?? 0;
       payload.title = stock?.name;
       payload.amount = `$${stock?.current_price}`;

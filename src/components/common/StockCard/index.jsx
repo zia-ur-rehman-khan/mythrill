@@ -8,10 +8,15 @@ import { useNavigate } from 'react-router-dom';
 import { AppStyles, Images } from '../../../theme';
 import { css } from 'aphrodite';
 import CommonDropdown from '../CommonDropdown';
+import {
+  StockSubscribeRequest,
+  getSubscribeStocksRequest
+} from '../../../redux/slicers/stocks';
+import { useDispatch } from 'react-redux';
 
 const StockCard = ({ value, addIcon }) => {
-  const { title, amount, stockUpdate, color, name_id, slug, type } = value;
-  console.log('🚀 ~ file: index.jsx:14 ~ StockCard ~ color:', color);
+  const { title, amount, stockUpdate, color, stockId, slug, type } = value;
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -30,13 +35,30 @@ const StockCard = ({ value, addIcon }) => {
     }
   ];
 
+  const subscribe = (stockId) => {
+    console.log(typeof stockId, stockId, 'id');
+    const payloadData = { stock_id: stockId };
+    dispatch(
+      StockSubscribeRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
   return (
     <Space className="stockCard-main">
       <Space direction="vertical">
         <CommonTextField
           text={title}
           fontWeight={600}
-          onClick={addIcon ? '' : () => changeRoute()}
+          onClick={() => !addIcon && changeRoute()}
         />
         <CommonTextField text={type} color={'#626D7D'} />
       </Space>
@@ -53,6 +75,7 @@ const StockCard = ({ value, addIcon }) => {
             width={'21px'}
             height={'21px'}
             className={css(AppStyles.pointer)}
+            onClick={() => subscribe(stockId)}
           />
         ) : (
           <CommonDropdown items={items}>

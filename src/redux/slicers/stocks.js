@@ -1,6 +1,7 @@
 // @flow
 import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
+import { current } from '@reduxjs/toolkit';
 
 const GeneralReducer = createSlice({
   name: 'stocks',
@@ -21,7 +22,6 @@ const GeneralReducer = createSlice({
 
     getAllStocksRequest() {},
     getAllStocksRequestSuccess(state, action) {
-      console.log(action, 'action');
       const unsubscribe = action?.payload?.filter((d) => d.subscribe === 0);
       state.stocksUnSubscribe = unsubscribe;
     },
@@ -32,7 +32,16 @@ const GeneralReducer = createSlice({
 
     StockSubscribeRequest() {},
     StockSubscribeSuccess(state, action) {
-      state.stocksSubscribe = action.payload;
+      console.log(action, 'action');
+      const data = state.stocksUnSubscribe;
+      console.log(current(data), 'data');
+      const filter = data?.filter(
+        (d) => d.stockId !== action?.payload?.stockId
+      );
+
+      console.log(filter, 'unsubscribe');
+      state.stocksUnSubscribe = filter;
+      state.stocksSubscribe = [...state.stocksSubscribe, action.payload];
     },
     StockUnSubscribeRequest() {},
     StockUnSubscribeSuccess(state, action) {

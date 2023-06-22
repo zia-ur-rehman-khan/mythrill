@@ -17,18 +17,18 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
 
   return (
     <>
-      {filteredStocks?.length > 0
-        ? addIcon
-          ? unSubstocks
-              ?.filter((d) =>
-                d.title.toLowerCase().includes(search.toLowerCase())
-              )
-              ?.map((data) => (
-                <StockCard addIcon={addIcon} value={data} key={data.id} />
-              ))
-          : filteredStocks?.map((data) => (
-              <StockCard value={data} key={data.id} />
+      {addIcon
+        ? unSubstocks
+            ?.filter((d) =>
+              d.title.toLowerCase().includes(search.toLowerCase())
+            )
+            ?.map((d) => (
+              <StockCard addIcon={addIcon} value={d} key={Math.random()} />
             ))
+        : filteredStocks?.length > 0
+        ? filteredStocks?.map((data) => (
+            <StockCard value={data} key={Math.random()} />
+          ))
         : noStockInTheList()}
     </>
   );
