@@ -36,7 +36,7 @@ const StockCard = ({ value, addIcon }) => {
         <CommonTextField
           text={title}
           fontWeight={600}
-          onClick={addIcon ? () => {} : () => changeRoute()}
+          onClick={addIcon ? '' : () => changeRoute()}
         />
         <CommonTextField text={type} color={'#626D7D'} />
       </Space>
