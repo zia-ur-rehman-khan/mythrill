@@ -231,9 +231,17 @@ export const refreshAccessToken = async () => {
   let data = {};
   data.token = getCurrentRefreshToken();
   const method = 'POST';
-  const _url = 'auth/v1/refresh-token';
+  const _url = 'users/refresh-token';
   try {
-    const response = await ApiHandler(method, _url, data, {}, BASE_URL);
+    const response = await ApiHandler(
+      method,
+      _url,
+      data,
+      {
+        Authorization: `Bearer ${data?.token}`
+      },
+      BASE_URL
+    );
     console.log({ newAccessToken: response });
     const responseJson = await response.json();
     console.log({ newAccessToken: responseJson.data });
