@@ -135,7 +135,7 @@ const Home = () => {
 
     socket.on('stock_name_updates', listener);
 
-    return unSubscribe;
+    // return unSubscribe;
   }, []);
 
   const getStockList = async () => {
