@@ -25,10 +25,12 @@ import { useDispatch } from 'react-redux';
 import {
   singleStockNameManipulator,
   stockListManipulator,
-  stocksNameManipulator
+  stocksNameManipulator,
+  stocksdataManipulatorObject
 } from '../../../manipulators/stocksName';
 import {
   getStocksNameRequest,
+  getSubscribeDataRealTime,
   getSubscribeStocksRequest,
   setStocksDataAction,
   setStocksListAction
@@ -122,25 +124,26 @@ const Home = () => {
       })
     );
 
-    const listener = (...args) => {
-      console.log(args, 'argument');
+    // const listener2 = (...args) => {
+    //   console.log(JSON.parse(args), 'two');
+    // };
+    // socket.on('stock_name_updates', listener2);
+
+    const listener1 = (...args) => {
+      console.log(JSON.parse(args).data, 'check_type');
+      dispatch(
+        getSubscribeDataRealTime(
+          stocksdataManipulatorObject(JSON.parse(args).data)
+        )
+      );
     };
-    socket.connect();
-    socket.on('connect', () => {
-      console.log('connect');
-    });
 
-    socket.emit('message', 'hello');
-    socket.on('stock_updates', listener);
+    socket.on('stock_updates', listener1);
 
-    socket.on('stock_name_updates', listener);
-
-    // return unSubscribe;
+    return () => {
+      socket.off('stock_updates', listener1);
+    };
   }, []);
-
-  const getStockList = async () => {
-    // debugger;
-  };
 
   if (isLoading) {
     return <Loader />;

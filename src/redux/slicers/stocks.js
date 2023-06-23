@@ -2,6 +2,7 @@
 import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
 import { current } from '@reduxjs/toolkit';
+import { color } from 'highcharts';
 
 const GeneralReducer = createSlice({
   name: 'stocks',
@@ -48,6 +49,31 @@ const GeneralReducer = createSlice({
 
       state.stocksSubscribe = filter;
       // state.stocksUnSubscribe = [...state.stocksSubscribe, action.payload];
+    },
+
+    getSubscribeDataRealTime(state, action) {
+      console.log(action.payload, 'data');
+      console.log(current(state.stocksSubscribe), 'subscribe');
+
+      const data = state.stocksSubscribe;
+
+      const filter = data.map((d) => {
+        const match = action.payload.nameId === d.nameId;
+
+        console.log(match, 'match');
+
+        if (match) {
+          return {
+            ...d,
+            amount: action.payload.amount,
+            stockUpdate: action.payload.stockUpdate,
+            color: action.payload.color
+          };
+        }
+
+        return d;
+      });
+      state.stocksSubscribe = filter;
     }
   }
 });
@@ -62,7 +88,8 @@ export const {
   StockUnSubscribeSuccess,
   setStocksDataAction,
   getSubscribeStocksRequest,
-  getSubscribeStocksSuccess
+  getSubscribeStocksSuccess,
+  getSubscribeDataRealTime
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;
