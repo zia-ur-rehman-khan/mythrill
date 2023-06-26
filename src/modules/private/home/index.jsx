@@ -130,7 +130,7 @@ const Home = () => {
     // socket.on('stock_name_updates', listener2);
 
     const listener1 = (...args) => {
-      console.log(JSON.parse(args).data, 'check_type');
+      // console.log(JSON.parse(args).data, 'check_type');
       dispatch(
         getSubscribeDataRealTime(
           stocksdataManipulatorObject(JSON.parse(args).data)

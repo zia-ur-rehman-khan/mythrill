@@ -20,14 +20,16 @@ const UserReducer = createSlice({
     userLoginSuccess(state, action) {
       console.log(action, 'userLoginSuccess');
       state.isAuthenticated = true;
-      state.data = action.payload;
+      state.data = action.payload.data;
     },
     // REFRESH TOKEN
     refreshToken(state, action) {
+      console.log(current(state.data), 'action first');
       let newData = cloneDeepItem(state.data);
       newData.access_token = action.payload.access_token;
       newData.refresh_token = action.payload.refresh_token;
       state.data = { ...state.data, ...newData };
+      console.log(current(state.data), 'action second');
     },
 
     // SET AUTH ERROR

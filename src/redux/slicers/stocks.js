@@ -52,15 +52,15 @@ const GeneralReducer = createSlice({
     },
 
     getSubscribeDataRealTime(state, action) {
-      console.log(action.payload, 'data');
-      console.log(current(state.stocksSubscribe), 'subscribe');
+      // console.log(action.payload, 'data');
+      // console.log(current(state.stocksSubscribe), 'subscribe');
 
       const data = state.stocksSubscribe;
 
       const filter = data.map((d) => {
         const match = action.payload.nameId === d.nameId;
 
-        console.log(match, 'match');
+        // console.log(match, 'match');
 
         if (match) {
           return {

@@ -5,7 +5,7 @@ import moment from 'moment';
 const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
 export function stocksdataManipulatorObject(stock = {}) {
-  console.log(stock, 'stock');
+  // console.log(stock, 'stock');
   try {
     if (_.isEmpty(stock)) return {};
 

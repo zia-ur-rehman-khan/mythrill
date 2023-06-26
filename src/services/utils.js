@@ -25,14 +25,14 @@ import { Form } from 'antd';
 
 // GET CURRENT ACCESS TOKEN FROM USER REDUCER
 export const getCurrentAccessToken = () => {
-  let token = DataHandler.getStore().getState().user?.data?.data?.access_token;
+  let token = DataHandler.getStore().getState().user?.data?.access_token;
   console.log('token');
   return token;
 };
 
 // GET CURRENT REFRESH TOKEN FROM USER REDUCER
 export const getCurrentRefreshToken = () => {
-  let token = DataHandler.getStore().getState().user?.data?.data?.refresh_token;
+  let token = DataHandler.getStore().getState().user?.data?.refresh_token;
   console.log('ssss');
   return token;
 };
@@ -227,7 +227,6 @@ export const toastAlert = (
 
 // GENERATE REFRESH TOKEN
 export const refreshAccessToken = async () => {
-  console.log('here in refreshAccessToken');
   let data = {};
   data.token = getCurrentRefreshToken();
   const method = 'POST';
@@ -236,17 +235,17 @@ export const refreshAccessToken = async () => {
     const response = await ApiHandler(
       method,
       _url,
-      data,
+      {},
       {
         Authorization: `Bearer ${data?.token}`
       },
       BASE_URL
     );
     console.log({ newAccessToken: response });
-    const responseJson = await response.json();
-    console.log({ newAccessToken: responseJson.data });
-    DataHandler.getStore().dispatch(refreshToken(responseJson.data));
-    return responseJson.data.access_token;
+    // const responseJson = await response.json();
+    console.log(response.data.data, 'responce is here');
+    DataHandler.getStore().dispatch(refreshToken(response?.data?.data));
+    return response?.data?.data?.access_token;
   } catch (error) {
     toastAlert(error.response);
     console.log({ refreshTokenError: error.response });

@@ -11,14 +11,15 @@ import { userSignOutSuccess, setAuthError } from '../redux/slicers/user';
 import { refreshAccessToken, toastAlert } from './utils';
 
 const userBlocked = (res) => {
-  DataHandler.getStore().dispatch(
-    setAuthError(res.data.message || ERROR_ACCOUNT_BLOCKED)
-  );
+  // DataHandler.getStore().dispatch(
+  //   setAuthError(res.data.message || ERROR_ACCOUNT_BLOCKED)
+  // );
   DataHandler.getStore().dispatch(userSignOutSuccess());
 };
 
 const onForbidden = async () => {
   const newToken = await refreshAccessToken();
+  console.log(newToken, 'nwToken');
   if (newToken) {
     return newToken;
   }
@@ -73,7 +74,18 @@ const ApiHandler = async (request, url, data, headers, baseUrl) => {
         const newToken = await onForbidden();
         if (newToken) {
           headers.Authorization = `Bearer ${newToken}`;
-          await ApiHandler(request, url, data, headers, baseUrl);
+          const responseNew = await ApiHandler(
+            request,
+            url,
+            data,
+            headers,
+            baseUrl
+          );
+          if (responseNew.status === 403 || responseNew.status === 401) {
+            userBlocked(responseNew);
+            return { status: false };
+          }
+          return responseNew;
         } else {
           return { status: false };
         }
