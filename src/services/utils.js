@@ -9,7 +9,11 @@ import {
 import ApiHandler from './ApiHandler';
 import DataHandler from './DataHandler';
 import { BASE_URL } from '../config/webService';
-import { userSignOutSuccess, refreshToken } from '../redux/slicers/user';
+import {
+  userSignOutSuccess,
+  refreshToken,
+  userSignOutRequest
+} from '../redux/slicers/user';
 import {
   cloneDeep,
   filter,
@@ -268,4 +272,8 @@ export const userPlatform = () => {
   } else {
     return 'web';
   }
+};
+
+export const handleUserSignout = () => {
+  DataHandler.getStore().dispatch(userSignOutRequest());
 };

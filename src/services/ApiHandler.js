@@ -8,7 +8,8 @@ import {
 } from '../config/webService';
 import { ALERT_TYPES, API_LOG, API_TIMEOUT } from '../constants';
 import { userSignOutSuccess, setAuthError } from '../redux/slicers/user';
-import { refreshAccessToken, toastAlert } from './utils';
+import { toastAlert } from './utils';
+import { refreshAccessToken } from '../helpers/refreshToken';
 
 const userBlocked = (res) => {
   // DataHandler.getStore().dispatch(
