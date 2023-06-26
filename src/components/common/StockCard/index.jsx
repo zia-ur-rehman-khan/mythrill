@@ -3,7 +3,7 @@ import CommonTextField from '../TextField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import './styles.scss';
-import { Dropdown, Space } from 'antd';
+import { Dropdown, Popover, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { AppStyles, Images } from '../../../theme';
 import { css } from 'aphrodite';
@@ -28,16 +28,24 @@ const StockCard = ({ value, addIcon }) => {
     navigate(`${slug}`);
   };
 
-  const items = [
+  const array = [
     {
-      label: 'Favorite',
-      key: '0'
+      label: 'Favorite'
     },
     {
       label: 'Remove',
-      key: '1'
+      onClick: () => unSubscribe(stockId)
     }
   ];
+
+  const items = array.map((d) => (
+    <CommonTextField
+      onClick={d.onClick}
+      text={d.label}
+      fontWeight={600}
+      mb={5}
+    />
+  ));
 
   const subscribe = (stockId) => {
     setIsLoading(true);
@@ -111,13 +119,19 @@ const StockCard = ({ value, addIcon }) => {
               onClick={() => subscribe(stockId)}
             />
           ) : (
-            <CommonDropdown items={items}>
+            <Popover
+              placement="bottom"
+              overlayClassName="market-popover"
+              content={items}
+              trigger="click"
+              arrow={false}
+            >
               <FontAwesomeIcon
                 className={css(AppStyles.pointer)}
                 icon={faEllipsisVertical}
-                onClick={() => unSubscribe(stockId)}
+                // onClick={() => unSubscribe(stockId)}
               />
-            </CommonDropdown>
+            </Popover>
           )}
         </Space>
       </Space>
