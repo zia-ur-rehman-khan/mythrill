@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CommonTextField from '../TextField';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -14,9 +14,12 @@ import {
   getSubscribeStocksRequest
 } from '../../../redux/slicers/stocks';
 import { useDispatch } from 'react-redux';
+import Loader from '../../loader';
 
 const StockCard = ({ value, addIcon }) => {
   const { title, amount, stockUpdate, color, stockId, slug, type } = value;
+  const [isLoading, setIsLoading] = useState(false);
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -37,11 +40,13 @@ const StockCard = ({ value, addIcon }) => {
   ];
 
   const subscribe = (stockId) => {
+    setIsLoading(true);
     const payloadData = { stock_id: stockId };
     dispatch(
       StockSubscribeRequest({
         payloadData,
         responseCallback: (res) => {
+          setIsLoading(false);
           if (res.status) {
             console.log(res.status, 'res');
           } else {
@@ -53,11 +58,14 @@ const StockCard = ({ value, addIcon }) => {
   };
 
   const unSubscribe = (stockId) => {
+    setIsLoading(true);
+
     const payloadData = { stock_id: stockId };
     dispatch(
       StockUnSubscribeRequest({
         payloadData,
         responseCallback: (res) => {
+          setIsLoading(false);
           if (res.status) {
             console.log(res, 'res');
           } else {
@@ -67,6 +75,14 @@ const StockCard = ({ value, addIcon }) => {
       })
     );
   };
+
+  if (isLoading) {
+    return (
+      <div className="stockCard-loader">
+        <Loader size={50} />
+      </div>
+    );
+  }
 
   return (
     <Space className="stockCard-main">
