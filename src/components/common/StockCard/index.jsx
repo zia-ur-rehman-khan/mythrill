@@ -76,50 +76,57 @@ const StockCard = ({ value, addIcon }) => {
     );
   };
 
-  if (isLoading) {
-    return (
-      <div className="stockCard-loader">
-        <Loader size={50} />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="stockCard-loader">
+  //       <Loader size={50} />
+  //     </div>
+  //   );
+  // }
 
   return (
-    <Space className="stockCard-main">
-      <Space direction="vertical">
-        <CommonTextField
-          text={title}
-          fontWeight={600}
-          onClick={() => !addIcon && changeRoute()}
-        />
-        <CommonTextField text={type} color={'#626D7D'} />
-      </Space>
-      <Space size={10}>
+    <div className="main-card-parent">
+      <Space className="stockCard-main">
         <Space direction="vertical">
-          <CommonTextField text={amount} fontWeight={600} />
-          <div className={`color-text ${color}`}>
-            <CommonTextField text={stockUpdate} topClass={'small'} />
-          </div>
-        </Space>
-        {addIcon ? (
-          <img
-            src={Images.add}
-            width={'21px'}
-            height={'21px'}
-            className={css(AppStyles.pointer)}
-            onClick={() => subscribe(stockId)}
+          <CommonTextField
+            text={title}
+            fontWeight={600}
+            onClick={() => !addIcon && changeRoute()}
           />
-        ) : (
-          <CommonDropdown items={items}>
-            <FontAwesomeIcon
+          <CommonTextField text={type} color={'#626D7D'} />
+        </Space>
+        <Space size={10}>
+          <Space direction="vertical">
+            <CommonTextField text={amount} fontWeight={600} />
+            <div className={`color-text ${color}`}>
+              <CommonTextField text={stockUpdate} topClass={'small'} />
+            </div>
+          </Space>
+          {addIcon ? (
+            <img
+              src={Images.add}
+              width={'21px'}
+              height={'21px'}
               className={css(AppStyles.pointer)}
-              icon={faEllipsisVertical}
-              onClick={() => unSubscribe(stockId)}
+              onClick={() => subscribe(stockId)}
             />
-          </CommonDropdown>
-        )}
+          ) : (
+            <CommonDropdown items={items}>
+              <FontAwesomeIcon
+                className={css(AppStyles.pointer)}
+                icon={faEllipsisVertical}
+                onClick={() => unSubscribe(stockId)}
+              />
+            </CommonDropdown>
+          )}
+        </Space>
       </Space>
-    </Space>
+      {isLoading && (
+        <div className="loader-main">
+          <Loader size={50} />
+        </div>
+      )}
+    </div>
   );
 };
 
