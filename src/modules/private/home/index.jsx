@@ -37,6 +37,7 @@ import {
 } from '../../../redux/slicers/stocks';
 import { Loader } from '../../../components';
 import { socket } from '../../../socket';
+import ChartExample from './stockDetaile/chart';
 
 const { useBreakpoint } = Grid;
 
@@ -51,7 +52,12 @@ const Home = () => {
 
   const getContentByPathname = useMemo(() => {
     if (pathname.startsWith('/stock/')) {
-      return <StockDetailes id={id} />;
+      return (
+        <>
+          <StockDetailes id={id} />
+          <ChartExample />
+        </>
+      );
     } else if (pathname === HOME_ROUTE) {
       return <Stock id={id} />;
     } else if (pathname === TRENDING_ROUTE) {
@@ -125,6 +131,8 @@ const Home = () => {
     );
 
     const listener1 = (...args) => {
+      console.log(JSON.parse(args).data, 'check_type');
+
       dispatch(
         getSubscribeDataRealTime(
           stocksdataManipulatorObject(JSON.parse(args).data)

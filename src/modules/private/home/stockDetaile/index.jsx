@@ -20,38 +20,25 @@ const StockDetailes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
+  const chartData = useSelector((state) => state?.stocks.stocksData);
 
   const selectedStockData = stocksSubscribe.find(
-    (stock) => stock.slug === `/stock/${id}`
+    (stock) => stock.nameId === id
   );
 
-  const data = selectedStockData?.stocks;
+  console.log(selectedStockData, 'selectedStockData');
 
-  const getStockData = async () => {
-    // const collectionRef = collection(db, "stocks");
-    // const stockQuery = query(collectionRef, where("name_id", "==", id));
-    // const documents = await getDocs(stockQuery);
-    // const stockList = [];
-    // documents.forEach((doc) => {
-    // 	console.log(doc.id, " => ", doc.data());
-    // 	stockList.push(doc.data());
-    // });
-    // const manipulatedData = stockListManipulator(stockList);
-  };
+  // const data = chartData[selectedStockData?.nameId];
 
-  // useEffect(() => {
-  //   if (!selectedStock) {
-  //     navigate(HOME_ROUTE);
-  //   }
-  // }, [selectedStock]);
+  // const manipulatedData =
+  //   data?.length > 0
+  //     ? data?.map((item) => ({
+  //         x: Date.parse(item?.date),
+  //         y: item?.currentPrice
+  //       }))
+  //     : [];
 
-  const manipulatedData =
-    data?.length > 0
-      ? data?.map((item) => ({
-          x: Date.parse(item?.date),
-          y: item?.currentPrice
-        }))
-      : [];
+  // console.log('🚀 ~ file: index.jsx:30 ~ StockDetailes ~ data:', chartData);
 
   return (
     <>
@@ -78,9 +65,9 @@ const StockDetailes = () => {
           <GraphRender stock={selectedStockData} />
         </Col>
       </Row>
-      {manipulatedData?.length > 0 && (
+      {/* {manipulatedData?.length > 0 && (
         <Chart data={manipulatedData} color={selectedStockData?.color} />
-      )}
+      )} */}
     </>
   );
 };

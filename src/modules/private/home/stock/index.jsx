@@ -21,23 +21,21 @@ import {
 
 const Stock = () => {
   const navigate = useNavigate();
-  // const stocksData = useSelector((state) => state?.stocks?.stocksData);
+  const stocksData = useSelector((state) => state?.stocks?.stocksData);
   // console.log('🚀 ~ file: index.jsx:25 ~ Stock ~ stocksData:', stocksData);
   const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
-  const userData = useSelector((state) => state?.user?.data);
 
-  // console.log(userData, 'user data');
+  console.log(stocksList, 'stocksList');
 
   const changeRoute = (id) => {
-    navigate(`${id}`);
+    navigate(`stock/${id}`);
   };
 
   return (
     <Row gutter={[20, 20]}>
       {stocksList?.length > 0 &&
         stocksList?.map((stock) => {
-          // const stockDetailData = stocksData[stock?.nameId];
-          const stockDetailData = stock.stocks;
+          const stockDetailData = stocksData[stock?.nameId];
 
           const data = stockDetailData?.map((item) => ({
             x: Date.parse(item?.date),
@@ -51,7 +49,7 @@ const Stock = () => {
               sm={{ span: 24 }}
               xs={{ span: 24 }}
               key={stock?.slug}
-              onClick={() => changeRoute(stock?.slug)}
+              onClick={() => changeRoute(stock?.nameId)}
               className="child"
             >
               <Space className="box" direction="vertical">

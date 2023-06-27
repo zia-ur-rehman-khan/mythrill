@@ -17,7 +17,8 @@ import { useDispatch } from 'react-redux';
 import Loader from '../../loader';
 
 const StockCard = ({ value, addIcon }) => {
-  const { title, amount, stockUpdate, color, stockId, slug, type } = value;
+  const { title, amount, stockUpdate, color, stockId, slug, type, nameId } =
+    value;
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const StockCard = ({ value, addIcon }) => {
   const navigate = useNavigate();
 
   const changeRoute = () => {
-    navigate(`${slug}`);
+    navigate(`stock/${nameId}`);
   };
 
   const array = [

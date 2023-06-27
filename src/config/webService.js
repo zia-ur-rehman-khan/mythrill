@@ -1,7 +1,7 @@
 import ApiHandler from '../services/ApiHandler';
 import { getCurrentAccessToken } from '../services/utils';
 
-export const API_TIMEOUT = 30000;
+export const API_TIMEOUT = 300000;
 export const ABORT_REQUEST_MESSAGE = 'Network failed. Aborted request.';
 
 export const BASE_URL = 'https://app-dev.mythril.ai/api/v1';

@@ -3,6 +3,10 @@ import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
 import { current } from '@reduxjs/toolkit';
 import { color } from 'highcharts';
+import {
+  stockGraphManipulator,
+  stocksdataManipulatorObject
+} from '../../manipulators/stocksName';
 
 const GeneralReducer = createSlice({
   name: 'stocks',
@@ -29,6 +33,23 @@ const GeneralReducer = createSlice({
     getSubscribeStocksRequest() {},
     getSubscribeStocksSuccess(state, action) {
       state.stocksSubscribe = action.payload;
+
+      const stocksDataPayload = {};
+
+      for (const stock of action.payload) {
+        console.log(stock, 'stock');
+        const sort = stock?.stocks?.sort(
+          (a, b) => new Date(a?.date) - new Date(b?.date)
+        );
+
+        if (sort?.length > 10) {
+          stocksDataPayload[stock.nameId] = sort?.splice(0, 10);
+        } else {
+          stocksDataPayload[stock.nameId] = sort;
+        }
+      }
+
+      state.stocksData = stocksDataPayload;
     },
 
     StockSubscribeRequest() {},
@@ -67,7 +88,11 @@ const GeneralReducer = createSlice({
             ...d,
             amount: action.payload.amount,
             stockUpdate: action.payload.stockUpdate,
-            color: action.payload.color
+            color: action.payload.color,
+            stocks: [...d.stocks, action.payload],
+            changeInPercent: action.payload.changeInPercent,
+            changeInPrice: action.payload.changeInPrice,
+            prevPrice: action.payload.prevPrice
           };
         }
 
