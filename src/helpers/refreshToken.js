@@ -1,4 +1,4 @@
-import { BASE_URL } from '../config/webService';
+import { BASE_URL, ERROR_SOMETHING_WENT_WRONG } from '../config/webService';
 import { refreshToken } from '../redux/slicers/user';
 import axios from 'axios';
 import DataHandler from '../services/DataHandler';
@@ -10,9 +10,10 @@ import {
 import { ALERT_TYPES } from '../constants';
 // GENERATE REFRESH TOKEN
 export const refreshAccessToken = async () => {
+  debugger;
   let token = getCurrentRefreshToken();
   if (token) {
-    const url = '/auth/refreshToken';
+    const url = '/users/refresh-token';
     const method = 'POST';
     const headers = { Authorization: `Bearer ${token}` };
     try {
@@ -23,12 +24,17 @@ export const refreshAccessToken = async () => {
         headers: headers
       });
 
-      DataHandler.getStore().dispatch(refreshToken(response.data));
+      const resToken = response?.data?.data?.data;
 
-      return response.data?.accessToken;
-    } catch ({ response }) {
-      console.log({ refreshTokenError: response });
-      toastAlert(response.data.message, ALERT_TYPES.error);
+      DataHandler.getStore().dispatch(refreshToken(resToken));
+
+      return resToken?.access_token;
+    } catch (error) {
+      console.log({ refreshTokenError: error });
+      toastAlert(
+        error?.response?.data?.message ?? ERROR_SOMETHING_WENT_WRONG,
+        ALERT_TYPES.error
+      );
       handleUserSignout();
       return false;
     }

@@ -1,6 +1,6 @@
 // @flow
 import _ from 'lodash';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { cloneDeepItem } from '../../services/utils';
 
 const UserReducer = createSlice({
@@ -24,12 +24,10 @@ const UserReducer = createSlice({
     },
     // REFRESH TOKEN
     refreshToken(state, action) {
-      console.log(current(state.data), 'action first');
-      let newData = cloneDeepItem(state.data);
+      let newData = { ...state.data };
       newData.access_token = action.payload.access_token;
       newData.refresh_token = action.payload.refresh_token;
       state.data = { ...state.data, ...newData };
-      console.log(current(state.data), 'action second');
     },
 
     // SET AUTH ERROR
