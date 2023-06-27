@@ -10,7 +10,6 @@ import {
 import { ALERT_TYPES } from '../constants';
 // GENERATE REFRESH TOKEN
 export const refreshAccessToken = async () => {
-  debugger;
   let token = getCurrentRefreshToken();
   if (token) {
     const url = '/users/refresh-token';

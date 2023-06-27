@@ -72,7 +72,6 @@ const ApiHandler = async (request, url, data, headers, baseUrl) => {
     if (response.status === 401) {
       try {
         const newToken = await onForbidden();
-        debugger;
         if (newToken) {
           headers.Authorization = `Bearer ${newToken}`;
           const responseNew = await ApiHandler(
