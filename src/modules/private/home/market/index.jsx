@@ -69,20 +69,22 @@ const Market = ({ isLoading, width }) => {
         background="rgba(118, 101, 193, 0.1)"
         onClick={() => setIsModal(true)}
       />
-      <CommonModal
-        width={width}
-        title={
-          <CommonHeading
-            text={'Add Stock'}
-            textAlign="center"
-            className={css(AppStyles.mBottom10)}
-          />
-        }
-        isModalVisible={isModal}
-        setIsModalVisible={setIsModal}
-      >
-        <AddStock />
-      </CommonModal>
+      {isModal && (
+        <CommonModal
+          width={width}
+          title={
+            <CommonHeading
+              text={'Add Stock'}
+              textAlign="center"
+              className={css(AppStyles.mBottom10)}
+            />
+          }
+          isModalVisible={isModal}
+          setIsModalVisible={setIsModal}
+        >
+          <AddStock isModalVisible={isModal} />
+        </CommonModal>
+      )}
     </>
   );
 };

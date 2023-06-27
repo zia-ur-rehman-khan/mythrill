@@ -8,10 +8,13 @@ import { AppStyles } from '../../../../../theme';
 import { useDispatch } from 'react-redux';
 import {
   getAllStocksRequest,
-  getSubscribeStocksRequest
+  getSubscribeStocksRequest,
+  getUnSubscribeDataRealTime
 } from '../../../../../redux/slicers/stocks';
+import { socket } from '../../../../../socket';
+import { stocksdataManipulatorObject } from '../../../../../manipulators/stocksName';
 
-const AddStock = () => {
+const AddStock = ({ isModalVisible }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -30,6 +33,20 @@ const AddStock = () => {
         }
       })
     );
+
+    const listener2 = (...args) => {
+      console.log(JSON.parse(args), 'two');
+      dispatch(
+        getUnSubscribeDataRealTime(
+          stocksdataManipulatorObject(JSON.parse(args).data)
+        )
+      );
+    };
+    socket.on('stock_name_updates', listener2);
+
+    return () => {
+      socket.off('stock_name_updates', listener2);
+    };
   }, []);
 
   if (isLoading) {

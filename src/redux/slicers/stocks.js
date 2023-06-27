@@ -73,7 +73,34 @@ const GeneralReducer = createSlice({
 
         return d;
       });
+
       state.stocksSubscribe = filter;
+    },
+
+    getUnSubscribeDataRealTime(state, action) {
+      console.log(action.payload, 'data');
+      console.log(current(state.stocksUnSubscribe), 'subscribe');
+
+      const data = state.stocksUnSubscribe;
+
+      const filter = data.map((d) => {
+        const match = action.payload.nameId === d.nameId;
+
+        console.log(match, 'match');
+
+        if (match) {
+          return {
+            ...d,
+            amount: action.payload.amount,
+            stockUpdate: action.payload.stockUpdate,
+            color: action.payload.color
+          };
+        }
+
+        return d;
+      });
+
+      state.stocksUnSubscribe = filter;
     }
   }
 });
@@ -89,7 +116,8 @@ export const {
   setStocksDataAction,
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
-  getSubscribeDataRealTime
+  getSubscribeDataRealTime,
+  getUnSubscribeDataRealTime
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;
