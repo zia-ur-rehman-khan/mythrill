@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const UserInfo = () => {
   const { data } = useSelector((state) => state?.user);
-  console.log('🚀 ~ file: index.jsx:24 ~ UserInfo ~ data:', data);
 
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
