@@ -65,7 +65,17 @@ const UserReducer = createSlice({
 
     ResetPasswordRequest(state, action) {},
     LogoutRequest(state, action) {},
-    ResendVerificationRequest(state, action) {}
+    ResendVerificationRequest(state, action) {},
+    userChangePasswordRequest(state, action) {},
+    userDataUpdateRequest(state, action) {},
+    userDataUpdateSuccess(state, action) {
+      console.log(action.payload, 'payload');
+      let newData = { ...state.data };
+      newData.name = action.payload.name;
+      newData.phone = action.payload.phone;
+      newData.email = action.payload.email;
+      state.data = { ...state.data, ...newData };
+    }
   }
 });
 
@@ -83,10 +93,12 @@ export const {
   VerificationRequest,
   ForgotRequest,
   EmailVerificationRequest,
-
+  userChangePasswordRequest,
   ResetPasswordRequest,
   LogoutRequest,
-  ResendVerificationRequest
+  ResendVerificationRequest,
+  userDataUpdateRequest,
+  userDataUpdateSuccess
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

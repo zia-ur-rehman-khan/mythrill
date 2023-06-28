@@ -19,13 +19,15 @@ const CommonInputField = ({
   // touch,
   height,
   suffix,
-  rules
+  rules,
+  disabled
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
       <Input
         style={{ height }}
         type={type}
+        disabled={disabled}
         // name={name}
         addonBefore={addonBefore}
         showCount={showCount}

@@ -1,0 +1,7 @@
+@use "../../../../master.scss";
+
+.user-password-main {
+    padding: 20px;
+    background-color: master.$dark-color;
+    border-radius: 20px;
+}

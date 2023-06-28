@@ -191,9 +191,9 @@ export const WEB_STRINGS = {
 };
 
 export const MENU_LIST = [
-  { title: 'Home', src: home, route: HOME_ROUTE }
+  { title: 'Home', src: home, route: HOME_ROUTE },
   // { title: "Share", src: share },
-  // { title: "Settings", src: setting },
+  { title: 'Settings', src: setting, route: SETTING_ROUTE }
 ];
 
 export const stock_List = [
