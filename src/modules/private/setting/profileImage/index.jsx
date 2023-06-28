@@ -59,7 +59,7 @@ const ProfileImage = ({ setFile, file, profileImage }) => {
         )}
       </Upload>
       <div className="edit-icon">
-        <img src={Images.editIcon} />
+        <img src={Images.editIcon} width={'25.5px'} height={'25.5px'} />
       </div>
     </div>
   );

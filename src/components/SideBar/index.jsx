@@ -17,13 +17,14 @@ import { CommonDropdown } from '../common';
 import DataHandler from '../../services/DataHandler';
 import { LogoutRequest, userLoginSuccess } from '../../redux/slicers/user';
 import { userSignOutSuccess } from '../../redux/slicers/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userPlatform } from '../../services/utils';
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state?.user);
 
   const changeRoute = (route) => {
     navigate(route);
@@ -87,16 +88,21 @@ const SideBar = ({ isDrawer }) => {
           </Space>
 
           <Space className="profile" align="center" size={10}>
-            <img src={Images.profile} width={'33.75px'} height={'33.75px'} />
+            <img
+              src={data?.profile_image || Images.profile}
+              width={'33.75px'}
+              height={'33.75px'}
+              style={{ borderRadius: '50%' }}
+            />
             <Space direction="vertical" size={2} align="baseline">
               <CommonTextField
-                text={'Andy Warhol'}
+                text={data?.name}
                 fontSize={'10.5px'}
                 lineHeight={'10px'}
                 className={`${css(AppStyles.weight7)}`}
               />
               <CommonTextField
-                text={'andywarhol@mail.com'}
+                text={data?.email}
                 fontSize={'9px'}
                 lineHeight={'10px'}
               />

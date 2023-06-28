@@ -60,7 +60,7 @@ const Header = () => {
         <NotificationContent />
         <Space className="profile" align="center" size={20}>
           <img
-            src={data.profile_image}
+            src={data.profile_image || Images.profile}
             width={'33.75px'}
             height={'33.75px'}
             style={{ borderRadius: '50%' }}
