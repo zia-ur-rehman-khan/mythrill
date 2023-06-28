@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Upload, message } from 'antd';
 import { useState } from 'react';
@@ -12,18 +12,25 @@ const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 };
 
-const ProfileImage = ({ setImageUrl, imageUrl }) => {
+const ProfileImage = ({ setFile, file, profileImage }) => {
   const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState(profileImage);
 
-  const handleChange = ({ fileList }) => {
-    getBase64(fileList[fileList.length - 1].originFileObj, (url) => {
-      setLoading(false);
-      setImageUrl(url);
-    });
+  const handleChange = (file) => {
+    setLoading(true);
+    setFile(file?.fileList[file?.fileList.length - 1].originFileObj ?? null);
+
+    getBase64(
+      file?.fileList[file?.fileList.length - 1].originFileObj,
+      (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      }
+    );
   };
 
   return (
-    <>
+    <div className="main-profile">
       <Upload
         className="my-uploader"
         name="avatar"
@@ -51,7 +58,10 @@ const ProfileImage = ({ setImageUrl, imageUrl }) => {
           />
         )}
       </Upload>
-    </>
+      <div className="edit-icon">
+        <img src={Images.editIcon} />
+      </div>
+    </div>
   );
 };
 export default ProfileImage;

@@ -64,6 +64,12 @@ const UserPassword = () => {
 
   return (
     <div className="user-password-main">
+      <CommonTextField
+        fontSize={'16px'}
+        text={'Change Password'}
+        fontWeight={600}
+        className={css(AppStyles.mBottom15)}
+      />
       <Form form={form} onFinish={onFinish} onFinishFailed={onFinishFailed}>
         <Row gutter={[20, 10]}>
           <Col

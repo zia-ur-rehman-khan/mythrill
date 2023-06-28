@@ -122,6 +122,11 @@ export const CHANGE_USER_Info = {
   type: REQUEST_TYPE.POST
 };
 
+export const CHANGE_USER_AVATAR = {
+  route: '/upload/avatar',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
 export const callRequest = async (
   url,
   data,

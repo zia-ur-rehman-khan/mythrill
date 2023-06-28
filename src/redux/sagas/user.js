@@ -2,6 +2,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from '../../constants';
 import {
   callRequest,
+  CHANGE_USER_AVATAR,
   CHANGE_USER_Info,
   CHANGE_USER_PASSWORD,
   CONTACT_US,
@@ -25,6 +26,7 @@ import {
   ResendVerificationRequest,
   ResetPasswordRequest,
   VerificationRequest,
+  userAvatarRequest,
   userChangePasswordRequest,
   userDataUpdateRequest,
   userDataUpdateSuccess,
@@ -321,6 +323,33 @@ function* userDataUpdate() {
   }
 }
 
+function* userAvatarUpdate() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(userAvatarRequest.type);
+    const { avatarPayload, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        CHANGE_USER_AVATAR,
+        avatarPayload,
+        '',
+        '',
+        {}
+      );
+      if (response?.success) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userDataUpdateSuccess(response?.data?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(userLogin);
   yield fork(userRegister);
@@ -332,4 +361,5 @@ export default function* root() {
   yield fork(userEmailVerification);
   yield fork(userDataUpdate);
   yield fork(changePassword);
+  yield fork(userAvatarUpdate);
 }

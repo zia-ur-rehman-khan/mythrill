@@ -12,15 +12,20 @@ import {
 import { AppStyles } from '../../../../theme';
 import { css } from 'aphrodite';
 import './styles.scss';
-import { userDataUpdateRequest } from '../../../../redux/slicers/user';
+import {
+  userAvatarRequest,
+  userDataUpdateRequest
+} from '../../../../redux/slicers/user';
 import { toastAlert } from '../../../../services/utils';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UserInfo = () => {
   const { data } = useSelector((state) => state?.user);
+  console.log('🚀 ~ file: index.jsx:24 ~ UserInfo ~ data:', data);
 
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState(data?.profile_image);
+  const [file, setFile] = useState(null);
+
   const dispatch = useDispatch();
 
   const [form] = Form.useForm();
@@ -30,20 +35,36 @@ const UserInfo = () => {
 
     const { fullName } = values;
 
-    const payloadData = {
-      name: fullName,
-      profile_image: imageUrl
-    };
+    const formData = new FormData();
+    formData.append('avatar', file);
 
     dispatch(
-      userDataUpdateRequest({
-        payloadData,
+      userAvatarRequest({
+        avatarPayload: formData,
         responseCallback: (res) => {
           setLoading(false);
 
-          if (res.status) {
-            toastAlert(res.message, ALERT_TYPES.success);
-            // form.resetFields();
+          if (res.success) {
+            const payloadData = {
+              name: fullName,
+              profile_image: res?.data?.image_name
+            };
+            dispatch(
+              userDataUpdateRequest({
+                payloadData,
+                responseCallback: (res) => {
+                  setLoading(false);
+
+                  if (res.status) {
+                    toastAlert(res.message, ALERT_TYPES.success);
+                    // form.resetFields();
+                    console.log(res, 'res');
+                  } else {
+                    console.log(res.errors, 'error');
+                  }
+                }
+              })
+            );
             console.log(res, 'res');
           } else {
             console.log(res.errors, 'error');
@@ -68,7 +89,11 @@ const UserInfo = () => {
         }}
         onFinishFailed={onFinishFailed}
       >
-        <ProfileImage imageUrl={imageUrl} setImageUrl={setImageUrl} />
+        <ProfileImage
+          profileImage={data?.profile_image}
+          setFile={setFile}
+          file={file}
+        />
 
         <Row gutter={[20, 10]}>
           <Col
