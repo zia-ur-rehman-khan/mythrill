@@ -69,7 +69,10 @@ const Register = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(NUMBER_VERIFICATION_ROUTE);
+            navigate(NUMBER_VERIFICATION_ROUTE, {
+              state: { number: phoneNumber }
+            });
+
             setLoading(false);
           } else {
             setLoading(false);
