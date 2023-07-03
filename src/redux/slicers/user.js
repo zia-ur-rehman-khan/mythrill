@@ -49,7 +49,6 @@ const UserReducer = createSlice({
 
     userSignOutSuccess(state, action) {
       state.isAuthenticated = false;
-      state.deviceToken = '';
       state.data = {};
     },
     deviceNotificationTokenSuccess(state, action) {
