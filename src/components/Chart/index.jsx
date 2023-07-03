@@ -24,10 +24,10 @@ const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
   const [chartType, setChartType] = useState('areaspline');
-  const { userData } = useSelector((state) => state?.user);
+  const userData = useSelector((state) => state?.user?.data);
 
   const chartRef = useRef(null);
-  console.log(data, 'data');
+  console.log(userData, 'data');
   const screens = useBreakpoint();
 
   const options = { style: 'currency', currency: 'USD' };
@@ -236,7 +236,7 @@ const Chart = ({ data, color }) => {
 
   useEffect(() => {
     const socket = initializeSocket(
-      `wss://app-dev.mythril.ai?stocks=${userData?.subscribedStocks}`
+      `wss://app-dev.mythril.ai?stocks=${userData?.subscribedStocks || ''}`
     );
 
     const listener1 = (...args) => {

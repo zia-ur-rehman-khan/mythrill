@@ -16,6 +16,7 @@ import {
 } from '../../../redux/slicers/stocks';
 import { useDispatch } from 'react-redux';
 import Loader from '../../loader';
+import { STOCK_DETAILE_ROUTE } from '../../../constants';
 
 const StockCard = ({ value, addIcon }) => {
   const { title, amount, stockUpdate, color, stockId, slug, type, nameId } =
@@ -27,7 +28,7 @@ const StockCard = ({ value, addIcon }) => {
   const navigate = useNavigate();
 
   const changeRoute = () => {
-    navigate(`stock/${nameId}`);
+    navigate(STOCK_DETAILE_ROUTE.replace(':id', nameId));
   };
 
   const array = [

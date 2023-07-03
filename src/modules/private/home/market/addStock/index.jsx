@@ -28,7 +28,7 @@ const AddStock = ({ isModalVisible }) => {
 
   useEffect(() => {
     const socket = initializeSocket(
-      `wss://app-dev.mythril.ai?stocks=${data?.subscribedStocks}`
+      `wss://app-dev.mythril.ai?stocks=${data?.subscribedStocks || ''}`
     );
 
     dispatch(
