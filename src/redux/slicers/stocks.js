@@ -14,7 +14,8 @@ const GeneralReducer = createSlice({
     stocks: [],
     stocksSubscribe: [],
     stocksUnSubscribe: [],
-    stocksData: {}
+    stocksData: {},
+    stockLimitExceed: false
   },
   reducers: {
     setStocksListAction(state, action) {
@@ -123,6 +124,9 @@ const GeneralReducer = createSlice({
       });
 
       state.stocksUnSubscribe = filter;
+    },
+    stockLimitExceed(state, action) {
+      state.stockLimitExceed = action.payload;
     }
   }
 });
@@ -139,7 +143,8 @@ export const {
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
   getSubscribeDataRealTime,
-  getUnSubscribeDataRealTime
+  getUnSubscribeDataRealTime,
+  stockLimitExceed
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

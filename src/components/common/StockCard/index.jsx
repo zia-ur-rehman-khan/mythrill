@@ -11,7 +11,8 @@ import CommonDropdown from '../CommonDropdown';
 import {
   StockSubscribeRequest,
   StockUnSubscribeRequest,
-  getSubscribeStocksRequest
+  getSubscribeStocksRequest,
+  stockLimitExceed
 } from '../../../redux/slicers/stocks';
 import { useDispatch } from 'react-redux';
 import Loader from '../../loader';
@@ -59,7 +60,8 @@ const StockCard = ({ value, addIcon }) => {
           if (res.status) {
             console.log(res.status, 'res');
           } else {
-            console.log(res.errors, 'error');
+            dispatch(stockLimitExceed(true));
+            console.log(res, 'error');
           }
         }
       })
