@@ -37,40 +37,62 @@ const UserInfo = () => {
     const formData = new FormData();
     formData.append('avatar', file);
 
-    dispatch(
-      userAvatarRequest({
-        avatarPayload: formData,
-        responseCallback: (res) => {
-          setLoading(false);
+    if (file) {
+      dispatch(
+        userAvatarRequest({
+          avatarPayload: formData,
+          responseCallback: (res) => {
+            setLoading(false);
 
-          if (res.success) {
-            const payloadData = {
-              name: fullName,
-              profile_image: res?.data?.image_name
-            };
-            dispatch(
-              userDataUpdateRequest({
-                payloadData,
-                responseCallback: (res) => {
-                  setLoading(false);
+            if (res.success) {
+              const payloadData = {
+                name: fullName,
+                profile_image: res?.data?.image_name
+              };
+              dispatch(
+                userDataUpdateRequest({
+                  payloadData,
+                  responseCallback: (res) => {
+                    setLoading(false);
 
-                  if (res.status) {
-                    toastAlert(res.message, ALERT_TYPES.success);
-                    // form.resetFields();
-                    console.log(res, 'res');
-                  } else {
-                    console.log(res.errors, 'error');
+                    if (res.status) {
+                      toastAlert(res.message, ALERT_TYPES.success);
+                      // form.resetFields();
+                      console.log(res, 'res');
+                    } else {
+                      console.log(res.errors, 'error');
+                    }
                   }
-                }
-              })
-            );
-            console.log(res, 'res');
-          } else {
-            console.log(res.errors, 'error');
+                })
+              );
+              console.log(res, 'res');
+            } else {
+              console.log(res.errors, 'error');
+            }
           }
-        }
-      })
-    );
+        })
+      );
+    } else {
+      const payloadData = {
+        name: fullName
+      };
+      dispatch(
+        userDataUpdateRequest({
+          payloadData,
+          responseCallback: (res) => {
+            setLoading(false);
+
+            if (res.status) {
+              toastAlert(res.message, ALERT_TYPES.success);
+              // form.resetFields();
+              console.log(res, 'res');
+            } else {
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
+    }
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -120,17 +142,7 @@ const UserInfo = () => {
             sm={{ span: 12 }}
             xs={{ span: 24 }}
           >
-            <CommonPhoneInput
-              name={'phoneNumber'}
-              disabled={true}
-              rules={[
-                {
-                  validator: (_, value) => {
-                    return phoneValidation(_, value);
-                  }
-                }
-              ]}
-            />
+            <CommonPhoneInput name={'phoneNumber'} disabled={true} />
           </Col>
           <Col
             lg={{ span: 8 }}

@@ -7,7 +7,7 @@ import PhoneInput from 'react-phone-input-2';
 import './styles.scss';
 
 const CommonPhoneInput = ({ name, disabled, rules }) => {
-  const [phoneValid, setPhoneValid] = useState();
+  const [phoneValid, setPhoneValid] = useState(true);
   return (
     <Form.Item
       name={name}
