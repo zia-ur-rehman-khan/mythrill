@@ -57,10 +57,10 @@ const ProfileImage = ({ setFile, file, profileImage }) => {
             style={{ borderRadius: '50%' }}
           />
         )}
+        <div className="edit-icon">
+          <img src={Images.editIcon} width={'25.5px'} height={'25.5px'} />
+        </div>
       </Upload>
-      <div className="edit-icon">
-        <img src={Images.editIcon} width={'25.5px'} height={'25.5px'} />
-      </div>
     </div>
   );
 };
