@@ -16,8 +16,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../theme';
+import { useSelector } from 'react-redux';
 
 const Layout = ({ children }) => {
+  const { data } = useSelector((state) => state?.user);
+
   return (
     <div className="main-layout">
       <SideBar />
@@ -35,7 +38,7 @@ const Layout = ({ children }) => {
                 xs={{ span: 24 }}
               >
                 <Space size={0} direction="vertical">
-                  <CommonHeading text={'Welcome Back Andy!'} />
+                  <CommonHeading text={`Welcome Back ${data?.name}!`} />
                 </Space>
               </Col>
               <Col
