@@ -37,6 +37,8 @@ import crossEye from '../assets/auth/crossEye.png';
 import redArrow from '../assets/chart/redArrow.png';
 import yellowArrow from '../assets/chart/yellowArrow.png';
 import greenArrow from '../assets/chart/greenArrow.png';
+import profileIcon from '../assets/setting/profileIcon.png';
+import editIcon from '../assets/setting/editIcon.png';
 
 export default {
   ErrorBackground2,
@@ -77,5 +79,7 @@ export default {
   crossEye,
   redArrow,
   yellowArrow,
-  greenArrow
+  greenArrow,
+  profileIcon,
+  editIcon
 };

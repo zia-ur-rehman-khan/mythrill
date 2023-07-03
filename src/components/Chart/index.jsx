@@ -1,4 +1,4 @@
-import React, { Component, useMemo, useState } from 'react';
+import React, { Component, useEffect, useMemo, useRef, useState } from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
 import priceData from '../../assets/json/btcdata.json';
@@ -16,91 +16,19 @@ import {
 } from '../common';
 import ExtraDetailes from './extraDetailes';
 import { title } from 'process';
+import { stocksdataManipulatorObject } from '../../manipulators/stocksName';
+import { socket } from '../../socket';
+import { connectFirestoreEmulator } from 'firebase/firestore';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
-  console.log({ stockDetail: data });
   const [chartType, setChartType] = useState('areaspline');
-
+  const chartRef = useRef(null);
+  console.log(data, 'data');
   const screens = useBreakpoint();
 
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
-
-  // const title = [
-  //   {
-  //     x: new Date("2023-06-06T06:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T07:29:00"),
-  //     y: 300000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T08:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T09:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T10:29:00"),
-  //     y: 700000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T11:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T12:29:00"),
-  //     y: 300000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T13:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T14:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T15:29:00"),
-  //     y: 700000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T16:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T17:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T18:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T19:29:00"),
-  //     y: 700000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T20:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T21:29:00"),
-  //     y: 300000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T22:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T23:29:00"),
-  //     y: 9554.84,
-  //   },
-  // ];
 
   const candlestickData = [
     [moment('2022-01-02').valueOf(), 131.39, 147.79, 130.23, 146.36],
@@ -174,6 +102,7 @@ const Chart = ({ data, color }) => {
       enabled: true
     },
     xAxis: {
+      minTickInterval: 1,
       minRange: 1,
       type: 'datetime',
       labels: {
@@ -190,9 +119,7 @@ const Chart = ({ data, color }) => {
           // fontSize: "8px",
           color: '#fff',
           position: 'absolute'
-        },
-        allowOverlap: true,
-        enabled: true
+        }
       }
       // Display tick at every data point
       // min: Date.UTC(2022, 5, 6, 6, 29), // Specify the minimum date and time value in UTC
@@ -246,11 +173,11 @@ const Chart = ({ data, color }) => {
     },
     series: [
       {
-        name: 'Price',
+        name: 'Prices',
         type: chartType,
         color: color,
         upColor: color,
-
+        pointInterval: 3600000,
         data: chartType === 'areaspline' ? data : candlestickData,
         tooltip: {
           valueDecimals: 2
@@ -264,10 +191,16 @@ const Chart = ({ data, color }) => {
         type: chartType
       },
       xAxis: {
+        minTickInterval: 1,
+        minRange: 1,
+        type: 'datetime',
         labels: {
           // formatter: function () {
           //   return moment(this.value).format("DD MMM");
           // },
+          formatter: function () {
+            return moment(this.value).format('DD MMM');
+          },
           style: {
             color: '#fff', // Customize the color of the Navigator date text
             opacity: '1'
@@ -298,6 +231,27 @@ const Chart = ({ data, color }) => {
     }
   };
 
+  useEffect(() => {
+    const listener1 = (...args) => {
+      const chart = chartRef.current.chart;
+
+      const test = stocksdataManipulatorObject(JSON.parse(args).data);
+
+      chart.series[0].addPoint(
+        { x: Date.parse(test.date), y: test.currentPrice },
+        true,
+        false
+      );
+      chart.series[0].color = test.color;
+    };
+
+    socket.on('stock_updates', listener1);
+
+    return () => {
+      socket.off('stock_updates', listener1);
+    };
+  }, []);
+
   const chartChange = (type) => {
     setChartType(type);
   };
@@ -308,6 +262,7 @@ const Chart = ({ data, color }) => {
         constructorType={'stockChart'}
         highcharts={Highcharts}
         options={configPrice}
+        ref={chartRef}
         key={chartType}
       />
     ),
@@ -321,6 +276,7 @@ const Chart = ({ data, color }) => {
           className={'chart-above-detailes'}
           chartChange={chartChange}
           chartType={chartType}
+          color={color}
         />
       )}
 

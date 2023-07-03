@@ -1,6 +1,6 @@
 // @flow
 import _ from 'lodash';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { cloneDeepItem } from '../../services/utils';
 
 const UserReducer = createSlice({
@@ -11,21 +11,20 @@ const UserReducer = createSlice({
     isAuthenticated: false,
     isError: null,
     deviceToken: '',
-    text: 'true'
+    hash: ''
   },
   reducers: {
     // USER LOGIN
-    userLoginRequest(state, action) {
-      console.log(action, 'userLoginRequest');
-    },
+    userLoginRequest(state, action) {},
+
     userLoginSuccess(state, action) {
       console.log(action, 'userLoginSuccess');
       state.isAuthenticated = true;
-      state.data = action.payload;
+      state.data = action.payload.data;
     },
     // REFRESH TOKEN
     refreshToken(state, action) {
-      let newData = cloneDeepItem(state.data);
+      let newData = { ...state.data };
       newData.access_token = action.payload.access_token;
       newData.refresh_token = action.payload.refresh_token;
       state.data = { ...state.data, ...newData };
@@ -50,10 +49,34 @@ const UserReducer = createSlice({
 
     userSignOutSuccess(state, action) {
       state.isAuthenticated = false;
+      state.deviceToken = '';
+      state.data = {};
     },
     deviceNotificationTokenSuccess(state, action) {
       state.deviceToken = action.payload;
-    }
+    },
+    userRegisterRequest(state, action) {},
+    userHash(state, action) {
+      state.hash = action.payload;
+    },
+    VerificationRequest(state, action) {},
+    ForgotRequest(state, action) {},
+    EmailVerificationRequest(state, action) {},
+
+    ResetPasswordRequest(state, action) {},
+    LogoutRequest(state, action) {},
+    ResendVerificationRequest(state, action) {},
+    userChangePasswordRequest(state, action) {},
+    userDataUpdateRequest(state, action) {},
+    userDataUpdateSuccess(state, action) {
+      let newData = { ...state.data };
+      newData.name = action.payload.name;
+      newData.phone = action.payload.phone;
+      newData.email = action.payload.email;
+      newData.profile_image = action.payload.profile_image;
+      state.data = { ...state.data, ...newData };
+    },
+    userAvatarRequest(state, action) {}
   }
 });
 
@@ -65,7 +88,19 @@ export const {
   userSignOutRequest,
   userSignOutSuccess,
   deviceNotificationTokenSuccess,
-  userLoginSuccess
+  userLoginSuccess,
+  userRegisterRequest,
+  userHash,
+  VerificationRequest,
+  ForgotRequest,
+  EmailVerificationRequest,
+  userChangePasswordRequest,
+  ResetPasswordRequest,
+  LogoutRequest,
+  ResendVerificationRequest,
+  userDataUpdateRequest,
+  userDataUpdateSuccess,
+  userAvatarRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

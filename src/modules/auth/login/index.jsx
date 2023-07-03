@@ -15,31 +15,59 @@ import { css } from 'aphrodite';
 import AuthLayout from '../../../components/AuthLayout';
 import { useNavigate } from 'react-router-dom';
 import {
+  HOME_ROUTE,
   passwordValidation,
   phoneValidation,
   validatorField
 } from '../../../constants';
 import DataHandler from '../../../services/DataHandler';
-import { userLoginSuccess } from '../../../redux/slicers/user';
+import {
+  userLoginRequest,
+  userLoginSuccess
+} from '../../../redux/slicers/user';
 import {
   CommonPasswordInput,
   CommonPhoneInput
 } from '../../../components/common';
+import { isMobile, userPlatform } from '../../../services/utils';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
-  const Navigate = useNavigate();
+  const deviceToken = useSelector((state) => state?.user?.deviceToken);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const changeRoute = (route) => {
-    Navigate(route);
+    navigate(route);
   };
 
   const onFinish = (values) => {
-    console.log('Success:', values);
-
     setLoading(true);
-    DataHandler.getStore().dispatch(userLoginSuccess());
-    changeRoute('/');
+    const { phoneNumber, password } = values;
+
+    const payloadData = {
+      phone: '+' + phoneNumber,
+      password: password,
+      platform: userPlatform(),
+      token: deviceToken
+    };
+
+    dispatch(
+      userLoginRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -65,7 +93,7 @@ const Login = () => {
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
 
             <CommonPhoneInput
-              name={'phone number'}
+              name={'phoneNumber'}
               rules={[
                 {
                   validator: (_, value) => {

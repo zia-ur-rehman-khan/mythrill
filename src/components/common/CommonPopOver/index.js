@@ -14,6 +14,7 @@ const CommonPopOver = ({
 }) => {
   return (
     <Popover
+      overlayClassName={'notification-popover'}
       className={className}
       arrow={arrow}
       content={content}

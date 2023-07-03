@@ -1,3 +1,5 @@
+@use "../../../master.scss";
+
 .stockCard-main {
     justify-content: space-between;
     width: 100%;
@@ -14,5 +16,29 @@
     .green {
         background: rgba(38, 171, 95, 0.2);
         color: #26ab5f;
+    }
+}
+
+.stockCard-loader {
+    width: 100%;
+    border-bottom: 0.4px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 0 10px 0;
+}
+
+.main-card-parent {
+    position: relative;
+    .loader-main {
+        position: absolute;
+        width: 100%;
+        z-index: 4;
+        top: 0;
+        padding: 10px 0 10px 0;
+        background: rgb(35 37 44 / 78%);
+    }
+}
+
+.market-popover {
+    .ant-popover-inner {
+        background-color: master.$theme3-color;
     }
 }

@@ -14,20 +14,42 @@ import {
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import { useNavigate } from 'react-router-dom';
-import { EMAIL_RULE } from '../../../constants';
+import { EMAIL_RULE, EMAIL_VERIFICATION_ROUTE } from '../../../constants';
+import { ForgotRequest } from '../../../redux/slicers/user';
+import { useDispatch } from 'react-redux';
 
 const Forgot = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const changeRoute = (route) => {
-    navigate(route);
+  const changeRoute = (route, email) => {
+    navigate(route, { state: { email: email } });
   };
 
   const onFinish = (values) => {
     setLoading(true);
+    const { email } = values;
 
-    changeRoute('/email');
+    const payloadData = {
+      email: email
+    };
+
+    dispatch(
+      ForgotRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(EMAIL_VERIFICATION_ROUTE, values?.email);
+            setLoading(false);
+            console.log(res, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {};
   return (

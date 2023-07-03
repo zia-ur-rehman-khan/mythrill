@@ -6,14 +6,10 @@ import PhoneInput from 'react-phone-input-2';
 
 import './styles.scss';
 
-const CommonPhoneInput = ({
-  name,
-
-  rules
-}) => {
+const CommonPhoneInput = ({ name, disabled, rules }) => {
   return (
     <Form.Item name={name} rules={rules}>
-      <PhoneInput country={'us'} dropdownClass="test" />
+      <PhoneInput country={'us'} dropdownClass="test" disabled={disabled} />
     </Form.Item>
   );
 };

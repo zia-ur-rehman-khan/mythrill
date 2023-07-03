@@ -52,9 +52,9 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
         </Space>
         <Space>
           <Space
-            onClick={() => {
-              chartChange('areaspline');
-            }}
+            // onClick={() => {
+            //   chartChange('areaspline');
+            // }}
             className={`${css(AppStyles.pointer)} ${
               chartType === 'areaspline' && 'active'
             }`}
@@ -76,9 +76,9 @@ const ExtraDetailes = ({ className, chartChange, chartType, color }) => {
             </svg>
           </Space>
           <Space
-            onClick={() => {
-              chartChange('candlestick');
-            }}
+            // onClick={() => {
+            //   chartChange('candlestick');
+            // }}
             className={` ${css(AppStyles.pointer)} ${
               chartType === 'candlestick' && 'active'
             }`}

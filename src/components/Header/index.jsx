@@ -13,9 +13,13 @@ import SideBar from '../SideBar';
 import { CommonDropdown, CommonPopOver } from '../common';
 import NotificationContent from './NotificationContent';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const Navigate = useNavigate();
+
+  const { data } = useSelector((state) => state?.user);
+
   const [isMobile, setIsMobile] = useState(false);
 
   const items = [
@@ -55,16 +59,21 @@ const Header = () => {
       <Space size={20} className="right-side">
         <NotificationContent />
         <Space className="profile" align="center" size={20}>
-          <img src={Images.profile} width={'33.75px'} height={'33.75px'} />
+          <img
+            src={data.profile_image || Images.profile}
+            width={'33.75px'}
+            height={'33.75px'}
+            style={{ borderRadius: '50%' }}
+          />
           <Space direction="vertical" align="baseline">
             <CommonTextField
-              text={'Andy Warhol'}
+              text={data?.name}
               fontSize={'10.5px'}
               lineHeight={'10px'}
               className={`${css(AppStyles.weight7)}`}
             />
             <CommonTextField
-              text={'andywarhol@mail.com'}
+              text={data?.email}
               fontSize={'9px'}
               lineHeight={'10px'}
             />

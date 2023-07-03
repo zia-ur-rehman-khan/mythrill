@@ -13,11 +13,11 @@ import {
 } from '../../../../components';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../../../theme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 import { stocksNameManipulator } from '../../../../manipulators/stocksName';
 import { useDispatch } from 'react-redux';
 import { setStocksListAction } from '../../../../redux/slicers/stocks';
+import AddStock from './addStock';
 
 const items = [
   {
@@ -69,26 +69,22 @@ const Market = ({ isLoading, width }) => {
         background="rgba(118, 101, 193, 0.1)"
         onClick={() => setIsModal(true)}
       />
-      <CommonModal
-        width={width}
-        title={
-          <CommonHeading
-            text={'Add Stock'}
-            textAlign="center"
-            className={css(AppStyles.mBottom10)}
-          />
-        }
-        isModalVisible={isModal}
-        setIsModalVisible={setIsModal}
-      >
-        <CommonInputField
-          placeholder="Search..."
-          suffix={<FontAwesomeIcon icon={faSearch} />}
-        />
-        <div className={css(AppStyles.padding10)}>
-          <StockListing addIcon={true} />
-        </div>
-      </CommonModal>
+      {isModal && (
+        <CommonModal
+          width={width}
+          title={
+            <CommonHeading
+              text={'Add Stock'}
+              textAlign="center"
+              className={css(AppStyles.mBottom10)}
+            />
+          }
+          isModalVisible={isModal}
+          setIsModalVisible={setIsModal}
+        >
+          <AddStock isModalVisible={isModal} />
+        </CommonModal>
+      )}
     </>
   );
 };

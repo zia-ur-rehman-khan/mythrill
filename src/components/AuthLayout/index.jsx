@@ -15,9 +15,9 @@ import { Images } from '../../theme';
 import { useNavigate } from 'react-router-dom';
 
 const AuthLayout = ({ children, image, className, arrow }) => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const changeRoute = () => {
-    Navigate(-1);
+    navigate(-1);
   };
   return (
     <div className="auth-box">

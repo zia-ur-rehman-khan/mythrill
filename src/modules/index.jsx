@@ -1,6 +1,6 @@
 import Error from './404';
 // PUBLIC ROUTES
-import Home from './public/home';
+import Home from './private/home';
 // AUTH ROUTES
 import Login from './auth/login/index';
 import Forgot from './auth/forgot';
@@ -11,13 +11,13 @@ import NumberVerification from './auth/numberVerification';
 import Subscripton from './auth/subscription';
 
 // PRIVATE ROUTES
-import Dashboard from './private/dashboard';
+import Dashboard from './public/dashboard';
 
-import Share from './public/share';
-import Setting from './public/setting';
-import Trending from './public/home/trending';
+import Share from './private/share';
+import Setting from './private/setting';
+import Trending from './private/home/trending';
 
-import StockDetaile from './public/home/stockDetaile';
+import StockDetaile from './private/home/stockDetaile';
 
 export {
   Error,
