@@ -180,10 +180,25 @@ const Chart = ({ data, color }) => {
         type: chartType,
         color: color,
         upColor: color,
-        pointInterval: 3600000,
         data: chartType === 'areaspline' ? data : candlestickData,
+        pointInterval: 86400000,
+        pointStart: 1230764400000,
         tooltip: {
           valueDecimals: 2
+        },
+        enabled: true,
+        forced: true,
+        groupAll: true,
+        units: ['minute', [5]],
+        dataGrouping: {
+          enabled: true,
+          forced: true,
+          groupAll: true,
+          units: [
+            ['minute', [1, 15, 30]],
+            ['hour', [1]],
+            ['day', [1]],
+        ],
         }
       }
     ],

@@ -43,8 +43,8 @@ const GeneralReducer = createSlice({
           (a, b) => new Date(a?.date) - new Date(b?.date)
         );
 
-        if (sort?.length > 10) {
-          stocksDataPayload[stock.nameId] = sort?.splice(0, 10);
+        if (sort?.length > 500) {
+          stocksDataPayload[stock.nameId] = sort.slice(sort?.length - 500, sort?.length);
         } else {
           stocksDataPayload[stock.nameId] = sort;
         }
