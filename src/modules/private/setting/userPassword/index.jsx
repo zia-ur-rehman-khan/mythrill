@@ -12,6 +12,7 @@ import {
   ALERT_TYPES,
   EMAIL_RULE,
   handlePassworMatch,
+  handlePassworNotMatch,
   passwordValidation,
   phoneValidation,
   validatorField
@@ -85,9 +86,8 @@ const UserPassword = () => {
                 placeholder={'**************'}
                 rules={[
                   {
-                    validator: (_, value) => {
-                      return passwordValidation(_, value);
-                    }
+                    required: true,
+                    message: 'Field is required.'
                   }
                 ]}
               />
@@ -107,7 +107,11 @@ const UserPassword = () => {
                 rules={[
                   {
                     validator: (_, value) => {
-                      return passwordValidation(_, value);
+                      return handlePassworNotMatch(
+                        _,
+                        value,
+                        getFieldValue('exisitingPassword')
+                      );
                     }
                   }
                 ]}

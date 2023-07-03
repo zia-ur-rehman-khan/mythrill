@@ -392,6 +392,24 @@ export const handlePassworMatch = (_, value, name) => {
   }
 };
 
+export const handlePassworNotMatch = (_, value, name) => {
+  if (!value?.length) {
+    return Promise.reject(new Error('Field is required.'));
+  } else if (value && value === name) {
+    return Promise.reject(new Error('Passwords is same.'));
+  } else if (value && value?.includes() === '') {
+    return Promise.reject(new Error('Cannot accept whitespace'));
+  } else if (value && !checkPasswordValidation(value)) {
+    return Promise.reject(
+      new Error(
+        'Should contain at least 8 and maximum 30 characters , 1 Upper case, 1 Lower Case and 1 Special Character!'
+      )
+    );
+  } else {
+    return Promise.resolve();
+  }
+};
+
 export const forGreen = (color) => {
   if (color === 'green') {
     return 'greenArrow';
