@@ -137,8 +137,6 @@ const Home = () => {
     );
 
     const listener1 = (...args) => {
-      console.log(JSON.parse(args).data, 'check_type');
-
       dispatch(
         getSubscribeDataRealTime(
           stocksdataManipulatorObject(JSON.parse(args).data)

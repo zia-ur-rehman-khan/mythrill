@@ -40,7 +40,6 @@ const AddStock = ({ isModalVisible }) => {
     );
 
     const listener2 = (...args) => {
-      console.log(JSON.parse(args), 'two');
       dispatch(
         getUnSubscribeDataRealTime(
           stocksdataManipulatorObject(JSON.parse(args).data)

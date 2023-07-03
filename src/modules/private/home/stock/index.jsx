@@ -25,8 +25,6 @@ const Stock = () => {
   // console.log('🚀 ~ file: index.jsx:25 ~ Stock ~ stocksData:', stocksData);
   const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
 
-  console.log(stocksList, 'stocksList');
-
   const changeRoute = (id) => {
     navigate(`stock/${id}`);
   };
