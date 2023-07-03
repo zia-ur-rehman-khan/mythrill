@@ -65,11 +65,11 @@ const GeneralReducer = createSlice({
     StockUnSubscribeSuccess(state, action) {
       const data = state.stocksSubscribe;
       const filter = data?.filter(
-        (d) => d.stockId !== action?.payload?.stock_id
+        (d) => d.stockId !== action?.payload?.stockId
       );
 
       state.stocksSubscribe = filter;
-      // state.stocksUnSubscribe = [...state.stocksSubscribe, action.payload];
+      state.stocksUnSubscribe = [...state.stocksUnSubscribe, action.payload];
     },
 
     getSubscribeDataRealTime(state, action) {

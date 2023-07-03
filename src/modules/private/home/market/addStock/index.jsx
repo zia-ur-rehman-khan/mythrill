@@ -5,21 +5,26 @@ import { CommonInputField, Loader } from '../../../../../components';
 import StockListing from '../stockListing';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../../../../theme';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllStocksRequest,
   getSubscribeStocksRequest,
   getUnSubscribeDataRealTime
 } from '../../../../../redux/slicers/stocks';
-import { socket } from '../../../../../socket';
+import initializeSocket, { socket } from '../../../../../socket';
 import { stocksdataManipulatorObject } from '../../../../../manipulators/stocksName';
 
 const AddStock = ({ isModalVisible }) => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const { data } = useSelector((state) => state?.user);
 
   useEffect(() => {
+    const socket = initializeSocket(
+      `wss://app-dev.mythril.ai?stocks=${data?.subscribedStocks}`
+    );
+
     dispatch(
       getAllStocksRequest({
         payloadData: {},
