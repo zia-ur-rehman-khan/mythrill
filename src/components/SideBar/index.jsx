@@ -99,7 +99,7 @@ const SideBar = ({ isDrawer }) => {
                 text={data?.name}
                 fontSize={'10.5px'}
                 lineHeight={'10px'}
-                className={`${css(AppStyles.weight7)}`}
+                className={`${css(AppStyles.weight7)} ellipsis`}
               />
               <CommonTextField
                 text={data?.email}

@@ -90,6 +90,13 @@ body {
 	}
 }
 
+.ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap !important;
+	overflow: hidden;
+	width: 60px;
+}
+
 .ant-form-item {
 	margin-bottom: 15px !important;
 }

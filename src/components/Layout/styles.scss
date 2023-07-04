@@ -11,6 +11,10 @@
                 padding: 36px 35px 35px 35px;
             }
             .top-section {
+                .ellipsis {
+                    min-width: 265px !important;
+                    width: 100% !important;
+                }
                 @media (max-width: 991px) {
                     padding: 20px 20px 10px 20px;
                 }

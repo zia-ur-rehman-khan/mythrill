@@ -37,9 +37,10 @@ const Layout = ({ children }) => {
                 sm={{ span: 12 }}
                 xs={{ span: 24 }}
               >
-                <Space size={0} direction="vertical">
-                  <CommonHeading text={`Welcome Back ${data?.name}!`} />
-                </Space>
+                <CommonHeading
+                  text={`Welcome Back ${data?.name}!`}
+                  className={'ellipsis'}
+                />
               </Col>
               <Col
                 lg={{ span: 10 }}
