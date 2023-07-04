@@ -30,14 +30,14 @@ const UserInfo = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    setLoading(true);
-
     const { fullName } = values;
 
     const formData = new FormData();
     formData.append('avatar', file);
 
     if (file) {
+      setLoading(true);
+
       dispatch(
         userAvatarRequest({
           avatarPayload: formData,
@@ -56,7 +56,10 @@ const UserInfo = () => {
                     setLoading(false);
 
                     if (res.status) {
-                      toastAlert(res.message, ALERT_TYPES.success);
+                      toastAlert(
+                        'Profile updated successfully',
+                        ALERT_TYPES.success
+                      );
                       // form.resetFields();
                       console.log(res, 'res');
                     } else {
@@ -72,7 +75,9 @@ const UserInfo = () => {
           }
         })
       );
-    } else {
+    } else if (values.fullName !== data?.name) {
+      setLoading(true);
+
       const payloadData = {
         name: fullName
       };
@@ -83,7 +88,7 @@ const UserInfo = () => {
             setLoading(false);
 
             if (res.status) {
-              toastAlert(res.message, ALERT_TYPES.success);
+              toastAlert('Profile updated successfully', ALERT_TYPES.success);
               // form.resetFields();
               console.log(res, 'res');
             } else {
@@ -92,6 +97,8 @@ const UserInfo = () => {
           }
         })
       );
+    } else {
+      toastAlert('No changes', ALERT_TYPES.info);
     }
   };
   const onFinishFailed = (errorInfo) => {
