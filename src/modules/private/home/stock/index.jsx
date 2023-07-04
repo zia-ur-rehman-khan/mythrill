@@ -33,7 +33,7 @@ const Stock = () => {
     <Row gutter={[20, 20]}>
       {stocksList?.length > 0 &&
         stocksList?.map((stock) => {
-          const stockDetailData = stocksData[stock?.nameId];
+          const stockDetailData = stocksData[stock?.nameId]?.data;
 
           const data = stockDetailData?.map((item) => ({
             x: Date.parse(item?.date),
