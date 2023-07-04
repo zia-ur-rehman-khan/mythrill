@@ -22,7 +22,7 @@ export const ALERT_TIMEOUT = 3000;
 export const DEV_ENV = 'dev';
 export const PROD_ENV = 'prod';
 export const API_LOG = process.env.REACT_APP_ENV === DEV_ENV;
-export const API_TIMEOUT = 30000;
+export const API_TIMEOUT = 60000;
 
 export const ERROR_MESSAGES = {
   INTERNET_ERROR: 'Please connect to the working internet',

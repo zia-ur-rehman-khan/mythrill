@@ -36,45 +36,49 @@ const UserInfo = () => {
     formData.append('avatar', file);
 
     if (file) {
-      setLoading(true);
+      if (file.size > 5 * 1024 * 1024) {
+        toastAlert('maximum size of image is 5mb', ALERT_TYPES.info);
+      } else {
+        setLoading(true);
 
-      dispatch(
-        userAvatarRequest({
-          avatarPayload: formData,
-          responseCallback: (res) => {
-            setLoading(false);
+        dispatch(
+          userAvatarRequest({
+            avatarPayload: formData,
+            responseCallback: (res) => {
+              setLoading(false);
 
-            if (res.success) {
-              const payloadData = {
-                name: fullName,
-                profile_image: res?.data?.image_name
-              };
-              dispatch(
-                userDataUpdateRequest({
-                  payloadData,
-                  responseCallback: (res) => {
-                    setLoading(false);
+              if (res.success) {
+                const payloadData = {
+                  name: fullName,
+                  profile_image: res?.data?.image_name
+                };
+                dispatch(
+                  userDataUpdateRequest({
+                    payloadData,
+                    responseCallback: (res) => {
+                      setLoading(false);
 
-                    if (res.status) {
-                      toastAlert(
-                        'Profile updated successfully',
-                        ALERT_TYPES.success
-                      );
-                      // form.resetFields();
-                      console.log(res, 'res');
-                    } else {
-                      console.log(res.errors, 'error');
+                      if (res.status) {
+                        toastAlert(
+                          'Profile updated successfully',
+                          ALERT_TYPES.success
+                        );
+                        // form.resetFields();
+                        console.log(res, 'res');
+                      } else {
+                        console.log(res.errors, 'error');
+                      }
                     }
-                  }
-                })
-              );
-              console.log(res, 'res');
-            } else {
-              console.log(res.errors, 'error');
+                  })
+                );
+                console.log(res, 'res');
+              } else {
+                console.log(res.errors, 'error');
+              }
             }
-          }
-        })
-      );
+          })
+        );
+      }
     } else if (values.fullName !== data?.name) {
       setLoading(true);
 
