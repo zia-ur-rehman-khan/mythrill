@@ -44,9 +44,12 @@ const GeneralReducer = createSlice({
         );
 
         if (sort?.length > 500) {
-          stocksDataPayload[stock.nameId] = sort.slice(sort?.length - 500, sort?.length);
+          stocksDataPayload[stock.nameId] = {
+            color: stock.color,
+            data: sort.slice(sort?.length - 500, sort?.length)
+          };
         } else {
-          stocksDataPayload[stock.nameId] = sort;
+          stocksDataPayload[stock.nameId] = { color: stock.color, data: sort };
         }
       }
 

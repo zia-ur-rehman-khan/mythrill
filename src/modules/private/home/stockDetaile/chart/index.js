@@ -7,23 +7,27 @@ import Chart from '../../../../../components/Chart';
 const ChartExample = () => {
   const { id } = useParams();
   const chartData = useSelector((state) => state?.stocks.stocksData);
-  const allStocksInfo = useSelector((state) => state?.stocks?.stocksSubscribe)
+  // const allStocksInfo = useSelector((state) => state?.stocks?.stocksSubscribe)
 
-  const stockInfo = allStocksInfo.find((item) => item?.nameId === id)
-
-  console.log('🚀 ~ file: index.js:24 ~ ChartExample ~ chartData:', stockInfo, allStocksInfo);
+  // const stockInfo = allStocksInfo.find((item) => item?.nameId === id)
 
   const data = chartData[id];
 
   const manipulatedData =
-    data?.length > 0
-      ? data?.map((item) => ({
+    data?.data?.length > 0
+      ? data?.data?.map((item) => ({
           x: Date.parse(item?.date),
           y: item?.currentPrice
         }))
       : [];
 
-  return <>{manipulatedData?.length > 0 && <Chart data={manipulatedData} color={stockInfo?.color} />}</>;
+  return (
+    <>
+      {manipulatedData?.length > 0 && (
+        <Chart data={manipulatedData} color={data.color} />
+      )}
+    </>
+  );
 };
 
 export default ChartExample;
