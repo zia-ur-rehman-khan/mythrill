@@ -13,6 +13,20 @@
     }
 }
 
+.ant-input-affix-wrapper-disabled {
+    .ant-input[disabled] {
+        background: master.$theme3-color;
+        color: #ffffff;
+
+        &::placeholder {
+            color: #ffffff;
+        }
+    }
+    &:hover {
+        border-color: master.$theme-color;
+    }
+}
+
 .ant-input-affix-wrapper {
     background: master.$theme3-color;
     height: 40px;

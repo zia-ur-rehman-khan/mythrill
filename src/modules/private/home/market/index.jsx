@@ -33,12 +33,12 @@ const items = [
   {
     key: '3',
     label: `Crypto`,
-    children: <StockListing test="Cryptocurrency" />
+    children: <StockListing test="CryptoCurreny" />
   },
   {
     key: '4',
     label: `Favorites`,
-    children: <StockListing />
+    children: <></>
   }
 ];
 

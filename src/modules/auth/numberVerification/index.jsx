@@ -13,7 +13,7 @@ import {
 } from '../../../components';
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ALERT_TYPES,
   NUMBER_VERIFICATION_ROUTE,
@@ -31,6 +31,7 @@ import { toastAlert } from '../../../services/utils';
 const NumberVerification = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const hash = useSelector((state) => state?.user?.hash);
   const navigate = useNavigate();
@@ -103,9 +104,10 @@ const NumberVerification = () => {
             width="65%"
             margin="0 auto"
             textAlign={'center'}
-            text={
-              'Add 6 digits verification code sent on your given phone number +0 123 **** ***'
-            }
+            text={`Add 6 digits verification code sent on your given phone number ${location?.state?.number?.slice(
+              0,
+              4
+            )} **** ***`}
             opacity={'0.5'}
           />
           <CommonInputField

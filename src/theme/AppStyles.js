@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   themeColor: { background: '#7665c1' },
   theme2Color: { background: '#393162' },
   theme3Color: { background: '#20232c' },
+  darkTheme: { background: '1d1f26' },
 
   w100: {
     width: '100%'

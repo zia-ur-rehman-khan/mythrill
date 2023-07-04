@@ -21,7 +21,7 @@ import {
   query,
   where
 } from '../../../firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   singleStockNameManipulator,
   stockListManipulator,
@@ -36,7 +36,7 @@ import {
   setStocksListAction
 } from '../../../redux/slicers/stocks';
 import { Loader } from '../../../components';
-import { socket } from '../../../socket';
+import initializeSocket, { socket } from '../../../socket';
 import ChartExample from './stockDetaile/chart';
 
 const { useBreakpoint } = Grid;
@@ -49,6 +49,7 @@ const Home = () => {
   const screens = useBreakpoint();
 
   const [isLoading, setIsLoading] = useState(true);
+  const { data } = useSelector((state) => state?.user);
 
   const getContentByPathname = useMemo(() => {
     if (pathname.startsWith('/stock/')) {
@@ -115,6 +116,11 @@ const Home = () => {
     // );
 
     // return unSubscribe;
+
+    const socket = initializeSocket(
+      `wss://app-dev.mythril.ai?stocks=${data?.subscribedStocks || ''}`
+    );
+
     dispatch(
       getSubscribeStocksRequest({
         payloadData: {},
@@ -131,8 +137,6 @@ const Home = () => {
     );
 
     const listener1 = (...args) => {
-      console.log(JSON.parse(args).data, 'check_type');
-
       dispatch(
         getSubscribeDataRealTime(
           stocksdataManipulatorObject(JSON.parse(args).data)

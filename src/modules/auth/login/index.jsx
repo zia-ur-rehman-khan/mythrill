@@ -92,16 +92,7 @@ const Login = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
 
-            <CommonPhoneInput
-              name={'phoneNumber'}
-              rules={[
-                {
-                  validator: (_, value) => {
-                    return phoneValidation(_, value);
-                  }
-                }
-              ]}
-            />
+            <CommonPhoneInput name={'phoneNumber'} />
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Password'} opacity={'0.5'} />

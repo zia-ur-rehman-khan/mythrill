@@ -146,7 +146,11 @@ function* StockUnSubscribe() {
       );
       if (response?.data) {
         if (responseCallback) responseCallback(response?.data);
-        yield put(StockUnSubscribeSuccess(payloadData));
+        yield put(
+          StockUnSubscribeSuccess(
+            stocksdataManipulatorObject(response?.data?.data?.stocks_name)
+          )
+        );
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);

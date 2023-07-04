@@ -11,10 +11,12 @@ import CommonDropdown from '../CommonDropdown';
 import {
   StockSubscribeRequest,
   StockUnSubscribeRequest,
-  getSubscribeStocksRequest
+  getSubscribeStocksRequest,
+  stockLimitExceed
 } from '../../../redux/slicers/stocks';
 import { useDispatch } from 'react-redux';
 import Loader from '../../loader';
+import { STOCK_DETAILE_ROUTE } from '../../../constants';
 
 const StockCard = ({ value, addIcon }) => {
   const { title, amount, stockUpdate, color, stockId, slug, type, nameId } =
@@ -26,7 +28,7 @@ const StockCard = ({ value, addIcon }) => {
   const navigate = useNavigate();
 
   const changeRoute = () => {
-    navigate(`stock/${nameId}`);
+    navigate(STOCK_DETAILE_ROUTE.replace(':id', nameId));
   };
 
   const array = [
@@ -59,7 +61,8 @@ const StockCard = ({ value, addIcon }) => {
           if (res.status) {
             console.log(res.status, 'res');
           } else {
-            console.log(res.errors, 'error');
+            dispatch(stockLimitExceed(true));
+            console.log(res, 'error');
           }
         }
       })

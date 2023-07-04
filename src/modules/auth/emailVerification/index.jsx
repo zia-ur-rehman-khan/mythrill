@@ -107,7 +107,7 @@ const EmailVerification = () => {
             text={'Email Verification Please Check Your Email'}
           />
           <Space>
-            <CommonTextField text={'john.smith@domain.com'} opacity={'0.5'} />
+            <CommonTextField text={location?.state?.email} opacity={'0.5'} />
             <CommonTextField
               text={'Not You?'}
               color="#7665c1"

@@ -14,7 +14,8 @@ const GeneralReducer = createSlice({
     stocks: [],
     stocksSubscribe: [],
     stocksUnSubscribe: [],
-    stocksData: {}
+    stocksData: {},
+    stockLimitExceed: false
   },
   reducers: {
     setStocksListAction(state, action) {
@@ -42,8 +43,8 @@ const GeneralReducer = createSlice({
           (a, b) => new Date(a?.date) - new Date(b?.date)
         );
 
-        if (sort?.length > 10) {
-          stocksDataPayload[stock.nameId] = sort?.splice(0, 10);
+        if (sort?.length > 500) {
+          stocksDataPayload[stock.nameId] = sort.slice(sort?.length - 500, sort?.length);
         } else {
           stocksDataPayload[stock.nameId] = sort;
         }
@@ -63,13 +64,15 @@ const GeneralReducer = createSlice({
     },
     StockUnSubscribeRequest() {},
     StockUnSubscribeSuccess(state, action) {
+      console.log(action, 'action');
+
       const data = state.stocksSubscribe;
       const filter = data?.filter(
-        (d) => d.stockId !== action?.payload?.stock_id
+        (d) => d.stockId !== action?.payload?.stockId
       );
 
       state.stocksSubscribe = filter;
-      // state.stocksUnSubscribe = [...state.stocksSubscribe, action.payload];
+      state.stocksUnSubscribe = [...state.stocksUnSubscribe, action.payload];
     },
 
     getSubscribeDataRealTime(state, action) {
@@ -103,15 +106,10 @@ const GeneralReducer = createSlice({
     },
 
     getUnSubscribeDataRealTime(state, action) {
-      console.log(action.payload, 'data');
-      console.log(current(state.stocksUnSubscribe), 'subscribe');
-
       const data = state.stocksUnSubscribe;
 
       const filter = data.map((d) => {
         const match = action.payload.nameId === d.nameId;
-
-        console.log(match, 'match');
 
         if (match) {
           return {
@@ -126,6 +124,9 @@ const GeneralReducer = createSlice({
       });
 
       state.stocksUnSubscribe = filter;
+    },
+    stockLimitExceed(state, action) {
+      state.stockLimitExceed = action.payload;
     }
   }
 });
@@ -142,7 +143,8 @@ export const {
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
   getSubscribeDataRealTime,
-  getUnSubscribeDataRealTime
+  getUnSubscribeDataRealTime,
+  stockLimitExceed
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

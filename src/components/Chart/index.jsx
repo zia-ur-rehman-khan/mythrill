@@ -17,14 +17,17 @@ import {
 import ExtraDetailes from './extraDetailes';
 import { title } from 'process';
 import { stocksdataManipulatorObject } from '../../manipulators/stocksName';
-import { socket } from '../../socket';
+import initializeSocket, { socket } from '../../socket';
 import { connectFirestoreEmulator } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
   const [chartType, setChartType] = useState('areaspline');
+  const userData = useSelector((state) => state?.user?.data);
+
   const chartRef = useRef(null);
-  console.log(data, 'data');
+  console.log(userData, 'data');
   const screens = useBreakpoint();
 
   const options = { style: 'currency', currency: 'USD' };
@@ -177,10 +180,25 @@ const Chart = ({ data, color }) => {
         type: chartType,
         color: color,
         upColor: color,
-        pointInterval: 3600000,
         data: chartType === 'areaspline' ? data : candlestickData,
+        pointInterval: 86400000,
+        pointStart: 1230764400000,
         tooltip: {
           valueDecimals: 2
+        },
+        enabled: true,
+        forced: true,
+        groupAll: true,
+        units: ['minute', [5]],
+        dataGrouping: {
+          enabled: true,
+          forced: true,
+          groupAll: true,
+          units: [
+            ['minute', [1, 15, 30]],
+            ['hour', [1]],
+            ['day', [1]],
+        ],
         }
       }
     ],
@@ -232,6 +250,10 @@ const Chart = ({ data, color }) => {
   };
 
   useEffect(() => {
+    const socket = initializeSocket(
+      `wss://app-dev.mythril.ai?stocks=${userData?.subscribedStocks || ''}`
+    );
+
     const listener1 = (...args) => {
       const chart = chartRef.current.chart;
 

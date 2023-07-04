@@ -1,0 +1,24 @@
+.main-profile {
+    position: relative;
+    width: 70px;
+
+    .my-uploader {
+        .ant-upload {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+    }
+    .edit-icon {
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        top: 50px;
+        img {
+            border: 2px solid #fff;
+            border-radius: 50%;
+            background: #fff;
+        }
+    }
+}

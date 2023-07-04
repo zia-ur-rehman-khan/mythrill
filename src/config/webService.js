@@ -110,6 +110,23 @@ export const GET_SUBSCRIBE_STOCKS = {
   type: REQUEST_TYPE.GET
 };
 
+export const CHANGE_USER_PASSWORD = {
+  route: '/users/change-password',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const CHANGE_USER_Info = {
+  route: '/users/update-user-profile',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const CHANGE_USER_AVATAR = {
+  route: '/upload/avatar',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
 export const callRequest = async (
   url,
   data,
