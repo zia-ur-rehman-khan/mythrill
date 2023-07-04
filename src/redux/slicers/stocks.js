@@ -42,14 +42,10 @@ const GeneralReducer = createSlice({
           (a, b) => new Date(a?.date) - new Date(b?.date)
         );
 
-        if (sort?.length > 500) {
-          stocksDataPayload[stock.nameId] = {
-            color: stock.color,
-            data: sort.slice(sort?.length - 500, sort?.length)
-          };
-        } else {
-          stocksDataPayload[stock.nameId] = { color: stock.color, data: sort };
-        }
+        stocksDataPayload[stock.nameId] = {
+          color: stock.color,
+          data: sort
+        };
       }
 
       state.stocksData = stocksDataPayload;
@@ -69,17 +65,10 @@ const GeneralReducer = createSlice({
         (a, b) => new Date(a?.date) - new Date(b?.date)
       );
 
-      if (sort?.length > 500) {
-        state.stocksData[action.payload.nameId] = {
-          color: action.payload.color,
-          data: sort.slice(sort?.length - 500, sort?.length)
-        };
-      } else {
-        state.stocksData[action.payload.nameId] = {
-          color: action.payload.color,
-          data: sort
-        };
-      }
+      state.stocksData[action.payload.nameId] = {
+        color: action.payload.color,
+        data: sort
+      };
 
       state.stocksData = { ...state.stocksData };
     },

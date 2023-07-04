@@ -169,6 +169,7 @@ const SmallChart = ({ color, data }) => {
         name: 'Price',
         type: 'areaspline',
         color: color, // Specify your desired color here
+        turboThreshold: data.length,
 
         data: data,
 

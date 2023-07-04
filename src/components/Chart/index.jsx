@@ -27,7 +27,7 @@ const Chart = ({ data, color }) => {
   const userData = useSelector((state) => state?.user?.data);
 
   const chartRef = useRef(null);
-  console.log(userData, 'data');
+  console.log(data, 'data');
   const screens = useBreakpoint();
 
   const options = { style: 'currency', currency: 'USD' };
@@ -75,6 +75,7 @@ const Chart = ({ data, color }) => {
         }
       }
     ],
+
     tooltip: {
       shared: true,
       formatter: function () {
@@ -181,11 +182,13 @@ const Chart = ({ data, color }) => {
         color: color,
         upColor: color,
         data: chartType === 'areaspline' ? data : candlestickData,
+        turboThreshold: data.length,
         pointInterval: 86400000,
         pointStart: 1230764400000,
         tooltip: {
           valueDecimals: 2
         },
+
         enabled: true,
         forced: true,
         groupAll: true,
