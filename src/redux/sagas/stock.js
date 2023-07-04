@@ -28,6 +28,7 @@ import {
   stocksdataManipulator,
   stocksdataManipulatorObject
 } from '../../manipulators/stocksName';
+import { socketTokenUpdate } from '../slicers/user';
 
 function* getStockNames() {
   while (true) {
@@ -118,6 +119,7 @@ function* StockSubscribe() {
             stocksdataManipulatorObject(response?.data?.data?.stocks_name)
           )
         );
+        yield put(socketTokenUpdate(response?.data?.data?.subscribedStocks));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -151,6 +153,7 @@ function* StockUnSubscribe() {
             stocksdataManipulatorObject(response?.data?.data?.stocks_name)
           )
         );
+        yield put(socketTokenUpdate(response?.data?.data?.subscribedStocks));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);

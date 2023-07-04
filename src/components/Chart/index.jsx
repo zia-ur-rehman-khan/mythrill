@@ -272,7 +272,7 @@ const Chart = ({ data, color }) => {
     return () => {
       socket.off('stock_updates', listener1);
     };
-  }, []);
+  }, [userData?.subscribedStocks]);
 
   const chartChange = (type) => {
     setChartType(type);

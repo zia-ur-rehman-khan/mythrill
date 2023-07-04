@@ -57,7 +57,7 @@ const AddStock = ({ isModalVisible }) => {
     return () => {
       socket.off('stock_name_updates', listener2);
     };
-  }, []);
+  }, [data?.subscribedStocks]);
 
   if (isLoading) {
     return <Loader />;

@@ -75,7 +75,12 @@ const UserReducer = createSlice({
       newData.profile_image = action.payload.profile_image;
       state.data = { ...state.data, ...newData };
     },
-    userAvatarRequest(state, action) {}
+    userAvatarRequest(state, action) {},
+    socketTokenUpdate(state, action) {
+      let newData = { ...state.data };
+      newData.subscribedStocks = action.payload;
+      state.data = { ...state.data, ...newData };
+    }
   }
 });
 
@@ -99,7 +104,8 @@ export const {
   ResendVerificationRequest,
   userDataUpdateRequest,
   userDataUpdateSuccess,
-  userAvatarRequest
+  userAvatarRequest,
+  socketTokenUpdate
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

@@ -19,7 +19,7 @@ export default function (reducers, onComplete) {
   const middlewares = [sagaMiddleware];
 
   if (process.env.REACT_APP_ENV === DEV_ENV) {
-    middlewares.push(logger);
+    // middlewares.push(logger);
   }
 
   const store = configureStore({

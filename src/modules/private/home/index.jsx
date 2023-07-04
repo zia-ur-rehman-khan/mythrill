@@ -149,7 +149,7 @@ const Home = () => {
     return () => {
       socket.off('stock_updates', listener1);
     };
-  }, []);
+  }, [data?.subscribedStocks]);
 
   if (isLoading) {
     return <Loader />;
