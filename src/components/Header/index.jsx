@@ -3,7 +3,7 @@ import './styles.scss';
 import CommonTextField from '../common/TextField';
 import { faBars, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
-import { Divider, Image, Space } from 'antd';
+import { Divider, Image, Popover, Space } from 'antd';
 import { Drawer } from 'antd';
 
 import { AppStyles, Images } from '../../theme';
@@ -13,29 +13,60 @@ import SideBar from '../SideBar';
 import { CommonDropdown, CommonPopOver } from '../common';
 import NotificationContent from './NotificationContent';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { LogoutRequest } from '../../redux/slicers/user';
+import { userPlatform } from '../../services/utils';
+import { HOME_ROUTE, SETTING_ROUTE } from '../../constants';
 
 const Header = () => {
   const Navigate = useNavigate();
 
   const { data } = useSelector((state) => state?.user);
 
-  const [isMobile, setIsMobile] = useState(false);
+  const dispatch = useDispatch();
 
-  const items = [
-    {
-      label: 'profile setting',
-      key: '0'
-    },
-    {
-      label: 'sign out',
-      key: '1'
-    }
-  ];
+  const [isMobile, setIsMobile] = useState(false);
 
   const changeRoute = (route) => {
     Navigate(route);
   };
+
+  const logout = () => {
+    dispatch(
+      LogoutRequest({
+        payloadData: { platform: userPlatform() },
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(HOME_ROUTE);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
+  const array = [
+    {
+      label: 'Profile setting',
+      onClick: () => changeRoute(SETTING_ROUTE)
+    },
+    {
+      label: 'Sign out',
+      onClick: () => logout()
+    }
+  ];
+
+  const items = array.map((d) => (
+    <CommonTextField
+      onClick={d.onClick}
+      text={d.label}
+      fontWeight={600}
+      mb={5}
+      fontSize={'14px'}
+    />
+  ));
 
   return (
     <header className="main-header">
@@ -76,15 +107,22 @@ const Header = () => {
               text={data?.email}
               fontSize={'9px'}
               lineHeight={'10px'}
+              className={'ellipsis'}
             />
           </Space>
 
-          <CommonDropdown items={items}>
+          <Popover
+            placement="bottom"
+            overlayClassName="market-popover"
+            content={items}
+            trigger="click"
+            arrow={false}
+          >
             <FontAwesomeIcon
               className={css(AppStyles.pointer)}
               icon={faEllipsisVertical}
             />
-          </CommonDropdown>
+          </Popover>
         </Space>
       </Space>
 
