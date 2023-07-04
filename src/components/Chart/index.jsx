@@ -81,7 +81,7 @@ const Chart = ({ data, color }) => {
         return (
           numberFormat.format(this.y, 0) +
           '</b><br/>' +
-          moment(this.x).format('MMMM Do YYYY, h:mm')
+          moment(this.x).format('MMMM Do YYYY, h:mm A')
         );
       }
     },
@@ -197,8 +197,8 @@ const Chart = ({ data, color }) => {
           units: [
             ['minute', [1, 15, 30]],
             ['hour', [1]],
-            ['day', [1]],
-        ],
+            ['day', [1]]
+          ]
         }
       }
     ],

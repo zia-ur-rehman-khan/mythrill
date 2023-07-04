@@ -47,6 +47,7 @@ const StockCard = ({ value, addIcon }) => {
       text={d.label}
       fontWeight={600}
       mb={5}
+      fontSize={'14px'}
     />
   ));
 
