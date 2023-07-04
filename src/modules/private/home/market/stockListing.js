@@ -7,8 +7,6 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
   const stocks = useSelector((state) => state?.stocks?.stocksSubscribe);
   const unSubstocks = useSelector((state) => state?.stocks?.stocksUnSubscribe);
 
-  console.log(stocks, 'stocks');
-
   const noStockInTheList = () => {
     return <CommonTextField text={'No Stocks in the list'} />;
   };

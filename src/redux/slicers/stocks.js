@@ -38,7 +38,6 @@ const GeneralReducer = createSlice({
       const stocksDataPayload = {};
 
       for (const stock of action.payload) {
-        console.log(stock, 'stock');
         const sort = stock?.stocks?.sort(
           (a, b) => new Date(a?.date) - new Date(b?.date)
         );
@@ -58,12 +57,31 @@ const GeneralReducer = createSlice({
 
     StockSubscribeRequest() {},
     StockSubscribeSuccess(state, action) {
+      console.log(action, 'sub');
       const data = state.stocksUnSubscribe;
       const filter = data?.filter(
         (d) => d.stockId !== action?.payload?.stockId
       );
       state.stocksUnSubscribe = filter;
       state.stocksSubscribe = [...state.stocksSubscribe, action.payload];
+
+      const sort = action.payload.stocks?.sort(
+        (a, b) => new Date(a?.date) - new Date(b?.date)
+      );
+
+      if (sort?.length > 500) {
+        state.stocksData[action.payload.nameId] = {
+          color: action.payload.color,
+          data: sort.slice(sort?.length - 500, sort?.length)
+        };
+      } else {
+        state.stocksData[action.payload.nameId] = {
+          color: action.payload.color,
+          data: sort
+        };
+      }
+
+      state.stocksData = { ...state.stocksData };
     },
     StockUnSubscribeRequest() {},
     StockUnSubscribeSuccess(state, action) {
