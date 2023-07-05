@@ -20,6 +20,7 @@ import { stocksdataManipulatorObject } from '../../manipulators/stocksName';
 import initializeSocket, { socket } from '../../socket';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
+import { SOCKET_URL } from '../../config/webService';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
@@ -254,7 +255,7 @@ const Chart = ({ data, color }) => {
 
   useEffect(() => {
     const socket = initializeSocket(
-      `wss://app-dev.mythril.ai?stocks=${userData?.subscribedStocks || ''}`
+      `wss://${SOCKET_URL}?stocks=${userData?.subscribedStocks || ''}`
     );
 
     const listener1 = (...args) => {
