@@ -18,6 +18,7 @@ import {
 import initializeSocket, { socket } from '../../../../../socket';
 import { stocksdataManipulatorObject } from '../../../../../manipulators/stocksName';
 import './styles.scss';
+import { SOCKET_URL } from '../../../../../config/webService';
 
 const AddStock = ({ isModalVisible }) => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const AddStock = ({ isModalVisible }) => {
 
   useEffect(() => {
     const socket = initializeSocket(
-      `wss://app-dev.mythril.ai?stocks=${data?.subscribedStocks || ''}`
+      `wss://${SOCKET_URL}?stocks=${data?.subscribedStocks || ''}`
     );
 
     dispatch(

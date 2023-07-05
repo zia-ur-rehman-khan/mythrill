@@ -38,6 +38,7 @@ import {
 import { Loader } from '../../../components';
 import initializeSocket, { socket } from '../../../socket';
 import ChartExample from './stockDetaile/chart';
+import { SOCKET_URL } from '../../../config/webService';
 
 const { useBreakpoint } = Grid;
 
@@ -118,7 +119,7 @@ const Home = () => {
     // return unSubscribe;
 
     const socket = initializeSocket(
-      `wss://app-dev.mythril.ai?stocks=${data?.subscribedStocks || ''}`
+      `wss://${SOCKET_URL}?stocks=${data?.subscribedStocks || ''}`
     );
 
     dispatch(
