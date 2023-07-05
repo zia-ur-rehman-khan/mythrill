@@ -1,5 +1,5 @@
 {
-  "name": "orthopaedic",
+  "name": "mythril",
   "version": "2.0.0",
   "private": true,
   "dependencies": {
@@ -15,6 +15,7 @@
     "aos": "^2.3.4",
     "aphrodite": "^2.4.0",
     "axios": "^0.21.1",
+    "env-cmd": "^10.1.0",
     "firebase": "^9.22.1",
     "firebase-messaging": "^1.0.6",
     "highcharts": "^11.0.1",
@@ -47,7 +48,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy-prod": "firebase use default && react-scripts build && firebase deploy",
-    "deploy-stag": "firebase use staging && react-scripts build && firebase deploy",
+    "deploy-stag": "firebase use staging && env-cmd -f .env.staging.local react-scripts build && firebase deploy",
     "deploy-dev": "firebase use dev && react-scripts build && firebase deploy",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
