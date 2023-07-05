@@ -1,0 +1,17 @@
+@use "../../../../master.scss";
+
+.payment-main {
+    padding: 20px;
+    background-color: master.$dark-color;
+    border-radius: 20px;
+
+    .button-side {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        .payment-but {
+            width: 50%;
+        }
+    }
+}

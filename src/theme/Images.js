@@ -39,6 +39,7 @@ import yellowArrow from '../assets/chart/yellowArrow.png';
 import greenArrow from '../assets/chart/greenArrow.png';
 import profileIcon from '../assets/setting/profileIcon.png';
 import editIcon from '../assets/setting/editIcon.png';
+import card from '../assets/setting/card.png';
 
 export default {
   ErrorBackground2,
@@ -81,5 +82,6 @@ export default {
   yellowArrow,
   greenArrow,
   profileIcon,
-  editIcon
+  editIcon,
+  card
 };
