@@ -13,12 +13,27 @@ import {
 } from '../../../components';
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
-import { useNavigate } from 'react-router-dom';
-import { validatorField } from '../../../constants';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  ALERT_TYPES,
+  NUMBER_VERIFICATION_ROUTE,
+  SUBSCRIPTION_ROUTE,
+  validatorField
+} from '../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  NumberVerificationRequest,
+  ResendVerificationRequest,
+  VerificationRequest
+} from '../../../redux/slicers/user';
+import { toastAlert } from '../../../services/utils';
 
 const NumberVerification = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
 
+  const hash = useSelector((state) => state?.user?.hash);
   const navigate = useNavigate();
 
   const changeRoute = (route) => {
@@ -27,14 +42,49 @@ const NumberVerification = () => {
 
   const onFinish = (values) => {
     setLoading(true);
+    const { code } = values;
 
-    console.log('Success:', values);
+    const payloadData = {
+      hash: hash,
+      otp: code
+    };
 
-    changeRoute('/packages');
+    dispatch(
+      VerificationRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(SUBSCRIPTION_ROUTE);
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+
+  const resend = () => {
+    dispatch(
+      ResendVerificationRequest({
+        payloadData: { hash: hash },
+        responseCallback: (res) => {
+          if (res.status) {
+            toastAlert(res.message, ALERT_TYPES.success);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
   return (
     <AuthLayout
       className={'number'}
@@ -54,9 +104,10 @@ const NumberVerification = () => {
             width="65%"
             margin="0 auto"
             textAlign={'center'}
-            text={
-              'Add 6 digits verification code sent on your given phone number +0 123 **** ***'
-            }
+            text={`Add 6 digits verification code sent on your given phone number ${location?.state?.number?.slice(
+              0,
+              4
+            )} **** ***`}
             opacity={'0.5'}
           />
           <CommonInputField
@@ -64,7 +115,14 @@ const NumberVerification = () => {
             type={'number'}
             className={'auth'}
             placeholder={'5 6 8 9 2 3'}
-            suffix={<CommonTextField text={'Resend'} opacity={'0.5'} />}
+            onClick={resend}
+            suffix={
+              <CommonTextField
+                text={'Resend'}
+                opacity={'0.5'}
+                onClick={resend}
+              />
+            }
             rules={[
               {
                 validator: (_, value) => {

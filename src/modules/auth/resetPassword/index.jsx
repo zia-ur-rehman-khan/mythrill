@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { AppStyles, Images } from '../../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,25 +13,66 @@ import {
 } from '../../../components';
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
-import { useNavigate } from 'react-router-dom';
-import { handlePassworMatch, passwordValidation } from '../../../constants';
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
+import {
+  HOME_ROUTE,
+  NUMBER_VERIFICATION_ROUTE,
+  handlePassworMatch,
+  lOGIN_ROUTE,
+  passwordValidation
+} from '../../../constants';
 import { CommonPasswordInput } from '../../../components/common';
+import {
+  ResetPasswordRequest,
+  userLoginRequest
+} from '../../../redux/slicers/user';
+import { useDispatch } from 'react-redux';
 
 const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const { email, code } = location?.state || {};
 
   const changeRoute = (route) => {
     navigate(route);
   };
 
+  useEffect(() => {
+    if (!email && !code) {
+      console.log(email, code);
+      navigate(HOME_ROUTE);
+    }
+  }, [email, code]);
+
   const onFinish = (values) => {
     setLoading(true);
+    const { password } = values;
 
-    console.log('Success:', values);
+    const payloadData = {
+      email: email,
+      password: password,
+      otp: code
+    };
 
-    changeRoute('/login');
+    dispatch(
+      ResetPasswordRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(lOGIN_ROUTE);
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);

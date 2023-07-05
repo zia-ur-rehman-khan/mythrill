@@ -4,32 +4,41 @@ import moment from 'moment';
 
 const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
-export function singleStockNameManipulator(stock = {}) {
+export function stocksdataManipulatorObject(stock = {}) {
+  // console.log(stock, 'stock');
   try {
     if (_.isEmpty(stock)) return {};
 
     const payload = {};
 
-    payload.title = stock?.fullName ?? '';
-    payload.type = 'Cryptocurrency';
-    payload.slug = stock?.name_id ?? '';
+    payload.changeInPercent = stock?.change_in_percent ?? 0;
+    payload.changeInPrice = stock?.change_in_price ?? 0;
+    payload.coin = stock?.coin ?? '';
+    payload.currentPrice = stock?.current_price ?? 0;
+    payload.date =
+      moment(new Date(stock?.createdAt)).format(FORMAT) ??
+      moment().format(FORMAT);
+    payload.fullName = stock?.fullName ?? '';
+    payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
     payload.nameId = stock?.name_id ?? '';
-    payload.id = stock?.id ?? '';
+    payload.overallTrend = stock?.overall_trend ?? '';
+    payload.prevPrice = stock?.prev_price ?? 0;
+
+    payload.stockId = stock.id ?? '';
+    payload.stocks = stockGraphManipulator(stock?.stocks);
+    payload.title = stock?.name;
     payload.amount = `$${stock?.current_price}`;
     payload.stockUpdate = `${stock?.change_in_percent}%`;
-    payload.overallTrend = stock?.overall_trend ?? '';
+    payload.nameId = stock?.name_id ?? '';
+    payload.type = stock?.type;
     payload.src = Images.bitCoin;
-    payload.changeInPrice = stock?.change_in_price ?? 0;
-    payload.changeInPercent = stock?.change_in_percent ?? 0;
-    payload.prevPrice = stock?.prev_price ?? 0;
-    payload.currentPrice = stock?.current_price ?? 0;
+    payload.slug = `/stock/${stock?.name_slug}` ?? '';
     payload.color =
       stock?.change_in_percent === 0
         ? 'yellow'
-        : stock?.change_in_percent > 0
+        : stock?.stocks_name?.change_in_percent > 0
         ? 'green'
         : 'red';
-    payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
 
     return payload;
   } catch (error) {
@@ -37,7 +46,7 @@ export function singleStockNameManipulator(stock = {}) {
   }
 }
 
-export function stocksNameManipulator(list = []) {
+export function stocksdataManipulator(list = []) {
   try {
     if (_.isEmpty(list) ?? !list?.length) {
       return [];
@@ -46,19 +55,18 @@ export function stocksNameManipulator(list = []) {
     const stockList = [];
     for (const stock of list) {
       const payload = {};
-
-      payload.title = stock?.name ?? '';
-      payload.type = 'Cryptocurrency';
-      payload.slug = stock?.name_id ?? '';
-      payload.id = stock?.id ?? '';
+      payload.stockId = stock.id ?? '';
+      payload.subscribe = stock.stock_subscribe.length ?? 0;
+      payload.title = stock?.name;
       payload.amount = `$${stock?.current_price}`;
-      payload.currentPrice = stock?.current_price ?? 0;
       payload.stockUpdate = `${stock?.change_in_percent}%`;
-      payload.src = Images.bitCoin;
+      payload.nameId = stock?.name_id ?? '';
+      payload.type = stock?.type;
+      payload.slug = `/stock/${stock?.name_slug}` ?? '';
       payload.color =
         stock?.change_in_percent === 0
           ? 'yellow'
-          : stock?.change_in_percent > 0
+          : stock?.stocks_name?.change_in_percent > 0
           ? 'green'
           : 'red';
 
@@ -72,7 +80,57 @@ export function stocksNameManipulator(list = []) {
   }
 }
 
-export function stockListManipulator(list = []) {
+export function stocksNameManipulator(list = []) {
+  try {
+    if (_.isEmpty(list) ?? !list?.length) {
+      return [];
+    }
+
+    const stockList = [];
+    for (const stock of list) {
+      const payload = {};
+      payload.stockSubscribe = stock?.stock_subscribe?.length ?? 0;
+      payload.changeInPercent = stock?.stocks_name?.change_in_percent ?? 0;
+      payload.changeInPrice = stock?.stocks_name?.change_in_price ?? 0;
+      payload.coin = stock?.stocks_name?.coin ?? '';
+      payload.currentPrice = stock?.stocks_name?.current_price ?? 0;
+      payload.date =
+        moment(new Date(stock?.stocks_name?.createdAt)).format(FORMAT) ??
+        moment().format(FORMAT);
+      payload.fullName = stock?.stocks_name?.fullName ?? '';
+      payload.fearGreedIndex = stock?.stocks_name?.fear_greed_index ?? 0;
+      payload.nameId = stock?.stocks_name?.name_id ?? '';
+      payload.overallTrend = stock?.stocks_name?.overall_trend ?? '';
+      payload.prevPrice = stock?.stocks_name?.prev_price ?? 0;
+
+      payload.title = stock?.stocks_name?.name ?? '';
+      payload.stockId = stock?.stocks_name.id ?? '';
+      payload.type = stock?.stocks_name?.type;
+      payload.slug = `/stock/${stock?.stocks_name?.name_slug}` ?? '';
+      payload.id = stock?.stocks_name?.id ?? '';
+      payload.amount = `$${stock?.stocks_name?.current_price}`;
+      payload.currentPrice = stock?.stocks_name?.current_price ?? 0;
+      payload.stockUpdate = `${stock?.stocks_name?.change_in_percent}%`;
+      payload.src = Images.bitCoin;
+      payload.stocks = stockGraphManipulator(stock?.stocks_name?.stocks);
+      payload.color =
+        stock?.stocks_name?.change_in_percent === 0
+          ? 'yellow'
+          : stock?.stocks_name?.change_in_percent > 0
+          ? 'green'
+          : 'red';
+
+      payload && stockList.push(payload);
+    }
+
+    return stockList;
+  } catch (error) {
+    console.error('stocksNameManipulator error --->>>> ', error);
+    return [];
+  }
+}
+
+export function stockGraphManipulator(list = []) {
   try {
     if (_.isEmpty(list) ?? !list?.length) {
       return [];
@@ -88,7 +146,7 @@ export function stockListManipulator(list = []) {
       payload.coin = stock?.coin ?? '';
       payload.currentPrice = stock?.current_price ?? 0;
       payload.date =
-        moment(new Date(stock?.date_time?.seconds * 1000)).format(FORMAT) ??
+        moment(new Date(stock?.createdAt)).format(FORMAT) ??
         moment().format(FORMAT);
       payload.fullName = stock?.fullName ?? '';
       payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
@@ -105,47 +163,3 @@ export function stockListManipulator(list = []) {
     return [];
   }
 }
-
-// STOCK NAME OBJECT
-
-// {
-//   title: "BTCUSDT",
-//   name: "Cryptocurrency",
-//   amount: "$23,738",
-//   stockUpdate: "+23,6%",
-//   color: "green",
-//   id: "1",
-//   src: Images.bitCoin,
-//   chartColor: "#1ABF17",
-// },
-
-// change_in_percent
-// :
-// -465
-// change_in_price
-// :
-// 0
-// coin
-// :
-// "ETH"
-// current_price
-// :
-// 5
-// date_time
-// :
-// it {seconds: 1686673522, nanoseconds: 345000000}
-// fear_greed_index
-// :
-// 0
-// fullName
-// :
-// "Ethereum"
-// name_id
-// :
-// "ethereum"
-// overall_trend
-// :
-// "Arvel"
-// prev_price
-// :
-// 8

@@ -12,27 +12,29 @@ const CommonInputField = ({
   showCount,
   addonBefore,
   type,
-  // onChange,
+  onChange,
   // onBlur,
   // value,
   // errors,
   // touch,
   height,
   suffix,
-  rules
+  rules,
+  disabled
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
       <Input
         style={{ height }}
         type={type}
+        disabled={disabled}
         // name={name}
         addonBefore={addonBefore}
         showCount={showCount}
         maxLength={maxLength}
         className={`ad-input  ${className || ''}`}
         placeholder={placeholder}
-        // onChange={onChange}
+        onChange={onChange}
         // onBlur={onBlur}
         // value={value}
         suffix={suffix || true}

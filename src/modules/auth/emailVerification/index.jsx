@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { AppStyles, Images } from '../../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,7 +13,7 @@ import {
 } from '../../../components';
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   EMAIL_RULE,
   handlePassworMatch,
@@ -21,24 +21,76 @@ import {
   passwordValidation,
   phoneValidation,
   validatorField,
-  numberValidatorField
+  numberValidatorField,
+  SUBSCRIPTION_ROUTE,
+  RESET_PASSWORD_ROUTE,
+  ALERT_TYPES,
+  HOME_ROUTE
 } from '../../../constants';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  EmailVerificationRequest,
+  ResendRequest,
+  ResendVerificationRequest,
+  VerificationRequest
+} from '../../../redux/slicers/user';
+import { toastAlert } from '../../../services/utils';
 
 const EmailVerification = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const hash = useSelector((state) => state?.user?.hash);
 
   const navigate = useNavigate();
 
-  const changeRoute = (route) => {
-    navigate(route);
+  const changeRoute = (route, code) => {
+    navigate(route, { state: { email: location.state.email, code: code } });
   };
 
   const onFinish = (values) => {
     setLoading(true);
+    const { code } = values;
 
-    changeRoute('/reset-password');
+    const payloadData = {
+      hash: hash,
+      otp: code
+    };
+
+    dispatch(
+      EmailVerificationRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(RESET_PASSWORD_ROUTE, values?.code);
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const onFinishFailed = (errorInfo) => {};
+
+  const resend = () => {
+    dispatch(
+      ResendVerificationRequest({
+        payloadData: { hash: hash },
+        responseCallback: (res) => {
+          if (res.status) {
+            toastAlert(res.message, ALERT_TYPES.success);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
   return (
     <AuthLayout
       className="email"
@@ -55,15 +107,26 @@ const EmailVerification = () => {
             text={'Email Verification Please Check Your Email'}
           />
           <Space>
-            <CommonTextField text={'john.smith@domain.com'} opacity={'0.5'} />
-            <CommonTextField text={'Not You?'} color="#7665c1" />
+            <CommonTextField text={location?.state?.email} opacity={'0.5'} />
+            <CommonTextField
+              text={'Not You?'}
+              color="#7665c1"
+              className={css(AppStyles.pointer)}
+              onClick={() => navigate(-1)}
+            />
           </Space>
           <CommonInputField
             name={'code'}
             type={'number'}
             className={'auth'}
             placeholder={'5 6 8 9 2 3'}
-            suffix={<CommonTextField text={'Resend'} opacity={'0.5'} />}
+            suffix={
+              <CommonTextField
+                text={'Resend'}
+                opacity={'0.5'}
+                onClick={resend}
+              />
+            }
             rules={[
               {
                 validator: (_, value) => {

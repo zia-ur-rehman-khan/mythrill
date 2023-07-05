@@ -22,7 +22,7 @@ export const ALERT_TIMEOUT = 3000;
 export const DEV_ENV = 'dev';
 export const PROD_ENV = 'prod';
 export const API_LOG = process.env.REACT_APP_ENV === DEV_ENV;
-export const API_TIMEOUT = 30000;
+export const API_TIMEOUT = 60000;
 
 export const ERROR_MESSAGES = {
   INTERNET_ERROR: 'Please connect to the working internet',
@@ -191,9 +191,9 @@ export const WEB_STRINGS = {
 };
 
 export const MENU_LIST = [
-  { title: 'Home', src: home, route: HOME_ROUTE }
+  { title: 'Home', src: home, route: HOME_ROUTE },
   // { title: "Share", src: share },
-  // { title: "Settings", src: setting },
+  { title: 'Settings', src: setting, route: SETTING_ROUTE }
 ];
 
 export const stock_List = [
@@ -387,6 +387,24 @@ export const handlePassworMatch = (_, value, name) => {
     return Promise.reject(new Error('Field is required.'));
   } else if (value && value !== name) {
     return Promise.reject(new Error('Passwords do not match.'));
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const handlePassworNotMatch = (_, value, name) => {
+  if (!value?.length) {
+    return Promise.reject(new Error('Field is required.'));
+  } else if (value && value === name) {
+    return Promise.reject(new Error('Passwords is same.'));
+  } else if (value && value?.includes() === '') {
+    return Promise.reject(new Error('Cannot accept whitespace'));
+  } else if (value && !checkPasswordValidation(value)) {
+    return Promise.reject(
+      new Error(
+        'Should contain at least 8 and maximum 30 characters , 1 Upper case, 1 Lower Case and 1 Special Character!'
+      )
+    );
   } else {
     return Promise.resolve();
   }

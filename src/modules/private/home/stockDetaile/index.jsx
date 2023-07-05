@@ -19,38 +19,26 @@ import moment from 'moment';
 const StockDetailes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { stocks: stocksList, stocksData } = useSelector(
-    (state) => state?.stocks
+  const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
+  const chartData = useSelector((state) => state?.stocks.stocksData);
+
+  const selectedStockData = stocksSubscribe.find(
+    (stock) => stock.nameId === id
   );
 
-  const selectedStock = stocksList.find((stock) => stock.slug === id);
-  const selectedStockData = stocksData[selectedStock?.slug];
+  console.log(selectedStockData, 'selectedStockData');
 
-  const getStockData = async () => {
-    // const collectionRef = collection(db, "stocks");
-    // const stockQuery = query(collectionRef, where("name_id", "==", id));
-    // const documents = await getDocs(stockQuery);
-    // const stockList = [];
-    // documents.forEach((doc) => {
-    // 	console.log(doc.id, " => ", doc.data());
-    // 	stockList.push(doc.data());
-    // });
-    // const manipulatedData = stockListManipulator(stockList);
-  };
+  // const data = chartData[selectedStockData?.nameId];
 
-  useEffect(() => {
-    if (!selectedStock) {
-      navigate(HOME_ROUTE);
-    }
-  }, [selectedStock]);
+  // const manipulatedData =
+  //   data?.length > 0
+  //     ? data?.map((item) => ({
+  //         x: Date.parse(item?.date),
+  //         y: item?.currentPrice
+  //       }))
+  //     : [];
 
-  const manipulatedData =
-    selectedStockData?.length > 0
-      ? selectedStockData?.map((item) => ({
-          x: Date.parse(item?.date),
-          y: item?.currentPrice
-        }))
-      : [];
+  // console.log('🚀 ~ file: index.jsx:30 ~ StockDetailes ~ data:', chartData);
 
   return (
     <>
@@ -65,7 +53,7 @@ const StockDetailes = () => {
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
-          <Update stock={selectedStock} />
+          <Update stock={selectedStockData} />
           <Suggestion />
         </Col>
         <Col
@@ -74,12 +62,12 @@ const StockDetailes = () => {
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
-          <GraphRender stock={selectedStock} />
+          <GraphRender stock={selectedStockData} />
         </Col>
       </Row>
-      {manipulatedData?.length > 0 && (
-        <Chart data={manipulatedData} color={selectedStock?.color} />
-      )}
+      {/* {manipulatedData?.length > 0 && (
+        <Chart data={manipulatedData} color={selectedStockData?.color} />
+      )} */}
     </>
   );
 };

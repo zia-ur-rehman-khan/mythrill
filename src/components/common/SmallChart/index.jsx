@@ -120,7 +120,7 @@ const SmallChart = ({ color, data }) => {
         return (
           numberFormat.format(this.y, 0) +
           '</b><br/>' +
-          moment(this.x).format('MMMM Do YYYY, h:mm')
+          moment(this.x).format('MMMM Do YYYY, h:mm A')
         );
       }
     },
@@ -169,6 +169,7 @@ const SmallChart = ({ color, data }) => {
         name: 'Price',
         type: 'areaspline',
         color: color, // Specify your desired color here
+        turboThreshold: data.length,
 
         data: data,
 

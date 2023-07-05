@@ -9,7 +9,11 @@ import {
 import ApiHandler from './ApiHandler';
 import DataHandler from './DataHandler';
 import { BASE_URL } from '../config/webService';
-import { userSignOutSuccess, refreshToken } from '../redux/slicers/user';
+import {
+  userSignOutSuccess,
+  refreshToken,
+  userSignOutRequest
+} from '../redux/slicers/user';
 import {
   cloneDeep,
   filter,
@@ -25,14 +29,14 @@ import { Form } from 'antd';
 
 // GET CURRENT ACCESS TOKEN FROM USER REDUCER
 export const getCurrentAccessToken = () => {
-  let token = DataHandler.getStore().getState().user.data.access_token;
+  let token = DataHandler.getStore().getState().user?.data?.access_token;
   console.log('token');
   return token;
 };
 
 // GET CURRENT REFRESH TOKEN FROM USER REDUCER
 export const getCurrentRefreshToken = () => {
-  let token = DataHandler.getStore().getState().user.data.refresh_token;
+  let token = DataHandler.getStore().getState().user?.data?.refresh_token;
   console.log('ssss');
   return token;
 };
@@ -227,22 +231,49 @@ export const toastAlert = (
 
 // GENERATE REFRESH TOKEN
 export const refreshAccessToken = async () => {
-  console.log('here in refreshAccessToken');
   let data = {};
   data.token = getCurrentRefreshToken();
   const method = 'POST';
-  const _url = 'auth/v1/refresh-token';
+  const _url = 'users/refresh-token';
   try {
-    const response = await ApiHandler(method, _url, data, {}, BASE_URL);
+    const response = await ApiHandler(
+      method,
+      _url,
+      {},
+      {
+        Authorization: `Bearer ${data?.token}`
+      },
+      BASE_URL
+    );
     console.log({ newAccessToken: response });
-    const responseJson = await response.json();
-    console.log({ newAccessToken: responseJson.data });
-    DataHandler.getStore().dispatch(refreshToken(responseJson.data));
-    return responseJson.data.access_token;
+    // const responseJson = await response.json();
+    console.log(response.data.data, 'responce is here');
+    DataHandler.getStore().dispatch(refreshToken(response?.data?.data));
+    return response?.data?.data?.access_token;
   } catch (error) {
     toastAlert(error.response);
     console.log({ refreshTokenError: error.response });
     DataHandler.getStore().dispatch(userSignOutSuccess());
     return false;
   }
+};
+
+export const userPlatform = () => {
+  if (
+    navigator.userAgent.match(/Android/i) ||
+    navigator.userAgent.match(/webOS/i) ||
+    navigator.userAgent.match(/iPhone/i) ||
+    navigator.userAgent.match(/iPad/i) ||
+    navigator.userAgent.match(/iPod/i) ||
+    navigator.userAgent.match(/BlackBerry/i) ||
+    navigator.userAgent.match(/Windows Phone/i)
+  ) {
+    return 'mobile';
+  } else {
+    return 'web';
+  }
+};
+
+export const handleUserSignout = () => {
+  DataHandler.getStore().dispatch(userSignOutRequest());
 };

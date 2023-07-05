@@ -1,4 +1,4 @@
-import React, { Component, useMemo, useState } from 'react';
+import React, { Component, useEffect, useMemo, useRef, useState } from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
 import priceData from '../../assets/json/btcdata.json';
@@ -16,91 +16,22 @@ import {
 } from '../common';
 import ExtraDetailes from './extraDetailes';
 import { title } from 'process';
+import { stocksdataManipulatorObject } from '../../manipulators/stocksName';
+import initializeSocket, { socket } from '../../socket';
+import { connectFirestoreEmulator } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
-  console.log({ stockDetail: data });
   const [chartType, setChartType] = useState('areaspline');
+  const userData = useSelector((state) => state?.user?.data);
 
+  const chartRef = useRef(null);
+  console.log(data, 'data');
   const screens = useBreakpoint();
 
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
-
-  // const title = [
-  //   {
-  //     x: new Date("2023-06-06T06:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T07:29:00"),
-  //     y: 300000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T08:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T09:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T10:29:00"),
-  //     y: 700000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T11:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T12:29:00"),
-  //     y: 300000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T13:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T14:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T15:29:00"),
-  //     y: 700000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T16:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T17:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T18:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T19:29:00"),
-  //     y: 700000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T20:29:00"),
-  //     y: 200000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T21:29:00"),
-  //     y: 300000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T22:29:00"),
-  //     y: 500000,
-  //   },
-  //   {
-  //     x: new Date("2023-06-06T23:29:00"),
-  //     y: 9554.84,
-  //   },
-  // ];
 
   const candlestickData = [
     [moment('2022-01-02').valueOf(), 131.39, 147.79, 130.23, 146.36],
@@ -144,13 +75,14 @@ const Chart = ({ data, color }) => {
         }
       }
     ],
+
     tooltip: {
       shared: true,
       formatter: function () {
         return (
           numberFormat.format(this.y, 0) +
           '</b><br/>' +
-          moment(this.x).format('MMMM Do YYYY, h:mm')
+          moment(this.x).format('MMMM Do YYYY, h:mm A')
         );
       }
     },
@@ -249,10 +181,27 @@ const Chart = ({ data, color }) => {
         type: chartType,
         color: color,
         upColor: color,
-
         data: chartType === 'areaspline' ? data : candlestickData,
+        turboThreshold: data.length,
+        pointInterval: 86400000,
+        pointStart: 1230764400000,
         tooltip: {
           valueDecimals: 2
+        },
+
+        enabled: true,
+        forced: true,
+        groupAll: true,
+        units: ['minute', [5]],
+        dataGrouping: {
+          enabled: true,
+          forced: true,
+          groupAll: true,
+          units: [
+            ['minute', [1, 15, 30]],
+            ['hour', [1]],
+            ['day', [1]]
+          ]
         }
       }
     ],
@@ -303,6 +252,31 @@ const Chart = ({ data, color }) => {
     }
   };
 
+  useEffect(() => {
+    const socket = initializeSocket(
+      `wss://app-dev.mythril.ai?stocks=${userData?.subscribedStocks || ''}`
+    );
+
+    const listener1 = (...args) => {
+      const chart = chartRef.current.chart;
+
+      const test = stocksdataManipulatorObject(JSON.parse(args).data);
+
+      chart.series[0].addPoint(
+        { x: Date.parse(test.date), y: test.currentPrice },
+        true,
+        true
+      );
+      chart.series[0].color = test.color;
+    };
+
+    socket.on('stock_updates', listener1);
+
+    return () => {
+      socket.off('stock_updates', listener1);
+    };
+  }, [userData?.subscribedStocks]);
+
   const chartChange = (type) => {
     setChartType(type);
   };
@@ -313,6 +287,7 @@ const Chart = ({ data, color }) => {
         constructorType={'stockChart'}
         highcharts={Highcharts}
         options={configPrice}
+        ref={chartRef}
         key={chartType}
       />
     ),
