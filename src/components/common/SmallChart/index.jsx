@@ -120,7 +120,7 @@ const SmallChart = ({ color, data }) => {
         return (
           numberFormat.format(this.y, 0) +
           '</b><br/>' +
-          moment(this.x).format('MMMM Do YYYY, h:mm')
+          moment(this.x).format('MMMM Do YYYY, h:mm A')
         );
       }
     },
@@ -143,10 +143,13 @@ const SmallChart = ({ color, data }) => {
       enabled: true
     },
     xAxis: {
-      type: 'date',
+      minTickInterval: 1,
+      minRange: 1,
+
+      type: 'datetime',
       labels: {
         formatter: function () {
-          return moment(this.value).format('DD MMM HH ss');
+          return moment(this.value).format('DD MMM');
         },
         style: {
           color: '#fff',
@@ -166,6 +169,7 @@ const SmallChart = ({ color, data }) => {
         name: 'Price',
         type: 'areaspline',
         color: color, // Specify your desired color here
+        turboThreshold: data.length,
 
         data: data,
 

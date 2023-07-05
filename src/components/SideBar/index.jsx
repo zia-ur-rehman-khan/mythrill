@@ -5,7 +5,7 @@ import { AppStyles, Images } from '../../theme';
 import { Divider, Drawer, List, Space } from 'antd';
 import CommonTextField from '../common/TextField';
 import CommonButton from '../common/CommonButton';
-import { MENU_LIST } from '../../constants';
+import { HOME_ROUTE, MENU_LIST } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,20 +15,35 @@ import { faBars, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { css } from 'aphrodite';
 import { CommonDropdown } from '../common';
 import DataHandler from '../../services/DataHandler';
-import { userLoginSuccess } from '../../redux/slicers/user';
+import { LogoutRequest, userLoginSuccess } from '../../redux/slicers/user';
 import { userSignOutSuccess } from '../../redux/slicers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { userPlatform } from '../../services/utils';
 
 const SideBar = ({ isDrawer }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state?.user);
 
   const changeRoute = (route) => {
     navigate(route);
   };
 
-  const logout = (route) => {
-    DataHandler.getStore().dispatch(userSignOutSuccess());
-    navigate(route);
+  const logout = () => {
+    dispatch(
+      LogoutRequest({
+        payloadData: { platform: userPlatform() },
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(HOME_ROUTE);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
   const items = [
     {
@@ -73,16 +88,21 @@ const SideBar = ({ isDrawer }) => {
           </Space>
 
           <Space className="profile" align="center" size={10}>
-            <img src={Images.profile} width={'33.75px'} height={'33.75px'} />
+            <img
+              src={data?.profile_image || Images.profile}
+              width={'33.75px'}
+              height={'33.75px'}
+              style={{ borderRadius: '50%' }}
+            />
             <Space direction="vertical" size={2} align="baseline">
               <CommonTextField
-                text={'Andy Warhol'}
+                text={data?.name}
                 fontSize={'10.5px'}
                 lineHeight={'10px'}
-                className={`${css(AppStyles.weight7)}`}
+                className={`${css(AppStyles.weight7)} ellipsis`}
               />
               <CommonTextField
-                text={'andywarhol@mail.com'}
+                text={data?.email}
                 fontSize={'9px'}
                 lineHeight={'10px'}
               />
@@ -92,7 +112,7 @@ const SideBar = ({ isDrawer }) => {
           <div className="logout">
             <CommonButton
               onClick={() => {
-                logout('/login');
+                logout();
               }}
               text={'Logout'}
             />

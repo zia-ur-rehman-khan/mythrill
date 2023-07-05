@@ -2,7 +2,11 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './styles.scss';
 import { Col, Row, Space } from 'antd';
-import { CommonTextField, SmallChart } from '../../../../components';
+import {
+  CommonHeading,
+  CommonTextField,
+  SmallChart
+} from '../../../../components';
 import { css } from 'aphrodite';
 import { AppStyles, Colors } from '../../../../theme';
 import { Images } from '../../../../theme';
@@ -18,19 +22,21 @@ import {
 const Stock = () => {
   const navigate = useNavigate();
   const stocksData = useSelector((state) => state?.stocks?.stocksData);
-  const stocksList = useSelector((state) => state?.stocks?.stocks);
+  console.log('🚀 ~ file: index.jsx:25 ~ Stock ~ stocksData:', stocksData);
+  const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
 
   const changeRoute = (id) => {
-    navigate(`/stock/${id}`);
+    navigate(`stock/${id}`);
   };
 
   return (
     <Row gutter={[20, 20]}>
       {stocksList?.length > 0 &&
         stocksList?.map((stock) => {
-          const stockDetailData = stocksData[stock?.nameId];
+          const stockDetailData = stocksData[stock?.nameId]?.data;
+
           const data = stockDetailData?.map((item) => ({
-            x: moment(item?.date).valueOf(),
+            x: Date.parse(item?.date),
             y: item?.currentPrice
           }));
 
@@ -41,7 +47,7 @@ const Stock = () => {
               sm={{ span: 24 }}
               xs={{ span: 24 }}
               key={stock?.slug}
-              onClick={() => changeRoute(stock?.slug)}
+              onClick={() => changeRoute(stock?.nameId)}
               className="child"
             >
               <Space className="box" direction="vertical">
@@ -86,19 +92,22 @@ const Stock = () => {
                     <img src={stock?.src} width={'36px'} height={'36px'} />
                     <Space size={3} direction="vertical">
                       <CommonTextField text={'Last'} opacity={0.5} />
-                      <CommonTextField text={stock?.prevPrice} opacity={0.5} />
+                      <CommonTextField
+                        text={stock?.prevPrice || ' '}
+                        opacity={0.5}
+                      />
                     </Space>
                     <Space size={3} direction="vertical">
                       <CommonTextField text={'Chg'} />
                       <CommonTextField
-                        text={stock?.changeInPrice}
+                        text={stock?.changeInPrice || ' '}
                         color={Colors.green}
                       />
                     </Space>
                     <Space size={3} direction="vertical">
                       <CommonTextField text={'Chg%'} />
                       <CommonTextField
-                        text={stock?.changeInPercent}
+                        text={stock?.changeInPercent || ' '}
                         color={Colors.green}
                       />
                     </Space>
@@ -125,6 +134,16 @@ const Stock = () => {
             </Col>
           );
         })}
+
+      {stocksList?.length === 0 && (
+        <div style={{ width: '100%', marginTop: '30px' }}>
+          <CommonHeading
+            level={3}
+            text={'No Stocks to show'}
+            textAlign={'center'}
+          />
+        </div>
+      )}
     </Row>
   );
 };

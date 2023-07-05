@@ -1,10 +1,10 @@
 import ApiHandler from '../services/ApiHandler';
 import { getCurrentAccessToken } from '../services/utils';
 
-export const API_TIMEOUT = 30000;
+export const API_TIMEOUT = 300000;
 export const ABORT_REQUEST_MESSAGE = 'Network failed. Aborted request.';
 
-export const BASE_URL = 'https://bc37-110-39-172-42.ngrok-free.app/api/v1';
+export const BASE_URL = 'https://app-dev.mythril.ai/api/v1';
 // export const BASE_URL = process.env.REACT_APP_BACKEND_DEV_URL;
 // export const BASE_URL = process.env.REACT_APP_BACKEND_STAGGING_URL;
 // export const BASE_URL = process.env.REACT_APP_BACKEND_PROD_URL;
@@ -50,12 +50,83 @@ export const LOGIN_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
-export const GET_STOCK_NAMES = {
-  route: '/stock/data/name',
+export const REJISTER_REQUEST = {
+  route: 'users/signup',
   access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const VERIFICATION_REQUEST = {
+  route: 'users/verify-otp',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const FORGOT_PASSWORD = {
+  route: 'users/forget-password',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const RESET_PASSWORD = {
+  route: 'users/reset-password',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const LOGOUT_REQUEST = {
+  route: 'users/logout',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const RESEND_VERIFICATION_REQUEST = {
+  route: 'users/resend-otp',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const GET_STOCK_NAMES = {
+  route: '/stock/all-stock-names',
+  access_token_required: true,
   type: REQUEST_TYPE.GET
 };
 
+export const STOCK_SUBSCRIBE = {
+  route: '/stock/stock-subscribe',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const STOCK_UNSUBSCRIBE = {
+  route: '/stock/stock-unsubscribe',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const GET_SUBSCRIBE_STOCKS = {
+  route: '/stock/all-subscribed-stocks',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const CHANGE_USER_PASSWORD = {
+  route: '/users/change-password',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const CHANGE_USER_Info = {
+  route: '/users/update-user-profile',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const CHANGE_USER_AVATAR = {
+  route: '/upload/avatar',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
 export const callRequest = async (
   url,
   data,

@@ -30,7 +30,7 @@ const Update = ({ stock }) => {
         <Space>
           <Space size={3} direction="vertical">
             <CommonTextField text={stock?.title} fontWeight={600} />
-            <CommonTextField text={`$${stock?.amount}`} opacity={0.5} />
+            <CommonTextField text={`${stock?.amount}`} opacity={0.5} />
           </Space>
           <img src={Images.upSignLarge} width={'24px'} height={'20px'} />
         </Space>
