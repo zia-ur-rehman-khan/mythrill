@@ -265,7 +265,7 @@ const Chart = ({ data, color }) => {
       chart.series[0].addPoint(
         { x: Date.parse(test.date), y: test.currentPrice },
         true,
-        false
+        true
       );
       chart.series[0].color = test.color;
     };
