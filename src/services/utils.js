@@ -277,3 +277,20 @@ export const userPlatform = () => {
 export const handleUserSignout = () => {
   DataHandler.getStore().dispatch(userSignOutRequest());
 };
+
+export const trendingFilter = (t) => {
+  switch (t) {
+    case 1:
+      return 'Buy';
+
+    case 2:
+      return 'Hold';
+
+    case 3:
+      return 'Sell';
+
+    default:
+      return '';
+      q;
+  }
+};

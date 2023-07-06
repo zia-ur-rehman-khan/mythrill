@@ -21,6 +21,12 @@ import { useSelector } from 'react-redux';
 const Layout = ({ children }) => {
   const { data } = useSelector((state) => state?.user);
 
+  const navigator = useNavigate();
+
+  const changeRoute = () => {
+    navigator(TRENDING_ROUTE);
+  };
+
   return (
     <div className="main-layout">
       <SideBar />
@@ -64,7 +70,7 @@ const Layout = ({ children }) => {
                 sm={{ span: 12 }}
                 xs={{ span: 24 }}
               >
-                <CommonButton text={'Trending Stock'} />
+                <CommonButton text={'Trending Stock'} onClick={changeRoute} />
               </Col>
             </Row>
           </div>

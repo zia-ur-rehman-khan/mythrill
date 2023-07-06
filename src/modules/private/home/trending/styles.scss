@@ -1,0 +1,62 @@
+@use "../../../../master.scss";
+
+.trending-main {
+    .tabel-container {
+        background: master.$theme3-color;
+        padding: 20px 15px 60px 15px;
+        border-radius: 6px;
+        margin-top: 20px;
+        .button-container {
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 20px;
+
+            .filter-button {
+                border-radius: 250px;
+                background: master.$dark-color;
+                height: 40px;
+                p {
+                    padding: 10px 20px !important;
+                }
+                .active {
+                    background: master.$theme-color;
+                    transition: background-color 0.3s ease-in-out;
+                    border-radius: 20px;
+                }
+            }
+        }
+        .ant-table-wrapper {
+            .ant-table {
+                background-color: master.$theme3-color;
+
+                .ant-table-thead > tr > th {
+                    background: #393162;
+                    color: #fff;
+                    border: none;
+                    &::before {
+                        display: none;
+                    }
+                }
+
+                .ant-table-tbody {
+                    tr:nth-child(even) {
+                        background: master.$dark-color;
+                    }
+                    tr > td {
+                        color: #fff;
+                        border: none;
+                        .trend-name {
+                            display: flex;
+                            align-items: center;
+                            gap: 5px;
+                        }
+                    }
+                    tr:hover > td {
+                        background: none;
+                    }
+                }
+            }
+        }
+    }
+}

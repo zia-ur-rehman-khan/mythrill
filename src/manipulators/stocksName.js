@@ -58,7 +58,7 @@ export function stocksdataManipulator(list = []) {
       payload.stockId = stock.id ?? '';
       payload.subscribe = stock.stock_subscribe.length ?? 0;
       payload.title = stock?.name;
-      payload.amount = s`$${stock?.current_price ?? 0}`;
+      payload.amount = `$${stock?.current_price ?? 0}`;
       payload.stockUpdate = `${stock?.change_in_percent ?? 0}%`;
       payload.nameId = stock?.name_id ?? '';
       payload.type = stock?.type;
@@ -75,7 +75,7 @@ export function stocksdataManipulator(list = []) {
 
     return stockList;
   } catch (error) {
-    console.error('stocksNameManipulator error --->>>> ', error);
+    console.error('stocksdataManipulator error --->>>> ', error);
     return [];
   }
 }
@@ -159,7 +159,7 @@ export function stockGraphManipulator(list = []) {
 
     return stockList;
   } catch (error) {
-    console.error('stockListManipulator error --->>>> ', error);
+    console.error('stockGraphManipulator error --->>>> ', error);
     return [];
   }
 }
