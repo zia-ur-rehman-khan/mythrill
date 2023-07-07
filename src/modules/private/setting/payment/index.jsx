@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CommonButton, CommonTextField } from '../../../../components';
 import { Col, Row, Space } from 'antd';
 import { AppStyles, Images } from '../../../../theme';
 import { css } from 'aphrodite';
 import './styles.scss';
+import {
+  CommonHeading,
+  CommonModal,
+  PaymentMethod
+} from '../../../../components/common';
 
 const Payment = () => {
+  const [isModal, setIsModal] = useState(false);
+
   return (
     <div className="payment-main">
       <CommonTextField
@@ -34,7 +41,11 @@ const Payment = () => {
           xs={{ span: 24 }}
         >
           <div className="button-side">
-            <CommonButton text={'Update Card'} topClass={'payment-but'} />
+            <CommonButton
+              text={'Update Card'}
+              topClass={'payment-but'}
+              onClick={() => setIsModal(!isModal)}
+            />
             <CommonButton
               text={'Remove Card'}
               topClass={'payment-but'}
@@ -44,6 +55,20 @@ const Payment = () => {
           </div>
         </Col>
       </Row>
+      <CommonModal
+        width={'50%'}
+        title={
+          <CommonHeading
+            text={'Update Payment Method'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isModal}
+        setIsModalVisible={setIsModal}
+      >
+        <PaymentMethod />
+      </CommonModal>
     </div>
   );
 };

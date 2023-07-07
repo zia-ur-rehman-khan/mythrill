@@ -21,7 +21,7 @@ const CommonPasswordInput = ({
         }
         style={{ height }}
         type={type}
-        className={`ad-input  ${className || ''}`}
+        className={`ad-input  ${className || 'common-password'}`}
         placeholder={placeholder}
       />
     </Form.Item>

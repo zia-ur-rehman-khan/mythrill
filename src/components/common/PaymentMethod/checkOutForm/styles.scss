@@ -1,0 +1,18 @@
+@use "../../../../master.scss";
+
+.StripeElement {
+    background: #363941;
+    height: 40px;
+    border-radius: 6px;
+    padding: 12px;
+    // .__PrivateStripeElement {
+    //     .__PrivateStripeElement-input {
+    //         // color: #ffffff;
+    //         // font-size: 12px !important;
+    //     }
+    // }
+}
+.expiry-section {
+    display: flex;
+    gap: 10px;
+}

@@ -9,6 +9,7 @@ import SmallChart from './SmallChart';
 import CommonPopOver from './CommonPopOver';
 import CommonPhoneInput from './CommonPhoneInput';
 import CommonPasswordInput from './CommonPassword';
+import PaymentMethod from './PaymentMethod';
 
 export {
   StockCard,
@@ -21,5 +22,6 @@ export {
   SmallChart,
   CommonPopOver,
   CommonPhoneInput,
-  CommonPasswordInput
+  CommonPasswordInput,
+  PaymentMethod
 };
