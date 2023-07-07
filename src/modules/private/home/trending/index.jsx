@@ -10,9 +10,11 @@ import { css } from 'aphrodite';
 import './styles.scss';
 import { useSelector } from 'react-redux';
 import { traendingFilter, trendingFilter } from '../../../../services/utils';
+import { useNavigate } from 'react-router';
 
 const Trending = () => {
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
+  const navigator = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
 
   const dataSource = stocksSubscribe?.map((t, i) => {
@@ -64,20 +66,28 @@ const Trending = () => {
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
   };
+
+  const routeChange = () => {
+    navigator(-1);
+  };
   return (
     <div className="trending-main">
-      <Space align="baseline">
+      <Space
+        align="baseline"
+        className={css(AppStyles.pointer)}
+        onClick={routeChange}
+      >
         <img src={Images.backArrow} />
         <CommonHeading level={3} text={'Back'} />
       </Space>
 
       <div className={`tabel-container`}>
-        <Space className="button-container">
+        <Space className="button-container" wrap={true}>
           <CommonHeading
             level={3}
             text={`${trendingFilter(activeTab)} / Uptrend`}
           />
-          <Space size={10} className="filter-button">
+          <Space className="filter-button">
             <CommonTextField
               text="Buy/uptrend"
               className={activeTab === 1 ? 'active' : ''}

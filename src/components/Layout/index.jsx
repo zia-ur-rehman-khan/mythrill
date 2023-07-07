@@ -7,7 +7,7 @@ import CommonTextField from '../common/TextField';
 import CommonHeading from '../common/CommonHeading';
 import CommonButton from '../common/CommonButton';
 import CommonInputField from '../common/CommonInput';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { TRENDING_ROUTE } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -20,8 +20,10 @@ import { useSelector } from 'react-redux';
 
 const Layout = ({ children }) => {
   const { data } = useSelector((state) => state?.user);
+  const location = useLocation();
 
   const navigator = useNavigate();
+  const { pathname } = location;
 
   const changeRoute = () => {
     navigator(TRENDING_ROUTE);
@@ -70,7 +72,11 @@ const Layout = ({ children }) => {
                 sm={{ span: 12 }}
                 xs={{ span: 24 }}
               >
-                <CommonButton text={'Trending Stock'} onClick={changeRoute} />
+                <CommonButton
+                  text={'Trending Stock'}
+                  onClick={changeRoute}
+                  classname={pathname === TRENDING_ROUTE && 'trend-button'}
+                />
               </Col>
             </Row>
           </div>

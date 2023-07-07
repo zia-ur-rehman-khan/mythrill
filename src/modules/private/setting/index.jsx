@@ -8,6 +8,7 @@ import { css } from 'aphrodite';
 import './styles.scss';
 import SocialLogin from './socialLogin';
 import Payment from './payment';
+import Subscription from './subscription';
 
 const Setting = () => {
   return (
@@ -20,6 +21,7 @@ const Setting = () => {
       <SocialLogin />
       <UserPassword />
       <Payment />
+      <Subscription />
     </Space>
   );
 };
