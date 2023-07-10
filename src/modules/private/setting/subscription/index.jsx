@@ -12,10 +12,10 @@ import './styles.scss';
 
 const Subscription = () => {
   const [isPause, setIsPause] = useState(false);
-  const [isCancel, setIsCanscel] = useState(false);
+  const [isCancel, setIsCancel] = useState(false);
 
   const modalOpen = (cancel) => {
-    setIsCanscel(cancel);
+    setIsCancel(cancel);
     setIsPause(true);
   };
 
