@@ -9,6 +9,7 @@ import './styles.scss';
 import SocialLogin from './socialLogin';
 import Payment from './payment';
 import Subscription from './subscription';
+import PaymentList from './paymentList';
 
 const Setting = () => {
   return (
@@ -18,9 +19,10 @@ const Setting = () => {
       className={`setting-main ${css(AppStyles.w100)}`}
     >
       <UserInfo />
-      <SocialLogin />
+      {/* <SocialLogin /> */}
       <UserPassword />
       <Payment />
+      <PaymentList />
       <Subscription />
     </Space>
   );

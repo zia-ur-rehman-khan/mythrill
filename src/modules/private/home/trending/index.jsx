@@ -11,6 +11,7 @@ import './styles.scss';
 import { useSelector } from 'react-redux';
 import { traendingFilter, trendingFilter } from '../../../../services/utils';
 import { useNavigate } from 'react-router';
+import CommonTable from '../../../../components/common/CommonTable';
 
 const Trending = () => {
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
@@ -105,7 +106,7 @@ const Trending = () => {
             />
           </Space>
         </Space>
-        <Table pagination={false} dataSource={dataSource} columns={columns} />
+        <CommonTable dataSource={dataSource} columns={columns} />
       </div>
     </div>
   );
