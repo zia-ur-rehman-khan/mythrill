@@ -29,6 +29,7 @@ import card3 from '../assets/auth/card3.png';
 import forgot from '../assets/auth/forgot.png';
 import email from '../assets/auth/email.png';
 import reset from '../assets/auth/reset.png';
+import subscription from '../assets/auth/subscription.png';
 import register from '../assets/auth/register.png';
 import number from '../assets/auth/number.png';
 import sidebar from '../assets/header/sideBar.png';
@@ -76,6 +77,7 @@ export default {
   card3,
   forgot,
   email,
+  subscription,
   reset,
   register,
   number,

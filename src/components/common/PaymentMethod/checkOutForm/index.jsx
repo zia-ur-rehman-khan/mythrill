@@ -22,7 +22,7 @@ import CommonButton from '../../CommonButton';
 import { error } from 'highcharts';
 import { toastAlert } from '../../../../services/utils';
 
-const CheckoutForm = ({ onAdd, isCard }) => {
+const CheckoutForm = ({ onAdd, isCard, subscription }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -50,7 +50,9 @@ const CheckoutForm = ({ onAdd, isCard }) => {
         `Card ${isCard ? 'updated ' : ' added'} successfully`,
         ALERT_TYPES.success
       );
-      onAdd();
+      {
+        !subscription && onAdd();
+      }
     }
   };
 
@@ -66,7 +68,7 @@ const CheckoutForm = ({ onAdd, isCard }) => {
             }}
           />
         </Space>
-        <div className={'expiry-section'}>
+        <div className={!subscription && 'expiry-section'}>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Expiry'} />
             <CardExpiryElement
@@ -84,7 +86,7 @@ const CheckoutForm = ({ onAdd, isCard }) => {
             />
           </Space>
         </div>
-        <div className={'expiry-section'}>
+        <div className={!subscription && 'expiry-section'}>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Country'} />
           </Space>

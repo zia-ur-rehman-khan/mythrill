@@ -15,6 +15,7 @@ import {
 } from '../modules';
 import { checkPasswordValidation, isEmailValid } from '../services/utils';
 import { Images } from '../theme';
+import PremiumSubscription from '../modules/private/premiumSubscription';
 
 const { home, share, setting } = Images;
 
@@ -77,6 +78,7 @@ export const RESET_PASSWORD_ROUTE = '/reset-password';
 export const REGISTER_ROUTE = '/register';
 export const NUMBER_VERIFICATION_ROUTE = '/number';
 export const SUBSCRIPTION_ROUTE = '/packages';
+export const PREMIUM_SUBSCRIPTION_ROUTE = '/subscription';
 
 // PRIVATE ROUTES
 export const DASHBOARD_ROUTE = '/dashboard';
@@ -178,6 +180,11 @@ export const PAGE_ROUTES = [
     description: '',
     access: ACCESS_TYPES.PRIVATE,
     component: <Home />
+  },
+  {
+    route: PREMIUM_SUBSCRIPTION_ROUTE,
+    access: ACCESS_TYPES.PRIVATE,
+    component: <PremiumSubscription />
   }
 ];
 export const WEB_STRINGS = {

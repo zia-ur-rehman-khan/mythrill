@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { Header, Layout } from '../../components';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { lOGIN_ROUTE } from '../../constants';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { PREMIUM_SUBSCRIPTION_ROUTE, lOGIN_ROUTE } from '../../constants';
+import PremiumSubscription from '../../modules/private/premiumSubscription';
 
 function PrivateSharedLayout({ children }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const authenticated = useSelector(({ user }) => user.isAuthenticated);
 
   useEffect(() => {
@@ -16,7 +19,11 @@ function PrivateSharedLayout({ children }) {
 
   return (
     <section>
-      <Layout>{children}</Layout>
+      {location.pathname === PREMIUM_SUBSCRIPTION_ROUTE ? (
+        <PremiumSubscription />
+      ) : (
+        <Layout>{children}</Layout>
+      )}
     </section>
   );
 }
