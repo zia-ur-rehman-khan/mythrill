@@ -1,11 +1,24 @@
-import React from 'react';
-import { CommonButton, CommonTextField } from '../../../../components';
+import React, { useState } from 'react';
+import {
+  CommonButton,
+  CommonHeading,
+  CommonModal,
+  CommonTextField
+} from '../../../../components';
 import { Col, Row, Space } from 'antd';
 import { AppStyles, Images } from '../../../../theme';
 import { css } from 'aphrodite';
 import './styles.scss';
 
 const Subscription = () => {
+  const [isPause, setIsPause] = useState(false);
+  const [isCancel, setIsCanscel] = useState(false);
+
+  const modalOpen = (cancel) => {
+    setIsCanscel(cancel);
+    setIsPause(true);
+  };
+
   return (
     <div className="payment-main">
       <CommonTextField
@@ -56,16 +69,35 @@ const Subscription = () => {
             <CommonButton
               text={'Pause Subscriptions'}
               topClass={'payment-but'}
+              onClick={() => modalOpen(false)}
             />
             <CommonButton
               text={'Cancel Renewal'}
               topClass={'payment-but'}
               background="none"
               border={'1px solid #ffff'}
+              onClick={() => modalOpen(true)}
             />
           </div>
         </Col>
       </Row>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Are you sure?'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isPause}
+        setIsModalVisible={setIsPause}
+        discription={`Do you want to ${
+          isCancel ? 'cancel the renewal' : 'pause the subscription'
+        }?`}
+        onConfirm={() => {
+          setIsPause(false);
+        }}
+      ></CommonModal>
     </div>
   );
 };

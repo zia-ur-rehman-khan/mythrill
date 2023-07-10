@@ -35,7 +35,7 @@ const CommonModal = ({
       >
         {discription ? (
           <Space size={20} direction="vertical" className="confirm-content">
-            <CommonTextField text={discription} />
+            <CommonTextField text={discription} textAlign={'center'} />
             <CommonButton text={'Confirm'} onClick={onConfirm} />
             <CommonButton
               text={'Not Now'}
