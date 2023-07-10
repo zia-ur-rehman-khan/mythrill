@@ -3,21 +3,17 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './checkOutForm';
 
-const PaymentMethod = () => {
+const PaymentMethod = ({ setIscard, setIsModal, isCard }) => {
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_GENERAL_KEY);
 
-  // const options = {
-  //   mode: 'payment',
-  //   amount: 1099,
-  //   currency: 'usd',
-  //   // Fully customizable with appearance API.
-  //   appearance: {
-  //     /*...*/
-  //   }
-  // };
+  const onAdd = () => {
+    setIscard(true);
+    setIsModal(false);
+  };
+
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm />
+      <CheckoutForm onAdd={onAdd} isCard={isCard} />
     </Elements>
   );
 };

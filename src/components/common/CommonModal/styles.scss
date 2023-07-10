@@ -20,3 +20,15 @@
         padding: 25px;
     }
 }
+
+.confirmation-modal {
+    width: 30% !important;
+    min-width: 250px !important;
+    .ant-modal-body {
+        min-height: 200px;
+        height: 200px !important;
+        .confirm-content {
+            width: 100%;
+        }
+    }
+}

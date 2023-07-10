@@ -16,11 +16,13 @@ import CommonTextField from '../../TextField';
 import { AppStyles } from '../../../../theme';
 import { css } from 'aphrodite';
 import CommonInputField from '../../CommonInput';
-import { validatorField } from '../../../../constants';
+import { ALERT_TYPES, validatorField } from '../../../../constants';
 import CommonDropdown from '../../CommonDropdown';
 import CommonButton from '../../CommonButton';
+import { error } from 'highcharts';
+import { toastAlert } from '../../../../services/utils';
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ onAdd, isCard }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -35,43 +37,20 @@ const CheckoutForm = () => {
   };
 
   const onFinish = async (values) => {
-    if (elements == null) {
-      return;
-    }
-
+    console.log(values, 'values');
     const cardElement = elements.getElement(CardNumberElement);
+    const { tokenError, token } = await stripe.createToken(cardElement);
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement
-    });
-
-    if (error) {
-      console.log(error.message);
+    if (tokenError) {
+      console.log(error.message, 'error');
+      toastAlert(error.message, ALERT_TYPES.error);
     } else {
-      const cardDetails = {
-        currency: 'usd',
-        amount: 1000,
-        cardBrand: paymentMethod.card.brand,
-        cardLast4: paymentMethod.card.last4,
-        cardExpMonth: paymentMethod.card.exp_month,
-        cardExpYear: paymentMethod.card.exp_year,
-        bank_account: {
-          account_number: '1234567890', // Replace with the appropriate bank account number
-          country: 'US', // Replace with the appropriate country value
-          routing_number: '123456789', // Replace with the appropriate routing number
-          account_holder_name: 'John Doe', // Replace with the account holder name
-          account_holder_type: 'individual' // Replace with the account holder type
-        }
-      };
-
-      console.log('Card Details:', paymentMethod);
-
-      const { tokenError, token } = await stripe.createToken(
-        'bank_account',
-        cardDetails
+      console.log('Card Details:', token);
+      toastAlert(
+        `Card ${isCard ? 'updated ' : ' added'} successfully`,
+        ALERT_TYPES.success
       );
-      console.log('🚀 ~ file: index.jsx:63 ~ onFinish ~ token:', token);
+      onAdd();
     }
   };
 
@@ -127,7 +106,7 @@ const CheckoutForm = () => {
           </Space>
         </div>
       </Space>
-      <CommonButton text={'Login'} htmlType="submit" />
+      <CommonButton text={isCard ? 'Update' : 'Add'} htmlType="submit" />
     </Form>
   );
 };

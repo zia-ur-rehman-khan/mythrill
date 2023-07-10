@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Modal } from 'antd';
+import { Modal, Space } from 'antd';
 import './styles.scss';
+import CommonTextField from '../TextField';
+import CommonButton from '../CommonButton';
 
 const CommonModal = ({
   setIsModalVisible,
@@ -9,7 +11,8 @@ const CommonModal = ({
   children,
   width,
   title,
-  crossIcon
+  discription,
+  onConfirm
 }) => {
   const handleOk = () => {
     setIsModalVisible(false);
@@ -21,6 +24,7 @@ const CommonModal = ({
   return (
     <div>
       <Modal
+        className={discription && 'confirmation-modal'}
         footer={null}
         width={width}
         title={title}
@@ -29,7 +33,21 @@ const CommonModal = ({
         onCancel={handleCancel}
         centered
       >
-        {children}
+        {discription ? (
+          <Space size={20} direction="vertical" className="confirm-content">
+            <CommonTextField text={discription} />
+            <CommonButton text={'Confirm'} onClick={onConfirm} />
+            <CommonButton
+              text={'Not Now'}
+              onClick={handleOk}
+              background="none"
+              border={'1px solid #ffff'}
+              topClass={'not-now'}
+            />
+          </Space>
+        ) : (
+          children
+        )}
       </Modal>
     </div>
   );

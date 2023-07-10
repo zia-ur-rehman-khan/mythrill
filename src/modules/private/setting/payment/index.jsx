@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { CommonButton, CommonTextField } from '../../../../components';
+import {
+  CommonButton,
+  CommonTextField,
+  ConfirmationModal
+} from '../../../../components';
 import { Col, Row, Space } from 'antd';
 import { AppStyles, Images } from '../../../../theme';
 import { css } from 'aphrodite';
@@ -10,8 +14,14 @@ import {
   PaymentMethod
 } from '../../../../components/common';
 
+const { disabel1, disabel2, disabel3, disabel4 } = Images;
+
+const array = [disabel1, disabel2, disabel3, disabel4];
+
 const Payment = () => {
   const [isModal, setIsModal] = useState(false);
+  const [isCard, setIscard] = useState(false);
+  const [isRemove, setIsRemove] = useState(false);
 
   return (
     <div className="payment-main">
@@ -28,10 +38,18 @@ const Payment = () => {
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
-          <Space>
-            <img src={Images.card} width={'45px'} height={'32px'} />
-            <CommonTextField text={'******123'} />
-          </Space>
+          {isCard ? (
+            <Space>
+              <img src={Images.card} width={'45px'} height={'32px'} />
+              <CommonTextField text={'******123'} />
+            </Space>
+          ) : (
+            array.map((d) => (
+              <Space>
+                <img src={d} width={'45px'} height={'28px'} />
+              </Space>
+            ))
+          )}
         </Col>
 
         <Col
@@ -42,16 +60,19 @@ const Payment = () => {
         >
           <div className="button-side">
             <CommonButton
-              text={'Update Card'}
+              text={isCard ? 'Update Card' : 'Add Your Card'}
               topClass={'payment-but'}
               onClick={() => setIsModal(!isModal)}
             />
-            <CommonButton
-              text={'Remove Card'}
-              topClass={'payment-but'}
-              background="none"
-              border={'1px solid #ffff'}
-            />
+            {isCard && (
+              <CommonButton
+                text={'Remove Card'}
+                topClass={'payment-but'}
+                background="none"
+                border={'1px solid #ffff'}
+                onClick={() => setIsRemove(true)}
+              />
+            )}
           </div>
         </Col>
       </Row>
@@ -59,7 +80,7 @@ const Payment = () => {
         width={'50%'}
         title={
           <CommonHeading
-            text={'Update Payment Method'}
+            text={isCard ? 'Update Payment Method' : 'Add Payment Method'}
             textAlign="center"
             className={css(AppStyles.mTop20)}
           />
@@ -67,8 +88,28 @@ const Payment = () => {
         isModalVisible={isModal}
         setIsModalVisible={setIsModal}
       >
-        <PaymentMethod />
+        <PaymentMethod
+          setIscard={setIscard}
+          setIsModal={setIsModal}
+          isCard={isCard}
+        />
       </CommonModal>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Are you sure?'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isRemove}
+        setIsModalVisible={setIsRemove}
+        discription="Do you want to remove the card?"
+        onConfirm={() => {
+          setIscard(false);
+          setIsRemove(false);
+        }}
+      ></CommonModal>
     </div>
   );
 };

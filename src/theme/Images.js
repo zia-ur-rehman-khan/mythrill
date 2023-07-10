@@ -40,6 +40,10 @@ import greenArrow from '../assets/chart/greenArrow.png';
 import profileIcon from '../assets/setting/profileIcon.png';
 import editIcon from '../assets/setting/editIcon.png';
 import card from '../assets/setting/card.png';
+import disabel1 from '../assets/setting/disabel1.png';
+import disabel2 from '../assets/setting/disabel2.png';
+import disabel3 from '../assets/setting/disabel3.png';
+import disabel4 from '../assets/setting/disabel4.png';
 
 export default {
   ErrorBackground2,
@@ -83,5 +87,9 @@ export default {
   greenArrow,
   profileIcon,
   editIcon,
-  card
+  card,
+  disabel1,
+  disabel2,
+  disabel3,
+  disabel4
 };
