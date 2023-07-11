@@ -50,6 +50,18 @@ export const LOGIN_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const GOOGLE_LOGIN_REQUEST = {
+  route: 'users/signin',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
+export const FACEBOOK_LOGIN_REQUEST = {
+  route: 'users/signin',
+  access_token_required: false,
+  type: REQUEST_TYPE.POST
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

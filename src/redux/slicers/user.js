@@ -80,7 +80,9 @@ const UserReducer = createSlice({
       let newData = { ...state.data };
       newData.subscribedStocks = action.payload;
       state.data = { ...state.data, ...newData };
-    }
+    },
+    googleLoginRequest(state, action) {},
+    facebookLoginRequest(state, action) {}
   }
 });
 
@@ -105,7 +107,9 @@ export const {
   userDataUpdateRequest,
   userDataUpdateSuccess,
   userAvatarRequest,
-  socketTokenUpdate
+  socketTokenUpdate,
+  googleLoginRequest,
+  facebookLoginRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

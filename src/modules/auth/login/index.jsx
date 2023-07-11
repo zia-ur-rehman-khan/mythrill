@@ -31,6 +31,9 @@ import {
 } from '../../../components/common';
 import { isMobile, userPlatform } from '../../../services/utils';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { useGoogleLogin } from '@react-oauth/google';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -71,6 +74,52 @@ const Login = () => {
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      if (!tokenResponse.access_token) return;
+      const payload = {
+        token: tokenResponse.access_token,
+        tokenType: 'googleV1'
+      };
+      // dispatch(
+      //   userLoginRequest({
+      //     payloadData,
+      //     responseCallback: (res) => {
+      //       if (res.status) {
+      //         setLoading(false);
+      //         console.log(res.status, 'res');
+      //       } else {
+      //         setLoading(false);
+      //         console.log(res.errors, 'error');
+      //       }
+      //     }
+      //   })
+      // );
+    }
+  });
+
+  const responseFacebook = (response) => {
+    if (!response.accessToken) return;
+    const payload = {
+      token: response.accessToken,
+      tokenType: 'facebook'
+    };
+    // dispatch(
+    //   userLoginRequest({
+    //     payloadData,
+    //     responseCallback: (res) => {
+    //       if (res.status) {
+    //         setLoading(false);
+    //         console.log(res.status, 'res');
+    //       } else {
+    //         setLoading(false);
+    //         console.log(res.errors, 'error');
+    //       }
+    //     }
+    //   })
+    // );
   };
 
   return (
@@ -131,8 +180,26 @@ const Login = () => {
           />
           <CommonTextField textAlign={'center'} text={'or continue with'} />
           <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
-            <img src={Images.google} width={'45px'} height={'45px'} />
-            <img src={Images.fb} width={'45px'} height={'45px'} />
+            <img
+              src={Images.google}
+              width={'45px'}
+              height={'45px'}
+              onClick={() => googleLogin()}
+              className={css(AppStyles.pointer)}
+            />
+            <FacebookLogin
+              appId={process.env.REACT_APP_FB_KEY}
+              callback={responseFacebook}
+              render={(renderProps) => (
+                <img
+                  src={Images.fb}
+                  width={'45px'}
+                  height={'45px'}
+                  onClick={renderProps.onClick}
+                  className={css(AppStyles.pointer)}
+                />
+              )}
+            />
           </Space>
           <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
             <CommonTextField text={'Don’t have an account?'} />

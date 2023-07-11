@@ -15,6 +15,7 @@ import './App.css';
 
 import { ConfigProvider } from 'antd';
 import { fetchToken, requestPermission } from './firebase';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
   const [persistor, setPersistor] = useState(null);
@@ -66,7 +67,11 @@ function App() {
             >
               <Router>
                 <ToastContainer />
-                <PageRoutes />
+                <GoogleOAuthProvider
+                  clientId={process.env.REACT_APP_GOOGLE_KEY}
+                >
+                  <PageRoutes />
+                </GoogleOAuthProvider>
               </Router>
             </PersistGate>
           </Provider>
