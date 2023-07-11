@@ -12,7 +12,32 @@
     //     }
     // }
 }
-.expiry-section {
-    display: flex;
-    gap: 10px;
+
+.subscription {
+    width: 100%;
+    .csv-feild {
+        width: 100%;
+        margin-top: 15px;
+    }
+    .card-but {
+        margin-top: 15px;
+    }
+}
+
+.add-card {
+    width: 100%;
+    .expiry-section {
+        display: flex;
+        gap: 10px;
+        .csv-feild {
+            width: 100%;
+        }
+    }
+    .card-but {
+        text-align: center;
+        margin-top: 20px;
+        button {
+            width: 200px;
+        }
+    }
 }

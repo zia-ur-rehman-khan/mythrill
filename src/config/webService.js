@@ -62,6 +62,18 @@ export const FACEBOOK_LOGIN_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const SUBSCRIPTION_REQUEST = {
+  route: 'payments/add-card',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const UPDATE_CARD_REQUEST = {
+  route: 'payments/update-card',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

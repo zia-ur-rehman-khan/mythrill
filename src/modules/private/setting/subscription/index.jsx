@@ -20,7 +20,7 @@ const Subscription = () => {
   };
 
   return (
-    <div className="payment-main">
+    <div className="subscription-main">
       <CommonTextField
         fontSize={'16px'}
         text={'Manage Subscription'}

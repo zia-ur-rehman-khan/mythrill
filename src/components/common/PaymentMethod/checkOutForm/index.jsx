@@ -21,10 +21,18 @@ import CommonDropdown from '../../CommonDropdown';
 import CommonButton from '../../CommonButton';
 import { error } from 'highcharts';
 import { toastAlert } from '../../../../services/utils';
+import { useDispatch } from 'react-redux';
+import {
+  subscriptionRequest,
+  updateCardRequest
+} from '../../../../redux/slicers/user';
 
-const CheckoutForm = ({ onAdd, isCard, subscription }) => {
+const CheckoutForm = ({ onAdd, subscription }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch();
 
   const cardNumberStyle = {
     base: {
@@ -36,8 +44,8 @@ const CheckoutForm = ({ onAdd, isCard, subscription }) => {
     }
   };
 
-  const onFinish = async (values) => {
-    console.log(values, 'values');
+  const onFinish = async () => {
+    setIsLoading(true);
     const cardElement = elements.getElement(CardNumberElement);
     const { tokenError, token } = await stripe.createToken(cardElement);
 
@@ -45,20 +53,52 @@ const CheckoutForm = ({ onAdd, isCard, subscription }) => {
       console.log(error.message, 'error');
       toastAlert(error.message, ALERT_TYPES.error);
     } else {
-      console.log('Card Details:', token);
-      toastAlert(
-        `Card ${isCard ? 'updated ' : ' added'} successfully`,
-        ALERT_TYPES.success
-      );
+      const payloadData = { token: token.id };
       {
-        !subscription && onAdd();
+        subscription
+          ? dispatch(
+              subscriptionRequest({
+                payloadData,
+                responseCallback: (res) => {
+                  setIsLoading(false);
+                  if (res.status) {
+                    toastAlert(
+                      'Subscription successfully',
+                      ALERT_TYPES.success
+                    );
+                  } else {
+                    console.log(res.errors, 'error');
+                  }
+                }
+              })
+            )
+          : dispatch(
+              updateCardRequest({
+                payloadData,
+                responseCallback: (res) => {
+                  setIsLoading(false);
+                  if (res.status) {
+                    toastAlert(
+                      'Card updated successfully',
+                      ALERT_TYPES.success
+                    );
+                    onAdd();
+                  } else {
+                    console.log(res.errors, 'error');
+                  }
+                }
+              })
+            );
       }
     }
   };
 
   return (
     <Form onFinish={onFinish}>
-      <Space direction="vertical" className={css(AppStyles.w100)}>
+      <Space
+        direction="vertical"
+        className={subscription ? 'subscription' : 'add-card'}
+      >
         <Space direction="vertical" className={css(AppStyles.w100)}>
           <CommonTextField text={'Card number'} />
           <CardNumberElement
@@ -68,7 +108,7 @@ const CheckoutForm = ({ onAdd, isCard, subscription }) => {
             }}
           />
         </Space>
-        <div className={!subscription && 'expiry-section'}>
+        <div className={'expiry-section'}>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Expiry'} />
             <CardExpiryElement
@@ -77,7 +117,7 @@ const CheckoutForm = ({ onAdd, isCard, subscription }) => {
               }}
             />
           </Space>
-          <Space direction="vertical" className={css(AppStyles.w100)}>
+          <Space direction="vertical" className={'csv-feild'}>
             <CommonTextField text={'CVC'} />
             <CardCvcElement
               options={{
@@ -86,29 +126,13 @@ const CheckoutForm = ({ onAdd, isCard, subscription }) => {
             />
           </Space>
         </div>
-        <div className={!subscription && 'expiry-section'}>
-          <Space direction="vertical" className={css(AppStyles.w100)}>
-            <CommonTextField text={'Country'} />
-          </Space>
-          <Space direction="vertical" className={css(AppStyles.w100)}>
-            <CommonTextField text={'Postal code'} />
-            <CommonInputField
-              name={'code'}
-              type={'number'}
-              placeholder={'5 6 8 9 2 3'}
-              className={'auth'}
-              rules={[
-                {
-                  validator: (_, value) => {
-                    return validatorField(_, value, 6, 6);
-                  }
-                }
-              ]}
-            />
-          </Space>
-        </div>
+        <CommonButton
+          text={subscription ? 'Confirm' : 'Update'}
+          htmlType="submit"
+          topClass={'card-but'}
+          loading={isLoading}
+        />
       </Space>
-      <CommonButton text={isCard ? 'Update' : 'Add'} htmlType="submit" />
     </Form>
   );
 };

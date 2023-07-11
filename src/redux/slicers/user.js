@@ -82,7 +82,9 @@ const UserReducer = createSlice({
       state.data = { ...state.data, ...newData };
     },
     googleLoginRequest(state, action) {},
-    facebookLoginRequest(state, action) {}
+    facebookLoginRequest(state, action) {},
+    subscriptionRequest(state, action) {},
+    updateCardRequest(state, action) {}
   }
 });
 
@@ -109,7 +111,9 @@ export const {
   userAvatarRequest,
   socketTokenUpdate,
   googleLoginRequest,
-  facebookLoginRequest
+  facebookLoginRequest,
+  subscriptionRequest,
+  updateCardRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

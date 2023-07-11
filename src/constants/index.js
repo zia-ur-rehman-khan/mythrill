@@ -32,6 +32,13 @@ export const ERROR_MESSAGES = {
   FAILED_TO_FETCH: 'Failed to fetch, try to refresh the page'
 };
 
+export const USER_SUBSCRIPTION_STATUS = {
+  FREE: 'FREE',
+  PREMIUM_YEARLY: 'PREMIUM_YEARLY',
+  PAUSED: 'PAUSED',
+  CANCLED: 'CANCLED'
+};
+
 export const SUCCESS_MESSAGES = {
   CONTACTUS_FORM: 'Form Submitted Successfully',
   LOGIN: 'Login Successfully',

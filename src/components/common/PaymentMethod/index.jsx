@@ -3,17 +3,16 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from './checkOutForm';
 
-const PaymentMethod = ({ setIscard, setIsModal, isCard, subscription }) => {
+const PaymentMethod = ({ setIsModal, subscription }) => {
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_GENERAL_KEY);
 
   const onAdd = () => {
-    setIscard(true);
     setIsModal(false);
   };
 
   return (
     <Elements stripe={stripePromise}>
-      <CheckoutForm subscription={subscription} onAdd={onAdd} isCard={isCard} />
+      <CheckoutForm subscription={subscription} onAdd={onAdd} />
     </Elements>
   );
 };

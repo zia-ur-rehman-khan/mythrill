@@ -16,6 +16,8 @@ import {
   RESEND_REQUEST,
   RESEND_VERIFICATION_REQUEST,
   RESET_PASSWORD,
+  SUBSCRIPTION_REQUEST,
+  UPDATE_CARD_REQUEST,
   VERIFICATION_REQUEST
 } from '../../config/webService';
 import { toastAlert } from '../../services/utils';
@@ -30,6 +32,8 @@ import {
   VerificationRequest,
   facebookLoginRequest,
   googleLoginRequest,
+  subscriptionRequest,
+  updateCardRequest,
   userAvatarRequest,
   userChangePasswordRequest,
   userDataUpdateRequest,
@@ -412,6 +416,64 @@ function* facebookLogin() {
   }
 }
 
+function* userSubscription() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(subscriptionRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        SUBSCRIPTION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userLoginSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* updateUserCard() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(updateCardRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        UPDATE_CARD_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userLoginSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(userLogin);
   yield fork(userRegister);
@@ -426,4 +488,6 @@ export default function* root() {
   yield fork(userAvatarUpdate);
   yield fork(googleLogin);
   yield fork(facebookLogin);
+  yield fork(userSubscription);
+  yield fork(updateUserCard);
 }
