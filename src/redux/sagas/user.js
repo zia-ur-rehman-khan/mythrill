@@ -2,6 +2,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { SAGA_ALERT_TIMEOUT, ALERT_TYPES } from '../../constants';
 import {
   callRequest,
+  CANCEL_SUBSCRIPTION_REQUEST,
   CHANGE_USER_AVATAR,
   CHANGE_USER_Info,
   CHANGE_USER_PASSWORD,
@@ -12,10 +13,12 @@ import {
   LOGIN_REQUEST,
   LOGOUT_REQUEST,
   NUMBER_VERIFICATION_REQUEST,
+  PAUSE_SUBSCRIPTION_REQUEST,
   REJISTER_REQUEST,
   RESEND_REQUEST,
   RESEND_VERIFICATION_REQUEST,
   RESET_PASSWORD,
+  RESUME_SUBSCRIPTION_REQUEST,
   SUBSCRIPTION_REQUEST,
   UPDATE_CARD_REQUEST,
   VERIFICATION_REQUEST
@@ -30,8 +33,11 @@ import {
   ResendVerificationRequest,
   ResetPasswordRequest,
   VerificationRequest,
+  cancelSubscriptionRequest,
   facebookLoginRequest,
   googleLoginRequest,
+  pauseSubscriptionRequest,
+  resumeSubscriptionRequest,
   subscriptionRequest,
   updateCardRequest,
   userAvatarRequest,
@@ -474,6 +480,93 @@ function* updateUserCard() {
   }
 }
 
+function* pauseSubscription() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(pauseSubscriptionRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        PAUSE_SUBSCRIPTION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userLoginSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* cancelSubscription() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(cancelSubscriptionRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        CANCEL_SUBSCRIPTION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userLoginSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* resumeSubscription() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(resumeSubscriptionRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        RESUME_SUBSCRIPTION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(userLoginSuccess(response?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(userLogin);
   yield fork(userRegister);
@@ -490,4 +583,7 @@ export default function* root() {
   yield fork(facebookLogin);
   yield fork(userSubscription);
   yield fork(updateUserCard);
+  yield fork(pauseSubscription);
+  yield fork(cancelSubscription);
+  yield fork(resumeSubscription);
 }

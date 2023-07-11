@@ -84,7 +84,11 @@ const UserReducer = createSlice({
     googleLoginRequest(state, action) {},
     facebookLoginRequest(state, action) {},
     subscriptionRequest(state, action) {},
-    updateCardRequest(state, action) {}
+    updateCardRequest(state, action) {},
+    updateCardRequest(state, action) {},
+    pauseSubscriptionRequest(state, action) {},
+    cancelSubscriptionRequest(state, action) {},
+    resumeSubscriptionRequest() {}
   }
 });
 
@@ -113,7 +117,10 @@ export const {
   googleLoginRequest,
   facebookLoginRequest,
   subscriptionRequest,
-  updateCardRequest
+  updateCardRequest,
+  pauseSubscriptionRequest,
+  cancelSubscriptionRequest,
+  resumeSubscriptionRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

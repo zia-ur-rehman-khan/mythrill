@@ -12,7 +12,8 @@ const CommonModal = ({
   width,
   title,
   discription,
-  onConfirm
+  onConfirm,
+  loading
 }) => {
   const handleOk = () => {
     setIsModalVisible(false);
@@ -36,7 +37,11 @@ const CommonModal = ({
         {discription ? (
           <Space size={20} direction="vertical" className="confirm-content">
             <CommonTextField text={discription} textAlign={'center'} />
-            <CommonButton text={'Confirm'} onClick={onConfirm} />
+            <CommonButton
+              text={'Confirm'}
+              onClick={onConfirm}
+              loading={loading}
+            />
             <CommonButton
               text={'Not Now'}
               onClick={handleOk}

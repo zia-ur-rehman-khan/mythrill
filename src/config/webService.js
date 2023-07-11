@@ -74,6 +74,24 @@ export const UPDATE_CARD_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const PAUSE_SUBSCRIPTION_REQUEST = {
+  route: 'payments/pause-subscription',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const CANCEL_SUBSCRIPTION_REQUEST = {
+  route: 'payments/cancle-subscription',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const RESUME_SUBSCRIPTION_REQUEST = {
+  route: 'payments/resume-subscription',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

@@ -9,10 +9,20 @@ import { Col, Row, Space } from 'antd';
 import { AppStyles, Images } from '../../../../theme';
 import { css } from 'aphrodite';
 import './styles.scss';
+import { useDispatch } from 'react-redux';
+import {
+  cancelSubscriptionRequest,
+  pauseSubscriptionRequest,
+  resumeSubscriptionRequest,
+  updateCardRequest
+} from '../../../../redux/slicers/user';
 
 const Subscription = () => {
   const [isPause, setIsPause] = useState(false);
   const [isCancel, setIsCancel] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   const modalOpen = (cancel) => {
     setIsCancel(cancel);
@@ -89,13 +99,70 @@ const Subscription = () => {
             className={css(AppStyles.mTop20)}
           />
         }
+        loading={isLoading}
         isModalVisible={isPause}
         setIsModalVisible={setIsPause}
         discription={`Do you want to ${
           isCancel ? 'cancel the renewal' : 'pause the subscription'
         }?`}
         onConfirm={() => {
-          setIsPause(false);
+          setIsLoading(true);
+
+          // dispatch(
+          //   resumeSubscriptionRequest({
+          //     payloadData: {},
+          //     responseCallback: (res) => {
+          //       setIsLoading(false);
+          //       if (res.status) {
+          //         toastAlert(
+          //           'resumed subscription successfully',
+          //           ALERT_TYPES.success
+          //         );
+          //         setIsPause(false);
+          //       } else {
+          //         console.log(res.errors, 'error');
+          //       }
+          //     }
+          //   })
+          // );
+
+          {
+            isCancel
+              ? dispatch(
+                  cancelSubscriptionRequest({
+                    payloadData: {},
+                    responseCallback: (res) => {
+                      setIsLoading(false);
+                      if (res.status) {
+                        toastAlert(
+                          'canceled subscription successfully',
+                          ALERT_TYPES.success
+                        );
+                        setIsPause(false);
+                      } else {
+                        console.log(res.errors, 'error');
+                      }
+                    }
+                  })
+                )
+              : dispatch(
+                  pauseSubscriptionRequest({
+                    payloadData: {},
+                    responseCallback: (res) => {
+                      setIsLoading(false);
+                      if (res.status) {
+                        toastAlert(
+                          'paused subscription successfully',
+                          ALERT_TYPES.success
+                        );
+                        setIsPause(false);
+                      } else {
+                        console.log(res.errors, 'error');
+                      }
+                    }
+                  })
+                );
+          }
         }}
       ></CommonModal>
     </div>
