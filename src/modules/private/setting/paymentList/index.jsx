@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import CommonTable from '../../../../components/common/CommonTable';
 import { CommonTextField } from '../../../../components';
 import { css } from 'aphrodite';
@@ -7,6 +7,8 @@ import './styles.scss';
 import { paymentListRequest } from '../../../../redux/slicers/user';
 import { useDispatch } from 'react-redux';
 import { getFormattedDateTime } from '../../../../services/utils';
+
+const paymentHeading = ['Status', 'Date', 'Amount', 'Description'];
 
 const PaymentList = () => {
   const dispatch = useDispatch();
@@ -30,44 +32,36 @@ const PaymentList = () => {
     );
   }, []);
 
-  const dataSource = paymentList?.map((t, i) => {
-    const data = {
-      key: i + 1,
-      status: 'Paid',
-      date: getFormattedDateTime(t.createdAt, 'DD/MM/YYYY'),
-      amount: `$ ${t.amount}.00`,
-      description: 'Via Master Card'
-    };
+  const dataSource = useMemo(
+    () =>
+      paymentList?.map((t, i) => {
+        const data = {
+          key: i + 1,
+          status: 'Paid',
+          date: getFormattedDateTime(t.createdAt, 'DD/MM/YYYY'),
+          amount: `$ ${t.amount}.00`,
+          description: 'Via Master Card'
+        };
 
-    return data;
-  });
+        return data;
+      }),
+    [paymentList]
+  );
 
-  const columns = [
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      width: '20%'
-    },
-    {
-      title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
-      width: '20%'
-    },
-    {
-      title: 'Amount',
-      dataIndex: 'amount',
-      key: 'amount',
-      width: '20%'
-    },
-    {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
-      width: '20%'
-    }
-  ];
+  const columns = useMemo(
+    () =>
+      paymentHeading?.map((t) => {
+        const data = {
+          title: t,
+          dataIndex: t.toLowerCase(),
+          key: t.toLowerCase(),
+          width: '20%'
+        };
+        return data;
+      }),
+    []
+  );
+
   return (
     <div className="payment-list">
       <CommonTextField

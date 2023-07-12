@@ -1,5 +1,5 @@
 import { Space, Table, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { AppStyles, Images } from '../../../../theme';
 import {
   CommonButton,
@@ -13,10 +13,12 @@ import { traendingFilter, trendingFilter } from '../../../../services/utils';
 import { useNavigate } from 'react-router';
 import CommonTable from '../../../../components/common/CommonTable';
 
+const trendingHeading = ['Name', 'Last', 'Chg', 'Chg%', 'F&G'];
+
 const Trending = () => {
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
-  const navigator = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
+  const navigator = useNavigate();
 
   const dataSource = stocksSubscribe?.map((t, i) => {
     const data = {
@@ -36,33 +38,18 @@ const Trending = () => {
     return data;
   });
 
-  const columns = [
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name'
-    },
-    {
-      title: 'Last',
-      dataIndex: 'last',
-      key: 'last'
-    },
-    {
-      title: 'Chg',
-      dataIndex: 'chg',
-      key: 'chg'
-    },
-    {
-      title: 'Chg%',
-      dataIndex: 'chgPer',
-      key: 'chgPer'
-    },
-    {
-      title: 'F&G',
-      dataIndex: 'fg',
-      key: 'fg'
-    }
-  ];
+  const columns = useMemo(
+    () =>
+      trendingHeading?.map((t) => {
+        const data = {
+          title: t,
+          dataIndex: t.toLowerCase(),
+          key: t.toLowerCase()
+        };
+        return data;
+      }),
+    []
+  );
 
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
