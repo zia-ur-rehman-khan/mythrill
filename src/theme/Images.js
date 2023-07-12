@@ -45,6 +45,7 @@ import disabel1 from '../assets/setting/disabel1.png';
 import disabel2 from '../assets/setting/disabel2.png';
 import disabel3 from '../assets/setting/disabel3.png';
 import disabel4 from '../assets/setting/disabel4.png';
+import info from '../assets/setting/info.png';
 
 export default {
   ErrorBackground2,
@@ -93,5 +94,6 @@ export default {
   disabel1,
   disabel2,
   disabel3,
-  disabel4
+  disabel4,
+  info
 };

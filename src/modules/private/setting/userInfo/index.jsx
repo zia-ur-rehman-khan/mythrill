@@ -1,4 +1,4 @@
-import { Col, Form, Row, Space } from 'antd';
+import { Col, Form, Row, Space, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import ProfileImage from '../profileImage';
 import { CommonInputField } from '../../../../components';
@@ -9,7 +9,7 @@ import {
   phoneValidation,
   validatorField
 } from '../../../../constants';
-import { AppStyles } from '../../../../theme';
+import { AppStyles, Images } from '../../../../theme';
 import { css } from 'aphrodite';
 import './styles.scss';
 import {
@@ -18,6 +18,12 @@ import {
 } from '../../../../redux/slicers/user';
 import { toastAlert } from '../../../../services/utils';
 import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCircleInfo,
+  faSearch,
+  faWarning
+} from '@fortawesome/free-solid-svg-icons';
 
 const UserInfo = () => {
   const { data } = useSelector((state) => state?.user);
@@ -164,10 +170,20 @@ const UserInfo = () => {
             <CommonInputField
               name="email"
               type={'email'}
-              className={'auth'}
+              className={'auth notVerified'}
               placeholder={'john.smith@domain.com'}
               rules={EMAIL_RULE}
               disabled={true}
+              suffix={
+                <Tooltip title="Email verification">
+                  <img
+                    src={Images.info}
+                    width={'100%'}
+                    height={'60%'}
+                    className={css(AppStyles.pointer)}
+                  />
+                </Tooltip>
+              }
             />
           </Col>
         </Row>
