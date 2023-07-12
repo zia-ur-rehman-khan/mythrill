@@ -63,7 +63,7 @@ export const FACEBOOK_LOGIN_REQUEST = {
 };
 
 export const SUBSCRIPTION_REQUEST = {
-  route: 'payments/add-card',
+  route: 'payments/subscription',
   access_token_required: true,
   type: REQUEST_TYPE.POST
 };
