@@ -291,6 +291,21 @@ export const trendingFilter = (t) => {
 
     default:
       return '';
-      q;
+  }
+};
+
+export const trendingImage = (t) => {
+  switch (t) {
+    case 1:
+      return 'greenArrow';
+
+    case 2:
+      return 'yellowArrow';
+
+    case 3:
+      return 'redArrow';
+
+    default:
+      return '';
   }
 };

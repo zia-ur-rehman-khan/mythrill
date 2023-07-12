@@ -98,6 +98,12 @@ export const PAYMENT_LIST_REQUEST = {
   type: REQUEST_TYPE.GET
 };
 
+export const TRENDING_LIST_REQUEST = {
+  route: 'stock/trending',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

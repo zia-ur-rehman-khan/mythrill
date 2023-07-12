@@ -56,7 +56,7 @@ export function stocksdataManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
       payload.stockId = stock.id ?? '';
-      payload.subscribe = stock.stock_subscribe.length ?? 0;
+      payload.subscribe = stock?.stock_subscribe?.length ?? 0;
       payload.title = stock?.name;
       payload.amount = `$${stock?.current_price ?? 0}`;
       payload.stockUpdate = `${stock?.change_in_percent ?? 0}%`;
@@ -141,6 +141,7 @@ export function stockGraphManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
 
+      payload.title = stock?.name;
       payload.changeInPercent = stock?.change_in_percent ?? 0;
       payload.changeInPrice = stock?.change_in_price ?? 0;
       payload.coin = stock?.coin ?? '';
