@@ -154,6 +154,12 @@ export function stockGraphManipulator(list = []) {
       payload.nameId = stock?.name_id ?? '';
       payload.overallTrend = stock?.overall_trend ?? '';
       payload.prevPrice = stock?.prev_price ?? 0;
+      payload.color =
+        stock?.change_in_percent === 0
+          ? 'yellow'
+          : stock?.change_in_percent > 0
+          ? 'green'
+          : 'red';
 
       stockList.push(payload);
     }

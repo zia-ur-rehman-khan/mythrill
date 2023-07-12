@@ -78,7 +78,7 @@ const Trending = () => {
     );
   }, []);
 
-  const dataSource = useMemo(
+  let dataSource = useMemo(
     () =>
       trending?.map((t, i) => {
         const data = {
@@ -92,13 +92,27 @@ const Trending = () => {
           last: t.prevPrice,
           chg: `$${t.changeInPrice}`,
           chgPer: `${t?.changeInPercent}%`,
-          fg: t?.fearGreedIndex
+          fg: t?.fearGreedIndex,
+          color: t?.color
         };
 
         return data;
       }),
     [trending]
   );
+
+  const filteredDataSource = useMemo(() => {
+    switch (activeTab) {
+      case 1:
+        return dataSource?.filter((t) => t.color === 'green');
+      case 2:
+        return dataSource?.filter((t) => t.color === 'yellow');
+      case 3:
+        return dataSource?.filter((t) => t.color === 'red');
+      default:
+        return dataSource;
+    }
+  }, [activeTab, dataSource]);
 
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
@@ -152,7 +166,7 @@ const Trending = () => {
         {loading ? (
           <Loader />
         ) : (
-          <CommonTable dataSource={dataSource} columns={columns} />
+          <CommonTable dataSource={filteredDataSource} columns={columns} />
         )}
       </div>
     </div>
