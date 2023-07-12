@@ -16,7 +16,7 @@ function AuthSharedLayout({ children }) {
     if (isAuthenticated) {
       navigate(HOME_ROUTE);
     }
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <section className="auth-wrapper">

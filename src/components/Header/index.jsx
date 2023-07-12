@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutRequest } from '../../redux/slicers/user';
 import { userPlatform } from '../../services/utils';
-import { HOME_ROUTE, SETTING_ROUTE } from '../../constants';
+import { HOME_ROUTE, SETTING_ROUTE, lOGIN_ROUTE } from '../../constants';
 
 const Header = () => {
   const Navigate = useNavigate();
@@ -37,7 +37,7 @@ const Header = () => {
         payloadData: { platform: userPlatform() },
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(HOME_ROUTE);
+            changeRoute(lOGIN_ROUTE);
             console.log(res.status, 'res');
           } else {
             console.log(res.errors, 'error');

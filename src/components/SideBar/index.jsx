@@ -5,7 +5,7 @@ import { AppStyles, Images } from '../../theme';
 import { Divider, Drawer, List, Space } from 'antd';
 import CommonTextField from '../common/TextField';
 import CommonButton from '../common/CommonButton';
-import { HOME_ROUTE, MENU_LIST } from '../../constants';
+import { HOME_ROUTE, MENU_LIST, lOGIN_ROUTE } from '../../constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,7 +36,7 @@ const SideBar = ({ isDrawer }) => {
         payloadData: { platform: userPlatform() },
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(HOME_ROUTE);
+            changeRoute(lOGIN_ROUTE);
             console.log(res.status, 'res');
           } else {
             console.log(res.errors, 'error');

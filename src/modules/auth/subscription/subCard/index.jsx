@@ -12,13 +12,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 import DataHandler from '../../../../services/DataHandler';
 import { userLoginSuccess } from '../../../../redux/slicers/user';
+import { HOME_ROUTE, PREMIUM_SUBSCRIPTION_ROUTE } from '../../../../constants';
 
 const SubcriptionCard = ({ title, amount }) => {
   const Navigate = useNavigate();
   const changeRoute = (route) => {
-    DataHandler.getStore().dispatch(userLoginSuccess());
-
-    Navigate(route);
+    amount === 'Free'
+      ? Navigate(HOME_ROUTE)
+      : Navigate(PREMIUM_SUBSCRIPTION_ROUTE);
   };
   return (
     <Space size={30} direction="vertical" className="sub-box">
@@ -54,7 +55,7 @@ const SubcriptionCard = ({ title, amount }) => {
           />
         </li>
       </ul>
-      <CommonButton text={'Start Now'} onClick={() => changeRoute('/')} />
+      <CommonButton text={'Start Now'} onClick={() => changeRoute()} />
     </Space>
   );
 };

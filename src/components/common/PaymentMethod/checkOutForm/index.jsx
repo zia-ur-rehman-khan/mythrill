@@ -16,7 +16,7 @@ import CommonTextField from '../../TextField';
 import { AppStyles } from '../../../../theme';
 import { css } from 'aphrodite';
 import CommonInputField from '../../CommonInput';
-import { ALERT_TYPES, validatorField } from '../../../../constants';
+import { ALERT_TYPES, HOME_ROUTE, validatorField } from '../../../../constants';
 import CommonDropdown from '../../CommonDropdown';
 import CommonButton from '../../CommonButton';
 import { error } from 'highcharts';
@@ -26,9 +26,12 @@ import {
   subscriptionRequest,
   updateCardRequest
 } from '../../../../redux/slicers/user';
+import { useNavigate } from 'react-router';
 
 const CheckoutForm = ({ onAdd, subscription }) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -66,6 +69,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
                       'Subscription successfully',
                       ALERT_TYPES.success
                     );
+                    navigate(HOME_ROUTE);
                   } else {
                     console.log(res.errors, 'error');
                   }

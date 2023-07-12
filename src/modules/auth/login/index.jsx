@@ -64,6 +64,7 @@ const Login = () => {
           if (res.status) {
             setLoading(false);
             console.log(res.status, 'res');
+            changeRoute(HOME_ROUTE);
           } else {
             setLoading(false);
             console.log(res.errors, 'error');

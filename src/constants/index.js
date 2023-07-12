@@ -149,7 +149,7 @@ export const PAGE_ROUTES = [
     route: SUBSCRIPTION_ROUTE,
     title: 'Package',
     description: '',
-    access: ACCESS_TYPES.AUTH,
+    access: ACCESS_TYPES.PRIVATE,
     component: <Subscripton />
   },
   // PRIVATE ROUTE
