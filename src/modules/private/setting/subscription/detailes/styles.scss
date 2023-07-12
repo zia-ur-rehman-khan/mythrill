@@ -1,4 +1,4 @@
-@use "../../../../master.scss";
+@use "../../../../../master.scss";
 
 .subscription-main {
     padding: 20px;
@@ -11,8 +11,15 @@
         gap: 10px;
         justify-content: flex-end;
         cursor: pointer;
+        .cancel {
+            button {
+                cursor: not-allowed;
+            }
+        }
         .payment-but {
             width: 50%;
+            max-width: 180px;
+            min-width: 80px;
         }
     }
 }

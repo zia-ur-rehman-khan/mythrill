@@ -13,6 +13,8 @@ import {
   CommonModal,
   PaymentMethod
 } from '../../../../components/common';
+import { useSelector } from 'react-redux';
+import { USER_SUBSCRIPTION_STATUS } from '../../../../constants';
 
 const { disabel1, disabel2, disabel3, disabel4 } = Images;
 
@@ -20,6 +22,14 @@ const array = [disabel1, disabel2, disabel3, disabel4];
 
 const Payment = () => {
   const [isModal, setIsModal] = useState(false);
+  const { data } = useSelector((state) => state?.user);
+  console.log('🚀 ~ file: index.jsx:26 ~ Payment ~ data:', data);
+
+  if (
+    data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE ||
+    data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.CANCLED
+  )
+    return '';
 
   return (
     <div className="payment-main">

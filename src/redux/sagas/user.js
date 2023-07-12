@@ -39,6 +39,7 @@ import {
   pauseSubscriptionRequest,
   resumeSubscriptionRequest,
   subscriptionRequest,
+  subscriptionRequestSuccess,
   updateCardRequest,
   userAvatarRequest,
   userChangePasswordRequest,
@@ -440,7 +441,7 @@ function* userSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        // yield put(userLoginSuccess(response?.data));
+        yield put(subscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -469,7 +470,7 @@ function* updateUserCard() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        // yield put(userLoginSuccess(response?.data));
+        yield put(subscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -498,7 +499,7 @@ function* pauseSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        // yield put(userLoginSuccess(response?.data));
+        yield put(subscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -527,7 +528,7 @@ function* cancelSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        // yield put(userLoginSuccess(response?.data));
+        yield put(subscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -556,7 +557,7 @@ function* resumeSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        // yield put(userLoginSuccess(response?.data));
+        yield put(subscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
