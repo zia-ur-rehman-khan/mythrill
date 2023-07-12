@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommonTable from '../../../../components/common/CommonTable';
 import { CommonTextField } from '../../../../components';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../../../theme';
 import './styles.scss';
+import { paymentListRequest } from '../../../../redux/slicers/user';
+import { useDispatch } from 'react-redux';
+import { getFormattedDateTime } from '../../../../services/utils';
 
 const PaymentList = () => {
-  const array = [1, 2, 3];
+  const dispatch = useDispatch();
+  const [paymentList, setPaymentList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const dataSource = array?.map((t, i) => {
+  useEffect(() => {
+    dispatch(
+      paymentListRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          setLoading(false);
+
+          if (res.status) {
+            setPaymentList(res.data.data);
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  }, []);
+
+  const dataSource = paymentList?.map((t, i) => {
     const data = {
       key: i + 1,
       status: 'Paid',
-      date: '01/07/2023',
-      amount: '$ 569.00',
+      date: getFormattedDateTime(t.createdAt, 'DD/MM/YYYY'),
+      amount: `$ ${t.amount}.00`,
       description: 'Via Master Card'
     };
 
@@ -55,7 +77,11 @@ const PaymentList = () => {
         className={css(AppStyles.mBottom15)}
       />
       <div className="tabel-list-main">
-        <CommonTable dataSource={dataSource} columns={columns} />
+        <CommonTable
+          dataSource={dataSource}
+          columns={columns}
+          loading={loading}
+        />
       </div>
     </div>
   );

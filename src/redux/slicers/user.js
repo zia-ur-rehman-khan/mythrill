@@ -95,7 +95,8 @@ const UserReducer = createSlice({
     updateCardRequest(state, action) {},
     pauseSubscriptionRequest(state, action) {},
     cancelSubscriptionRequest(state, action) {},
-    resumeSubscriptionRequest() {}
+    resumeSubscriptionRequest() {},
+    paymentListRequest() {}
   }
 });
 
@@ -128,7 +129,8 @@ export const {
   pauseSubscriptionRequest,
   cancelSubscriptionRequest,
   resumeSubscriptionRequest,
-  subscriptionRequestSuccess
+  subscriptionRequestSuccess,
+  paymentListRequest
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

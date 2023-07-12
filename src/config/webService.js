@@ -92,6 +92,12 @@ export const RESUME_SUBSCRIPTION_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const PAYMENT_LIST_REQUEST = {
+  route: 'payments/list',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,
