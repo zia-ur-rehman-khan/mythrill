@@ -20,15 +20,17 @@ import {
   ALERT_TYPES,
   USER_SUBSCRIPTION_STATUS
 } from '../../../../../constants';
-import { toastAlert } from '../../../../../services/utils';
+import {
+  getFormattedDateTime,
+  toastAlert
+} from '../../../../../services/utils';
 
-const Detailes = ({ cancel, paused }) => {
+const Detailes = ({ cancel, paused, detailes }) => {
   const [isPause, setIsPause] = useState(false);
   const [isCancel, setIsCancel] = useState(false);
   const [isResume, setIsResume] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-  const { data } = useSelector((state) => state?.user);
 
   const dispatch = useDispatch();
 
@@ -37,6 +39,10 @@ const Detailes = ({ cancel, paused }) => {
     setIsCancel(cancel);
     setIsPause(true);
   };
+
+  console.log(detailes, 'detailes');
+
+  const { amount, start_at } = detailes ?? {};
 
   return (
     <div className="subscription-main">
@@ -62,18 +68,21 @@ const Detailes = ({ cancel, paused }) => {
                   text={'Manage Subscription'}
                   fontWeight={600}
                 />
-                <CommonTextField text={'$575.00 / yearly'} />
+                <CommonTextField text={`$${amount}.00 / yearly`} />
               </Space>
             </Space>
             <Space>
               <CommonTextField text={'Subscription Date:'} fontWeight={600} />
-              <CommonTextField text={' Dec 17th, 2023'} />
+              <CommonTextField
+                text={getFormattedDateTime(start_at, 'MMM Do, YYYY')}
+              />
             </Space>
             <CommonTextField
               width={'60%'}
-              text={
-                'Next Payment $575.00 on Dec 17th, 2024 Automatic renewal every year'
-              }
+              text={`Next Payment $${amount}.00 on ${getFormattedDateTime(
+                start_at,
+                'MMM Do, YYYY'
+              )} Automatic renewal every year`}
             />
           </Space>
         </Col>

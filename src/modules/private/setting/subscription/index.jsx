@@ -6,17 +6,16 @@ import Free from './free';
 
 const ManageSubscription = () => {
   const { data } = useSelector((state) => state?.user);
-  console.log('🚀 ~ file: index.jsx:9 ~ ManageSubscription ~ data:', data);
 
   const getContentByPathname = useMemo(() => {
     if (data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE)
-      return <Free />;
+      return <Free detailes={data['createdAt']} />;
     else if (data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.CANCLED) {
-      return <Detailes cancel />;
+      return <Detailes cancel detailes={data['pay_details']} />;
     } else if (data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.PAUSED) {
-      return <Detailes paused />;
+      return <Detailes paused detailes={data['pay_details']} />;
     } else {
-      return <Detailes />;
+      return <Detailes detailes={data['pay_details']} />;
     }
   }, [data]);
 

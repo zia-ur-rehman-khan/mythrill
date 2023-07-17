@@ -5,9 +5,12 @@ import { AppStyles, Images } from '../../../../../theme';
 import { Col, Row, Space } from 'antd';
 import { useNavigate } from 'react-router';
 import { PREMIUM_SUBSCRIPTION_ROUTE } from '../../../../../constants';
+import { getFormattedDateTime } from '../../../../../services/utils';
 
-const Free = () => {
+const Free = ({ detailes }) => {
   const navigate = useNavigate();
+
+  console.log(detailes, 'detailes');
   return (
     <div className="subscription-main">
       <CommonTextField
@@ -37,7 +40,9 @@ const Free = () => {
             </Space>
             <Space>
               <CommonTextField text={'Subscription Date:'} fontWeight={600} />
-              <CommonTextField text={' Dec 17th, 2023'} />
+              <CommonTextField
+                text={getFormattedDateTime(detailes, 'MMM Do, YYYY')}
+              />
             </Space>
           </Space>
         </Col>

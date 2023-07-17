@@ -23,7 +23,6 @@ const array = [disabel1, disabel2, disabel3, disabel4];
 const Payment = () => {
   const [isModal, setIsModal] = useState(false);
   const { data } = useSelector((state) => state?.user);
-  console.log('🚀 ~ file: index.jsx:26 ~ Payment ~ data:', data);
 
   if (
     data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE ||
@@ -48,7 +47,7 @@ const Payment = () => {
         >
           <Space>
             <img src={Images.card} width={'45px'} height={'32px'} />
-            <CommonTextField text={'******123'} />
+            <CommonTextField text={`******${data?.pay_details?.last4}`} />
           </Space>
         </Col>
 

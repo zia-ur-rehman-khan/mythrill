@@ -88,12 +88,28 @@ const UserReducer = createSlice({
       console.log(action, 'action');
       let newData = { ...state.data };
       newData.subscribe_status = action.payload.subscribe_status;
+      newData.pay_details = action.payload.pay_details;
+
       state.data = { ...state.data, ...newData };
     },
 
     updateCardRequest(state, action) {},
+    updateCardRequestSuccess(state, action) {
+      console.log(action, 'action');
+      let newData = { ...state.data };
+      newData.subscribe_status = action.payload.subscribe_status;
+      newData.pay_details = action.payload.pay_details;
+
+      state.data = { ...state.data, ...newData };
+    },
     updateCardRequest(state, action) {},
     pauseSubscriptionRequest(state, action) {},
+    pauseSubscriptionRequestSuccess(state, action) {
+      console.log(action, 'action');
+      let newData = { ...state.data };
+      newData.subscribe_status = action.payload.subscribe_status;
+      state.data = { ...state.data, ...newData };
+    },
     cancelSubscriptionRequest(state, action) {},
     resumeSubscriptionRequest() {},
     paymentListRequest() {},
@@ -127,7 +143,9 @@ export const {
   facebookLoginRequest,
   subscriptionRequest,
   updateCardRequest,
+  updateCardRequestSuccess,
   pauseSubscriptionRequest,
+  pauseSubscriptionRequestSuccess,
   cancelSubscriptionRequest,
   resumeSubscriptionRequest,
   subscriptionRequestSuccess,

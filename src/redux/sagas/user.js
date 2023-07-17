@@ -39,12 +39,14 @@ import {
   facebookLoginRequest,
   googleLoginRequest,
   pauseSubscriptionRequest,
+  pauseSubscriptionRequestSuccess,
   paymentListRequest,
   resumeSubscriptionRequest,
   subscriptionRequest,
   subscriptionRequestSuccess,
   trendingListRequest,
   updateCardRequest,
+  updateCardRequestSuccess,
   userAvatarRequest,
   userChangePasswordRequest,
   userDataUpdateRequest,
@@ -474,7 +476,7 @@ function* updateUserCard() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(subscriptionRequestSuccess(response?.data?.data));
+        yield put(updateCardRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -503,7 +505,7 @@ function* pauseSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(subscriptionRequestSuccess(response?.data?.data));
+        yield put(pauseSubscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -532,7 +534,7 @@ function* cancelSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(subscriptionRequestSuccess(response?.data?.data));
+        yield put(pauseSubscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -561,7 +563,7 @@ function* resumeSubscription() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(subscriptionRequestSuccess(response?.data?.data));
+        yield put(pauseSubscriptionRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
