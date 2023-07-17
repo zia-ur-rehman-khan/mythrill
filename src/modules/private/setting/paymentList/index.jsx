@@ -37,10 +37,10 @@ const PaymentList = () => {
       paymentList?.map((t, i) => {
         const data = {
           key: i + 1,
-          status: 'Paid',
+          status: t.status ? 'Paid' : 'Unpaid',
           date: getFormattedDateTime(t.createdAt, 'DD/MM/YYYY'),
           amount: `$ ${t.amount}.00`,
-          description: 'Via Master Card'
+          description: `Via ${t.brand}`
         };
 
         return data;
