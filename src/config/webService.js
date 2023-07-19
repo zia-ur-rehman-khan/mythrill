@@ -51,13 +51,13 @@ export const LOGIN_REQUEST = {
 };
 
 export const GOOGLE_LOGIN_REQUEST = {
-  route: 'users/signin',
+  route: 'users/google',
   access_token_required: false,
   type: REQUEST_TYPE.POST
 };
 
 export const FACEBOOK_LOGIN_REQUEST = {
-  route: 'users/signin',
+  route: 'users/facebook',
   access_token_required: false,
   type: REQUEST_TYPE.POST
 };

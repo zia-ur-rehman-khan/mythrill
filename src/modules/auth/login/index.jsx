@@ -22,6 +22,8 @@ import {
 } from '../../../constants';
 import DataHandler from '../../../services/DataHandler';
 import {
+  facebookLoginRequest,
+  googleLoginRequest,
   userLoginRequest,
   userLoginSuccess
 } from '../../../redux/slicers/user';
@@ -80,47 +82,47 @@ const Login = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       if (!tokenResponse.access_token) return;
-      const payload = {
-        token: tokenResponse.access_token,
-        tokenType: 'googleV1'
+      console.log(tokenResponse, 'google');
+      const payloadData = {
+        token: tokenResponse.access_token
       };
-      // dispatch(
-      //   userLoginRequest({
-      //     payloadData,
-      //     responseCallback: (res) => {
-      //       if (res.status) {
-      //         setLoading(false);
-      //         console.log(res.status, 'res');
-      //       } else {
-      //         setLoading(false);
-      //         console.log(res.errors, 'error');
-      //       }
-      //     }
-      //   })
-      // );
+      dispatch(
+        googleLoginRequest({
+          payloadData,
+          responseCallback: (res) => {
+            if (res.status) {
+              changeRoute(HOME_ROUTE);
+            } else {
+              setLoading(false);
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
     }
   });
 
   const responseFacebook = (response) => {
     if (!response.accessToken) return;
-    const payload = {
-      token: response.accessToken,
-      tokenType: 'facebook'
+    console.log(response, 'fb');
+
+    const payloadData = {
+      token: response.accessToken
     };
-    // dispatch(
-    //   userLoginRequest({
-    //     payloadData,
-    //     responseCallback: (res) => {
-    //       if (res.status) {
-    //         setLoading(false);
-    //         console.log(res.status, 'res');
-    //       } else {
-    //         setLoading(false);
-    //         console.log(res.errors, 'error');
-    //       }
-    //     }
-    //   })
-    // );
+    dispatch(
+      facebookLoginRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            setLoading(false);
+            console.log(res.status, 'res');
+          } else {
+            setLoading(false);
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
 
   return (

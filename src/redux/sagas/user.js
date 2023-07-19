@@ -388,8 +388,8 @@ function* googleLogin() {
       );
 
       if (response.status) {
-        if (responseCallback) responseCallback(response);
         yield put(userLoginSuccess(response?.data));
+        if (responseCallback) responseCallback(response);
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -417,8 +417,8 @@ function* facebookLogin() {
       );
 
       if (response.status) {
-        if (responseCallback) responseCallback(response);
         yield put(userLoginSuccess(response?.data));
+        if (responseCallback) responseCallback(response);
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);

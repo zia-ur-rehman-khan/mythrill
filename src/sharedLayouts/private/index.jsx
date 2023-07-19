@@ -15,6 +15,8 @@ function PrivateSharedLayout({ children }) {
 
   const authenticated = useSelector(({ user }) => user.isAuthenticated);
 
+  console.log(authenticated, 'authenticated');
+
   useEffect(() => {
     if (!authenticated) {
       navigate(lOGIN_ROUTE);
