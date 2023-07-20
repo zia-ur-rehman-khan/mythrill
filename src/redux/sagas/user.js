@@ -16,6 +16,7 @@ import {
   PAUSE_SUBSCRIPTION_REQUEST,
   PAYMENT_LIST_REQUEST,
   REJISTER_REQUEST,
+  REMOVE_CARD_REQUEST,
   RESEND_REQUEST,
   RESEND_VERIFICATION_REQUEST,
   RESET_PASSWORD,
@@ -41,6 +42,8 @@ import {
   pauseSubscriptionRequest,
   pauseSubscriptionRequestSuccess,
   paymentListRequest,
+  removeCardRequest,
+  removeCardRequestSuccess,
   resumeSubscriptionRequest,
   subscriptionRequest,
   subscriptionRequestSuccess,
@@ -487,6 +490,35 @@ function* updateUserCard() {
   }
 }
 
+function* removeUserCard() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(removeCardRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        REMOVE_CARD_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(removeCardRequestSuccess(response?.data?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 function* pauseSubscription() {
   while (true) {
     // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
@@ -648,6 +680,7 @@ export default function* root() {
   yield fork(facebookLogin);
   yield fork(userSubscription);
   yield fork(updateUserCard);
+  yield fork(removeUserCard);
   yield fork(pauseSubscription);
   yield fork(cancelSubscription);
   yield fork(resumeSubscription);

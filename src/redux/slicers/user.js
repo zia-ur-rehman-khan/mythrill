@@ -89,6 +89,7 @@ const UserReducer = createSlice({
       let newData = { ...state.data };
       newData.subscribe_status = action.payload.subscribe_status;
       newData.pay_details = action.payload.pay_details;
+      newData.card_exist = action.payload.card_exist;
 
       state.data = { ...state.data, ...newData };
     },
@@ -102,6 +103,15 @@ const UserReducer = createSlice({
 
       state.data = { ...state.data, ...newData };
     },
+    removeCardRequest(state, action) {},
+    removeCardRequestSuccess(state, action) {
+      console.log(action, 'removeCardRequestSuccess');
+      let newData = { ...state.data };
+      newData.card_exist = action.payload.card_exist;
+
+      state.data = { ...state.data, ...newData };
+    },
+
     updateCardRequest(state, action) {},
     pauseSubscriptionRequest(state, action) {},
     pauseSubscriptionRequestSuccess(state, action) {
@@ -144,6 +154,8 @@ export const {
   subscriptionRequest,
   updateCardRequest,
   updateCardRequestSuccess,
+  removeCardRequest,
+  removeCardRequestSuccess,
   pauseSubscriptionRequest,
   pauseSubscriptionRequestSuccess,
   cancelSubscriptionRequest,

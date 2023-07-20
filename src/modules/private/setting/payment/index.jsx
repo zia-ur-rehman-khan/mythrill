@@ -13,8 +13,9 @@ import {
   CommonModal,
   PaymentMethod
 } from '../../../../components/common';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { USER_SUBSCRIPTION_STATUS } from '../../../../constants';
+import { removeCardRequest } from '../../../../redux/slicers/user';
 
 const { disabel1, disabel2, disabel3, disabel4 } = Images;
 
@@ -22,7 +23,11 @@ const array = [disabel1, disabel2, disabel3, disabel4];
 
 const Payment = () => {
   const [isModal, setIsModal] = useState(false);
+  const [isRemove, setIsRemove] = useState(false);
+  const dispatch = useDispatch();
+
   const { data } = useSelector((state) => state?.user);
+  console.log('🚀 ~ file: index.jsx:29 ~ Payment ~ data:', data);
 
   if (
     data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE ||
@@ -57,19 +62,31 @@ const Payment = () => {
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
-          <CommonButton
-            width="180px"
-            text={'Update Card'}
-            topClass={'payment-but'}
-            onClick={() => setIsModal(!isModal)}
-          />
+          <div className="button-side">
+            <CommonButton
+              text={data?.card_exist ? 'Update Card' : 'Add Your Card'}
+              topClass={'payment-but'}
+              onClick={() => setIsModal(!isModal)}
+            />
+            {data?.card_exist && (
+              <CommonButton
+                text={'Remove Card'}
+                topClass={'payment-but'}
+                background="none"
+                border={'1px solid #ffff'}
+                onClick={() => setIsRemove(true)}
+              />
+            )}
+          </div>
         </Col>
       </Row>
       <CommonModal
         width={'50%'}
         title={
           <CommonHeading
-            text={'Update Payment Method'}
+            text={
+              data?.card_exist ? 'Update Payment Method' : 'Add Payment Method'
+            }
             textAlign="center"
             className={css(AppStyles.mTop20)}
           />
@@ -79,6 +96,33 @@ const Payment = () => {
       >
         <PaymentMethod setIsModal={setIsModal} />
       </CommonModal>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Are you sure?'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isRemove}
+        setIsModalVisible={setIsRemove}
+        discription="Do you want to remove the card?"
+        onConfirm={() => {
+          dispatch(
+            removeCardRequest({
+              payloadData: {},
+              responseCallback: (res) => {
+                if (res.status) {
+                  toastAlert('Card remove successfully', ALERT_TYPES.success);
+                  setIsRemove(false);
+                } else {
+                  console.log(res.errors, 'error');
+                }
+              }
+            })
+          );
+        }}
+      ></CommonModal>
     </div>
   );
 };

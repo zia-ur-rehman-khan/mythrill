@@ -73,6 +73,11 @@ export const UPDATE_CARD_REQUEST = {
   access_token_required: true,
   type: REQUEST_TYPE.POST
 };
+export const REMOVE_CARD_REQUEST = {
+  route: 'payments/remove-card',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
 
 export const PAUSE_SUBSCRIPTION_REQUEST = {
   route: 'payments/pause-subscription',

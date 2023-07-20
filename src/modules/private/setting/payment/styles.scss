@@ -4,7 +4,17 @@
     padding: 20px;
     background-color: master.$dark-color;
     border-radius: 20px;
-    .payment-but {
-        text-align: end;
+
+    .button-side {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: flex-end;
+
+        .payment-but {
+            width: 50%;
+            max-width: 180px;
+            min-width: 80px;
+        }
     }
 }
