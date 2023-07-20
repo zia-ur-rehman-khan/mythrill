@@ -93,7 +93,6 @@ const Login = () => {
             if (res.status) {
               changeRoute(HOME_ROUTE);
             } else {
-              setLoading(false);
               console.log(res.errors, 'error');
             }
           }
@@ -114,10 +113,9 @@ const Login = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            setLoading(false);
+            changeRoute(HOME_ROUTE);
             console.log(res.status, 'res');
           } else {
-            setLoading(false);
             console.log(res.errors, 'error');
           }
         }
