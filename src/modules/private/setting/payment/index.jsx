@@ -50,10 +50,18 @@ const Payment = () => {
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
-          <Space>
-            <img src={Images.card} width={'45px'} height={'32px'} />
-            <CommonTextField text={`******${data?.pay_details?.last4}`} />
-          </Space>
+          {data?.card_exist ? (
+            <Space>
+              <img src={Images.card} width={'45px'} height={'32px'} />
+              <CommonTextField text={`******${data?.pay_details?.last4}`} />
+            </Space>
+          ) : (
+            array.map((d) => (
+              <Space>
+                <img src={d} width={'45px'} height={'28px'} />
+              </Space>
+            ))
+          )}
         </Col>
 
         <Col
@@ -112,6 +120,7 @@ const Payment = () => {
             removeCardRequest({
               payloadData: {},
               responseCallback: (res) => {
+                console.log('🚀 ~ file: index.jsx:123 ~ Payment ~ res:', res);
                 if (res.status) {
                   toastAlert('Card remove successfully', ALERT_TYPES.success);
                   setIsRemove(false);

@@ -96,10 +96,11 @@ const UserReducer = createSlice({
 
     updateCardRequest(state, action) {},
     updateCardRequestSuccess(state, action) {
-      console.log(action, 'action');
+      console.log(action, 'updateCardRequestSuccess');
       let newData = { ...state.data };
       newData.subscribe_status = action.payload.subscribe_status;
       newData.pay_details = action.payload.pay_details;
+      newData.card_exist = action.payload.card_exist;
 
       state.data = { ...state.data, ...newData };
     },
