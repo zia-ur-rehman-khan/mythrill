@@ -27,6 +27,7 @@ import {
 import {
   EMAIL_RULE,
   NUMBER_VERIFICATION_ROUTE,
+  SUBSCRIPTION_ROUTE,
   handlePassworMatch,
   handlePasswordConfirm,
   passwordValidation,
@@ -34,10 +35,15 @@ import {
   validatorField
 } from '../../../constants';
 import {
+  facebookLoginRequest,
+  googleLoginRequest,
   userLoginRequest,
   userRegisterRequest
 } from '../../../redux/slicers/user';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+
 import { useDispatch, useSelector } from 'react-redux';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -89,6 +95,51 @@ const Register = () => {
 
   const [form] = Form.useForm();
   const { getFieldValue } = form;
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      if (!tokenResponse.access_token) return;
+      console.log(tokenResponse, 'google');
+      const payloadData = {
+        token: tokenResponse.access_token
+      };
+      dispatch(
+        googleLoginRequest({
+          payloadData,
+          responseCallback: (res) => {
+            console.log(res, 'resresresres');
+            if (res.status) {
+              changeRoute(SUBSCRIPTION_ROUTE);
+            } else {
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
+    }
+  });
+
+  const responseFacebook = (response) => {
+    if (!response.accessToken) return;
+    console.log(response, 'fb');
+
+    const payloadData = {
+      token: response.accessToken
+    };
+    dispatch(
+      facebookLoginRequest({
+        payloadData,
+        responseCallback: (res) => {
+          if (res.status) {
+            changeRoute(SUBSCRIPTION_ROUTE);
+            console.log(res.status, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
 
   return (
     <AuthLayout
@@ -176,8 +227,26 @@ const Register = () => {
           <Space direction="vertical" size={15} className={css(AppStyles.w100)}>
             <CommonTextField textAlign={'center'} text={'or continue with'} />
             <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
-              <img src={Images.google} width={'45px'} height={'45px'} />
-              <img src={Images.fb} width={'45px'} height={'45px'} />
+              <img
+                src={Images.google}
+                width={'45px'}
+                height={'45px'}
+                onClick={() => googleLogin()}
+                className={css(AppStyles.pointer)}
+              />
+              <FacebookLogin
+                appId={process.env.REACT_APP_FB_KEY}
+                callback={responseFacebook}
+                render={(renderProps) => (
+                  <img
+                    src={Images.fb}
+                    width={'45px'}
+                    height={'45px'}
+                    onClick={renderProps.onClick}
+                    className={css(AppStyles.pointer)}
+                  />
+                )}
+              />
             </Space>
             <Space className={css(AppStyles.justifyCenter, AppStyles.w100)}>
               <CommonTextField text={'already have an account?'} />

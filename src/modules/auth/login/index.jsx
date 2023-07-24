@@ -16,6 +16,7 @@ import AuthLayout from '../../../components/AuthLayout';
 import { useNavigate } from 'react-router-dom';
 import {
   HOME_ROUTE,
+  SUBSCRIPTION_ROUTE,
   passwordValidation,
   phoneValidation,
   validatorField
@@ -91,7 +92,7 @@ const Login = () => {
           payloadData,
           responseCallback: (res) => {
             if (res.status) {
-              changeRoute(HOME_ROUTE);
+              changeRoute(SUBSCRIPTION_ROUTE);
             } else {
               console.log(res.errors, 'error');
             }
@@ -113,7 +114,7 @@ const Login = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(HOME_ROUTE);
+            changeRoute(SUBSCRIPTION_ROUTE);
             console.log(res.status, 'res');
           } else {
             console.log(res.errors, 'error');
