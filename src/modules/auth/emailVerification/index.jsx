@@ -46,7 +46,9 @@ const EmailVerification = () => {
   const navigate = useNavigate();
 
   const changeRoute = (route, code) => {
-    navigate(route, { state: { email: location.state.email, code: code } });
+    navigate(route, {
+      state: { phoneNumber: location.state.phoneNumber, code: code }
+    });
   };
 
   const onFinish = (values) => {
@@ -104,10 +106,13 @@ const EmailVerification = () => {
           <CommonHeading
             level={3}
             textAlign={'center'}
-            text={'Email Verification Please Check Your Email'}
+            text={'Phone Verification Please Check Your phone'}
           />
           <Space>
-            <CommonTextField text={location?.state?.email} opacity={'0.5'} />
+            <CommonTextField
+              text={location?.state?.phoneNumber}
+              opacity={'0.5'}
+            />
             <CommonTextField
               text={'Not You?'}
               color="#7665c1"

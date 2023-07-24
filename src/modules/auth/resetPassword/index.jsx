@@ -35,25 +35,25 @@ const ResetPassword = () => {
 
   const navigate = useNavigate();
 
-  const { email, code } = location?.state || {};
+  const { phoneNumber, code } = location?.state || {};
 
   const changeRoute = (route) => {
     navigate(route);
   };
 
   useEffect(() => {
-    if (!email && !code) {
-      console.log(email, code);
+    if (!phoneNumber && !code) {
+      console.log(phoneNumber, code);
       navigate(HOME_ROUTE);
     }
-  }, [email, code]);
+  }, [phoneNumber, code]);
 
   const onFinish = (values) => {
     setLoading(true);
     const { password } = values;
 
     const payloadData = {
-      email: email,
+      phone: phoneNumber,
       password: password,
       otp: code
     };

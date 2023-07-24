@@ -17,22 +17,23 @@ import { useNavigate } from 'react-router-dom';
 import { EMAIL_RULE, EMAIL_VERIFICATION_ROUTE } from '../../../constants';
 import { ForgotRequest } from '../../../redux/slicers/user';
 import { useDispatch } from 'react-redux';
+import { CommonPhoneInput } from '../../../components/common';
 
 const Forgot = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const changeRoute = (route, email) => {
-    navigate(route, { state: { email: email } });
+  const changeRoute = (route, phoneNumber) => {
+    navigate(route, { state: { phoneNumber: phoneNumber } });
   };
 
   const onFinish = (values) => {
     setLoading(true);
-    const { email } = values;
+    const { phoneNumber } = values;
 
     const payloadData = {
-      email: email
+      phone: '+' + phoneNumber
     };
 
     dispatch(
@@ -40,7 +41,7 @@ const Forgot = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(EMAIL_VERIFICATION_ROUTE, values?.email);
+            changeRoute(EMAIL_VERIFICATION_ROUTE, '+' + phoneNumber);
             setLoading(false);
             console.log(res, 'res');
           } else {
@@ -69,19 +70,15 @@ const Forgot = () => {
             margin="0 auto"
             textAlign={'center'}
             text={
-              'Enter your registered email below to receive password reset instruction'
+              'Enter your registered phone number below to receive password reset instruction'
             }
             opacity={'0.5'}
           />
 
           <Space direction="vertical" className={css(AppStyles.w100)}>
-            <CommonTextField text={'Email Address'} opacity={'0.5'} />
-            <CommonInputField
-              name="email"
-              className={'auth'}
-              placeholder={'john.smith@domain.com'}
-              rules={EMAIL_RULE}
-            />
+            <CommonTextField text={'Phone Number'} opacity={'0.5'} />
+
+            <CommonPhoneInput name={'phoneNumber'} />
           </Space>
 
           <CommonButton
