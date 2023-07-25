@@ -21,6 +21,7 @@ import initializeSocket, { socket } from '../../socket';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { SOCKET_URL } from '../../config/webService';
+import TradingViewWidget from '../TradingView';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ data, color }) => {
@@ -316,6 +317,7 @@ const Chart = ({ data, color }) => {
           />
         )}
         {chartType && chartComponent}
+        {/* <TradingViewWidget /> */}
       </div>
     </>
   );
