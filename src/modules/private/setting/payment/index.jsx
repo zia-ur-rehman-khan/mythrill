@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { USER_SUBSCRIPTION_STATUS } from '../../../../constants';
 import { removeCardRequest } from '../../../../redux/slicers/user';
+import { cardHandel } from '../../../../services/utils';
 
 const { disabel1, disabel2, disabel3, disabel4 } = Images;
 
@@ -27,6 +28,7 @@ const Payment = () => {
   const dispatch = useDispatch();
 
   const { data } = useSelector((state) => state?.user);
+
   console.log('🚀 ~ file: index.jsx:29 ~ Payment ~ data:', data);
 
   if (
@@ -52,7 +54,11 @@ const Payment = () => {
         >
           {data?.card_exist ? (
             <Space>
-              <img src={Images.card} width={'45px'} height={'32px'} />
+              <img
+                src={Images[cardHandel(data?.pay_details?.brand)]}
+                width={'45px'}
+                height={'32px'}
+              />
               <CommonTextField text={`******${data?.pay_details?.last4}`} />
             </Space>
           ) : (

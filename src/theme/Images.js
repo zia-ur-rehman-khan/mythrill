@@ -46,6 +46,8 @@ import disabel2 from '../assets/setting/disabel2.png';
 import disabel3 from '../assets/setting/disabel3.png';
 import disabel4 from '../assets/setting/disabel4.png';
 import info from '../assets/setting/info.png';
+import masterCard from '../assets/setting/masterCard.png';
+import visaCard from '../assets/setting/visaCard.png';
 
 export default {
   ErrorBackground2,
@@ -95,5 +97,7 @@ export default {
   disabel2,
   disabel3,
   disabel4,
-  info
+  info,
+  masterCard,
+  visaCard
 };

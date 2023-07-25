@@ -42,7 +42,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
 
   console.log(detailes, 'detailes');
 
-  const { amount, start_at, end_at } = detailes ?? {};
+  const { amount, start_at, end_at, brand } = detailes ?? {};
 
   return (
     <div className="subscription-main">

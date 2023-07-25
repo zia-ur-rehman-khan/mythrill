@@ -309,3 +309,13 @@ export const trendingImage = (t) => {
       return '';
   }
 };
+
+export const cardHandel = (t) => {
+  switch (t) {
+    case 'Visa':
+      return 'visaCard';
+
+    case 'master':
+      return 'masterCard';
+  }
+};
