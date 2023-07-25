@@ -31,6 +31,13 @@ import { useNavigate } from 'react-router';
 const CheckoutForm = ({ onAdd, subscription }) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const [isValid, setIsValid] = useState({
+    card: false,
+    expiry: false,
+    cvc: false
+  });
+  const [showError, setShowError] = useState(null);
+
   const navigate = useNavigate();
 
   const stripe = useStripe();
@@ -48,6 +55,10 @@ const CheckoutForm = ({ onAdd, subscription }) => {
   };
 
   const onFinish = async () => {
+    const { card, expiry, cvc } = isValid;
+    if (!card || !expiry || !cvc) {
+      return setShowError(isValid);
+    }
     setIsLoading(true);
     const cardElement = elements.getElement(CardNumberElement);
     const { tokenError, token } = await stripe.createToken(cardElement);
@@ -106,28 +117,61 @@ const CheckoutForm = ({ onAdd, subscription }) => {
         <Space direction="vertical" className={css(AppStyles.w100)}>
           <CommonTextField text={'Card number'} />
           <CardNumberElement
+            onChange={(e) => {
+              setIsValid((pre) => ({ ...pre, card: e?.complete }));
+              console.log(e);
+            }}
             options={{
               style: cardNumberStyle,
               placeholder: 'Enter card number'
             }}
           />
+          {showError?.card === false && !isValid?.card && (
+            <CommonTextField
+              text={'Please type valid card data'}
+              color={'#ff4d4f'}
+              fontSize={'12px'}
+            />
+          )}
         </Space>
         <div className={'expiry-section'}>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Expiry'} />
             <CardExpiryElement
+              onChange={(e) => {
+                setIsValid((pre) => ({ ...pre, expiry: e?.complete }));
+                console.log(e);
+              }}
               options={{
                 style: cardNumberStyle
               }}
             />
+            {showError?.expiry === false && !isValid?.expiry && (
+              <CommonTextField
+                text={'Please type valid expiry date'}
+                color={'#ff4d4f'}
+                fontSize={'12px'}
+              />
+            )}
           </Space>
           <Space direction="vertical" className={'csv-feild'}>
             <CommonTextField text={'CVC'} />
             <CardCvcElement
+              onChange={(e) => {
+                setIsValid((pre) => ({ ...pre, cvc: e?.complete }));
+                console.log(e);
+              }}
               options={{
                 style: cardNumberStyle
               }}
             />
+            {showError?.cvc === false && !isValid?.cvc && (
+              <CommonTextField
+                text={'Please type valid cvc data'}
+                color={'#ff4d4f'}
+                fontSize={'12px'}
+              />
+            )}
           </Space>
         </div>
         <CommonButton
