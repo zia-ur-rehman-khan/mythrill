@@ -42,7 +42,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
 
   console.log(detailes, 'detailes');
 
-  const { amount, start_at } = detailes ?? {};
+  const { amount, start_at, end_at } = detailes ?? {};
 
   return (
     <div className="subscription-main">
@@ -80,7 +80,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
             <CommonTextField
               width={'60%'}
               text={`Next Payment $${amount}.00 on ${getFormattedDateTime(
-                start_at,
+                end_at,
                 'MMM Do, YYYY'
               )} Automatic renewal every year`}
             />
