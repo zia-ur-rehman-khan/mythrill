@@ -171,6 +171,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
                           ALERT_TYPES.success
                         );
                         setIsPause(false);
+                        setIsResume(false);
                       } else {
                         console.log(res.errors, 'error');
                       }
