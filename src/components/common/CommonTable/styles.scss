@@ -7,7 +7,9 @@
 
         .ant-table-thead > tr > th {
             background: #393162;
-            color: #fff;
+            color: #ccc;
+            font-weight: 300;
+
             border: none;
             &::before {
                 display: none;
@@ -19,7 +21,9 @@
                 background: master.$dark-color;
             }
             tr > td {
-                color: #fff;
+                color: #ccc;
+                font-weight: 300;
+
                 border: none;
                 .trend-name {
                     display: flex;
@@ -33,7 +37,8 @@
             .ant-table-placeholder {
                 background: none;
                 .ant-empty-description {
-                    color: #fff;
+                    color: #ccc;
+                    font-weight: 300;
                 }
             }
         }
