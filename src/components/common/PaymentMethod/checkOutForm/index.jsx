@@ -13,14 +13,19 @@ import {
 import { Form, Space } from 'antd';
 import './styles.scss';
 import CommonTextField from '../../TextField';
-import { AppStyles } from '../../../../theme';
+import { AppStyles, Images } from '../../../../theme';
 import { css } from 'aphrodite';
 import CommonInputField from '../../CommonInput';
 import { ALERT_TYPES, HOME_ROUTE, validatorField } from '../../../../constants';
 import CommonDropdown from '../../CommonDropdown';
 import CommonButton from '../../CommonButton';
 import { error } from 'highcharts';
-import { toastAlert } from '../../../../services/utils';
+import {
+  cardHandel,
+  cardfeildHandel,
+  cardfieldHandel,
+  toastAlert
+} from '../../../../services/utils';
 import { useDispatch } from 'react-redux';
 import {
   subscriptionRequest,
@@ -28,9 +33,13 @@ import {
 } from '../../../../redux/slicers/user';
 import { useNavigate } from 'react-router';
 
+const { visaCard, masterCard, americanExpressCard, discoverCard, card } =
+  Images;
+
 const CheckoutForm = ({ onAdd, subscription }) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const [cardIcon, setCardIcon] = useState('unknown');
   const [isValid, setIsValid] = useState({
     card: false,
     expiry: false,
@@ -116,23 +125,32 @@ const CheckoutForm = ({ onAdd, subscription }) => {
       >
         <Space direction="vertical" className={css(AppStyles.w100)}>
           <CommonTextField text={'Card number'} />
-          <CardNumberElement
-            onChange={(e) => {
-              setIsValid((pre) => ({ ...pre, card: e?.complete }));
-              console.log(e);
-            }}
-            options={{
-              style: cardNumberStyle,
-              placeholder: 'Enter card number'
-            }}
-          />
-          {showError?.card === false && !isValid?.card && (
-            <CommonTextField
-              text={'Please type valid card data'}
-              color={'#ff4d4f'}
-              fontSize={'12px'}
+          <div className="card-field">
+            <CardNumberElement
+              onChange={(e) => {
+                setIsValid((pre) => ({ ...pre, card: e?.complete }));
+                setCardIcon(e?.brand);
+              }}
+              options={{
+                style: cardNumberStyle,
+                placeholder: 'Enter card number'
+              }}
             />
-          )}
+            {showError?.card === false && !isValid?.card && (
+              <CommonTextField
+                text={'Please enter valid card data'}
+                color={'#ff4d4f'}
+                fontSize={'12px'}
+              />
+            )}
+            <Space size={0} className="card-icons">
+              <img
+                src={Images[cardfieldHandel(cardIcon)]}
+                width={'45px'}
+                height={'28px'}
+              />
+            </Space>
+          </div>
         </Space>
         <div className={'expiry-section'}>
           <Space direction="vertical" className={css(AppStyles.w100)}>
@@ -140,7 +158,6 @@ const CheckoutForm = ({ onAdd, subscription }) => {
             <CardExpiryElement
               onChange={(e) => {
                 setIsValid((pre) => ({ ...pre, expiry: e?.complete }));
-                console.log(e);
               }}
               options={{
                 style: cardNumberStyle
@@ -148,7 +165,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
             />
             {showError?.expiry === false && !isValid?.expiry && (
               <CommonTextField
-                text={'Please type valid expiry date'}
+                text={'Please enter valid expiry date'}
                 color={'#ff4d4f'}
                 fontSize={'12px'}
               />
@@ -159,7 +176,6 @@ const CheckoutForm = ({ onAdd, subscription }) => {
             <CardCvcElement
               onChange={(e) => {
                 setIsValid((pre) => ({ ...pre, cvc: e?.complete }));
-                console.log(e);
               }}
               options={{
                 style: cardNumberStyle
@@ -167,7 +183,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
             />
             {showError?.cvc === false && !isValid?.cvc && (
               <CommonTextField
-                text={'Please type valid cvc data'}
+                text={'Please enter valid cvc data'}
                 color={'#ff4d4f'}
                 fontSize={'12px'}
               />

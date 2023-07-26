@@ -317,5 +317,27 @@ export const cardHandel = (t) => {
 
     case 'master':
       return 'masterCard';
+
+    default:
+      return 'card';
+  }
+};
+
+export const cardfieldHandel = (t) => {
+  switch (t) {
+    case 'visa':
+      return 'visaCard';
+
+    case 'mastercard':
+      return 'masterCard';
+
+    case 'amex':
+      return 'americanExpressCard';
+
+    case 'discover':
+      return 'discoverCard';
+
+    default:
+      return 'card';
   }
 };

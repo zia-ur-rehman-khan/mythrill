@@ -1,26 +1,29 @@
 @use "../../../master.scss";
 
-.ant-modal > .ant-modal-content {
-    background-color: master.$dark-color;
-    padding: 0 !important;
-    .ant-modal-header {
+.ant-modal {
+    min-width: 250px !important;
+
+    .ant-modal-content {
         background-color: master.$dark-color;
-        .ant-modal-title {
-            padding-top: 25px;
+        padding: 0 !important;
+        .ant-modal-header {
+            background-color: master.$dark-color;
+            .ant-modal-title {
+                padding-top: 25px;
+            }
         }
-    }
-    .ant-modal-close {
-        .ant-modal-close-x {
-            color: master.$white-color;
+        .ant-modal-close {
+            .ant-modal-close-x {
+                color: master.$white-color;
+            }
         }
-    }
-    .ant-modal-body {
-        height: 400px;
-        overflow-y: auto;
-        padding: 25px;
+        .ant-modal-body {
+            height: 400px;
+            overflow-y: auto;
+            padding: 25px;
+        }
     }
 }
-
 .confirmation-modal {
     width: 30% !important;
     min-width: 250px !important;

@@ -48,6 +48,8 @@ import disabel4 from '../assets/setting/disabel4.png';
 import info from '../assets/setting/info.png';
 import masterCard from '../assets/setting/masterCard.png';
 import visaCard from '../assets/setting/visaCard.png';
+import discoverCard from '../assets/setting/discoverCard.png';
+import americanExpressCard from '../assets/setting/americanExpressCard.png';
 
 export default {
   ErrorBackground2,
@@ -99,5 +101,7 @@ export default {
   disabel4,
   info,
   masterCard,
-  visaCard
+  visaCard,
+  discoverCard,
+  americanExpressCard
 };
