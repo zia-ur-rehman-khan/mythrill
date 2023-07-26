@@ -178,8 +178,8 @@ const UserInfo = () => {
                 <Tooltip title="Email verification">
                   <img
                     src={Images.info}
-                    width={'100%'}
-                    height={'60%'}
+                    width={'20px'}
+                    height={'20px'}
                     className={css(AppStyles.pointer)}
                   />
                 </Tooltip>
