@@ -70,11 +70,13 @@ const CheckoutForm = ({ onAdd, subscription }) => {
     }
     setIsLoading(true);
     const cardElement = elements.getElement(CardNumberElement);
-    const { tokenError, token } = await stripe.createToken(cardElement);
 
-    if (tokenError) {
+    const { error, token } = await stripe.createToken(cardElement);
+
+    if (error) {
       console.log(error.message, 'error');
       toastAlert(error.message, ALERT_TYPES.error);
+      setIsLoading(false);
     } else {
       const payloadData = { token: token.id };
       {
