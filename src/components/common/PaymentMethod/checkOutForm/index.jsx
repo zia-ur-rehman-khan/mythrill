@@ -33,12 +33,8 @@ import {
 } from '../../../../redux/slicers/user';
 import { useNavigate } from 'react-router';
 
-const { visaCard, masterCard, americanExpressCard, discoverCard, card } =
-  Images;
-
 const CheckoutForm = ({ onAdd, subscription }) => {
   const [isLoading, setIsLoading] = useState(false);
-
   const [cardIcon, setCardIcon] = useState('unknown');
   const [isValid, setIsValid] = useState({
     card: false,
