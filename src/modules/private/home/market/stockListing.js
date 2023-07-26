@@ -20,7 +20,7 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
       {addIcon
         ? unSubstocks
             ?.filter((d) =>
-              d.title.toLowerCase().includes(search.toLowerCase())
+              d?.title?.toLowerCase().includes(search.toLowerCase())
             )
             ?.map((d) => (
               <StockCard addIcon={addIcon} value={d} key={Math.random()} />
