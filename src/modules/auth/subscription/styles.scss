@@ -1,18 +1,22 @@
 @use "../../../master.scss";
 
-.sub-parent {
-    background: master.$dark-color;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 40px 20px;
-    .sub-content {
-        margin-top: 40px;
+.subscription-main-page {
+    padding: 30px;
+    .sub-heading {
+        background: master.$dark-color;
         display: flex;
-        flex-wrap: wrap;
-        gap: 40px;
         justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+    .free {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 30px;
+
+        @media (max-width: 575px) {
+            padding: 30px 20px;
+        }
     }
 }

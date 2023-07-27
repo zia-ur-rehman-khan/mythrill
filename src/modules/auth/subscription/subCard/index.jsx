@@ -1,4 +1,4 @@
-import { Space } from 'antd';
+import { Radio, Space } from 'antd';
 import { css } from 'aphrodite';
 import React from 'react';
 import { AppStyles, Images } from '../../../../theme';
@@ -14,6 +14,8 @@ import DataHandler from '../../../../services/DataHandler';
 import { userLoginSuccess } from '../../../../redux/slicers/user';
 import { HOME_ROUTE, PREMIUM_SUBSCRIPTION_ROUTE } from '../../../../constants';
 
+const radio = ['$25', '$64', '$210'];
+
 const SubcriptionCard = ({ title, amount }) => {
   const Navigate = useNavigate();
   const changeRoute = (route) => {
@@ -25,36 +27,29 @@ const SubcriptionCard = ({ title, amount }) => {
     <Space size={30} direction="vertical" className="sub-box">
       <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
         <img src={Images.authLogo} width={'50px'} height={'58px'} />
-        {amount === 'Free' ? (
-          <CommonHeading text={amount} />
-        ) : (
-          <Space>
-            <CommonHeading text={'$575.00'} />
-            <CommonTextField text={'/ year'} />
-          </Space>
-        )}
+        <Space>
+          <CommonHeading text={'$25'} />
+          <CommonTextField text={'/ monthly'} />
+        </Space>
       </Space>
-      <CommonTextField fontWeight={600} fontSize={'23px'} text={title} />
-      <ul className={css(AppStyles.mLeft20)}>
-        <li>
-          <CommonTextField opacity={0.5} text={'Lorem ipsum dolor sit amet'} />
-        </li>
-        <li>
-          <CommonTextField
-            opacity={0.5}
-            text={'Lorem ipsum dolor sit amet consectetur adipiscing elit'}
-          />
-        </li>
-        <li>
-          <CommonTextField opacity={0.5} text={'Integer sed felis felis.'} />
-        </li>
-        <li>
-          <CommonTextField
-            opacity={0.5}
-            text={'ed efficitur fermentum laoreet'}
-          />
-        </li>
-      </ul>
+      <Space direction="vertical">
+        <CommonTextField
+          fontWeight={600}
+          fontSize={'23px'}
+          text={'Basic Tier'}
+        />
+        <CommonTextField text={'10 crypto/stock tracking indices'} />
+      </Space>
+
+      <Radio.Group className={css(AppStyles.w100)}>
+        {radio.map((t, index) => (
+          <Space className={css([AppStyles.w100, AppStyles.mBottom20])}>
+            <Radio value={t} />
+            <CommonTextField text={t} fontWeight={600} />
+            <CommonTextField text={'Quarter savings of 15%'} opacity={0.5} />
+          </Space>
+        ))}
+      </Radio.Group>
       <CommonButton text={'Start Now'} onClick={() => changeRoute()} />
     </Space>
   );
