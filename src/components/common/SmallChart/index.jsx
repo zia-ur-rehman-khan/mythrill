@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
-import priceData from '../../../assets/json/btcdata.json';
 import moment from 'moment';
 import './styles.scss';
 import { css } from 'aphrodite';
