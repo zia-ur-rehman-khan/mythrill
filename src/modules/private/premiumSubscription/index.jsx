@@ -55,7 +55,7 @@ const PremiumSubscription = () => {
   return (
     <AuthLayout
       arrow
-      className="subscription"
+      className="subscription-auth"
       image={<img src={Images.subscription} className="sub-image" />}
     >
       <Space direction="vertical" className={css(AppStyles.w100)}>
