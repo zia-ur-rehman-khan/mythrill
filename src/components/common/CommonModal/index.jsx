@@ -13,7 +13,8 @@ const CommonModal = ({
   title,
   discription,
   onConfirm,
-  loading
+  loading,
+  className
 }) => {
   const handleOk = () => {
     setIsModalVisible(false);
@@ -25,7 +26,7 @@ const CommonModal = ({
   return (
     <div>
       <Modal
-        className={discription && 'confirmation-modal'}
+        className={(discription && 'confirmation-modal') || className}
         footer={null}
         width={width}
         title={title}

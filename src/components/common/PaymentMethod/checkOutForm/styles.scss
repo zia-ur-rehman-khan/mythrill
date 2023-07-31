@@ -19,7 +19,7 @@
         position: relative;
         .card-icons {
             position: absolute;
-            right: 0;
+            right: 12px;
             top: 6px;
             @media (max-width: 800px) {
                 top: 12px;
@@ -54,7 +54,7 @@
         position: relative;
         .card-icons {
             position: absolute;
-            right: 6px;
+            right: 12px;
             top: 6px;
             @media (max-width: 800px) {
                 top: 12px;

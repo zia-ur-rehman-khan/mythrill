@@ -96,6 +96,7 @@ const Payment = () => {
       </Row>
       <CommonModal
         width={'50%'}
+        className={'update-payment-modal'}
         title={
           <CommonHeading
             text={
