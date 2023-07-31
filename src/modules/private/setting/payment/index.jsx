@@ -14,7 +14,7 @@ import {
   PaymentMethod
 } from '../../../../components/common';
 import { useDispatch, useSelector } from 'react-redux';
-import { USER_SUBSCRIPTION_STATUS } from '../../../../constants';
+import { ALERT_TYPES, USER_SUBSCRIPTION_STATUS } from '../../../../constants';
 import { removeCardRequest } from '../../../../redux/slicers/user';
 import { cardHandel, toastAlert } from '../../../../services/utils';
 
