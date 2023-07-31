@@ -159,7 +159,11 @@ const UserInfo = () => {
             sm={{ span: 12 }}
             xs={{ span: 24 }}
           >
-            <CommonPhoneInput name={'phoneNumber'} disabled={true} />
+            <CommonPhoneInput
+              name={'phoneNumber'}
+              disabled={true}
+              rules={false}
+            />
           </Col>
           <Col
             lg={{ span: 8 }}

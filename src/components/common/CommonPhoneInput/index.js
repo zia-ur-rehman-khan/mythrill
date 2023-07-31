@@ -6,27 +6,29 @@ import PhoneInput from 'react-phone-input-2';
 
 import './styles.scss';
 
-const CommonPhoneInput = ({ name, disabled, rules }) => {
+const CommonPhoneInput = ({ name, disabled, rules = true }) => {
   const [phoneValid, setPhoneValid] = useState(true);
   return (
     <Form.Item
       name={name}
-      rules={[
-        {
-          required: true,
-          message: 'Phone is required'
-        },
-        {
-          validator: (_, value) => {
-            console.log({ phoneValid });
-            if (value && !phoneValid) {
-              return Promise.reject(new Error('Invalid Number'));
-            } else {
-              return Promise.resolve();
+      rules={
+        rules && [
+          {
+            required: true,
+            message: 'Phone is required'
+          },
+          {
+            validator: (_, value) => {
+              console.log({ phoneValid });
+              if (value && !phoneValid) {
+                return Promise.reject(new Error('Invalid Number'));
+              } else {
+                return Promise.resolve();
+              }
             }
           }
-        }
-      ]}
+        ]
+      }
     >
       <PhoneInput
         country={'us'}
