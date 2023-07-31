@@ -16,7 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { USER_SUBSCRIPTION_STATUS } from '../../../../constants';
 import { removeCardRequest } from '../../../../redux/slicers/user';
-import { cardHandel } from '../../../../services/utils';
+import { cardHandel, toastAlert } from '../../../../services/utils';
 
 const { disabel1, disabel2, disabel3, disabel4 } = Images;
 
@@ -76,13 +76,13 @@ const Payment = () => {
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
-          <div className="button-side">
-            <CommonButton
-              text={data?.card_exist ? 'Update Card' : 'Add Your Card'}
-              topClass={'payment-but'}
-              onClick={() => setIsModal(!isModal)}
-            />
-            {data?.card_exist && (
+          {data?.card_exist ? (
+            <div className="button-side">
+              <CommonButton
+                text={'Update Card'}
+                topClass={'payment-but'}
+                onClick={() => setIsModal(!isModal)}
+              />
               <CommonButton
                 text={'Remove Card'}
                 topClass={'payment-but'}
@@ -90,8 +90,22 @@ const Payment = () => {
                 border={'1px solid #ffff'}
                 onClick={() => setIsRemove(true)}
               />
-            )}
-          </div>
+            </div>
+          ) : (
+            <Space
+              className={css(
+                AppStyles.w100,
+                AppStyles.justifyEnd,
+                AppStyles.mTop10
+              )}
+            >
+              <CommonButton
+                width={'180px'}
+                text={'Add Your Card'}
+                onClick={() => setIsModal(!isModal)}
+              />
+            </Space>
+          )}
         </Col>
       </Row>
       <CommonModal
