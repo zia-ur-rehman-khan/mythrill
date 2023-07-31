@@ -80,6 +80,7 @@ const StockCard = ({ value, addIcon }) => {
         responseCallback: (res) => {
           setIsLoading(false);
           if (res.status) {
+            dispatch(stockLimitExceed(false));
             console.log(res, 'res');
           } else {
             console.log(res.errors, 'error');
