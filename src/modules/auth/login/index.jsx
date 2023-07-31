@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   HOME_ROUTE,
   SUBSCRIPTION_ROUTE,
+  USER_SUBSCRIPTION_STATUS,
   passwordValidation,
   phoneValidation,
   validatorField
@@ -66,8 +67,14 @@ const Login = () => {
         responseCallback: (res) => {
           if (res.status) {
             setLoading(false);
-            console.log(res.status, 'res');
-            changeRoute(HOME_ROUTE);
+            console.log(res.data.data.subscribe_status, 'res');
+            if (
+              res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
+            ) {
+              changeRoute(SUBSCRIPTION_ROUTE);
+            } else {
+              changeRoute(HOME_ROUTE);
+            }
           } else {
             setLoading(false);
             console.log(res.errors, 'error');
@@ -92,7 +99,13 @@ const Login = () => {
           payloadData,
           responseCallback: (res) => {
             if (res.status) {
-              changeRoute(SUBSCRIPTION_ROUTE);
+              if (
+                res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
+              ) {
+                changeRoute(SUBSCRIPTION_ROUTE);
+              } else {
+                changeRoute(HOME_ROUTE);
+              }
             } else {
               console.log(res.errors, 'error');
             }
@@ -114,8 +127,13 @@ const Login = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(SUBSCRIPTION_ROUTE);
-            console.log(res.status, 'res');
+            if (
+              res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
+            ) {
+              changeRoute(SUBSCRIPTION_ROUTE);
+            } else {
+              changeRoute(HOME_ROUTE);
+            }
           } else {
             console.log(res.errors, 'error');
           }

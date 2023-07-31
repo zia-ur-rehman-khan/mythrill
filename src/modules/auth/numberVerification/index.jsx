@@ -16,8 +16,10 @@ import { css } from 'aphrodite';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   ALERT_TYPES,
+  HOME_ROUTE,
   NUMBER_VERIFICATION_ROUTE,
   SUBSCRIPTION_ROUTE,
+  USER_SUBSCRIPTION_STATUS,
   validatorField
 } from '../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,9 +56,16 @@ const NumberVerification = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(SUBSCRIPTION_ROUTE);
+            console.log(res.data.data.subscribe_status, 'res');
+
+            if (
+              res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
+            ) {
+              changeRoute(SUBSCRIPTION_ROUTE);
+            } else {
+              changeRoute(HOME_ROUTE);
+            }
             setLoading(false);
-            console.log(res.status, 'res');
           } else {
             setLoading(false);
             console.log(res.errors, 'error');

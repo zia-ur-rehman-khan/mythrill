@@ -9,9 +9,16 @@ import { App, Col, Row, Space } from 'antd';
 import { AppStyles, Images } from '../../../theme';
 import { css } from 'aphrodite';
 import SubcriptionCard from './subCard';
+import { HOME_ROUTE } from '../../../constants';
+import { useNavigate } from 'react-router-dom';
 
 const Subscripton = () => {
   const array = [1, 2, 3, 4];
+  const navigate = useNavigate();
+
+  const changeRoute = (route) => {
+    navigate(route);
+  };
   return (
     <div className="subscription-main-page">
       <div className="sub-heading">
@@ -41,6 +48,7 @@ const Subscripton = () => {
           </Col>
           <Col lg={6} md={6} xs={24}>
             <CommonButton
+              onClick={() => changeRoute(HOME_ROUTE)}
               topClass="sub-button"
               text={'selected'}
               background="none"
