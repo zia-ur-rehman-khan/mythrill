@@ -153,18 +153,22 @@ const UserInfo = () => {
               ]}
             />
           </Col>
-          <Col
-            lg={{ span: 8 }}
-            md={{ span: 8 }}
-            sm={{ span: 12 }}
-            xs={{ span: 24 }}
-          >
-            <CommonPhoneInput
-              name={'phoneNumber'}
-              disabled={true}
-              rules={false}
-            />
-          </Col>
+          {data['login_with'] === 'google' ||
+          data['login_with'] === 'facebook' ? null : (
+            <Col
+              lg={{ span: 8 }}
+              md={{ span: 8 }}
+              sm={{ span: 12 }}
+              xs={{ span: 24 }}
+            >
+              <CommonPhoneInput
+                name={'phoneNumber'}
+                disabled={true}
+                rules={false}
+              />
+            </Col>
+          )}
+
           <Col
             lg={{ span: 8 }}
             md={{ span: 8 }}

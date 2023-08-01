@@ -22,15 +22,19 @@ import { css } from 'aphrodite';
 import './styles.scss';
 import { userLoginRequest } from '../../../../redux/slicers/user';
 import { userChangePasswordRequest } from '../../../../redux/slicers/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toastAlert } from '../../../../services/utils';
 
 const UserPassword = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state?.user);
 
   const [form] = Form.useForm();
   const { getFieldValue } = form;
+
+  if (data['login_with'] === 'google' || data['login_with'] === 'facebook')
+    return '';
 
   const onFinish = (values) => {
     setLoading(true);

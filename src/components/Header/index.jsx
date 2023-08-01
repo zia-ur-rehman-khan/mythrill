@@ -89,14 +89,14 @@ const Header = () => {
       </div>
       <Space size={20} className="right-side">
         <NotificationContent />
-        <Space className="profile" align="center" size={20}>
+        <Space className="profile" align="center" size={10}>
           <img
             src={data.profile_image || Images.profile}
             width={'33.75px'}
             height={'33.75px'}
             style={{ borderRadius: '50%' }}
           />
-          <Space direction="vertical" align="baseline">
+          <Space direction="vertical" align="baseline" size={3}>
             <CommonTextField
               text={data?.name}
               fontSize={'10.5px'}
