@@ -14,7 +14,8 @@ const CommonModal = ({
   discription,
   onConfirm,
   loading,
-  className
+  className,
+  destroyOnClose
 }) => {
   const handleOk = () => {
     setIsModalVisible(false);
@@ -26,6 +27,7 @@ const CommonModal = ({
   return (
     <div>
       <Modal
+        destroyOnClose={destroyOnClose}
         className={(discription && 'confirmation-modal') || className}
         footer={null}
         width={width}

@@ -33,6 +33,16 @@ import {
 } from '../../../../redux/slicers/user';
 import { useNavigate } from 'react-router';
 
+const cardNumberStyle = {
+  base: {
+    fontSize: '12px',
+    color: '#ffffff'
+  },
+  invalid: {
+    color: '#fa755a'
+  }
+};
+
 const CheckoutForm = ({ onAdd, subscription }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardIcon, setCardIcon] = useState('unknown');
@@ -49,16 +59,6 @@ const CheckoutForm = ({ onAdd, subscription }) => {
   const elements = useElements();
   const dispatch = useDispatch();
 
-  const cardNumberStyle = {
-    base: {
-      fontSize: '12px',
-      color: '#ffffff'
-    },
-    invalid: {
-      color: '#fa755a'
-    }
-  };
-
   const onFinish = async () => {
     const { card, expiry, cvc } = isValid;
     if (!card || !expiry || !cvc) {
@@ -66,8 +66,6 @@ const CheckoutForm = ({ onAdd, subscription }) => {
     }
     setIsLoading(true);
     const cardElement = elements.getElement(CardNumberElement);
-    const cardExpiryElement = elements.getElement(CardExpiryElement);
-    const cardCvcElement = elements.getElement(CardCvcElement);
 
     const { error, token } = await stripe.createToken(cardElement);
 
@@ -107,9 +105,6 @@ const CheckoutForm = ({ onAdd, subscription }) => {
                       ALERT_TYPES.success
                     );
                     onAdd();
-                    cardElement.clear();
-                    cardExpiryElement.clear();
-                    cardCvcElement.clear();
                   } else {
                     console.log(res.errors, 'error');
                   }

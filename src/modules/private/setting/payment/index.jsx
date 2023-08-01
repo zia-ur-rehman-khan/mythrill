@@ -109,6 +109,7 @@ const Payment = () => {
         </Col>
       </Row>
       <CommonModal
+        destroyOnClose={true}
         width={'50%'}
         className={'update-payment-modal'}
         title={
