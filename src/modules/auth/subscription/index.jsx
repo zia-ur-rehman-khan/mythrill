@@ -38,7 +38,7 @@ const Subscripton = () => {
           className={` free ${css(AppStyles.spaceBetween, AppStyles.w100)}`}
         >
           <Col lg={12} md={12} xs={24}>
-            <Space>
+            <Space size={20}>
               <img src={Images.authLogo} width={'50px'} height={'58px'} />
               <Space size={0} direction="vertical">
                 <CommonHeading text={'M-Trend Free'} />
@@ -50,7 +50,7 @@ const Subscripton = () => {
             <CommonButton
               onClick={() => changeRoute(HOME_ROUTE)}
               topClass="sub-button"
-              text={'selected'}
+              text={'Selected'}
               background="none"
               border={'1px solid #ffff'}
             />
@@ -59,11 +59,11 @@ const Subscripton = () => {
 
         <Row
           justify={'space-between'}
-          gutter={[0, 30]}
+          gutter={[30, 30]}
           className="packages-list"
         >
           {array.map((t) => (
-            <Col xxl={6} xl={5} lg={10} md={10} sm={10} xs={24}>
+            <Col xxl={6} xl={6} lg={11} md={12} sm={12} xs={24}>
               <SubcriptionCard title="Basic Package" />
             </Col>
           ))}
@@ -74,7 +74,7 @@ const Subscripton = () => {
           className={` free ${css(AppStyles.spaceBetween, AppStyles.w100)}`}
         >
           <Col lg={12} md={12} xs={24}>
-            <Space>
+            <Space size={20}>
               <img src={Images.authLogo} width={'50px'} height={'58px'} />
               <Space size={0} direction="vertical">
                 <CommonHeading text={'M-Trend Enterprise'} />

@@ -28,12 +28,12 @@ const items = [
   {
     key: '2',
     label: `Stocks`,
-    children: <StockListing test="Stock" />
+    children: <StockListing test="Market" />
   },
   {
     key: '3',
     label: `Crypto`,
-    children: <StockListing test="CryptoCurreny" />
+    children: <StockListing test="CryptoCurrency" />
   },
   {
     key: '4',
