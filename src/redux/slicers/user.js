@@ -11,7 +11,8 @@ const UserReducer = createSlice({
     isAuthenticated: false,
     isError: null,
     deviceToken: '',
-    hash: ''
+    hash: '',
+    search: ''
   },
   reducers: {
     // USER LOGIN
@@ -124,7 +125,10 @@ const UserReducer = createSlice({
     cancelSubscriptionRequest(state, action) {},
     resumeSubscriptionRequest() {},
     paymentListRequest() {},
-    trendingListRequest() {}
+    trendingListRequest() {},
+    search(state, action) {
+      state.search = action.payload;
+    }
   }
 });
 
@@ -163,7 +167,8 @@ export const {
   resumeSubscriptionRequest,
   subscriptionRequestSuccess,
   paymentListRequest,
-  trendingListRequest
+  trendingListRequest,
+  search
 } = UserReducer.actions;
 
 export default UserReducer.reducer;

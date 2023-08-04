@@ -7,21 +7,25 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
   const stocks = useSelector((state) => state?.stocks?.stocksSubscribe);
   const unSubstocks = useSelector((state) => state?.stocks?.stocksUnSubscribe);
 
+  const searchText = useSelector((state) => state?.user.search);
+
   const noStockInTheList = () => {
     return <CommonTextField text={'No Stocks in the list'} />;
   };
 
-  const filteredStocks = test
-    ? stocks?.filter((d) => d?.type === test)
-    : stocks;
+  let filteredStocks = test ? stocks?.filter((d) => d?.type === test) : stocks;
+
+  if (searchText) {
+    filteredStocks = filteredStocks?.filter((d) =>
+      d.nameId.includes(searchText.toLowerCase())
+    );
+  }
 
   return (
     <>
       {addIcon
         ? unSubstocks
-            ?.filter((d) =>
-              d?.title?.toLowerCase().includes(search.toLowerCase())
-            )
+            ?.filter((d) => d?.title?.includes(search.toLowerCase()))
             ?.map((d) => (
               <StockCard addIcon={addIcon} value={d} key={Math.random()} />
             ))

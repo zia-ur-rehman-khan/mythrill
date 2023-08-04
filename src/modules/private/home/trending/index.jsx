@@ -57,6 +57,7 @@ const Trending = () => {
   const [trending, setTrending] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const searchText = useSelector((state) => state?.user.search);
 
   const navigator = useNavigate();
 
@@ -78,9 +79,17 @@ const Trending = () => {
     );
   }, []);
 
+  let trendingItems = trending;
+
+  if (searchText) {
+    trendingItems = trendingItems?.filter((d) =>
+      d.nameId.includes(searchText.toLowerCase())
+    );
+  }
+
   let dataSource = useMemo(
     () =>
-      trending?.map((t, i) => {
+      trendingItems?.map((t, i) => {
         const data = {
           key: i + 1,
           name: (
@@ -98,7 +107,7 @@ const Trending = () => {
 
         return data;
       }),
-    [trending]
+    [trendingItems]
   );
 
   const filteredDataSource = useMemo(() => {

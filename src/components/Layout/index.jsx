@@ -16,17 +16,23 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../theme';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { search } from '../../redux/slicers/user';
 
 const Layout = ({ children }) => {
   const { data } = useSelector((state) => state?.user);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const navigator = useNavigate();
   const { pathname } = location;
 
   const changeRoute = () => {
     navigator(TRENDING_ROUTE);
+  };
+
+  const handelSearch = (e) => {
+    dispatch(search(e.target.value));
   };
 
   return (
@@ -58,6 +64,7 @@ const Layout = ({ children }) => {
               >
                 <CommonInputField
                   placeholder="Search..."
+                  onChange={handelSearch}
                   suffix={
                     <FontAwesomeIcon
                       className={css(AppStyles.cursorPointer)}

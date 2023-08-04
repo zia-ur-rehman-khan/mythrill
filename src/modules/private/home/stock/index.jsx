@@ -22,17 +22,25 @@ import {
 const Stock = () => {
   const navigate = useNavigate();
   const stocksData = useSelector((state) => state?.stocks?.stocksData);
-  console.log('🚀 ~ file: index.jsx:25 ~ Stock ~ stocksData:', stocksData);
   const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
+  const searchText = useSelector((state) => state?.user.search);
 
   const changeRoute = (id) => {
     navigate(`stock/${id}`);
   };
 
+  let stocksItems = stocksList;
+
+  if (searchText) {
+    stocksItems = stocksItems?.filter((d) =>
+      d.nameId.includes(searchText.toLowerCase())
+    );
+  }
+
   return (
     <Row gutter={[20, 20]}>
-      {stocksList?.length > 0 &&
-        stocksList?.map((stock) => {
+      {stocksItems?.length > 0 &&
+        stocksItems?.map((stock) => {
           const stockDetailData = stocksData[stock?.nameId]?.data;
 
           const data = stockDetailData?.map((item) => ({
@@ -135,7 +143,7 @@ const Stock = () => {
           );
         })}
 
-      {stocksList?.length === 0 && (
+      {stocksItems?.length === 0 && (
         <div style={{ width: '100%', marginTop: '30px' }}>
           <CommonHeading
             level={3}
