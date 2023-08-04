@@ -20,7 +20,7 @@ import { cardHandel, toastAlert } from '../../../../services/utils';
 
 const { disabel1, disabel2, disabel3, disabel4 } = Images;
 
-const array = [disabel1, disabel2, disabel3, disabel4];
+const array = [disabel3, disabel1, disabel4, disabel2];
 
 const Payment = () => {
   const [isModal, setIsModal] = useState(false);
@@ -62,11 +62,11 @@ const Payment = () => {
               <CommonTextField text={`******${data?.pay_details?.last4}`} />
             </Space>
           ) : (
-            array.map((d) => (
-              <Space>
-                <img src={d} width={'45px'} height={'28px'} />
-              </Space>
-            ))
+            <Space size={2}>
+              {array.map((d) => (
+                <img src={d} />
+              ))}
+            </Space>
           )}
         </Col>
 
