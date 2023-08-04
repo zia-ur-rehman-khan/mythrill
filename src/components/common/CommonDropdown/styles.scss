@@ -3,6 +3,10 @@
 .ant-dropdown {
     .ant-dropdown-menu {
         background-color: master.$theme3-color;
+        .ant-dropdown-menu-item-divider {
+            opacity: 0.1;
+            background-color: #ffffff;
+        }
         .ant-dropdown-menu-item {
             color: #ffffff;
 

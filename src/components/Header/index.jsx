@@ -47,26 +47,19 @@ const Header = () => {
     );
   };
 
-  const array = [
+  const items = [
     {
-      label: 'Profile setting',
+      label: <CommonTextField text={'Profile setting'} fontWeight={600} />,
       onClick: () => changeRoute(SETTING_ROUTE)
     },
     {
-      label: 'Sign out',
+      type: 'divider'
+    },
+    {
+      label: <CommonTextField text={'Sign out'} fontWeight={600} />,
       onClick: () => logout()
     }
   ];
-
-  const items = array.map((d) => (
-    <CommonTextField
-      onClick={d.onClick}
-      text={d.label}
-      fontWeight={600}
-      mb={5}
-      fontSize={'14px'}
-    />
-  ));
 
   return (
     <header className="main-header">
@@ -111,18 +104,12 @@ const Header = () => {
             />
           </Space>
 
-          <Popover
-            placement="bottom"
-            overlayClassName="market-popover"
-            content={items}
-            trigger="click"
-            arrow={false}
-          >
+          <CommonDropdown items={items}>
             <FontAwesomeIcon
               className={css(AppStyles.pointer)}
               icon={faEllipsisVertical}
             />
-          </Popover>
+          </CommonDropdown>
         </Space>
       </Space>
 

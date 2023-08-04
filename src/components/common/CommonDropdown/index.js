@@ -5,6 +5,7 @@ import './styles.scss';
 const CommonDropdown = ({ children, items }) => {
   return (
     <Dropdown
+      placement="bottomRight"
       menu={{
         items
       }}

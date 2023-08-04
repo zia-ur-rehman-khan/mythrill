@@ -31,25 +31,18 @@ const StockCard = ({ value, addIcon }) => {
     navigate(STOCK_DETAILE_ROUTE.replace(':id', nameId));
   };
 
-  const array = [
+  const items = [
     {
-      label: 'Favorite'
+      label: <CommonTextField text={'Favorite'} fontWeight={600} />
     },
     {
-      label: 'Remove',
+      type: 'divider'
+    },
+    {
+      label: <CommonTextField text={'Remove'} fontWeight={600} />,
       onClick: () => unSubscribe(stockId)
     }
   ];
-
-  const items = array.map((d) => (
-    <CommonTextField
-      onClick={d.onClick}
-      text={d.label}
-      fontWeight={600}
-      mb={5}
-      fontSize={'14px'}
-    />
-  ));
 
   const subscribe = (stockId) => {
     setIsLoading(true);
@@ -125,19 +118,12 @@ const StockCard = ({ value, addIcon }) => {
               onClick={() => subscribe(stockId)}
             />
           ) : (
-            <Popover
-              placement="bottom"
-              overlayClassName="market-popover"
-              content={items}
-              trigger="click"
-              arrow={false}
-            >
+            <CommonDropdown items={items}>
               <FontAwesomeIcon
                 className={css(AppStyles.pointer)}
                 icon={faEllipsisVertical}
-                // onClick={() => unSubscribe(stockId)}
               />
-            </Popover>
+            </CommonDropdown>
           )}
         </Space>
       </Space>
