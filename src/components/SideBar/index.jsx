@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 import { css } from 'aphrodite';
-import { CommonDropdown } from '../common';
+import { CommonDropdown, CommonHeading, CommonModal } from '../common';
 import DataHandler from '../../services/DataHandler';
 import { LogoutRequest, userLoginSuccess } from '../../redux/slicers/user';
 import { userSignOutSuccess } from '../../redux/slicers/user';
@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userPlatform } from '../../services/utils';
 
 const SideBar = ({ isDrawer }) => {
+  const [logout, setLogout] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -30,21 +31,6 @@ const SideBar = ({ isDrawer }) => {
     navigate(route);
   };
 
-  const logout = () => {
-    dispatch(
-      LogoutRequest({
-        payloadData: { platform: userPlatform() },
-        responseCallback: (res) => {
-          if (res.status) {
-            changeRoute(lOGIN_ROUTE);
-            console.log(res.status, 'res');
-          } else {
-            console.log(res.errors, 'error');
-          }
-        }
-      })
-    );
-  };
   const items = [
     {
       label: 'profile setting',
@@ -112,13 +98,40 @@ const SideBar = ({ isDrawer }) => {
           <div className="logout">
             <CommonButton
               onClick={() => {
-                logout();
+                setLogout(!logout);
               }}
               text={'Logout'}
             />
           </div>
         </Space>
       </div>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Are you sure?'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={logout}
+        setIsModalVisible={setLogout}
+        discription="Do you want to logout?"
+        onConfirm={() => {
+          dispatch(
+            LogoutRequest({
+              payloadData: { platform: userPlatform() },
+              responseCallback: (res) => {
+                if (res.status) {
+                  changeRoute(lOGIN_ROUTE);
+                  console.log(res.status, 'res');
+                } else {
+                  console.log(res.errors, 'error');
+                }
+              }
+            })
+          );
+        }}
+      ></CommonModal>
     </>
   );
 };
