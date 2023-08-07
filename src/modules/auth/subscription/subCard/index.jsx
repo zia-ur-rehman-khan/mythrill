@@ -18,10 +18,8 @@ const radio = ['$25', '$64', '$210'];
 
 const SubcriptionCard = ({ title, amount }) => {
   const Navigate = useNavigate();
-  const changeRoute = (route) => {
-    amount === 'Free'
-      ? Navigate(HOME_ROUTE)
-      : Navigate(PREMIUM_SUBSCRIPTION_ROUTE);
+  const changeRoute = () => {
+    Navigate(PREMIUM_SUBSCRIPTION_ROUTE);
   };
   return (
     <Space size={30} direction="vertical" className="sub-box">

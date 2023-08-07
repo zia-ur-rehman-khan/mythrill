@@ -50,9 +50,7 @@ const Subscripton = () => {
             <CommonButton
               onClick={() => changeRoute(HOME_ROUTE)}
               topClass="sub-button"
-              text={'Selected'}
-              background="none"
-              border={'1px solid #ffff'}
+              text={'Start now'}
             />
           </Col>
         </Row>
