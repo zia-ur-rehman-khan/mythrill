@@ -63,7 +63,7 @@ const Layout = ({ children }) => {
                 xs={{ span: 24 }}
               >
                 <CommonInputField
-                  placeholder="Search..."
+                  placeholder="Search Stocks."
                   onChange={handelSearch}
                   suffix={
                     <FontAwesomeIcon

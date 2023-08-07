@@ -80,6 +80,12 @@
         .csv-feild {
             width: 100%;
         }
+        @media (max-width: 800px) {
+            display: block !important;
+            .csv-feild {
+                margin-top: 10px;
+            }
+        }
     }
     .card-but {
         text-align: center;
