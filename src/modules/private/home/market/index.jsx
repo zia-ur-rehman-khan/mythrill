@@ -65,6 +65,7 @@ const Market = ({ isLoading, width }) => {
       <CommonTextField text={'Market'} />
       <Tabs activeKey={currentKey?.key} items={items} onChange={onChange} />
       <CommonButton
+        width={'100%'}
         text={'Add Stock'}
         background="rgba(118, 101, 193, 0.1)"
         onClick={() => setIsModal(true)}

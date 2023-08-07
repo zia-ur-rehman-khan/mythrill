@@ -50,6 +50,7 @@ import masterCard from '../assets/setting/masterCard.png';
 import visaCard from '../assets/setting/visaCard.png';
 import discoverCard from '../assets/setting/discoverCard.png';
 import americanExpressCard from '../assets/setting/americanExpressCard.png';
+import emptyStock from '../assets/chart/emptyStock.png';
 
 export default {
   ErrorBackground2,
@@ -103,5 +104,6 @@ export default {
   masterCard,
   visaCard,
   discoverCard,
-  americanExpressCard
+  americanExpressCard,
+  emptyStock
 };
