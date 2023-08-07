@@ -59,18 +59,14 @@ const PremiumSubscription = () => {
       image={<img src={Images.subscription} className="sub-image" />}
     >
       <Space direction="vertical" className={css(AppStyles.w100)}>
-        <Space className={css(AppStyles.w100, AppStyles.spaceAround)}>
+        <Space size={40} className={css(AppStyles.w100)}>
           <img src={Images.authLogo} width={'50px'} height={'58px'} />
           <Space>
             <CommonHeading text={'$575.00'} />
             <CommonTextField text={'/ year'} />
           </Space>
         </Space>
-        <CommonHeading
-          level={3}
-          textAlign={'center'}
-          text={'Premium Package'}
-        />
+        <CommonHeading level={3} text={'Premium Package'} />
         <PaymentMethod subscription />
       </Space>
     </AuthLayout>
