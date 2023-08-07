@@ -149,7 +149,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
                       setIsLoading(false);
                       if (res.status) {
                         toastAlert(
-                          'canceled subscription successfully',
+                          'Canceled subscription successfully',
                           ALERT_TYPES.success
                         );
                         setIsPause(false);
@@ -167,7 +167,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
                       setIsLoading(false);
                       if (res.status) {
                         toastAlert(
-                          'resumed subscription successfully',
+                          'Resumed subscription successfully',
                           ALERT_TYPES.success
                         );
                         setIsPause(false);
