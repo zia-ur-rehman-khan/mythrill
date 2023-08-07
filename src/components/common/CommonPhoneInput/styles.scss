@@ -1,5 +1,9 @@
 @use "../../../master.scss";
 
+.disabled {
+    opacity: 0.6;
+}
+
 .react-tel-input {
     height: 40px;
 

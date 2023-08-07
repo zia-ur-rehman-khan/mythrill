@@ -162,6 +162,7 @@ const UserInfo = () => {
               xs={{ span: 24 }}
             >
               <CommonPhoneInput
+                className={'disabled'}
                 name={'phoneNumber'}
                 disabled={true}
                 rules={false}
@@ -178,7 +179,7 @@ const UserInfo = () => {
             <CommonInputField
               name="email"
               type={'email'}
-              className={'auth notVerified'}
+              className={'auth disabled'}
               placeholder={'john.smith@domain.com'}
               rules={EMAIL_RULE}
               disabled={true}
