@@ -5,6 +5,15 @@
     width: 100%;
     border-bottom: 0.4px solid rgba(255, 255, 255, 0.05);
     padding: 10px 0 10px 0;
+    .ellipsis {
+        width: 225px !important;
+    }
+    @media (max-width: 400px) {
+        .ellipsis {
+            width: 130px !important;
+        }
+    }
+
     .color-text {
         border-radius: 61.2328px;
         padding: 5px;

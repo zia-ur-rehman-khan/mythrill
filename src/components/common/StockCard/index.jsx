@@ -99,6 +99,7 @@ const StockCard = ({ value, addIcon }) => {
             text={title}
             fontWeight={600}
             onClick={() => !addIcon && changeRoute()}
+            className={'ellipsis'}
           />
           <CommonTextField text={type} color={'#626D7D'} />
         </Space>
