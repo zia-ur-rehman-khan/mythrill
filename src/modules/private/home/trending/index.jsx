@@ -28,27 +28,32 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    key: 'name'
+    key: 'name',
+    width: '100px'
   },
   {
     title: 'Last',
     dataIndex: 'last',
-    key: 'last'
+    key: 'last',
+    width: '100px'
   },
   {
     title: 'Chg',
     dataIndex: 'chg',
-    key: 'chg'
+    key: 'chg',
+    width: '100px'
   },
   {
     title: 'Chg%',
     dataIndex: 'chgPer',
-    key: 'chgPer'
+    key: 'chgPer',
+    width: '100px'
   },
   {
     title: 'F&G',
     dataIndex: 'fg',
-    key: 'fg'
+    key: 'fg',
+    width: '100px'
   }
 ];
 
