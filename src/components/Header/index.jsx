@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import CommonTextField from '../common/TextField';
 import { faBars, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import { css } from 'aphrodite';
 import SideBar from '../SideBar';
 import { CommonDropdown, CommonPopOver } from '../common';
 import NotificationContent from './NotificationContent';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutRequest } from '../../redux/slicers/user';
 import { userPlatform } from '../../services/utils';
@@ -20,12 +20,15 @@ import { HOME_ROUTE, SETTING_ROUTE, lOGIN_ROUTE } from '../../constants';
 
 const Header = () => {
   const Navigate = useNavigate();
-
   const { data } = useSelector((state) => state?.user);
-
   const dispatch = useDispatch();
-
   const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Close the modal when the route changes
+    setIsMobile(false);
+  }, [location]);
 
   const changeRoute = (route) => {
     Navigate(route);
