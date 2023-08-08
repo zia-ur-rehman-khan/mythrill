@@ -7,25 +7,34 @@
         border-radius: 6px;
         margin-top: 20px;
         .button-container {
+            display: flex;
             justify-content: space-between;
             width: 100%;
             align-items: center;
             margin-bottom: 20px;
-
-            .filter-button {
-                border-radius: 250px;
-                background: master.$dark-color;
-                p {
-                    padding: 10px 20px !important;
-                    @media (max-width: 500px) {
-                        padding: 5px 3px !important;
-                    }
+            flex-wrap: wrap;
+            gap: 10px;
+            .filter-parent {
+                text-align: center;
+                @media (max-width: 640px) {
+                    width: 100%;
                 }
+                .filter-button {
+                    border-radius: 250px;
+                    background: master.$dark-color;
 
-                .active {
-                    background: master.$theme-color;
-                    transition: background-color 0.3s ease-in-out;
-                    border-radius: 20px;
+                    p {
+                        padding: 10px 20px !important;
+                        @media (max-width: 500px) {
+                            padding: 6px 4px !important;
+                        }
+                    }
+
+                    .active {
+                        background: master.$theme-color;
+                        transition: background-color 0.3s ease-in-out;
+                        border-radius: 20px;
+                    }
                 }
             }
         }

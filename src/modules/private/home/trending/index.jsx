@@ -147,7 +147,7 @@ const Trending = () => {
       </Space>
 
       <div className={`tabel-container`}>
-        <Space className="button-container" wrap={true}>
+        <div className="button-container">
           <Space>
             <CommonHeading
               level={3}
@@ -159,24 +159,26 @@ const Trending = () => {
               height={'30px'}
             />
           </Space>
-          <Space className="filter-button">
-            <CommonTextField
-              text="Buy/uptrend"
-              className={activeTab === 1 ? 'active' : ''}
-              onClick={() => handleTabClick(1)}
-            />
-            <CommonTextField
-              text="Hold/neutral"
-              className={activeTab === 2 ? 'active' : ''}
-              onClick={() => handleTabClick(2)}
-            />
-            <CommonTextField
-              text="Sell/downtrend"
-              className={activeTab === 3 ? 'active' : ''}
-              onClick={() => handleTabClick(3)}
-            />
-          </Space>
-        </Space>
+          <div className="filter-parent">
+            <Space className="filter-button">
+              <CommonTextField
+                text="Buy/uptrend"
+                className={activeTab === 1 ? 'active' : ''}
+                onClick={() => handleTabClick(1)}
+              />
+              <CommonTextField
+                text="Hold/neutral"
+                className={activeTab === 2 ? 'active' : ''}
+                onClick={() => handleTabClick(2)}
+              />
+              <CommonTextField
+                text="Sell/downtrend"
+                className={activeTab === 3 ? 'active' : ''}
+                onClick={() => handleTabClick(3)}
+              />
+            </Space>
+          </div>
+        </div>
         {loading ? (
           <Loader />
         ) : (
