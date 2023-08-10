@@ -36,7 +36,7 @@ export function stocksdataManipulatorObject(stock = {}) {
     payload.color =
       stock?.change_in_percent === 0
         ? 'yellow'
-        : stock?.stocks_name?.change_in_percent > 0
+        : stock?.change_in_percent > 0
         ? 'green'
         : 'red';
 

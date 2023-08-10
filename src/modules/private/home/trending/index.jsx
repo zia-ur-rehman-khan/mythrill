@@ -21,8 +21,11 @@ import { trendingListRequest } from '../../../../redux/slicers/user';
 import {
   stockGraphManipulator,
   stocksNameManipulator,
-  stocksdataManipulator
+  stocksdataManipulator,
+  stocksdataManipulatorObject
 } from '../../../../manipulators/stocksName';
+import { SOCKET_URL } from '../../../../config/webService';
+import initializeSocket from '../../../../socket';
 
 const columns = [
   {
@@ -83,6 +86,51 @@ const Trending = () => {
       })
     );
   }, []);
+
+  useEffect(() => {
+    const socket = initializeSocket(`wss://${SOCKET_URL}?stocks=${''}`);
+
+    const listener1 = (...args) => {
+      console.log(
+        '🚀 ~ file: index.jsx:141 ~ listener1 ~ args:',
+        stocksdataManipulatorObject(JSON.parse(args).data)
+      );
+
+      const updateData = stocksdataManipulatorObject(JSON.parse(args).data);
+
+      const match = trending.find((t) => t.nameId === updateData.nameId);
+      console.log('🚀 ~ file: index.jsx:100 ~ listener1 ~ trending:', trending);
+
+      console.log('🚀 ~ file: index.jsx:100 ~ listener1 ~ match:', match);
+
+      if (match) {
+        const filter = trending.map((d) => {
+          if (d.nameId === updateData.nameId) {
+            return {
+              ...d,
+              amount: updateData.amount,
+              stockUpdate: updateData.stockUpdate,
+              color: updateData.color,
+              changeInPercent: updateData.changeInPercent,
+              changeInPrice: updateData.changeInPrice,
+              prevPrice: updateData.prevPrice
+            };
+          }
+
+          return d;
+        });
+        setTrending(filter);
+      } else {
+        setTrending((pre) => [...pre, updateData]);
+      }
+    };
+
+    socket.on('trending_stock_updates', listener1);
+
+    return () => {
+      socket.off('trending_stock_updates', listener1);
+    };
+  }, [trending]);
 
   let trendingItems = trending;
 
