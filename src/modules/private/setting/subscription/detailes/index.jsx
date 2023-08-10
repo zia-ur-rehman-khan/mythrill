@@ -42,7 +42,8 @@ const Detailes = ({ cancel, paused, detailes }) => {
 
   console.log(detailes, 'detailes');
 
-  const { amount, start_at, end_at, brand } = detailes ?? {};
+  const { amount, start_at, end_at, renewal_period, package_name } =
+    detailes ?? {};
 
   return (
     <div className="subscription-main">
@@ -65,10 +66,10 @@ const Detailes = ({ cancel, paused, detailes }) => {
               <Space direction="vertical">
                 <CommonTextField
                   fontSize={'16px'}
-                  text={'Manage Subscription'}
+                  text={package_name}
                   fontWeight={600}
                 />
-                <CommonTextField text={`$${amount}.00 / yearly`} />
+                <CommonTextField text={`$${amount}.00 / ${renewal_period}`} />
               </Space>
             </Space>
             <Space>

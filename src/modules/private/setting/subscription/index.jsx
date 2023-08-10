@@ -8,7 +8,9 @@ const ManageSubscription = () => {
   const { data } = useSelector((state) => state?.user);
 
   const getContentByPathname = useMemo(() => {
-    if (data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE)
+    if (data['subscribe_status'] === '') {
+      return '';
+    } else if (data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE)
       return <Free detailes={data['createdAt']} />;
     else if (data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.CANCLED) {
       return <Detailes cancel detailes={data['pay_details']} />;
