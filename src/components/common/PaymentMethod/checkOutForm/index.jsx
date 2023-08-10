@@ -31,7 +31,7 @@ import {
   subscriptionRequest,
   updateCardRequest
 } from '../../../../redux/slicers/user';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 
 const cardNumberStyle = {
   base: {
@@ -46,6 +46,8 @@ const cardNumberStyle = {
 const CheckoutForm = ({ onAdd, subscription }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [cardIcon, setCardIcon] = useState('unknown');
+  const location = useLocation();
+
   const [isValid, setIsValid] = useState({
     card: false,
     expiry: false,
@@ -74,7 +76,12 @@ const CheckoutForm = ({ onAdd, subscription }) => {
       toastAlert(error.message, ALERT_TYPES.error);
       setIsLoading(false);
     } else {
-      const payloadData = { token: token.id };
+      let payloadData = { token: token.id };
+
+      if (location?.state?.subscription_type) {
+        payloadData.subscription_type = location.state.subscription_type;
+      }
+
       {
         subscription
           ? dispatch(

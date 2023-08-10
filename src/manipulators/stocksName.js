@@ -170,3 +170,40 @@ export function stockGraphManipulator(list = []) {
     return [];
   }
 }
+
+// export function packagesManipulator(subscription = {}) {
+//   // console.log(stock, 'stock');
+//   try {
+//     if (_.isEmpty(subscription)) return {};
+
+//     const payload = {};
+
+//     payload.basic = {
+//       options: subscription?.basic,
+//       title: 'Basic',
+//       stock: '10'
+//     };
+
+//     payload.advance = {
+//       options: subscription?.advance,
+//       title: 'Advanced',
+//       stock: '25'
+//     };
+
+//     payload.platinum = {
+//       options: subscription?.platinum,
+//       title: 'Platinum',
+//       stock: '50'
+//     };
+
+//     payload.platinum = {
+//       options: subscription?.professional,
+//       title: 'Professional Tier',
+//       stock: '100'
+//     };
+
+//     return payload;
+//   } catch (error) {
+//     console.error('singleStockNameManipulator error --->>> ', error);
+//   }
+// }

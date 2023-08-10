@@ -91,6 +91,7 @@ const UserReducer = createSlice({
       newData.subscribe_status = action.payload.subscribe_status;
       newData.pay_details = action.payload.pay_details;
       newData.card_exist = action.payload.card_exist;
+      newData.avail_free = action.payload.avail_free;
 
       state.data = { ...state.data, ...newData };
     },

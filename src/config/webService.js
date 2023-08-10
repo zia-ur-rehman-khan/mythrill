@@ -39,7 +39,7 @@ export const CONTACT_US = {
 // ALL SUBSCRIPTIONS
 
 export const GET_SUBSCRIPTIONS = {
-  route: '/reports/stats',
+  route: 'payments/packages',
   access_token_required: false,
   type: REQUEST_TYPE.GET
 };

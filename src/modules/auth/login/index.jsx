@@ -68,9 +68,7 @@ const Login = () => {
           if (res.status) {
             setLoading(false);
             console.log(res.data.data.subscribe_status, 'res');
-            if (
-              res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
-            ) {
+            if (res.data.data.subscribe_status === '') {
               changeRoute(SUBSCRIPTION_ROUTE);
             } else {
               changeRoute(HOME_ROUTE);
@@ -99,9 +97,7 @@ const Login = () => {
           payloadData,
           responseCallback: (res) => {
             if (res.status) {
-              if (
-                res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
-              ) {
+              if (res.data.data.subscribe_status === '') {
                 changeRoute(SUBSCRIPTION_ROUTE);
               } else {
                 changeRoute(HOME_ROUTE);
@@ -127,9 +123,7 @@ const Login = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            if (
-              res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
-            ) {
+            if (res.data.data.subscribe_status === '') {
               changeRoute(SUBSCRIPTION_ROUTE);
             } else {
               changeRoute(HOME_ROUTE);

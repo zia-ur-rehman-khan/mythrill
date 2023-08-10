@@ -24,7 +24,7 @@ function* getSubscriptions() {
       );
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(getSubscriptionsSuccess(response));
+        // yield put(getSubscriptionsSuccess(response));
       } else {
         if (responseCallback) responseCallback(response);
       }
