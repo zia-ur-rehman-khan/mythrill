@@ -39,7 +39,7 @@ const Stock = () => {
 
   if (searchText) {
     stocksItems = stocksItems?.filter((d) =>
-      d.nameId.includes(searchText.toLowerCase())
+      d.nameId.toLowerCase().includes(searchText.toLowerCase())
     );
   }
 

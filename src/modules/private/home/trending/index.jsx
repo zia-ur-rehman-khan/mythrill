@@ -57,12 +57,19 @@ const columns = [
     dataIndex: 'fg',
     key: 'fg',
     width: '100px'
+  },
+  {
+    title: 'UpdatedAt',
+    dataIndex: 'lastUpdated',
+    key: 'lastUpdated',
+    width: '100px'
   }
 ];
 
 const Trending = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [trending, setTrending] = useState([]);
+  console.log('🚀 ~ file: index.jsx:66 ~ Trending ~ trending:', trending);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const searchText = useSelector((state) => state?.user.search);
@@ -99,9 +106,6 @@ const Trending = () => {
       const updateData = stocksdataManipulatorObject(JSON.parse(args).data);
 
       const match = trending.find((t) => t.nameId === updateData.nameId);
-      console.log('🚀 ~ file: index.jsx:100 ~ listener1 ~ trending:', trending);
-
-      console.log('🚀 ~ file: index.jsx:100 ~ listener1 ~ match:', match);
 
       if (match) {
         const filter = trending.map((d) => {
@@ -113,7 +117,8 @@ const Trending = () => {
               color: updateData.color,
               changeInPercent: updateData.changeInPercent,
               changeInPrice: updateData.changeInPrice,
-              prevPrice: updateData.prevPrice
+              prevPrice: updateData.prevPrice,
+              updateDate: updateData?.updateDate
             };
           }
 
@@ -136,7 +141,7 @@ const Trending = () => {
 
   if (searchText) {
     trendingItems = trendingItems?.filter((d) =>
-      d.nameId.includes(searchText.toLowerCase())
+      d.nameId.toLowerCase().includes(searchText.toLowerCase())
     );
   }
 
@@ -155,7 +160,8 @@ const Trending = () => {
           chg: `$${t.changeInPrice}`,
           chgPer: `${t?.changeInPercent}%`,
           fg: t?.fearGreedIndex,
-          color: t?.color
+          color: t?.color,
+          lastUpdated: t?.updateDate
         };
 
         return data;

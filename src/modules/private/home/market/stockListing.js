@@ -17,7 +17,7 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
 
   if (searchText) {
     filteredStocks = filteredStocks?.filter((d) =>
-      d.nameId.includes(searchText.toLowerCase())
+      d.nameId.toLowerCase().includes(searchText.toLowerCase())
     );
   }
 
@@ -25,7 +25,9 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
     <>
       {addIcon
         ? unSubstocks
-            ?.filter((d) => d?.title?.includes(search.toLowerCase()))
+            ?.filter((d) =>
+              d?.nameId?.toLowerCase().includes(search.toLowerCase())
+            )
             ?.map((d) => (
               <StockCard addIcon={addIcon} value={d} key={Math.random()} />
             ))

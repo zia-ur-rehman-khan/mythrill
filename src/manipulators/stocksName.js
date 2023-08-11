@@ -149,6 +149,7 @@ export function stockGraphManipulator(list = []) {
       payload.date =
         moment(new Date(stock?.createdAt)).format(FORMAT) ??
         moment().format(FORMAT);
+      payload.updateDate = moment(new Date(stock?.updatedAt)).fromNow();
       payload.fullName = stock?.fullName ?? '';
       payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
       payload.nameId = stock?.name_id ?? '';
