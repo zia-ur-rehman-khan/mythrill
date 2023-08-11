@@ -32,6 +32,7 @@ import {
   updateCardRequest
 } from '../../../../redux/slicers/user';
 import { useNavigate, useLocation } from 'react-router';
+import { stockLimitExceed } from '../../../../redux/slicers/stocks';
 
 const cardNumberStyle = {
   base: {
@@ -94,6 +95,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
                       'Subscription successfully',
                       ALERT_TYPES.success
                     );
+                    dispatch(stockLimitExceed(true));
                     navigate(HOME_ROUTE);
                   } else {
                     console.log(res.errors, 'error');

@@ -24,6 +24,7 @@ import {
 } from '../../../../constants';
 import { toastAlert } from '../../../../services/utils';
 import { useDispatch, useSelector } from 'react-redux';
+import { stockLimitExceed } from '../../../../redux/slicers/stocks';
 
 const SubcriptionCard = ({ title, subData }) => {
   const { data } = useSelector((state) => state?.user);
@@ -118,6 +119,7 @@ const SubcriptionCard = ({ title, subData }) => {
                 if (res.status) {
                   toastAlert('Subscription successfully', ALERT_TYPES.success);
                   Navigate(HOME_ROUTE);
+                  dispatch(stockLimitExceed(true));
                 } else {
                   console.log(res.errors, 'error');
                 }
