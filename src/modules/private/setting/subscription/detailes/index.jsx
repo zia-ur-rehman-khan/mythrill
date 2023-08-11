@@ -103,13 +103,14 @@ const Detailes = ({ cancel, paused, detailes }) => {
                 <CommonButton
                   width="180px"
                   text={'Buy Subscriptions'}
+                  topClass={'payment-but'}
                   onClick={() => navigate(SUBSCRIPTION_ROUTE)}
                 />
 
                 <CommonButton
                   text={'Canceled'}
+                  topClass={'payment-but cancel'}
                   width="180px"
-                  topClass={'cancel'}
                 />
               </>
             ) : (
