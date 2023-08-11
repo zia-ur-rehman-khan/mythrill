@@ -121,6 +121,7 @@ const UserReducer = createSlice({
       console.log(action, 'action');
       let newData = { ...state.data };
       newData.subscribe_status = action.payload.subscribe_status;
+      newData.card_exist = action.payload.card_exist;
       state.data = { ...state.data, ...newData };
     },
     cancelSubscriptionRequest(state, action) {},

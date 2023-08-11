@@ -18,12 +18,14 @@ import {
 } from '../../../../../redux/slicers/user';
 import {
   ALERT_TYPES,
+  SUBSCRIPTION_ROUTE,
   USER_SUBSCRIPTION_STATUS
 } from '../../../../../constants';
 import {
   getFormattedDateTime,
   toastAlert
 } from '../../../../../services/utils';
+import { useNavigate } from 'react-router-dom';
 
 const Detailes = ({ cancel, paused, detailes }) => {
   const [isPause, setIsPause] = useState(false);
@@ -31,6 +33,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
   const [isResume, setIsResume] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -96,11 +99,19 @@ const Detailes = ({ cancel, paused, detailes }) => {
         >
           <div className="button-side">
             {cancel ? (
-              <CommonButton
-                text={'Canceled'}
-                width="180px"
-                topClass={'cancel'}
-              />
+              <>
+                <CommonButton
+                  width="180px"
+                  text={'Buy Subscriptions'}
+                  onClick={() => navigate(SUBSCRIPTION_ROUTE)}
+                />
+
+                <CommonButton
+                  text={'Canceled'}
+                  width="180px"
+                  topClass={'cancel'}
+                />
+              </>
             ) : (
               <>
                 <CommonButton

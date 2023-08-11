@@ -23,7 +23,7 @@ import {
   SUBSCRIPTION_ROUTE
 } from '../../../../constants';
 import { toastAlert } from '../../../../services/utils';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SubcriptionCard = ({ title, subData }) => {
   const { data } = useSelector((state) => state?.user);
@@ -33,6 +33,7 @@ const SubcriptionCard = ({ title, subData }) => {
   const [detail, setDetail] = useState(subData[0]);
 
   const Navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let filter = subData.filter((t) => {
@@ -45,14 +46,14 @@ const SubcriptionCard = ({ title, subData }) => {
   }, [selectedValue]);
 
   const changeRoute = () => {
-    if (selectedValue) {
+    if (data?.subscribe_status !== detail[0]?.package_name) {
       data.card_exist
         ? setIsRemove(true)
         : Navigate(PREMIUM_SUBSCRIPTION_ROUTE, {
             state: { subscription_type: detail[0]?.package_name }
           });
     } else {
-      toastAlert('Please select a subscription option.', ALERT_TYPES.error);
+      toastAlert('You already subscribe this package', ALERT_TYPES.error);
     }
   };
 
@@ -107,7 +108,7 @@ const SubcriptionCard = ({ title, subData }) => {
         }
         isModalVisible={isRemove}
         setIsModalVisible={setIsRemove}
-        discription="Do you want to subcribe free?"
+        discription={`Do you want to subcribe ${detail[0]?.package_name}?`}
         onConfirm={() => {
           const payloadData = { subscription_type: detail[0]?.package_name };
           dispatch(
