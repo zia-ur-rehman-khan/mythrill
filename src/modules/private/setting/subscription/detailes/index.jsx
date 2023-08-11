@@ -188,7 +188,7 @@ const Detailes = ({ cancel, paused, detailes }) => {
 
                       if (res.status) {
                         toastAlert(
-                          'paused subscription successfully',
+                          'Paused subscription successfully',
                           ALERT_TYPES.success
                         );
                         setIsPause(false);

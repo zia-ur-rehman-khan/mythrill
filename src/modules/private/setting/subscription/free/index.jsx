@@ -4,7 +4,10 @@ import { css } from 'aphrodite';
 import { AppStyles, Images } from '../../../../../theme';
 import { Col, Row, Space } from 'antd';
 import { useNavigate } from 'react-router';
-import { PREMIUM_SUBSCRIPTION_ROUTE } from '../../../../../constants';
+import {
+  PREMIUM_SUBSCRIPTION_ROUTE,
+  SUBSCRIPTION_ROUTE
+} from '../../../../../constants';
 import { getFormattedDateTime } from '../../../../../services/utils';
 
 const Free = ({ detailes }) => {
@@ -57,7 +60,7 @@ const Free = ({ detailes }) => {
             <CommonButton
               width="180px"
               text={'Buy Subscriptions'}
-              onClick={() => navigate(PREMIUM_SUBSCRIPTION_ROUTE)}
+              onClick={() => navigate(SUBSCRIPTION_ROUTE)}
             />
           </div>
         </Col>
