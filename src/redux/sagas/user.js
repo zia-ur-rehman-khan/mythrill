@@ -635,35 +635,6 @@ function* paymentList() {
   }
 }
 
-function* trendingList() {
-  while (true) {
-    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
-    const { payload } = yield take(trendingListRequest.type);
-    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
-    const { payloadData, responseCallback } = payload;
-    try {
-      const response = yield call(
-        callRequest,
-        TRENDING_LIST_REQUEST,
-        payloadData,
-        '',
-        '',
-        {}
-      );
-
-      if (response.status) {
-        if (responseCallback) responseCallback(response);
-        // yield put(subscriptionRequestSuccess(response?.data?.data));
-      } else {
-        if (responseCallback) responseCallback(response);
-        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
-      }
-    } catch (err) {
-      if (responseCallback) responseCallback(err);
-    }
-  }
-}
-
 export default function* root() {
   yield fork(userLogin);
   yield fork(userRegister);
@@ -685,5 +656,4 @@ export default function* root() {
   yield fork(cancelSubscription);
   yield fork(resumeSubscription);
   yield fork(paymentList);
-  yield fork(trendingList);
 }

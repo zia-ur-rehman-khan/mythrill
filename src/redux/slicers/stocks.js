@@ -15,7 +15,8 @@ const GeneralReducer = createSlice({
     stocksSubscribe: [],
     stocksUnSubscribe: [],
     stocksData: {},
-    stockLimitExceed: false
+    stockLimitExceed: false,
+    trendData: []
   },
   reducers: {
     setStocksListAction(state, action) {
@@ -137,6 +138,50 @@ const GeneralReducer = createSlice({
     },
     stockLimitExceed(state, action) {
       state.stockLimitExceed = action.payload;
+    },
+    trendingListRequest() {},
+    trendingListRequestSuccess(state, action) {
+      state.trendData = action.payload;
+    },
+    StockSubscribeTrend(state, action) {
+      state.trendData = [...state.trendData, action.payload];
+    },
+    StockUnSubscribeTrend(state, action) {
+      const data = state.trendData;
+      const filter = data?.filter(
+        (d) => d.stockId !== action?.payload?.stock_id
+      );
+      console.log(
+        '🚀 ~ file: stocks.js:156 ~ StockUnSubscribeTrend ~ filter:',
+        filter
+      );
+
+      state.trendData = filter;
+    },
+    getTrendDataRealTime(state, action) {
+      const data = state.trendData;
+      const updateData = action.payload;
+
+      const filter = data.map((d) => {
+        const match = action.payload.nameId === d.nameId;
+
+        if (match) {
+          return {
+            ...d,
+            amount: updateData.amount,
+            stockUpdate: updateData.stockUpdate,
+            color: updateData.color,
+            changeInPercent: updateData.changeInPercent,
+            changeInPrice: updateData.changeInPrice,
+            prevPrice: updateData.prevPrice,
+            updateDate: updateData?.updateDate
+          };
+        }
+
+        return d;
+      });
+
+      state.trendData = filter;
     }
   }
 });
@@ -154,7 +199,12 @@ export const {
   getSubscribeStocksSuccess,
   getSubscribeDataRealTime,
   getUnSubscribeDataRealTime,
-  stockLimitExceed
+  stockLimitExceed,
+  trendingListRequest,
+  trendingListRequestSuccess,
+  StockSubscribeTrend,
+  getTrendDataRealTime,
+  StockUnSubscribeTrend
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

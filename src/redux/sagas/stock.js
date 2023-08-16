@@ -5,14 +5,17 @@ import {
   GET_STOCK_NAMES,
   GET_SUBSCRIBE_STOCKS,
   STOCK_SUBSCRIBE,
-  STOCK_UNSUBSCRIBE
+  STOCK_UNSUBSCRIBE,
+  TRENDING_LIST_REQUEST
 } from '../../config/webService';
 import { toastAlert } from '../../services/utils';
 import {
   StockSubscribeRequest,
   StockSubscribeSuccess,
+  StockSubscribeTrend,
   StockUnSubscribeRequest,
   StockUnSubscribeSuccess,
+  StockUnSubscribeTrend,
   getAllStocksRequest,
   getAllStocksRequestSuccess,
   getStocksNameRequest,
@@ -21,9 +24,12 @@ import {
   getSubscribeStockesRequest,
   getSubscribeStockesSuccess,
   getSubscribeStocksRequest,
-  getSubscribeStocksSuccess
+  getSubscribeStocksSuccess,
+  trendingListRequest,
+  trendingListRequestSuccess
 } from '../slicers/stocks';
 import {
+  stockGraphManipulator,
   stocksNameManipulator,
   stocksdataManipulator,
   stocksdataManipulatorObject
@@ -120,6 +126,11 @@ function* StockSubscribe() {
           )
         );
         yield put(socketTokenUpdate(response?.data?.data?.subscribedStocks));
+        yield put(
+          StockSubscribeTrend(
+            stocksdataManipulatorObject(response?.data?.data?.trending_stocks)
+          )
+        );
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -154,6 +165,7 @@ function* StockUnSubscribe() {
           )
         );
         yield put(socketTokenUpdate(response?.data?.data?.subscribedStocks));
+        yield put(StockUnSubscribeTrend(payloadData));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -163,9 +175,44 @@ function* StockUnSubscribe() {
     }
   }
 }
+
+function* trendingList() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(trendingListRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        TRENDING_LIST_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(
+          trendingListRequestSuccess(
+            stockGraphManipulator(response?.data?.data)
+          )
+        );
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(getStockNames);
   yield fork(StockSubscribe);
   yield fork(StockUnSubscribe);
   yield fork(getSubscribeStocks);
+  yield fork(trendingList);
 }

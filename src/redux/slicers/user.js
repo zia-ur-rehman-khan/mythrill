@@ -127,7 +127,6 @@ const UserReducer = createSlice({
     cancelSubscriptionRequest(state, action) {},
     resumeSubscriptionRequest() {},
     paymentListRequest() {},
-    trendingListRequest() {},
     search(state, action) {
       state.search = action.payload;
     }

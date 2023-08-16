@@ -17,7 +17,10 @@ import {
 } from '../../../../services/utils';
 import { useNavigate } from 'react-router';
 import CommonTable from '../../../../components/common/CommonTable';
-import { trendingListRequest } from '../../../../redux/slicers/user';
+import {
+  getTrendDataRealTime,
+  trendingListRequest
+} from '../../../../redux/slicers/stocks';
 import {
   stockGraphManipulator,
   stocksNameManipulator,
@@ -68,11 +71,11 @@ const columns = [
 
 const Trending = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const [trending, setTrending] = useState([]);
-  console.log('🚀 ~ file: index.jsx:66 ~ Trending ~ trending:', trending);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const searchText = useSelector((state) => state?.user.search);
+  const trend = useSelector((state) => state?.stocks?.trendData);
+  const { data } = useSelector((state) => state?.user);
 
   const navigator = useNavigate();
 
@@ -85,7 +88,6 @@ const Trending = () => {
 
           if (res.status) {
             console.log(res, 'res');
-            setTrending(stockGraphManipulator(res?.data?.data));
           } else {
             console.log(res.errors, 'error');
           }
@@ -95,39 +97,18 @@ const Trending = () => {
   }, []);
 
   useEffect(() => {
-    const socket = initializeSocket(`wss://${SOCKET_URL}?stocks=${''}`);
+    const socket = initializeSocket(
+      `wss://${SOCKET_URL}?stocks=${data?.subscribedStocks || ''}`
+    );
 
     const listener1 = (...args) => {
       console.log(
         '🚀 ~ file: index.jsx:141 ~ listener1 ~ args:',
         stocksdataManipulatorObject(JSON.parse(args).data)
       );
-
-      const updateData = stocksdataManipulatorObject(JSON.parse(args).data);
-
-      const match = trending.find((t) => t.nameId === updateData.nameId);
-
-      if (match) {
-        const filter = trending.map((d) => {
-          if (d.nameId === updateData.nameId) {
-            return {
-              ...d,
-              amount: updateData.amount,
-              stockUpdate: updateData.stockUpdate,
-              color: updateData.color,
-              changeInPercent: updateData.changeInPercent,
-              changeInPrice: updateData.changeInPrice,
-              prevPrice: updateData.prevPrice,
-              updateDate: updateData?.updateDate
-            };
-          }
-
-          return d;
-        });
-        setTrending(filter);
-      } else {
-        setTrending((pre) => [...pre, updateData]);
-      }
+      dispatch(
+        getTrendDataRealTime(stocksdataManipulatorObject(JSON.parse(args).data))
+      );
     };
 
     socket.on('trending_stock_updates', listener1);
@@ -135,9 +116,9 @@ const Trending = () => {
     return () => {
       socket.off('trending_stock_updates', listener1);
     };
-  }, [trending]);
+  }, []);
 
-  let trendingItems = trending;
+  let trendingItems = trend;
 
   if (searchText) {
     trendingItems = trendingItems?.filter((d) =>
