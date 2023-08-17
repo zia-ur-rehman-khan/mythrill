@@ -24,7 +24,12 @@ const ChartExample = () => {
   return (
     <>
       {manipulatedData?.length > 0 && (
-        <Chart data={manipulatedData} color={data.color} />
+        <Chart
+          data={manipulatedData}
+          color={data.color}
+          stockId={data?.stockId}
+          frequency={data?.frequency}
+        />
       )}
     </>
   );

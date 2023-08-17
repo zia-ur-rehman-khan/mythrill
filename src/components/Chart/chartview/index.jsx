@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CommonButton,
   CommonHeading,
@@ -9,26 +9,77 @@ import { css } from 'aphrodite';
 import { AppStyles, Images } from '../../../theme';
 import { Form, Radio, Space } from 'antd';
 import './styles.scss';
+import {
+  getFrequencyDataRequest,
+  getFrequencyRequest,
+  setFrequencyRequest
+} from '../../../redux/slicers/stocks';
+import { useDispatch } from 'react-redux';
+import { toastAlert } from '../../../services/utils';
+import { ALERT_TYPES, frequencyData } from '../../../constants';
 
-const ChartView = ({ chartView, chartviewChange }) => {
+const ChartView = ({
+  chartView,
+  chartviewChange,
+  stockId,
+  frequencyAlertShow
+}) => {
   const [isModal, setIsModal] = useState(false);
-  const [frequency, setFrequency] = useState('Every Day');
-  const radio = [
-    'Every Minutes',
-    'Every 30 Minutes',
-    'Every Hour',
-    'Every Day',
-    'Every Week',
-    'Every Month'
-  ];
+  const [frequency, setFrequency] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [frequencyAlert, setFrequencyAlerttest] = useState(frequencyAlertShow);
+
+  const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    setIsModal(false);
-    setFrequency(values?.frequency);
+    setIsLoading(true);
+
+    const match = frequency.find((d) => {
+      return `${d.slug} + ${d.interval}` === values.frequency;
+    });
+
+    dispatch(
+      setFrequencyRequest({
+        payloadData: {
+          slug: match.slug,
+          interval: match.interval,
+          stock_id: stockId
+        },
+        responseCallback: (res) => {
+          setIsLoading(false);
+          setIsModal(false);
+          if (res.status) {
+            setFrequencyAlerttest([res.data.data]);
+            toastAlert(res.message, ALERT_TYPES.success);
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+  useEffect(() => {
+    dispatch(
+      getFrequencyDataRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          setIsLoading(false);
+
+          if (res.status) {
+            setFrequency(res?.data?.data);
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  }, []);
+
   return (
     <>
       <Space
@@ -43,7 +94,9 @@ const ChartView = ({ chartView, chartviewChange }) => {
           onClick={() => setIsModal(true)}
         >
           <img src={Images.freNotification} />
-          <CommonTextField text={frequency} />
+          <CommonTextField
+            text={frequencyData(frequency, frequencyAlert)?.title}
+          />
           <img src={Images.rightArrow} />
         </Space>
         <Space size={0} className={`view-tab ${css(AppStyles.theme3Color)}`}>
@@ -80,7 +133,11 @@ const ChartView = ({ chartView, chartviewChange }) => {
       >
         <Form
           name="basic"
-          initialValues={{ frequency: frequency }}
+          initialValues={{
+            frequency: `${frequencyData(frequency, frequencyAlert)?.slug} + ${
+              frequencyData(frequency, frequencyAlert)?.interval
+            }`
+          }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
         >
@@ -89,21 +146,24 @@ const ChartView = ({ chartView, chartviewChange }) => {
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <Radio.Group className={css(AppStyles.w100)}>
-              {radio.map((t, index) => (
-                <Space
-                  className={css([
-                    AppStyles.w100,
-                    AppStyles.spaceBetween,
-                    AppStyles.mBottom20
-                  ])}
-                >
-                  <CommonTextField text={t} />
-                  <Radio value={t} />
-                </Space>
-              ))}
+              {frequency?.map((t) => {
+                return (
+                  <Space
+                    key={Math.random()}
+                    className={css([
+                      AppStyles.w100,
+                      AppStyles.spaceBetween,
+                      AppStyles.mBottom20
+                    ])}
+                  >
+                    <CommonTextField text={t.title} />
+                    <Radio value={`${t.slug} + ${t.interval}`} />
+                  </Space>
+                );
+              })}
             </Radio.Group>
           </Form.Item>
-          <CommonButton text={'Save'} htmlType="submit" />
+          <CommonButton text={'Save'} htmlType="submit" loading={isLoading} />
         </Form>
       </CommonModal>
     </>

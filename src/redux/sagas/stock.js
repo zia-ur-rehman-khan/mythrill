@@ -2,8 +2,11 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import { ALERT_TYPES } from '../../constants';
 import {
   callRequest,
+  FREQUENCY_DATA_REQUEST,
+  GET_FREQUENCY_REQUEST,
   GET_STOCK_NAMES,
   GET_SUBSCRIBE_STOCKS,
+  SET_FREQUENCY_REQUEST,
   STOCK_SUBSCRIBE,
   STOCK_UNSUBSCRIBE,
   TRENDING_LIST_REQUEST
@@ -18,6 +21,8 @@ import {
   StockUnSubscribeTrend,
   getAllStocksRequest,
   getAllStocksRequestSuccess,
+  getFrequencyDataRequest,
+  getFrequencyRequest,
   getStocksNameRequest,
   getStocksNameSuccess,
   getSubscribeStockes,
@@ -25,6 +30,8 @@ import {
   getSubscribeStockesSuccess,
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
+  setFrequencyRequest,
+  setFrequencyRequestSuccess,
   trendingListRequest,
   trendingListRequestSuccess
 } from '../slicers/stocks';
@@ -209,10 +216,100 @@ function* trendingList() {
   }
 }
 
+function* getFrequencyData() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(getFrequencyDataRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        FREQUENCY_DATA_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put();
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* setFrequency() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(setFrequencyRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        SET_FREQUENCY_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(setFrequencyRequestSuccess(response?.data?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* getFrequency() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(getFrequencyRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        GET_FREQUENCY_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put();
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(getStockNames);
   yield fork(StockSubscribe);
   yield fork(StockUnSubscribe);
   yield fork(getSubscribeStocks);
   yield fork(trendingList);
+  yield fork(getFrequencyData);
+  yield fork(setFrequency);
+  yield fork(getFrequency);
 }

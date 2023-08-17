@@ -447,3 +447,20 @@ export const forYellow = (color) => {
     return 'yellow';
   }
 };
+
+export const frequencyData = (frequencyData, frequencyAlert) => {
+  if (frequencyAlert?.length > 0) {
+    const temp = frequencyData?.find((t) => {
+      if (
+        t.slug === frequencyAlert[0]?.slug &&
+        t.interval === frequencyAlert[0]?.interval
+      ) {
+        return t;
+      }
+    });
+
+    return temp;
+  } else {
+    return frequencyData;
+  }
+};

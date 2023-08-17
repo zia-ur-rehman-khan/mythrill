@@ -45,7 +45,9 @@ const GeneralReducer = createSlice({
 
         stocksDataPayload[stock.nameId] = {
           color: stock.color,
-          data: sort
+          data: sort,
+          stockId: stock.stockId,
+          frequency: stock.frequency
         };
       }
 
@@ -68,7 +70,9 @@ const GeneralReducer = createSlice({
 
       state.stocksData[action.payload.nameId] = {
         color: action.payload.color,
-        data: sort
+        data: sort,
+        stockId: stock.stockId,
+        frequency: stock.frequency
       };
 
       state.stocksData = { ...state.stocksData };
@@ -182,7 +186,13 @@ const GeneralReducer = createSlice({
       });
 
       state.trendData = filter;
-    }
+    },
+    getFrequencyDataRequest() {},
+    setFrequencyRequest() {},
+    setFrequencyRequestSuccess(state, action) {
+      console.log(action, 'action');
+    },
+    getFrequencyRequest() {}
   }
 });
 
@@ -204,7 +214,11 @@ export const {
   trendingListRequestSuccess,
   StockSubscribeTrend,
   getTrendDataRealTime,
-  StockUnSubscribeTrend
+  StockUnSubscribeTrend,
+  getFrequencyDataRequest,
+  setFrequencyRequest,
+  setFrequencyRequestSuccess,
+  getFrequencyRequest
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

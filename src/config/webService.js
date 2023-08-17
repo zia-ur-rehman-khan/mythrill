@@ -109,6 +109,24 @@ export const TRENDING_LIST_REQUEST = {
   type: REQUEST_TYPE.GET
 };
 
+export const FREQUENCY_DATA_REQUEST = {
+  route: 'stock/get-frequency-data',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const SET_FREQUENCY_REQUEST = {
+  route: 'stock/set-frequency',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const GET_FREQUENCY_REQUEST = {
+  route: 'stock/get-frequency',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

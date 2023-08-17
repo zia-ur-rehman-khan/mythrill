@@ -13,7 +13,7 @@ import ChartView from './chartview';
 import TradingViewWidget from '../TradingView';
 const { useBreakpoint } = Grid;
 
-const Chart = ({ data, color }) => {
+const Chart = ({ data, color, stockId, frequency }) => {
   const [chartType, setChartType] = useState('areaspline');
   const [chartView, setChartView] = useState('myThril');
 
@@ -35,7 +35,12 @@ const Chart = ({ data, color }) => {
 
   return (
     <>
-      <ChartView chartView={chartView} chartviewChange={chartviewChange} />
+      <ChartView
+        stockId={stockId}
+        frequencyAlertShow={frequency}
+        chartView={chartView}
+        chartviewChange={chartviewChange}
+      />
 
       {!screens.lg && (
         <ExtraDetailes
