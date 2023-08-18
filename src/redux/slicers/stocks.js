@@ -71,8 +71,8 @@ const GeneralReducer = createSlice({
       state.stocksData[action.payload.nameId] = {
         color: action.payload.color,
         data: sort,
-        stockId: stock.stockId,
-        frequency: stock.frequency
+        stockId: action.payload.stockId,
+        frequency: action.payload.frequency
       };
 
       state.stocksData = { ...state.stocksData };
