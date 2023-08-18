@@ -95,7 +95,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
                       'Subscription successfully',
                       ALERT_TYPES.success
                     );
-                    dispatch(stockLimitExceed(true));
+                    dispatch(stockLimitExceed(false));
                     navigate(HOME_ROUTE);
                   } else {
                     console.log(res.errors, 'error');
