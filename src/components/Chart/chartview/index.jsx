@@ -18,16 +18,11 @@ import { useDispatch } from 'react-redux';
 import { toastAlert } from '../../../services/utils';
 import { ALERT_TYPES, frequencyData } from '../../../constants';
 
-const ChartView = ({
-  chartView,
-  chartviewChange,
-  stockId,
-  frequencyAlertShow
-}) => {
+const ChartView = ({ chartView, chartviewChange, stockId }) => {
   const [isModal, setIsModal] = useState(false);
   const [frequency, setFrequency] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [frequencyAlert, setFrequencyAlerttest] = useState(frequencyAlertShow);
+  const [frequencyAlert, setFrequencyAlerttest] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -72,6 +67,26 @@ const ChartView = ({
           if (res.status) {
             setFrequency(res?.data?.data);
             console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+
+    dispatch(
+      getFrequencyRequest({
+        payloadData: {
+          stock_id: stockId
+        },
+        responseCallback: (res) => {
+          setIsLoading(false);
+
+          if (res.status) {
+            console.log(res, 'check');
+            setFrequencyAlerttest(
+              res?.data?.data === null ? [] : [res?.data?.data]
+            );
           } else {
             console.log(res.errors, 'error');
           }

@@ -449,6 +449,7 @@ export const forYellow = (color) => {
 };
 
 export const frequencyData = (frequencyData, frequencyAlert) => {
+  console.log(frequencyData, frequencyAlert, 'test');
   if (frequencyAlert?.length > 0) {
     const temp = frequencyData?.find((t) => {
       if (
@@ -461,6 +462,6 @@ export const frequencyData = (frequencyData, frequencyAlert) => {
 
     return temp;
   } else {
-    return frequencyData;
+    return frequencyData?.[0];
   }
 };
