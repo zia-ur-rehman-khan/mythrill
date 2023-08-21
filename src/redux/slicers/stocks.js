@@ -152,13 +152,7 @@ const GeneralReducer = createSlice({
     },
     StockUnSubscribeTrend(state, action) {
       const data = state.trendData;
-      const filter = data?.filter(
-        (d) => d.stockId !== action?.payload?.stock_id
-      );
-      console.log(
-        '🚀 ~ file: stocks.js:156 ~ StockUnSubscribeTrend ~ filter:',
-        filter
-      );
+      const filter = data?.filter((d) => d.nameId !== action?.payload?.nameId);
 
       state.trendData = filter;
     },

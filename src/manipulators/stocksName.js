@@ -11,26 +11,26 @@ export function stocksdataManipulatorObject(stock = {}) {
 
     const payload = {};
 
-    payload.changeInPercent = stock?.change_in_percent ?? 0;
-    payload.changeInPrice = stock?.change_in_price ?? 0;
+    payload.changeInPercent = stock?.change_in_percent ?? 'n/a';
+    payload.changeInPrice = stock?.change_in_price ?? 'n/a';
     payload.coin = stock?.coin ?? '';
-    payload.currentPrice = stock?.current_price ?? 0;
+    payload.currentPrice = stock?.current_price ?? 'n/a';
     payload.date =
       moment(new Date(stock?.createdAt)).format(FORMAT) ??
       moment().format(FORMAT);
     payload.updateDate = moment(new Date(stock?.updatedAt)).fromNow();
 
     payload.fullName = stock?.fullName ?? '';
-    payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
+    payload.fearGreedIndex = stock?.fear_greed_index ?? 'n/a';
     payload.nameId = stock?.name_id ?? '';
     payload.overallTrend = stock?.overall_trend ?? '';
-    payload.prevPrice = stock?.prev_price ?? 0;
+    payload.prevPrice = stock?.prev_price ?? 'n/a';
 
     payload.stockId = stock.id ?? '';
     payload.stocks = stockGraphManipulator(stock?.stocks);
     payload.title = stock?.name;
-    payload.amount = `$${stock?.current_price ?? 0}`;
-    payload.stockUpdate = `${stock?.change_in_percent ?? 0}%`;
+    payload.amount = `$${stock?.current_price ?? 'n/a'}`;
+    payload.stockUpdate = `${stock?.change_in_percent ?? 'n/a'}%`;
     payload.nameId = stock?.name_id ?? '';
     payload.type = stock?.type;
     payload.src = Images.bitCoin;
@@ -60,8 +60,8 @@ export function stocksdataManipulator(list = []) {
       payload.stockId = stock.id ?? '';
       payload.subscribe = stock?.stock_subscribe?.length ?? 0;
       payload.title = stock?.name;
-      payload.amount = `$${stock?.current_price ?? 0}`;
-      payload.stockUpdate = `${stock?.change_in_percent ?? 0}%`;
+      payload.amount = `$${stock?.current_price ?? 'n/a'}`;
+      payload.stockUpdate = `${stock?.change_in_percent ?? 'n/a'}%`;
       payload.nameId = stock?.name_id ?? '';
       payload.type = stock?.type;
       payload.slug = `/stock/${stock?.name_slug}` ?? '';
@@ -92,29 +92,31 @@ export function stocksNameManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
       payload.stockSubscribe = stock?.stock_subscribe?.length ?? 0;
-      payload.changeInPercent = stock?.stocks_name?.change_in_percent ?? 0;
-      payload.changeInPrice = stock?.stocks_name?.change_in_price ?? 0;
+      payload.changeInPercent = stock?.stocks_name?.change_in_percent ?? 'n/a';
+      payload.changeInPrice = stock?.stocks_name?.change_in_price ?? 'n/a';
       payload.frequency = stock?.stocks_name?.Frequency;
 
       payload.coin = stock?.stocks_name?.coin ?? '';
-      payload.currentPrice = stock?.stocks_name?.current_price ?? 0;
+      payload.currentPrice = stock?.stocks_name?.current_price ?? 'n/a';
       payload.date =
         moment(new Date(stock?.stocks_name?.createdAt)).format(FORMAT) ??
         moment().format(FORMAT);
       payload.fullName = stock?.stocks_name?.fullName ?? '';
-      payload.fearGreedIndex = stock?.stocks_name?.fear_greed_index ?? 0;
+      payload.fearGreedIndex = stock?.stocks_name?.fear_greed_index ?? 'n/a';
       payload.nameId = stock?.stocks_name?.name_id ?? '';
       payload.overallTrend = stock?.stocks_name?.overall_trend ?? '';
-      payload.prevPrice = stock?.stocks_name?.prev_price ?? 0;
+      payload.prevPrice = stock?.stocks_name?.prev_price ?? 'n/a';
 
       payload.title = stock?.stocks_name?.name ?? '';
       payload.stockId = stock?.stocks_name.id ?? '';
       payload.type = stock?.stocks_name?.type;
       payload.slug = `/stock/${stock?.stocks_name?.name_slug}` ?? '';
       payload.id = stock?.stocks_name?.id ?? '';
-      payload.amount = `$${stock?.stocks_name?.current_price}`;
-      payload.currentPrice = stock?.stocks_name?.current_price ?? 0;
-      payload.stockUpdate = `${stock?.stocks_name?.change_in_percent}%`;
+      payload.amount = `$${stock?.stocks_name?.current_price ?? 'n/a'}`;
+      payload.currentPrice = stock?.stocks_name?.current_price ?? 'n/a';
+      payload.stockUpdate = `${
+        stock?.stocks_name?.change_in_percent ?? 'n/a'
+      }%`;
       payload.src = Images.bitCoin;
       payload.stocks = stockGraphManipulator(stock?.stocks_name?.stocks);
       payload.color =
@@ -146,19 +148,19 @@ export function stockGraphManipulator(list = []) {
       const payload = {};
 
       payload.title = stock?.name;
-      payload.changeInPercent = stock?.change_in_percent ?? 0;
-      payload.changeInPrice = stock?.change_in_price ?? 0;
+      payload.changeInPercent = stock?.change_in_percent ?? 'n/a';
+      payload.changeInPrice = stock?.change_in_price ?? 'n/a';
       payload.coin = stock?.coin ?? '';
-      payload.currentPrice = stock?.current_price ?? 0;
+      payload.currentPrice = stock?.current_price ?? 'n/a';
       payload.date =
         moment(new Date(stock?.createdAt)).format(FORMAT) ??
         moment().format(FORMAT);
       payload.updateDate = moment(new Date(stock?.updatedAt)).fromNow();
       payload.fullName = stock?.fullName ?? '';
-      payload.fearGreedIndex = stock?.fear_greed_index ?? 0;
+      payload.fearGreedIndex = stock?.fear_greed_index ?? 'n/a';
       payload.nameId = stock?.name_id ?? '';
       payload.overallTrend = stock?.overall_trend ?? '';
-      payload.prevPrice = stock?.prev_price ?? 0;
+      payload.prevPrice = stock?.prev_price ?? 'n/a';
       payload.color =
         stock?.change_in_percent === 0
           ? 'yellow'

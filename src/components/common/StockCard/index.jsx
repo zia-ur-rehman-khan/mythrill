@@ -66,7 +66,7 @@ const StockCard = ({ value, addIcon }) => {
   const unSubscribe = (stockId) => {
     setIsLoading(true);
 
-    const payloadData = { stock_id: stockId };
+    const payloadData = { stock_id: stockId, nameId: nameId };
     dispatch(
       StockUnSubscribeRequest({
         payloadData,
