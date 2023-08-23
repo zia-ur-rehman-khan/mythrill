@@ -90,7 +90,9 @@ const Login = () => {
       if (!tokenResponse.access_token) return;
       console.log(tokenResponse, 'google');
       const payloadData = {
-        token: tokenResponse.access_token
+        token: tokenResponse.access_token,
+        platform: userPlatform(),
+        device_token: deviceToken
       };
       dispatch(
         googleLoginRequest({
@@ -116,7 +118,9 @@ const Login = () => {
     console.log(response, 'fb');
 
     const payloadData = {
-      token: response.accessToken
+      token: response.accessToken,
+      platform: userPlatform(),
+      device_token: deviceToken
     };
     dispatch(
       facebookLoginRequest({
