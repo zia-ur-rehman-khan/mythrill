@@ -55,19 +55,12 @@ const NumberVerification = () => {
       VerificationRequest({
         payloadData,
         responseCallback: (res) => {
+          setLoading(false);
+
           if (res.status) {
             console.log(res.data.data.subscribe_status, 'res');
-
-            if (
-              res.data.data.subscribe_status === USER_SUBSCRIPTION_STATUS.FREE
-            ) {
-              changeRoute(SUBSCRIPTION_ROUTE);
-            } else {
-              changeRoute(HOME_ROUTE);
-            }
-            setLoading(false);
+            changeRoute(SUBSCRIPTION_ROUTE);
           } else {
-            setLoading(false);
             console.log(res.errors, 'error');
           }
         }
