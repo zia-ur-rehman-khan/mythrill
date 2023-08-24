@@ -26,6 +26,7 @@ import {
 } from '../../../services/utils';
 import {
   EMAIL_RULE,
+  HOME_ROUTE,
   NUMBER_VERIFICATION_ROUTE,
   SUBSCRIPTION_ROUTE,
   handlePassworMatch,
@@ -101,15 +102,20 @@ const Register = () => {
       if (!tokenResponse.access_token) return;
       console.log(tokenResponse, 'google');
       const payloadData = {
-        token: tokenResponse.access_token
+        token: tokenResponse.access_token,
+        platform: userPlatform(),
+        device_token: deviceToken
       };
       dispatch(
         googleLoginRequest({
           payloadData,
           responseCallback: (res) => {
-            console.log(res, 'resresresres');
             if (res.status) {
-              changeRoute(SUBSCRIPTION_ROUTE);
+              if (res.data.data.subscribe_status === '') {
+                changeRoute(SUBSCRIPTION_ROUTE);
+              } else {
+                changeRoute(HOME_ROUTE);
+              }
             } else {
               console.log(res.errors, 'error');
             }
@@ -124,15 +130,20 @@ const Register = () => {
     console.log(response, 'fb');
 
     const payloadData = {
-      token: response.accessToken
+      token: response.accessToken,
+      platform: userPlatform(),
+      device_token: deviceToken
     };
     dispatch(
       facebookLoginRequest({
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(SUBSCRIPTION_ROUTE);
-            console.log(res.status, 'res');
+            if (res.data.data.subscribe_status === '') {
+              changeRoute(SUBSCRIPTION_ROUTE);
+            } else {
+              changeRoute(HOME_ROUTE);
+            }
           } else {
             console.log(res.errors, 'error');
           }
