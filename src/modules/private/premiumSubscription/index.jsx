@@ -10,7 +10,7 @@ import {
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import AuthLayout from '../../../components/AuthLayout';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PaymentMethod } from '../../../components/common';
 
 const PremiumSubscription = () => {
@@ -18,11 +18,15 @@ const PremiumSubscription = () => {
   // const deviceToken = useSelector((state) => state?.user?.deviceToken);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
   // const dispatch = useDispatch();
 
   const changeRoute = (route) => {
     navigate(route);
   };
+
+  const { amount, period, title } = location?.state?.subscription_detailes;
 
   const onFinish = (values) => {
     // setLoading(true);
@@ -62,11 +66,14 @@ const PremiumSubscription = () => {
         <Space size={40} className={css(AppStyles.w100)}>
           <img src={Images.authLogo} width={'50px'} height={'58px'} />
           <Space>
-            <CommonHeading text={'$575.00'} />
-            <CommonTextField text={'/ year'} />
+            <CommonHeading text={`$${amount}`} />
+            <CommonTextField text={`/${period} `} />
           </Space>
         </Space>
-        <CommonHeading level={3} text={'Premium Package'} />
+        <CommonHeading
+          level={3}
+          text={`${title[0].toUpperCase()}${title.slice(1)} Tier`}
+        />
         <PaymentMethod subscription />
       </Space>
     </AuthLayout>

@@ -51,7 +51,7 @@ const SubcriptionCard = ({ title, subData }) => {
       data.card_exist
         ? setIsRemove(true)
         : Navigate(PREMIUM_SUBSCRIPTION_ROUTE, {
-            state: { subscription_type: detail[0]?.package_name }
+            state: { subscription_detailes: { ...detail[0], title } }
           });
     } else {
       toastAlert('You already subscribe this package', ALERT_TYPES.error);

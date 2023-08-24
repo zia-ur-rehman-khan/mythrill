@@ -79,8 +79,9 @@ const CheckoutForm = ({ onAdd, subscription }) => {
     } else {
       let payloadData = { token: token.id };
 
-      if (location?.state?.subscription_type) {
-        payloadData.subscription_type = location.state.subscription_type;
+      if (location?.state?.subscription_detailes) {
+        payloadData.subscription_type =
+          location?.state?.subscription_detailes.package_name;
       }
 
       {
