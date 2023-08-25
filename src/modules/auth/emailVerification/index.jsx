@@ -94,61 +94,35 @@ const EmailVerification = () => {
     );
   };
   return (
-    <AuthLayout
-      className="email"
-      image={<img src={Images.email} className="email-image" />}
-    >
-      <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
-        <Space direction="vertical" className={css(AppStyles.w100)}>
-          <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>
-            <img src={Images.authLogo} width={'50px'} height={'58px'} />
-          </Space>
-          <CommonHeading
-            level={3}
-            textAlign={'center'}
-            text={'Phone Verification Please Check Your phone'}
-          />
-          <Space>
-            <CommonTextField
-              text={location?.state?.phoneNumber}
-              opacity={'0.5'}
-            />
-            <CommonTextField
-              text={'Not You?'}
-              color="#7665c1"
-              className={css(AppStyles.pointer)}
-              onClick={() => navigate(-1)}
-            />
-          </Space>
-          <CommonInputField
-            name={'code'}
-            type={'number'}
-            className={'auth'}
-            placeholder={'5 6 8 9 2 3'}
-            suffix={
-              <CommonTextField
-                text={'Resend'}
-                opacity={'0.5'}
-                onClick={resend}
-              />
-            }
-            rules={[
-              {
-                validator: (_, value) => {
-                  return validatorField(_, value, 6, 6);
-                }
-              }
-            ]}
-          />
-          <CommonButton
-            loading={loading}
-            htmlType="submit"
-            text={'Submit'}
-            classname={css(AppStyles.mTop20)}
+    <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Space size={10} direction="vertical" className={css(AppStyles.w100)}>
+        <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>
+          <CommonTextField text={'Didn’t receive a code?'} />
+          <CommonTextField
+            text={'Resend'}
+            color="#7665c1"
+            className={css(AppStyles.pointer)}
           />
         </Space>
-      </Form>
-    </AuthLayout>
+        <CommonInputField
+          name={'code'}
+          type={'number'}
+          className={'auth'}
+          placeholder={'5 6 8 9 2 3'}
+          suffix={
+            <CommonTextField text={'Resend'} opacity={'0.5'} onClick={resend} />
+          }
+          rules={[
+            {
+              validator: (_, value) => {
+                return validatorField(_, value, 6, 6);
+              }
+            }
+          ]}
+        />
+        <CommonButton loading={loading} htmlType="submit" text={'Submit'} />
+      </Space>
+    </Form>
   );
 };
 export default EmailVerification;

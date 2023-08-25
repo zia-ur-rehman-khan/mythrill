@@ -2,7 +2,13 @@ import { Col, Form, Row, Space, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import ProfileImage from '../profileImage';
 import { CommonInputField } from '../../../../components';
-import { CommonButton, CommonPhoneInput } from '../../../../components/common';
+import {
+  CommonButton,
+  CommonHeading,
+  CommonModal,
+  CommonPhoneInput,
+  CommonTextField
+} from '../../../../components/common';
 import {
   ALERT_TYPES,
   EMAIL_RULE,
@@ -24,12 +30,14 @@ import {
   faSearch,
   faWarning
 } from '@fortawesome/free-solid-svg-icons';
+import EmailVerification from '../../../auth/emailVerification';
 
 const UserInfo = () => {
   const { data } = useSelector((state) => state?.user);
 
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
+  const [emailVerification, setEmailVerification] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -186,6 +194,7 @@ const UserInfo = () => {
               suffix={
                 <Tooltip title="Email verification">
                   <img
+                    onClick={() => setEmailVerification(true)}
                     src={Images.info}
                     width={'20px'}
                     height={'20px'}
@@ -212,6 +221,20 @@ const UserInfo = () => {
           />
         </Space>
       </Form>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Verify Your Email'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={emailVerification}
+        setIsModalVisible={setEmailVerification}
+        className={'confirmation-modal'}
+      >
+        <EmailVerification />
+      </CommonModal>
     </div>
   );
 };
