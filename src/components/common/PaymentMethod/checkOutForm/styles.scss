@@ -46,6 +46,14 @@
     .card-but {
         margin-top: 15px;
     }
+    .gradient {
+        width: 25%;
+        height: 2px;
+        background: linear-gradient(90deg, #e9e9ec 0.5%, rgba(233, 233, 236, 0) 72.5%);
+    }
+    .right-border {
+        transform: rotate(-180deg);
+    }
 }
 
 .add-card {

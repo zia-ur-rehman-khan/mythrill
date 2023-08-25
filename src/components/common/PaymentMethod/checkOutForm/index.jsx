@@ -204,6 +204,36 @@ const CheckoutForm = ({ onAdd, subscription }) => {
           topClass={'card-but'}
           loading={isLoading}
         />
+        {subscription && (
+          <Space
+            size={20}
+            direction="vertical"
+            className={css(AppStyles.w100, AppStyles.mTop15)}
+          >
+            <div
+              size={0}
+              className={css(
+                AppStyles.spaceBetween,
+                AppStyles.w100,
+                AppStyles.flexBox,
+                AppStyles.alignItemsCenter
+              )}
+            >
+              <div className="gradient right-border"></div>
+              <CommonTextField
+                text={'Or pay with Coinbase'}
+                textAlign={'center'}
+              />
+              <div className="gradient"></div>
+            </div>
+            <CommonButton
+              text={'Pay with Coinbase'}
+              classname={'icon-but'}
+              icon={<img src={Images.coinBase} />}
+              background={'#0052FF'}
+            />
+          </Space>
+        )}
       </Space>
     </Form>
   );
