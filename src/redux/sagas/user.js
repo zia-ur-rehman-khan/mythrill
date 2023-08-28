@@ -7,6 +7,8 @@ import {
   CHANGE_USER_Info,
   CHANGE_USER_PASSWORD,
   CONTACT_US,
+  Email_VALIDATION_REQUEST,
+  Email_VERIFICATION_REQUEST,
   FACEBOOK_LOGIN_REQUEST,
   FORGOT_PASSWORD,
   GOOGLE_LOGIN_REQUEST,
@@ -28,6 +30,8 @@ import {
 } from '../../config/webService';
 import { toastAlert } from '../../services/utils';
 import {
+  EmailValidationRequest,
+  EmailValidationRequestSuccess,
   EmailVerificationRequest,
   ForgotRequest,
   LogoutRequest,
@@ -188,7 +192,7 @@ function* userEmailVerification() {
     try {
       const response = yield call(
         callRequest,
-        VERIFICATION_REQUEST,
+        Email_VERIFICATION_REQUEST,
         payloadData,
         '',
         '',
@@ -197,6 +201,35 @@ function* userEmailVerification() {
 
       if (response.status) {
         if (responseCallback) responseCallback(response);
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* userEmailValidation() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(EmailValidationRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        Email_VALIDATION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(EmailValidationRequestSuccess(response?.data?.data));
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -656,4 +689,5 @@ export default function* root() {
   yield fork(cancelSubscription);
   yield fork(resumeSubscription);
   yield fork(paymentList);
+  yield fork(userEmailValidation);
 }

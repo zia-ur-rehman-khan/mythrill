@@ -29,8 +29,6 @@ const Payment = () => {
 
   const { data } = useSelector((state) => state?.user);
 
-  console.log('🚀 ~ file: index.jsx:29 ~ Payment ~ data:', data);
-
   if (
     data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.FREE ||
     data['subscribe_status'] === USER_SUBSCRIPTION_STATUS.CANCLED

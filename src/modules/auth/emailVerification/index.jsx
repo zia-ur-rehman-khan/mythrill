@@ -29,6 +29,7 @@ import {
 } from '../../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  EmailValidationRequest,
   EmailVerificationRequest,
   ResendRequest,
   ResendVerificationRequest,
@@ -36,7 +37,7 @@ import {
 } from '../../../redux/slicers/user';
 import { toastAlert } from '../../../services/utils';
 
-const EmailVerification = () => {
+const EmailVerification = ({ setEmailVerification }) => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -51,6 +52,21 @@ const EmailVerification = () => {
     });
   };
 
+  useEffect(() => {
+    dispatch(
+      EmailVerificationRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  }, []);
+
   const onFinish = (values) => {
     setLoading(true);
     const { code } = values;
@@ -61,15 +77,15 @@ const EmailVerification = () => {
     };
 
     dispatch(
-      EmailVerificationRequest({
+      EmailValidationRequest({
         payloadData,
         responseCallback: (res) => {
+          setLoading(false);
+          setEmailVerification(false);
           if (res.status) {
-            changeRoute(RESET_PASSWORD_ROUTE, values?.code);
-            setLoading(false);
-            console.log(res.status, 'res');
+            console.log(res, 'res');
+            toastAlert(res.message, ALERT_TYPES.success);
           } else {
-            setLoading(false);
             console.log(res.errors, 'error');
           }
         }
@@ -80,12 +96,12 @@ const EmailVerification = () => {
 
   const resend = () => {
     dispatch(
-      ResendVerificationRequest({
-        payloadData: { hash: hash },
+      EmailVerificationRequest({
+        payloadData: {},
         responseCallback: (res) => {
           if (res.status) {
+            console.log(res, 'res');
             toastAlert(res.message, ALERT_TYPES.success);
-            console.log(res.status, 'res');
           } else {
             console.log(res.errors, 'error');
           }

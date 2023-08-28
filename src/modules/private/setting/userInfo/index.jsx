@@ -192,15 +192,17 @@ const UserInfo = () => {
               rules={EMAIL_RULE}
               disabled={true}
               suffix={
-                <Tooltip title="Email verification">
-                  <img
-                    onClick={() => setEmailVerification(true)}
-                    src={Images.info}
-                    width={'20px'}
-                    height={'20px'}
-                    className={css(AppStyles.pointer)}
-                  />
-                </Tooltip>
+                !data.email_verified && (
+                  <Tooltip title="Email verification">
+                    <img
+                      onClick={() => setEmailVerification(true)}
+                      src={Images.info}
+                      width={'20px'}
+                      height={'20px'}
+                      className={css(AppStyles.pointer)}
+                    />
+                  </Tooltip>
+                )
               }
             />
           </Col>
@@ -233,7 +235,7 @@ const UserInfo = () => {
         setIsModalVisible={setEmailVerification}
         className={'confirmation-modal'}
       >
-        <EmailVerification />
+        <EmailVerification setEmailVerification={setEmailVerification} />
       </CommonModal>
     </div>
   );

@@ -62,7 +62,12 @@ const UserReducer = createSlice({
     VerificationRequest(state, action) {},
     ForgotRequest(state, action) {},
     EmailVerificationRequest(state, action) {},
-
+    EmailValidationRequest(state, action) {},
+    EmailValidationRequestSuccess(state, action) {
+      let newData = { ...state.data };
+      newData.email_verified = action.payload.email_verified;
+      state.data = { ...state.data, ...newData };
+    },
     ResetPasswordRequest(state, action) {},
     LogoutRequest(state, action) {},
     ResendVerificationRequest(state, action) {},
@@ -169,6 +174,8 @@ export const {
   subscriptionRequestSuccess,
   paymentListRequest,
   trendingListRequest,
+  EmailValidationRequest,
+  EmailValidationRequestSuccess,
   search
 } = UserReducer.actions;
 

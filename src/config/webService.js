@@ -139,6 +139,18 @@ export const VERIFICATION_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const Email_VERIFICATION_REQUEST = {
+  route: 'users/email-verification',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const Email_VALIDATION_REQUEST = {
+  route: 'users/email-validation',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
 export const FORGOT_PASSWORD = {
   route: 'users/forget-password',
   access_token_required: false,
