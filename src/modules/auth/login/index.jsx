@@ -51,14 +51,15 @@ const Login = () => {
   };
 
   const onFinish = (values) => {
-    setLoading(true);
-    const { phoneNumber, password } = values;
+    // setLoading(true);
+    const { phoneNumber, password, remember } = values;
 
     const payloadData = {
       phone: '+' + phoneNumber,
       password: password,
       platform: userPlatform(),
-      token: deviceToken
+      token: deviceToken,
+      remember_me: remember
     };
 
     dispatch(
@@ -176,9 +177,11 @@ const Login = () => {
           </Space>
           <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
             <Space>
-              <Checkbox />
+              <Form.Item name="remember" valuePropName="checked">
+                <Checkbox />
+              </Form.Item>
               <CommonTextField
-                text={'Remember me'}
+                text="Remember me"
                 opacity={'0.5'}
                 fontWeight={600}
               />
