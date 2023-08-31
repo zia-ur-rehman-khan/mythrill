@@ -29,3 +29,21 @@
         display: none;
     }
 }
+
+.notification-parent {
+    position: relative;
+    .count {
+        color: master.$white-color;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid #20232c;
+        background: #cd393a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: -8px;
+        top: -10px;
+    }
+}

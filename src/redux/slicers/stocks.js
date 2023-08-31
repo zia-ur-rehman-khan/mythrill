@@ -16,7 +16,9 @@ const GeneralReducer = createSlice({
     stocksUnSubscribe: [],
     stocksData: {},
     stockLimitExceed: false,
-    trendData: []
+    trendData: [],
+    notificationList: [],
+    notificationCount: 0
   },
   reducers: {
     setStocksListAction(state, action) {
@@ -186,7 +188,51 @@ const GeneralReducer = createSlice({
     setFrequencyRequestSuccess(state, action) {
       console.log(action, 'action');
     },
-    getFrequencyRequest() {}
+    getFrequencyRequest() {},
+    getNotificationRequest() {},
+    getNotificationSuccess(state, action) {
+      state.notificationList = action.payload;
+    },
+    getNotificationReadRequest() {},
+    getNotificationReadSuccess(state, action) {
+      const data = state.notificationList;
+      const updateData = action.payload;
+
+      const filter = data.map((d) => {
+        const match = action.payload.id === d.id;
+
+        if (match) {
+          return {
+            ...d,
+            is_read: updateData.is_read
+          };
+        }
+
+        return d;
+      });
+
+      state.notificationList = filter;
+    },
+    getNotificationReadAllRequest(state, action) {},
+    getNotificationReadAllRequestSuccess(state, action) {
+      state.notificationList = action.payload;
+    },
+    getNotificationsCountRequest(state, action) {},
+    getNotificationsCountRequestSuccess(state, action) {
+      state.notificationCount = action.payload.unseen_count;
+    },
+    seeNotificationsRequest(state, action) {},
+    seeNotificationsRequestSuccess(state, action) {
+      state.notificationCount = 0;
+    },
+    getlatestNotification(state, action) {
+      const data = state.notificationList;
+
+      let newData = action.payload;
+      state.notificationList = [{ ...newData }, ...data];
+
+      state.notificationCount += 1;
+    }
   }
 });
 
@@ -212,7 +258,18 @@ export const {
   getFrequencyDataRequest,
   setFrequencyRequest,
   setFrequencyRequestSuccess,
-  getFrequencyRequest
+  getFrequencyRequest,
+  getNotificationRequest,
+  getNotificationSuccess,
+  getNotificationReadRequest,
+  getNotificationReadSuccess,
+  getNotificationReadAllRequest,
+  getNotificationReadAllRequestSuccess,
+  getNotificationsCountRequest,
+  getNotificationsCountRequestSuccess,
+  seeNotificationsRequest,
+  seeNotificationsRequestSuccess,
+  getlatestNotification
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

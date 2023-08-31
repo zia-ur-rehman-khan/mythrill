@@ -29,6 +29,8 @@ import {
   stocksdataManipulatorObject
 } from '../../../manipulators/stocksName';
 import {
+  getNotificationRequest,
+  getNotificationsCountRequest,
   getStocksNameRequest,
   getSubscribeDataRealTime,
   getSubscribeStocksRequest,
@@ -68,55 +70,31 @@ const Home = () => {
   }, [id, pathname]);
 
   useEffect(() => {
-    // const stockListCollectionRef = collection(db, 'stocks');
-    // const stocksListQuery = query(
-    //   stockListCollectionRef,
-    //   orderBy('date_time', 'desc'),
-    //   limit(200),
-    //   where('name_id', 'in', STOCK_NAME_LIST)
-    // );
-    // console.log('stocksListQuery', stocksListQuery);
-    // const unSubscribe = onSnapshot(
-    //   stocksListQuery,
-    //   (querySnapshot) => {
-    //     const stocksList = [];
-    //     querySnapshot.forEach((doc) => {
-    //       stocksList.push(doc.data());
-    //     });
+    dispatch(
+      getNotificationRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'check');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
 
-    //     const stocksDataPayload = {};
-    //     const stockNamesPayload = [];
-
-    //     for (const stock of STOCK_NAME_LIST) {
-    //       const filteredStock = stocksList?.filter(
-    //         (item) => item.name_id === stock
-    //       );
-
-    //       if (filteredStock?.length === 0) continue;
-
-    //       const stockNameManipulatedData = singleStockNameManipulator(
-    //         filteredStock?.[0]
-    //       );
-    //       const manipulatedData = stockListManipulator(filteredStock);
-
-    //       manipulatedData?.sort(
-    //         (a, b) => new Date(a?.date) - new Date(b?.date)
-    //       );
-    //       stockNamesPayload.push(stockNameManipulatedData);
-    //       stocksDataPayload[stock] = manipulatedData;
-    //     }
-
-    //     dispatch(setStocksListAction(stockNamesPayload));
-    //     dispatch(setStocksDataAction(stocksDataPayload));
-    //     setIsLoading(false);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //     setIsLoading(false);
-    //   }
-    // );
-
-    // return unSubscribe;
+    dispatch(
+      getNotificationsCountRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'check');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
 
     const socket = initializeSocket(
       `wss://${SOCKET_URL}?stocks=${data?.subscribedStocks || ''}`

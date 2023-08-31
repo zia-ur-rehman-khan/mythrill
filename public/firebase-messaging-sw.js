@@ -1,3 +1,6 @@
+import { getlatestNotification } from '../src/redux/slicers/stocks';
+import DataHandler from '../src/services/DataHandler';
+
 importScripts(
   'https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js'
 );
@@ -27,15 +30,9 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// self.addEventListener("notificationclick", (event) => {
-//   console.log("On notification click: ", event);
-//   let data = event?.notification?.data?.data;
-//   let activityLogs = "/member/inventory/activity-logs";
-//   let url = "";
-//   let baseurl = data?.url;
-//   if (baseurl.includes("dashboard")) {
-//     baseurl = baseurl.split("/").slice(0, -1).join("/");
-//   }
+// self.addEventListener('notificationclick', (event) => {
+//   console.log('On notification click: ', event);
+
 //   url = baseurl + activityLogs;
 //   event.notification.close();
 
@@ -44,11 +41,11 @@ if ('serviceWorker' in navigator) {
 //   event.waitUntil(
 //     clients
 //       .matchAll({
-//         type: "window",
+//         type: 'window'
 //       })
 //       .then((clientList) => {
 //         for (const client of clientList) {
-//           if (client.url === "/" && "focus" in client) return client.focus();
+//           if (client.url === '/' && 'focus' in client) return client.focus();
 //         }
 //         if (clients.openWindow) return clients.openWindow(url);
 //       })
@@ -58,11 +55,13 @@ if ('serviceWorker' in navigator) {
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function (payload) {
-  console.log('Received background notification ', messaging, payload);
+  console.log('Message Received. 2', payload);
+
+  DataHandler.getStore().dispatch(getlatestNotification(payload?.data));
 
   const notificationOptions = {
-    body: payload.data?.body || payload.notification?.body,
-    tag: payload.data?.title || payload.notification?.body,
+    body: payload.data?.description,
+    tag: payload.data?.title,
     data: payload
   };
 

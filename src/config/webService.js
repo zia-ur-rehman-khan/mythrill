@@ -127,6 +127,36 @@ export const GET_FREQUENCY_REQUEST = {
   type: REQUEST_TYPE.POST
 };
 
+export const GET_NOTIFICATION_REQUEST = {
+  route: 'notifications/list',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const GET_NOTIFICATION_READ_REQUEST = {
+  route: 'notifications/read',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const GET_NOTIFICATION_READ_ALL_REQUEST = {
+  route: 'notifications/read-all',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const GET_NOTIFICATIONS_COUNT_REQUEST = {
+  route: 'notifications/unseen',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const SEE_NOTIFICATIONS_REQUEST = {
+  route: 'notifications/seen-all',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

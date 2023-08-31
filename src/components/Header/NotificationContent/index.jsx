@@ -4,9 +4,73 @@ import { AppStyles, Images } from '../../../theme';
 import { CommonPopOver, CommonTextField } from '../../common';
 import { Divider, Space } from 'antd';
 import './styles.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import {
+  getNotificationReadAllRequest,
+  getNotificationReadRequest,
+  seeNotificationsRequest
+} from '../../../redux/slicers/stocks';
 
 const NotificationContent = ({ mobile }) => {
-  const { bitCoin, netflix } = Images;
+  const { notificationList, notificationCount } = useSelector(
+    (state) => state?.stocks
+  );
+  const dispatch = useDispatch();
+
+  console.log(
+    '🚀 ~ file: index.jsx:11 ~ NotificationContent ~ list:',
+    notificationList
+  );
+
+  // const { bitCoin, netflix } = Images;
+
+  const markAllRead = () => {
+    dispatch(
+      getNotificationReadAllRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
+  const readNotification = (id) => {
+    dispatch(
+      getNotificationReadRequest({
+        payloadData: {},
+        query: `id=${id}`,
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
+  const seeNotifications = (id) => {
+    dispatch(
+      seeNotificationsRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
+
   const title = (
     <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
       <CommonTextField
@@ -15,7 +79,9 @@ const NotificationContent = ({ mobile }) => {
         fontSize={'15px'}
       />
       <CommonTextField
-        onClick={() => {}}
+        onClick={() => {
+          markAllRead();
+        }}
         text={'Mark all as read'}
         topClass={'small'}
         textDecoration="underline"
@@ -23,26 +89,29 @@ const NotificationContent = ({ mobile }) => {
     </Space>
   );
 
-  const array = [netflix, bitCoin, netflix, bitCoin, netflix, bitCoin, netflix];
+  // const array = [netflix, bitCoin, netflix, bitCoin, netflix, bitCoin, netflix];
 
-  const content = array.map((t, index) => (
-    <div className={`main ${t < index + 1 === 3 && 'hide'}`}>
+  const content = notificationList?.map((t, index) => (
+    <div
+      className={`main ${!t.is_read && 'hide'}`}
+      onClick={() => readNotification(t.id)}
+    >
       <div className={`notification-content }`}>
         <Space
           align="start"
           className={css(AppStyles.w100, AppStyles.spaceBetween)}
         >
           <Space align="start">
-            <img src={t} />
+            {/* <img src={netflix} /> */}
             <Space size={2} direction="vertical">
-              <CommonTextField text={'Bessie Cooper'} fontWeight={600} />
-              <CommonTextField
-                text={'Enrichment will be created'}
-                topClass={'small'}
-              />
+              <CommonTextField text={t.title} fontWeight={600} />
+              <CommonTextField text={t.description} topClass={'small'} />
             </Space>
           </Space>
-          <CommonTextField text={'2 hr ago'} color={'#93969E'} />
+          <CommonTextField
+            text={moment(new Date(t.createdAt)).fromNow()}
+            color={'#93969E'}
+          />
         </Space>
       </div>
       <Divider className="border-line" />
@@ -56,12 +125,20 @@ const NotificationContent = ({ mobile }) => {
       title={title}
       trigger="click"
     >
-      <img
-        src={Images.notification}
-        width={'20px'}
-        height={'22px'}
-        className={css(AppStyles.pointer)}
-      />
+      <div className="notification-parent">
+        {notificationCount !== 0 && (
+          <div className="count">
+            <CommonTextField text={notificationCount} fontSize={'9px'} />
+          </div>
+        )}
+        <img
+          src={Images.notification}
+          width={'20px'}
+          height={'22px'}
+          className={css(AppStyles.pointer)}
+          onClick={seeNotifications}
+        />
+      </div>
     </CommonPopOver>
   );
 };

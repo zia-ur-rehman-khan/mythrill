@@ -17,6 +17,7 @@ import {
 import { initializeApp } from 'firebase/app';
 import DataHandler from './services/DataHandler';
 import { deviceNotificationTokenSuccess } from './redux/slicers/user';
+import { getlatestNotification } from './redux/slicers/stocks';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -50,8 +51,28 @@ const fetchToken = () => {
 };
 
 onMessage(messaging, (payload) => {
-  // const notification = JSON.parse(payload.data?.result);
-  console.log('message-received', payload);
+  const notification = payload?.data;
+  const { title, description } = notification;
+
+  console.log('Message Received. 1 ', payload);
+
+  DataHandler.getStore().dispatch(getlatestNotification(payload?.data));
+
+  const notif = new Notification(title, { body: description });
+
+  // notif.addEventListener('click', (event) => {
+  //   console.log('On notification click: ', event);
+  //   let data = event?.currentTarget?.data?.data;
+  //   let activityLogs = '/member/inventory/activity-logs';
+  //   let url = '';
+  //   let baseurl = data?.url;
+  //   if (baseurl.includes('dashboard')) {
+  //     baseurl = baseurl.split('/').slice(0, -1).join('/');
+  //   }
+  //   url = baseurl + activityLogs;
+  //   notif.close();
+  //   window.open(url);
+  // });
 });
 
 async function requestPermission() {

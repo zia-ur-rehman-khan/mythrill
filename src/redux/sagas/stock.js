@@ -4,8 +4,15 @@ import {
   callRequest,
   FREQUENCY_DATA_REQUEST,
   GET_FREQUENCY_REQUEST,
+  GET_NOTIFICATION_COUNT_REQUEST,
+  GET_NOTIFICATION_READ_ALL_REQUEST,
+  GET_NOTIFICATION_READ_REQUEST,
+  GET_NOTIFICATION_REQUEST,
+  GET_NOTiFICATION_REQUEST,
+  GET_NOTIFICATIONS_COUNT_REQUEST,
   GET_STOCK_NAMES,
   GET_SUBSCRIBE_STOCKS,
+  SEE_NOTIFICATIONS_REQUEST,
   SET_FREQUENCY_REQUEST,
   STOCK_SUBSCRIBE,
   STOCK_UNSUBSCRIBE,
@@ -23,6 +30,16 @@ import {
   getAllStocksRequestSuccess,
   getFrequencyDataRequest,
   getFrequencyRequest,
+  getNotificationCountRequestSuccess,
+  getNotificationReadAllRequest,
+  getNotificationReadAllRequestSuccess,
+  getNotificationReadRequest,
+  getNotificationReadSuccess,
+  getNotificationRequest,
+  getNotificationRequestSuccess,
+  getNotificationSuccess,
+  getNotificationsCountRequest,
+  getNotificationsCountRequestSuccess,
   getStocksNameRequest,
   getStocksNameSuccess,
   getSubscribeStockes,
@@ -30,6 +47,8 @@ import {
   getSubscribeStockesSuccess,
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
+  seeNotificationsRequest,
+  seeNotificationsRequestSuccess,
   setFrequencyRequest,
   setFrequencyRequestSuccess,
   trendingListRequest,
@@ -303,6 +322,157 @@ function* getFrequency() {
   }
 }
 
+function* getNotification() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(getNotificationRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        GET_NOTIFICATION_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(getNotificationSuccess(response?.data?.data?.notifications));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* getNotificationRead() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(getNotificationReadRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback, query } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        GET_NOTIFICATION_READ_REQUEST,
+        payloadData,
+        '',
+        query,
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(
+          getNotificationReadSuccess(response?.data?.data?.notifications)
+        );
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* getNotificationReadAll() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(getNotificationReadAllRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        GET_NOTIFICATION_READ_ALL_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(
+          getNotificationReadAllRequestSuccess(
+            response?.data?.data?.notifications
+          )
+        );
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* getNotificationsCount() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(getNotificationsCountRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        GET_NOTIFICATIONS_COUNT_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(getNotificationsCountRequestSuccess(response?.data?.data));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* seeNotifications() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(seeNotificationsRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        SEE_NOTIFICATIONS_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        yield put(seeNotificationsRequestSuccess());
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(getStockNames);
   yield fork(StockSubscribe);
@@ -312,4 +482,9 @@ export default function* root() {
   yield fork(getFrequencyData);
   yield fork(setFrequency);
   yield fork(getFrequency);
+  yield fork(getNotification);
+  yield fork(getNotificationRead);
+  yield fork(getNotificationReadAll);
+  yield fork(getNotificationsCount);
+  yield fork(seeNotifications);
 }
