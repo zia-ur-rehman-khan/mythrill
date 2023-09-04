@@ -10,7 +10,9 @@ const CommonPopOver = ({
   title,
   trigger,
   width,
-  placement
+  placement,
+  setVisible,
+  visible
 }) => {
   return (
     <Popover
@@ -22,6 +24,8 @@ const CommonPopOver = ({
       placement={placement}
       overlayStyle={{ width: width }}
       trigger={trigger}
+      visible={visible}
+      onVisibleChange={(visible) => setVisible(visible)}
     >
       {children}
     </Popover>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from 'aphrodite';
 import { AppStyles, Images } from '../../../theme';
 import { CommonPopOver, CommonTextField } from '../../common';
@@ -11,19 +11,18 @@ import {
   getNotificationReadRequest,
   seeNotificationsRequest
 } from '../../../redux/slicers/stocks';
+import { useNavigate } from 'react-router-dom';
+import { useCommonNotification } from '../../../services/utils';
 
 const NotificationContent = ({ mobile }) => {
   const { notificationList, notificationCount } = useSelector(
     (state) => state?.stocks
   );
+  const [visible, setVisible] = useState(false);
+
   const dispatch = useDispatch();
 
-  console.log(
-    '🚀 ~ file: index.jsx:11 ~ NotificationContent ~ list:',
-    notificationList
-  );
-
-  // const { bitCoin, netflix } = Images;
+  const { navigateOnCondition } = useCommonNotification();
 
   const markAllRead = () => {
     dispatch(
@@ -47,13 +46,24 @@ const NotificationContent = ({ mobile }) => {
         query: `id=${id}`,
         responseCallback: (res) => {
           if (res.status) {
-            console.log(res, 'res');
+            const extraDetails = JSON.parse(
+              res?.data?.data?.notifications?.extra
+            );
+            navigateOnCondition(extraDetails);
+
+            setVisible(false);
           } else {
             console.log(res.errors, 'error');
           }
         }
       })
     );
+  };
+
+  const clickNotification = (extra) => {
+    const extraDetails = JSON.parse(extra);
+    navigateOnCondition(extraDetails);
+    setVisible(false);
   };
 
   const seeNotifications = (id) => {
@@ -94,7 +104,9 @@ const NotificationContent = ({ mobile }) => {
   const content = notificationList?.map((t, index) => (
     <div
       className={`main ${!t.is_read && 'hide'}`}
-      onClick={() => readNotification(t.id)}
+      onClick={() =>
+        t.is_read ? clickNotification(t.extra) : readNotification(t.id)
+      }
     >
       <div className={`notification-content }`}>
         <Space
@@ -124,6 +136,8 @@ const NotificationContent = ({ mobile }) => {
       content={content}
       title={title}
       trigger="click"
+      setVisible={setVisible}
+      visible={visible}
     >
       <div className="notification-parent">
         {notificationCount !== 0 && (

@@ -465,3 +465,6 @@ export const frequencyData = (frequencyData, frequencyAlert) => {
     return frequencyData?.[0];
   }
 };
+
+export const CACHE_NAME = 'my-cache';
+export const NOTIFICATION_KEY = 'notification';

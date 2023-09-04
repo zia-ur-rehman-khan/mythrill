@@ -26,6 +26,7 @@ import {
   every
 } from 'lodash';
 import { Form } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 // GET CURRENT ACCESS TOKEN FROM USER REDUCER
 export const getCurrentAccessToken = () => {
@@ -340,4 +341,59 @@ export const cardfieldHandel = (t) => {
     default:
       return 'card';
   }
+};
+
+export const getCachValue = async (cacheName, key) => {
+  try {
+    const cache = await caches.open(cacheName);
+    const response = await cache.match(key);
+
+    if (response) {
+      const data = await response.json();
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addToCache = async (cacheName, key, value) => {
+  try {
+    const cache = await caches.open(cacheName);
+
+    // Create a Response object with the value
+    const response = new Response(JSON.stringify(value), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Add the Response to the cache with the specified key
+    await cache.put(key, response);
+
+    console.log('Added key:', key, 'with value:', value, 'to the cache.');
+  } catch (error) {
+    console.error('Error adding key-value pair to cache:', error);
+    throw error; // Rethrow the error for error handling
+  }
+};
+
+export const useCommonNotification = () => {
+  const navigate = useNavigate();
+
+  const navigateOnCondition = (extraDetails) => {
+    let url = '';
+    if (extraDetails.type == 'stock') {
+      url = `/stock/${extraDetails.name_id}`;
+    } else {
+      url = `/setting`;
+    }
+    navigate(url);
+  };
+
+  return {
+    navigateOnCondition
+  };
 };

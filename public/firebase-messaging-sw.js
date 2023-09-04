@@ -1,6 +1,3 @@
-import { getlatestNotification } from '../src/redux/slicers/stocks';
-import DataHandler from '../src/services/DataHandler';
-
 importScripts(
   'https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js'
 );
@@ -30,34 +27,14 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// self.addEventListener('notificationclick', (event) => {
-//   console.log('On notification click: ', event);
-
-//   url = baseurl + activityLogs;
-//   event.notification.close();
-
-//   // This looks to see if the current is already open and
-//   // focuses if it is
-//   event.waitUntil(
-//     clients
-//       .matchAll({
-//         type: 'window'
-//       })
-//       .then((clientList) => {
-//         for (const client of clientList) {
-//           if (client.url === '/' && 'focus' in client) return client.focus();
-//         }
-//         if (clients.openWindow) return clients.openWindow(url);
-//       })
-//   );
-// });
-
 const messaging = firebase.messaging();
+
+var extraDetails;
 
 messaging.onBackgroundMessage(function (payload) {
   console.log('Message Received. 2', payload);
 
-  DataHandler.getStore().dispatch(getlatestNotification(payload?.data));
+  extraDetails = JSON.parse(payload?.data?.extra);
 
   const notificationOptions = {
     body: payload.data?.description,
@@ -65,8 +42,66 @@ messaging.onBackgroundMessage(function (payload) {
     data: payload
   };
 
+  const cacheName = 'my-cache';
+
+  const notificationKey = 'notification';
+  const notificationValue = true;
+
+  caches
+    .open(cacheName)
+    .then((cache) => {
+      const response = new Response(JSON.stringify(notificationValue), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      cache
+        .put(notificationKey, response)
+        .then(() => {
+          console.log(
+            'Added key:',
+            notificationKey,
+            'with value:',
+            notificationValue,
+            'to the cache.'
+          );
+        })
+        .catch((error) => {
+          console.error('Error adding key-value pair to cache:', error);
+        });
+    })
+    .catch((error) => {
+      console.error('Error opening cache:', error);
+    });
+
   self.registration.showNotification(
     payload?.data?.title || payload?.notification?.body,
     notificationOptions
+  );
+});
+
+self.addEventListener('notificationclick', (event) => {
+  console.log('On notification click:2', event);
+
+  if (extraDetails.type == 'stock') {
+    url = `/stock/${extraDetails.name_id}`;
+  } else {
+    url = `/setting`;
+  }
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: 'window'
+      })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url === '/' && 'focus' in client) return client.focus();
+        }
+        if (clients.openWindow) return clients.openWindow(url);
+      })
   );
 });

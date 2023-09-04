@@ -7,7 +7,9 @@ import Stock from './stock';
 import StockDetailes from './stockDetaile';
 import Trending from './trending';
 import {
+  CACHE_NAME,
   HOME_ROUTE,
+  NOTIFICATION_KEY,
   STOCK_NAME_LIST,
   TRENDING_ROUTE
 } from '../../../constants';
@@ -41,6 +43,7 @@ import { Loader } from '../../../components';
 import initializeSocket, { socket } from '../../../socket';
 import ChartExample from './stockDetaile/chart';
 import { SOCKET_URL } from '../../../config/webService';
+import { addToCache, getCachValue } from '../../../services/utils';
 
 const { useBreakpoint } = Grid;
 
@@ -70,32 +73,6 @@ const Home = () => {
   }, [id, pathname]);
 
   useEffect(() => {
-    dispatch(
-      getNotificationRequest({
-        payloadData: {},
-        responseCallback: (res) => {
-          if (res.status) {
-            console.log(res, 'check');
-          } else {
-            console.log(res.errors, 'error');
-          }
-        }
-      })
-    );
-
-    dispatch(
-      getNotificationsCountRequest({
-        payloadData: {},
-        responseCallback: (res) => {
-          if (res.status) {
-            console.log(res, 'check');
-          } else {
-            console.log(res.errors, 'error');
-          }
-        }
-      })
-    );
-
     const socket = initializeSocket(
       `wss://${SOCKET_URL}?stocks=${data?.subscribedStocks || ''}`
     );
@@ -130,6 +107,64 @@ const Home = () => {
       socket.off('stock_updates', listener1);
     };
   }, [data?.subscribedStocks]);
+
+  useEffect(() => {
+    const notification = () => {
+      dispatch(
+        getNotificationRequest({
+          payloadData: {},
+          responseCallback: (res) => {
+            if (res.status) {
+              console.log(res, 'check');
+            } else {
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
+
+      dispatch(
+        getNotificationsCountRequest({
+          payloadData: {},
+          responseCallback: (res) => {
+            if (res.status) {
+              console.log(res, 'check');
+            } else {
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
+    };
+
+    notification();
+
+    const checkCache = () => {
+      if (document.visibilityState === 'visible' && document.hidden === false) {
+        getCachValue(CACHE_NAME, NOTIFICATION_KEY)
+          .then((notificationValue) => {
+            if (notificationValue !== null && notificationValue) {
+              console.log('cache value', notificationValue);
+              notification();
+              addToCache(CACHE_NAME, NOTIFICATION_KEY, false).catch((error) => {
+                console.log('add cache value error', error);
+              });
+            } else {
+              console.log('cache value not found');
+            }
+          })
+          .catch((error) => {
+            console.error('Error reading value from cache:', error);
+          });
+      }
+    };
+
+    document.addEventListener('visibilitychange', checkCache);
+
+    return () => {
+      document.removeEventListener('visibilitychange', checkCache);
+    };
+  }, []);
 
   if (isLoading) {
     return <Loader />;

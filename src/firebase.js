@@ -52,7 +52,9 @@ const fetchToken = () => {
 
 onMessage(messaging, (payload) => {
   const notification = payload?.data;
-  const { title, description } = notification;
+  const { title, description, extra } = notification;
+
+  var extraDetails = JSON.parse(extra);
 
   console.log('Message Received. 1 ', payload);
 
@@ -60,19 +62,14 @@ onMessage(messaging, (payload) => {
 
   const notif = new Notification(title, { body: description });
 
-  // notif.addEventListener('click', (event) => {
-  //   console.log('On notification click: ', event);
-  //   let data = event?.currentTarget?.data?.data;
-  //   let activityLogs = '/member/inventory/activity-logs';
-  //   let url = '';
-  //   let baseurl = data?.url;
-  //   if (baseurl.includes('dashboard')) {
-  //     baseurl = baseurl.split('/').slice(0, -1).join('/');
-  //   }
-  //   url = baseurl + activityLogs;
-  //   notif.close();
-  //   window.open(url);
-  // });
+  notif.addEventListener('click', (event) => {
+    if (extraDetails.type == 'stock') {
+      window.location.href = `/stock/${extraDetails.name_id}`;
+    } else {
+      window.location.href = `/setting`;
+    }
+    notif.close();
+  });
 });
 
 async function requestPermission() {
