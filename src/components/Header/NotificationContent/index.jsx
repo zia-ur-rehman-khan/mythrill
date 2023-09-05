@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'aphrodite';
 import { AppStyles, Images } from '../../../theme';
 import { CommonPopOver, CommonTextField } from '../../common';
@@ -9,10 +9,13 @@ import moment from 'moment';
 import {
   getNotificationReadAllRequest,
   getNotificationReadRequest,
+  getNotificationRequest,
+  getNotificationsCountRequest,
   seeNotificationsRequest
 } from '../../../redux/slicers/stocks';
 import { useNavigate } from 'react-router-dom';
 import { useCommonNotification } from '../../../services/utils';
+import { CACHE_NAME, NOTIFICATION_KEY } from '../../../constants';
 
 const NotificationContent = ({ mobile }) => {
   const { notificationList, notificationCount } = useSelector(
@@ -101,34 +104,96 @@ const NotificationContent = ({ mobile }) => {
 
   // const array = [netflix, bitCoin, netflix, bitCoin, netflix, bitCoin, netflix];
 
-  const content = notificationList?.map((t, index) => (
-    <div
-      className={`main ${!t.is_read && 'hide'}`}
-      onClick={() =>
-        t.is_read ? clickNotification(t.extra) : readNotification(t.id)
-      }
-    >
-      <div className={`notification-content }`}>
-        <Space
-          align="start"
-          className={css(AppStyles.w100, AppStyles.spaceBetween)}
-        >
-          <Space align="start">
-            {/* <img src={netflix} /> */}
-            <Space size={2} direction="vertical">
-              <CommonTextField text={t.title} fontWeight={600} />
-              <CommonTextField text={t.description} topClass={'small'} />
+  const content = notificationList?.map((t, index) => {
+    const { id, createdAt } = JSON.parse(t.extra);
+
+    return (
+      <div
+        className={`main ${!t.is_read && 'hide'}`}
+        onClick={() =>
+          t.is_read ? clickNotification(t.extra) : readNotification(id)
+        }
+      >
+        <div className={`notification-content }`}>
+          <Space
+            align="start"
+            className={css(AppStyles.w100, AppStyles.spaceBetween)}
+          >
+            <Space align="start">
+              {/* <img src={netflix} /> */}
+              <Space size={2} direction="vertical">
+                <CommonTextField text={t.title} fontWeight={600} />
+                <CommonTextField text={t.description} topClass={'small'} />
+              </Space>
             </Space>
+            <CommonTextField
+              text={moment(new Date(createdAt)).fromNow()}
+              color={'#93969E'}
+            />
           </Space>
-          <CommonTextField
-            text={moment(new Date(t.createdAt)).fromNow()}
-            color={'#93969E'}
-          />
-        </Space>
+        </div>
+        <Divider className="border-line" />
       </div>
-      <Divider className="border-line" />
-    </div>
-  ));
+    );
+  });
+
+  useEffect(() => {
+    const notification = () => {
+      dispatch(
+        getNotificationRequest({
+          payloadData: {},
+          responseCallback: (res) => {
+            if (res.status) {
+              console.log(res, 'check');
+            } else {
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
+
+      dispatch(
+        getNotificationsCountRequest({
+          payloadData: {},
+          responseCallback: (res) => {
+            if (res.status) {
+              console.log(res, 'check');
+            } else {
+              console.log(res.errors, 'error');
+            }
+          }
+        })
+      );
+    };
+
+    notification();
+
+    const checkCache = () => {
+      if (document.visibilityState === 'visible' && document.hidden === false) {
+        getCachValue(CACHE_NAME, NOTIFICATION_KEY)
+          .then((notificationValue) => {
+            if (notificationValue !== null && notificationValue) {
+              console.log('cache value', notificationValue);
+              notification();
+              addToCache(CACHE_NAME, NOTIFICATION_KEY, false).catch((error) => {
+                console.log('add cache value error', error);
+              });
+            } else {
+              console.log('cache value not found');
+            }
+          })
+          .catch((error) => {
+            console.error('Error reading value from cache:', error);
+          });
+      }
+    };
+
+    document.addEventListener('visibilitychange', checkCache);
+
+    return () => {
+      document.removeEventListener('visibilitychange', checkCache);
+    };
+  }, []);
 
   return (
     <CommonPopOver

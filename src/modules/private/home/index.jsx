@@ -108,64 +108,6 @@ const Home = () => {
     };
   }, [data?.subscribedStocks]);
 
-  useEffect(() => {
-    const notification = () => {
-      dispatch(
-        getNotificationRequest({
-          payloadData: {},
-          responseCallback: (res) => {
-            if (res.status) {
-              console.log(res, 'check');
-            } else {
-              console.log(res.errors, 'error');
-            }
-          }
-        })
-      );
-
-      dispatch(
-        getNotificationsCountRequest({
-          payloadData: {},
-          responseCallback: (res) => {
-            if (res.status) {
-              console.log(res, 'check');
-            } else {
-              console.log(res.errors, 'error');
-            }
-          }
-        })
-      );
-    };
-
-    notification();
-
-    const checkCache = () => {
-      if (document.visibilityState === 'visible' && document.hidden === false) {
-        getCachValue(CACHE_NAME, NOTIFICATION_KEY)
-          .then((notificationValue) => {
-            if (notificationValue !== null && notificationValue) {
-              console.log('cache value', notificationValue);
-              notification();
-              addToCache(CACHE_NAME, NOTIFICATION_KEY, false).catch((error) => {
-                console.log('add cache value error', error);
-              });
-            } else {
-              console.log('cache value not found');
-            }
-          })
-          .catch((error) => {
-            console.error('Error reading value from cache:', error);
-          });
-      }
-    };
-
-    document.addEventListener('visibilitychange', checkCache);
-
-    return () => {
-      document.removeEventListener('visibilitychange', checkCache);
-    };
-  }, []);
-
   if (isLoading) {
     return <Loader />;
   }
