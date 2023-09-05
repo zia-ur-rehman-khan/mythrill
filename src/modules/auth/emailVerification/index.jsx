@@ -42,7 +42,7 @@ const EmailVerification = ({ setEmailVerification }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const hash = useSelector((state) => state?.user?.hash);
+  const hash = useSelector((state) => state?.user?.data?.hash);
 
   const navigate = useNavigate();
 
