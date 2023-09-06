@@ -11,16 +11,22 @@ import {
   getNotificationReadRequest,
   getNotificationRequest,
   getNotificationsCountRequest,
-  seeNotificationsRequest
+  getlatestNotification,
+  seeNotificationsRequest,
+  seeNotificationsRequestSuccess
 } from '../../../redux/slicers/stocks';
 import { useNavigate } from 'react-router-dom';
 import { useCommonNotification } from '../../../services/utils';
 import { CACHE_NAME, NOTIFICATION_KEY } from '../../../constants';
+import { SOCKET_URL } from '../../../config/webService';
+import initializeSocket from '../../../socket';
+import { io } from 'socket.io-client';
 
 const NotificationContent = ({ mobile }) => {
   const { notificationList, notificationCount } = useSelector(
     (state) => state?.stocks
   );
+  const { id } = useSelector((state) => state?.user?.data);
   const [visible, setVisible] = useState(false);
 
   const dispatch = useDispatch();
@@ -70,6 +76,7 @@ const NotificationContent = ({ mobile }) => {
   };
 
   const seeNotifications = (id) => {
+    dispatch(seeNotificationsRequestSuccess());
     dispatch(
       seeNotificationsRequest({
         payloadData: {},
@@ -109,6 +116,7 @@ const NotificationContent = ({ mobile }) => {
 
     return (
       <div
+        key={index}
         className={`main ${!t.is_read && 'hide'}`}
         onClick={() =>
           t.is_read ? clickNotification(t.extra) : readNotification(id)
@@ -138,6 +146,10 @@ const NotificationContent = ({ mobile }) => {
   });
 
   useEffect(() => {
+    const socket = io(`wss://${SOCKET_URL}`, {
+      extraHeaders: { userid: id }
+    });
+
     const notification = () => {
       dispatch(
         getNotificationRequest({
@@ -168,30 +180,41 @@ const NotificationContent = ({ mobile }) => {
 
     notification();
 
-    const checkCache = () => {
-      if (document.visibilityState === 'visible' && document.hidden === false) {
-        getCachValue(CACHE_NAME, NOTIFICATION_KEY)
-          .then((notificationValue) => {
-            if (notificationValue !== null && notificationValue) {
-              console.log('cache value', notificationValue);
-              notification();
-              addToCache(CACHE_NAME, NOTIFICATION_KEY, false).catch((error) => {
-                console.log('add cache value error', error);
-              });
-            } else {
-              console.log('cache value not found');
-            }
-          })
-          .catch((error) => {
-            console.error('Error reading value from cache:', error);
-          });
-      }
+    // const checkCache = () => {
+    //   if (document.visibilityState === 'visible' && document.hidden === false) {
+    //     getCachValue(CACHE_NAME, NOTIFICATION_KEY)
+    //       .then((notificationValue) => {
+    //         if (notificationValue !== null && notificationValue) {
+    //           console.log('cache value', notificationValue);
+    //           notification();
+    //           addToCache(CACHE_NAME, NOTIFICATION_KEY, false).catch((error) => {
+    //             console.log('add cache value error', error);
+    //           });
+    //         } else {
+    //           console.log('cache value not found');
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.error('Error reading value from cache:', error);
+    //       });
+    //   }
+    // };
+
+    const listener1 = (...args) => {
+      const data = JSON.parse(args?.[0])?.data;
+      data.extra = JSON.stringify(data.extra);
+
+      dispatch(getlatestNotification(data));
     };
 
-    document.addEventListener('visibilitychange', checkCache);
+    socket.on('push_notification', listener1);
+
+    // document.addEventListener('visibilitychange', checkCache);
 
     return () => {
-      document.removeEventListener('visibilitychange', checkCache);
+      socket.off('push_notification', listener1);
+
+      // document.removeEventListener('visibilitychange', checkCache);
     };
   }, []);
 
@@ -204,7 +227,7 @@ const NotificationContent = ({ mobile }) => {
       setVisible={setVisible}
       visible={visible}
     >
-      <div className="notification-parent">
+      <div className="notification-parent" onClick={seeNotifications}>
         {notificationCount !== 0 && (
           <div className="count">
             <CommonTextField text={notificationCount} fontSize={'9px'} />
@@ -215,7 +238,6 @@ const NotificationContent = ({ mobile }) => {
           width={'20px'}
           height={'22px'}
           className={css(AppStyles.pointer)}
-          onClick={seeNotifications}
         />
       </div>
     </CommonPopOver>

@@ -58,7 +58,7 @@ onMessage(messaging, (payload) => {
 
   console.log('Message Received. 1 ', payload);
 
-  DataHandler.getStore().dispatch(getlatestNotification(payload?.data));
+  // DataHandler.getStore().dispatch(getlatestNotification(payload?.data));
 
   const notif = new Notification(title, { body: description });
 

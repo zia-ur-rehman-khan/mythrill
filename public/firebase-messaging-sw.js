@@ -42,38 +42,38 @@ messaging.onBackgroundMessage(function (payload) {
     data: payload
   };
 
-  const cacheName = 'my-cache';
+  // const cacheName = 'my-cache';
 
-  const notificationKey = 'notification';
-  const notificationValue = true;
+  // const notificationKey = 'notification';
+  // const notificationValue = true;
 
-  caches
-    .open(cacheName)
-    .then((cache) => {
-      const response = new Response(JSON.stringify(notificationValue), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+  // caches
+  //   .open(cacheName)
+  //   .then((cache) => {
+  //     const response = new Response(JSON.stringify(notificationValue), {
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       }
+  //     });
 
-      cache
-        .put(notificationKey, response)
-        .then(() => {
-          console.log(
-            'Added key:',
-            notificationKey,
-            'with value:',
-            notificationValue,
-            'to the cache.'
-          );
-        })
-        .catch((error) => {
-          console.error('Error adding key-value pair to cache:', error);
-        });
-    })
-    .catch((error) => {
-      console.error('Error opening cache:', error);
-    });
+  //     cache
+  //       .put(notificationKey, response)
+  //       .then(() => {
+  //         console.log(
+  //           'Added key:',
+  //           notificationKey,
+  //           'with value:',
+  //           notificationValue,
+  //           'to the cache.'
+  //         );
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error adding key-value pair to cache:', error);
+  //       });
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error opening cache:', error);
+  //   });
 
   self.registration.showNotification(
     payload?.data?.title || payload?.notification?.body,
