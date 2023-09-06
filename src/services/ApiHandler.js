@@ -24,7 +24,7 @@ const onForbidden = async () => {
   if (newToken) {
     return newToken;
   }
-  DataHandler.getStore().dispatch(userSignOutSuccess());
+  // DataHandler.getStore().dispatch(userSignOutSuccess());
   return false;
 };
 

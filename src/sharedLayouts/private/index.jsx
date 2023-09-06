@@ -21,7 +21,7 @@ function PrivateSharedLayout({ children }) {
     if (!authenticated) {
       navigate(lOGIN_ROUTE);
     }
-  }, []);
+  }, [authenticated]);
 
   return (
     <section>

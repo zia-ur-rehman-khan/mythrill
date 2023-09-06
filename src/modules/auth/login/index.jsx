@@ -177,7 +177,11 @@ const Login = () => {
           </Space>
           <Space className={css(AppStyles.w100, AppStyles.spaceBetween)}>
             <Space>
-              <Form.Item name="remember" valuePropName="checked">
+              <Form.Item
+                name="remember"
+                valuePropName="checked"
+                className={css(AppStyles.mBottom0)}
+              >
                 <Checkbox />
               </Form.Item>
               <CommonTextField

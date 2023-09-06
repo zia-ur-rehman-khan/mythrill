@@ -1,4 +1,8 @@
-import { BASE_URL, ERROR_SOMETHING_WENT_WRONG } from '../config/webService';
+import {
+  BASE_URL,
+  ERROR_SOMETHING_WENT_WRONG,
+  ERROR_TOKEN_EXPIRE
+} from '../config/webService';
 import { refreshToken } from '../redux/slicers/user';
 import axios from 'axios';
 import DataHandler from '../services/DataHandler';
@@ -30,10 +34,7 @@ export const refreshAccessToken = async () => {
       return resToken?.access_token;
     } catch (error) {
       console.log({ refreshTokenError: error });
-      toastAlert(
-        error?.response?.data?.message ?? ERROR_SOMETHING_WENT_WRONG,
-        ALERT_TYPES.error
-      );
+      toastAlert(ERROR_TOKEN_EXPIRE, ALERT_TYPES.error);
       handleUserSignout();
       return false;
     }
