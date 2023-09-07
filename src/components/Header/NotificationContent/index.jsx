@@ -28,6 +28,11 @@ const NotificationContent = ({ mobile }) => {
   );
   const { id } = useSelector((state) => state?.user?.data);
   const [visible, setVisible] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  console.log(
+    '🚀 ~ file: index.jsx:32 ~ NotificationContent ~ disabled:',
+    disabled
+  );
 
   const dispatch = useDispatch();
 
@@ -40,6 +45,7 @@ const NotificationContent = ({ mobile }) => {
         responseCallback: (res) => {
           if (res.status) {
             console.log(res, 'res');
+            setDisabled(true);
           } else {
             console.log(res.errors, 'error');
           }
@@ -68,6 +74,18 @@ const NotificationContent = ({ mobile }) => {
       })
     );
   };
+
+  useEffect(() => {
+    if (notificationList?.length > 0) {
+      const test = notificationList.some((t) => t.is_read === false);
+      console.log('🚀 ~ file: index.jsx:77 ~ useEffect ~ test:', test);
+      if (test) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    }
+  }, [notificationList]);
 
   const clickNotification = (extra) => {
     const extraDetails = JSON.parse(extra);
@@ -98,14 +116,23 @@ const NotificationContent = ({ mobile }) => {
         fontWeight={600}
         fontSize={'15px'}
       />
-      <CommonTextField
-        onClick={() => {
-          markAllRead();
-        }}
-        text={'Mark all as read'}
-        topClass={'small'}
-        textDecoration="underline"
-      />
+      {disabled ? (
+        <CommonTextField
+          text={'Mark all as read'}
+          topClass={'small'}
+          textDecoration="underline"
+          color={'grey'}
+        />
+      ) : (
+        <CommonTextField
+          onClick={() => {
+            markAllRead();
+          }}
+          text={'Mark all as read'}
+          topClass={'small'}
+          textDecoration="underline"
+        />
+      )}
     </Space>
   );
 
