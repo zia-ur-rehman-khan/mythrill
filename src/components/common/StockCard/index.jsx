@@ -132,7 +132,7 @@ const StockCard = ({ value, addIcon }) => {
         }
         isModalVisible={isRemove}
         setIsModalVisible={setIsRemove}
-        discription="Do you want to remove the card?"
+        discription="Do you want to remove the stock?"
         onConfirm={() => {
           const payloadData = { stock_id: stockId, nameId: nameId };
           dispatch(
