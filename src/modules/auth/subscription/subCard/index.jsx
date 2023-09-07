@@ -75,7 +75,7 @@ const SubcriptionCard = ({ title, subData }) => {
             text={`${title[0].toUpperCase()}${title.slice(1)} Tier`}
           />
           <CommonTextField
-            text={`${detail[0]?.period} crypto/stock tracking indices`}
+            text={`${detail[0]?.subscribe_count} crypto/stock tracking indices`}
           />
         </Space>
 

@@ -52,6 +52,7 @@ import discoverCard from '../assets/setting/discoverCard.png';
 import americanExpressCard from '../assets/setting/americanExpressCard.png';
 import emptyStock from '../assets/chart/emptyStock.png';
 import coinBase from '../assets/auth/coinBase.png';
+import notifyIcon from '../assets/notification/notifyIcon.png';
 
 export default {
   ErrorBackground2,
@@ -107,5 +108,6 @@ export default {
   discoverCard,
   americanExpressCard,
   emptyStock,
-  coinBase
+  coinBase,
+  notifyIcon
 };

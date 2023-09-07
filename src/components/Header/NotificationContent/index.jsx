@@ -128,10 +128,13 @@ const NotificationContent = ({ mobile }) => {
             className={css(AppStyles.w100, AppStyles.spaceBetween)}
           >
             <Space align="start">
-              {/* <img src={netflix} /> */}
+              <img src={Images.notifyIcon} className="notify-icon" />
               <Space size={2} direction="vertical">
                 <CommonTextField text={t.title} fontWeight={600} />
-                <CommonTextField text={t.description} topClass={'small'} />
+                <CommonTextField
+                  text={t.description}
+                  topClass={'notify-content'}
+                />
               </Space>
             </Space>
             <CommonTextField
@@ -140,7 +143,7 @@ const NotificationContent = ({ mobile }) => {
             />
           </Space>
         </div>
-        <Divider className="border-line" />
+        {/* <Divider className="border-line" /> */}
       </div>
     );
   });

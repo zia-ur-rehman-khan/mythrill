@@ -2,13 +2,22 @@
 
 .main {
     .notification-content {
-        padding: 10px 5px 1px 5px;
+        padding: 10px 5px 10px 5px;
         border-radius: 6px;
         margin: 10px 0 10px 0;
         cursor: pointer;
 
         &:hover {
             background-color: master.$dark-color;
+        }
+        .notify-content {
+            width: 100%;
+            max-width: 200px;
+            min-width: 80px;
+        }
+        .notify-icon {
+            min-width: 35px;
+            min-height: 35px;
         }
     }
 

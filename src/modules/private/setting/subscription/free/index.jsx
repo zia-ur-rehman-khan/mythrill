@@ -32,12 +32,13 @@ const Free = ({ detailes }) => {
           <Space direction="vertical">
             <Space>
               <img src={Images.authLogo} width={'50'} height={'57px'} />
-              <Space direction="vertical">
+              <Space size={5} direction="vertical">
                 <CommonTextField
                   fontSize={'16px'}
                   text={'Free Package'}
                   fontWeight={600}
                 />
+                <CommonTextField text={'2 crypto/stock tracking indices'} />
                 <CommonTextField text={'$0.00 / yearly'} />
               </Space>
             </Space>

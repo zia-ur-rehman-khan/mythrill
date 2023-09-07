@@ -60,7 +60,10 @@ onMessage(messaging, (payload) => {
 
   // DataHandler.getStore().dispatch(getlatestNotification(payload?.data));
 
-  const notif = new Notification(title, { body: description });
+  const notif = new Notification(title, {
+    body: description,
+    icon: 'https://mythrill-public.s3.amazonaws.com/Group+1000005141.png'
+  });
 
   notif.addEventListener('click', (event) => {
     if (extraDetails.type == 'stock') {

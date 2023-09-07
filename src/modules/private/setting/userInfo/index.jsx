@@ -193,7 +193,7 @@ const UserInfo = () => {
               disabled={true}
               suffix={
                 !data.email_verified && (
-                  <Tooltip title="Email verification">
+                  <Tooltip title="Please verify your email">
                     <img
                       onClick={() => setEmailVerification(true)}
                       src={Images.info}

@@ -66,12 +66,13 @@ const Detailes = ({ cancel, paused, detailes }) => {
           <Space direction="vertical">
             <Space>
               <img src={Images.authLogo} width={'50'} height={'57px'} />
-              <Space direction="vertical">
+              <Space size={5} direction="vertical">
                 <CommonTextField
                   fontSize={'16px'}
                   text={package_name}
                   fontWeight={600}
                 />
+                <CommonTextField text={'2 crypto/stock tracking indices'} />
                 <CommonTextField text={`$${amount}.00 / ${renewal_period}`} />
               </Space>
             </Space>
