@@ -234,6 +234,7 @@ const UserInfo = () => {
         isModalVisible={emailVerification}
         setIsModalVisible={setEmailVerification}
         className={'confirmation-modal'}
+        destroyOnClose={true}
       >
         <EmailVerification setEmailVerification={setEmailVerification} />
       </CommonModal>

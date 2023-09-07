@@ -39,6 +39,8 @@ import { toastAlert } from '../../../services/utils';
 
 const EmailVerification = ({ setEmailVerification }) => {
   const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -81,10 +83,9 @@ const EmailVerification = ({ setEmailVerification }) => {
         payloadData,
         responseCallback: (res) => {
           setLoading(false);
-          setEmailVerification(false);
           if (res.status) {
-            console.log(res, 'res');
             toastAlert(res.message, ALERT_TYPES.success);
+            setEmailVerification(false);
           } else {
             console.log(res.errors, 'error');
           }
@@ -95,6 +96,7 @@ const EmailVerification = ({ setEmailVerification }) => {
   const onFinishFailed = (errorInfo) => {};
 
   const resend = () => {
+    setDisabled(true);
     dispatch(
       EmailVerificationRequest({
         payloadData: {},
@@ -108,6 +110,9 @@ const EmailVerification = ({ setEmailVerification }) => {
         }
       })
     );
+    setTimeout(() => {
+      setDisabled(false);
+    }, 30000);
   };
   return (
     <Form onFinish={onFinish} onFinishFailed={onFinishFailed}>
@@ -116,8 +121,9 @@ const EmailVerification = ({ setEmailVerification }) => {
           <CommonTextField text={'Didn’t receive a code?'} />
           <CommonTextField
             text={'Resend'}
-            color="#7665c1"
-            className={css(AppStyles.pointer)}
+            color={disabled ? 'grey' : '#7665c1'}
+            className={disabled ? '' : css(AppStyles.pointer)}
+            onClick={!disabled && resend}
           />
         </Space>
         <CommonInputField
@@ -125,9 +131,7 @@ const EmailVerification = ({ setEmailVerification }) => {
           type={'number'}
           className={'auth'}
           placeholder={'5 6 8 9 2 3'}
-          suffix={
-            <CommonTextField text={'Resend'} opacity={'0.5'} onClick={resend} />
-          }
+          // suffix={<CommonTextField text={'Resend'} opacity={'0.5'} />}
           rules={[
             {
               validator: (_, value) => {
