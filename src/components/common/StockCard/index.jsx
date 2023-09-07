@@ -16,7 +16,8 @@ import {
 } from '../../../redux/slicers/stocks';
 import { useDispatch } from 'react-redux';
 import Loader from '../../loader';
-import { STOCK_DETAILE_ROUTE } from '../../../constants';
+import { ALERT_TYPES, STOCK_DETAILE_ROUTE } from '../../../constants';
+import { toastAlert } from '../../../services/utils';
 
 const StockCard = ({ value, addIcon }) => {
   const { title, amount, stockUpdate, color, stockId, slug, type, nameId } =
@@ -54,6 +55,7 @@ const StockCard = ({ value, addIcon }) => {
           setIsLoading(false);
           if (res.status) {
             console.log(res.status, 'res');
+            toastAlert('Stock subscribe susccessfully', ALERT_TYPES.success);
           } else {
             dispatch(stockLimitExceed(true));
             console.log(res, 'error');
@@ -75,6 +77,7 @@ const StockCard = ({ value, addIcon }) => {
           if (res.status) {
             dispatch(stockLimitExceed(false));
             console.log(res, 'res');
+            toastAlert('Stock unsubscribe susccessfully', ALERT_TYPES.success);
           } else {
             console.log(res.errors, 'error');
           }
