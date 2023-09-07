@@ -18,11 +18,14 @@ import { useDispatch } from 'react-redux';
 import Loader from '../../loader';
 import { ALERT_TYPES, STOCK_DETAILE_ROUTE } from '../../../constants';
 import { toastAlert } from '../../../services/utils';
+import CommonModal from '../CommonModal';
+import CommonHeading from '../CommonHeading';
 
 const StockCard = ({ value, addIcon }) => {
   const { title, amount, stockUpdate, color, stockId, slug, type, nameId } =
     value;
   const [isLoading, setIsLoading] = useState(false);
+  const [isRemove, setIsRemove] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -66,24 +69,7 @@ const StockCard = ({ value, addIcon }) => {
   };
 
   const unSubscribe = (stockId) => {
-    setIsLoading(true);
-
-    const payloadData = { stock_id: stockId, nameId: nameId };
-    dispatch(
-      StockUnSubscribeRequest({
-        payloadData,
-        responseCallback: (res) => {
-          setIsLoading(false);
-          if (res.status) {
-            dispatch(stockLimitExceed(false));
-            console.log(res, 'res');
-            toastAlert('Stock unsubscribe susccessfully', ALERT_TYPES.success);
-          } else {
-            console.log(res.errors, 'error');
-          }
-        }
-      })
-    );
+    setIsRemove(true);
   };
 
   // if (isLoading) {
@@ -136,6 +122,34 @@ const StockCard = ({ value, addIcon }) => {
           <Loader size={50} />
         </div>
       )}
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Are you sure?'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isRemove}
+        setIsModalVisible={setIsRemove}
+        discription="Do you want to remove the card?"
+        onConfirm={() => {
+          const payloadData = { stock_id: stockId, nameId: nameId };
+          dispatch(
+            StockUnSubscribeRequest({
+              payloadData,
+              responseCallback: (res) => {
+                if (res.status) {
+                  dispatch(stockLimitExceed(false));
+                  console.log(res, 'res');
+                } else {
+                  console.log(res.errors, 'error');
+                }
+              }
+            })
+          );
+        }}
+      ></CommonModal>
     </div>
   );
 };
