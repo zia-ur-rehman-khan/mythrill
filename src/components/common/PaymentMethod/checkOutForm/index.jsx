@@ -204,7 +204,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
           topClass={'card-but'}
           loading={isLoading}
         />
-        {subscription && (
+        {/* {subscription && (
           <Space
             size={20}
             direction="vertical"
@@ -233,7 +233,7 @@ const CheckoutForm = ({ onAdd, subscription }) => {
               background={'#0052FF'}
             />
           </Space>
-        )}
+        )} */}
       </Space>
     </Form>
   );
