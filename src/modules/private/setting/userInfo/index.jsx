@@ -38,6 +38,7 @@ const UserInfo = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [emailVerification, setEmailVerification] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -134,6 +135,9 @@ const UserInfo = () => {
           email: data?.email
         }}
         onFinishFailed={onFinishFailed}
+        onValuesChange={(changedValues, allValues) => {
+          setDisabled(false);
+        }}
       >
         <ProfileImage
           profileImage={data?.profile_image}
@@ -215,12 +219,16 @@ const UserInfo = () => {
             AppStyles.mTop10
           )}
         >
-          <CommonButton
-            width="180px"
-            loading={loading}
-            text={'Save'}
-            htmlType="submit"
-          />
+          {disabled ? (
+            <CommonButton width="180px" text={'Save'} topClass="disable-but" />
+          ) : (
+            <CommonButton
+              width="180px"
+              loading={loading}
+              text={'Save'}
+              htmlType="submit"
+            />
+          )}
         </Space>
       </Form>
       <CommonModal
