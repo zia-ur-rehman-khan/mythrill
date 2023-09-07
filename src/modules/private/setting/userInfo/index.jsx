@@ -80,6 +80,7 @@ const UserInfo = () => {
                         );
                         // form.resetFields();
                         console.log(res, 'res');
+                        setDisabled(true);
                       } else {
                         console.log(res.errors, 'error');
                       }
@@ -109,6 +110,7 @@ const UserInfo = () => {
             if (res.status) {
               toastAlert('Profile updated successfully', ALERT_TYPES.success);
               // form.resetFields();
+              setDisabled(true);
               console.log(res, 'res');
             } else {
               console.log(res.errors, 'error');
