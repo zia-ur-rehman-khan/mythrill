@@ -226,7 +226,8 @@ export const toastAlert = (
     closeOnClick: closeOnClick,
     pauseOnHover: pauseOnHover,
     draggable: draggable,
-    theme: theme
+    theme: theme,
+    toastId: message
   });
 };
 
