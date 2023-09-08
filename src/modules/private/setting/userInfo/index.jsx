@@ -198,8 +198,10 @@ const UserInfo = () => {
               rules={EMAIL_RULE}
               disabled={true}
               suffix={
-                !data.email_verified && (
-                  <Tooltip title="Please verify your email">
+                <Tooltip title="Please verify your email">
+                  {data.email_verified ? (
+                    <img src={Images.tick} width={'20px'} height={'20px'} />
+                  ) : (
                     <img
                       onClick={() => setEmailVerification(true)}
                       src={Images.info}
@@ -207,8 +209,8 @@ const UserInfo = () => {
                       height={'20px'}
                       className={css(AppStyles.pointer)}
                     />
-                  </Tooltip>
-                )
+                  )}
+                </Tooltip>
               }
             />
           </Col>
