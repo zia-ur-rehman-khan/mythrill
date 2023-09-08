@@ -62,7 +62,7 @@ onMessage(messaging, (payload) => {
 
   const notif = new Notification(title, {
     body: description,
-    icon: 'https://mythrill-public.s3.amazonaws.com/Group+1000005141.png'
+    icon: 'https://mythrill-public.s3.amazonaws.com/Mask+group.svg'
   });
 
   notif.addEventListener('click', (event) => {

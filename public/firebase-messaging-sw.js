@@ -39,7 +39,7 @@ messaging.onBackgroundMessage(function (payload) {
   const notificationOptions = {
     body: payload.data?.description,
     tag: payload.data?.title,
-    icon: 'https://mythrill-public.s3.amazonaws.com/Group+1000005141.png',
+    icon: 'https://mythrill-public.s3.amazonaws.com/Mask+group.svg',
     data: payload
   };
 
