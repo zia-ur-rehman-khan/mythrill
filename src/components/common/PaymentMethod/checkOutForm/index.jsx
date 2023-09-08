@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -41,6 +41,14 @@ const cardNumberStyle = {
   },
   invalid: {
     color: '#fa755a'
+  }
+};
+
+const setRef = (instance) => {
+  if (instance) {
+    instance._element.on('ready', () => {
+      instance._element.focus();
+    });
   }
 };
 
@@ -124,6 +132,15 @@ const CheckoutForm = ({ onAdd, subscription }) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (elements?.getElement) {
+      const cardElement = elements.getElement(CardNumberElement);
+      cardElement.on('ready', () => {
+        cardElement.focus();
+      });
+    }
+  }, [elements]);
 
   return (
     <Form onFinish={onFinish}>
