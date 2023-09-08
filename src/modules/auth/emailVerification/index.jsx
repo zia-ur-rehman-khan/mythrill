@@ -39,7 +39,7 @@ import { toastAlert } from '../../../services/utils';
 
 const EmailVerification = ({ setEmailVerification }) => {
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -67,6 +67,9 @@ const EmailVerification = ({ setEmailVerification }) => {
         }
       })
     );
+    setTimeout(() => {
+      setDisabled(false);
+    }, 30000);
   }, []);
 
   const onFinish = (values) => {
@@ -83,9 +86,9 @@ const EmailVerification = ({ setEmailVerification }) => {
         payloadData,
         responseCallback: (res) => {
           setLoading(false);
+          setEmailVerification(false);
           if (res.status) {
             toastAlert(res.message, ALERT_TYPES.success);
-            setEmailVerification(false);
           } else {
             console.log(res.errors, 'error');
           }
