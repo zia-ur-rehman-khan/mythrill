@@ -160,7 +160,7 @@ const Login = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
 
-            <CommonPhoneInput name={'phoneNumber'} />
+            <CommonPhoneInput name={'phoneNumber'} autoFocus={true} />
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Password'} opacity={'0.5'} />

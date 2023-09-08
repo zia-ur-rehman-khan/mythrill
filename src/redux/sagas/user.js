@@ -130,7 +130,7 @@ function* userVerification() {
     // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
     const { payload } = yield take(VerificationRequest.type);
     // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
-    const { payloadData, responseCallback } = payload;
+    const { payloadData, responseCallback, forgot } = payload;
     try {
       const response = yield call(
         callRequest,
@@ -142,7 +142,9 @@ function* userVerification() {
       );
 
       if (response.status) {
-        yield put(userLoginSuccess(response?.data));
+        if (!forgot) {
+          yield put(userLoginSuccess(response?.data));
+        }
         if (responseCallback) responseCallback(response);
       } else {
         if (responseCallback) responseCallback(response);

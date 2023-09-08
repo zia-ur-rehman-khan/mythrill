@@ -6,7 +6,13 @@ import PhoneInput from 'react-phone-input-2';
 
 import './styles.scss';
 
-const CommonPhoneInput = ({ name, disabled, className, rules = true }) => {
+const CommonPhoneInput = ({
+  name,
+  disabled,
+  className,
+  rules = true,
+  autoFocus
+}) => {
   const [phoneValid, setPhoneValid] = useState(true);
   return (
     <Form.Item
@@ -31,6 +37,9 @@ const CommonPhoneInput = ({ name, disabled, className, rules = true }) => {
       }
     >
       <PhoneInput
+        inputProps={{
+          autoFocus: autoFocus
+        }}
         className={className}
         country={'us'}
         dropdownClass="test"

@@ -60,6 +60,7 @@ const UserReducer = createSlice({
       state.hash = action.payload;
     },
     VerificationRequest(state, action) {},
+
     ForgotRequest(state, action) {},
     EmailVerificationRequest(state, action) {},
     EmailValidationRequest(state, action) {},

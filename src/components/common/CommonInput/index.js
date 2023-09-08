@@ -20,11 +20,13 @@ const CommonInputField = ({
   height,
   suffix,
   rules,
-  disabled
+  disabled,
+  autoFocus
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
       <Input
+        autoFocus={autoFocus}
         style={{ height }}
         type={type}
         disabled={disabled}

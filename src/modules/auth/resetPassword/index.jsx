@@ -98,6 +98,7 @@ const ResetPassword = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'New Password'} opacity={'0.5'} />
             <CommonPasswordInput
+              autoFocus={true}
               name={'password'}
               placeholder={'**************'}
               rules={[

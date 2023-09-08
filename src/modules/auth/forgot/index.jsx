@@ -14,7 +14,11 @@ import {
 import { Checkbox, Form, Input, Space } from 'antd';
 import { css } from 'aphrodite';
 import { useNavigate } from 'react-router-dom';
-import { EMAIL_RULE, EMAIL_VERIFICATION_ROUTE } from '../../../constants';
+import {
+  EMAIL_RULE,
+  EMAIL_VERIFICATION_ROUTE,
+  NUMBER_VERIFICATION_ROUTE
+} from '../../../constants';
 import { ForgotRequest } from '../../../redux/slicers/user';
 import { useDispatch } from 'react-redux';
 import { CommonPhoneInput } from '../../../components/common';
@@ -25,7 +29,7 @@ const Forgot = () => {
   const dispatch = useDispatch();
 
   const changeRoute = (route, phoneNumber) => {
-    navigate(route, { state: { phoneNumber: phoneNumber } });
+    navigate(route, { state: { number: phoneNumber, forgot: true } });
   };
 
   const onFinish = (values) => {
@@ -41,7 +45,7 @@ const Forgot = () => {
         payloadData,
         responseCallback: (res) => {
           if (res.status) {
-            changeRoute(EMAIL_VERIFICATION_ROUTE, '+' + phoneNumber);
+            changeRoute(NUMBER_VERIFICATION_ROUTE, '+' + phoneNumber);
             setLoading(false);
             console.log(res, 'res');
           } else {
@@ -78,7 +82,7 @@ const Forgot = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
 
-            <CommonPhoneInput name={'phoneNumber'} />
+            <CommonPhoneInput name={'phoneNumber'} autoFocus={true} />
           </Space>
 
           <CommonButton

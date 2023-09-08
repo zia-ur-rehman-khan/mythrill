@@ -11,11 +11,13 @@ const CommonPasswordInput = ({
   className,
   type,
   height,
-  rules
+  rules,
+  autoFocus
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
       <Input.Password
+        autoFocus={autoFocus}
         iconRender={(visible) =>
           visible ? <img src={Images.eye} /> : <img src={Images.crossEye} />
         }

@@ -18,6 +18,7 @@ import {
   ALERT_TYPES,
   HOME_ROUTE,
   NUMBER_VERIFICATION_ROUTE,
+  RESET_PASSWORD_ROUTE,
   SUBSCRIPTION_ROUTE,
   USER_SUBSCRIPTION_STATUS,
   validatorField
@@ -38,8 +39,11 @@ const NumberVerification = () => {
   const hash = useSelector((state) => state?.user?.hash);
   const navigate = useNavigate();
 
-  const changeRoute = (route) => {
-    navigate(route);
+  const showNumber = location?.state?.number;
+
+  const changeRoute = (route, number, code) => {
+    console.log('test');
+    navigate(route, { state: { phoneNumber: number, code: code } });
   };
 
   const onFinish = (values) => {
@@ -51,21 +55,41 @@ const NumberVerification = () => {
       otp: code
     };
 
-    dispatch(
-      VerificationRequest({
-        payloadData,
-        responseCallback: (res) => {
-          setLoading(false);
+    {
+      location?.state?.forgot
+        ? dispatch(
+            VerificationRequest({
+              payloadData,
+              responseCallback: (res) => {
+                setLoading(false);
 
-          if (res.status) {
-            console.log(res.data.data.subscribe_status, 'res');
-            changeRoute(SUBSCRIPTION_ROUTE);
-          } else {
-            console.log(res.errors, 'error');
-          }
-        }
-      })
-    );
+                if (res.status) {
+                  console.log(res.data.data.subscribe_status, 'res1');
+                  changeRoute(RESET_PASSWORD_ROUTE, showNumber, code);
+                } else {
+                  console.log(res.errors, 'error');
+                }
+              },
+              forgot: true
+            })
+          )
+        : dispatch(
+            VerificationRequest({
+              payloadData,
+              responseCallback: (res) => {
+                setLoading(false);
+
+                if (res.status) {
+                  console.log(res.data.data.subscribe_status, 'res2');
+
+                  changeRoute(SUBSCRIPTION_ROUTE);
+                } else {
+                  console.log(res.errors, 'error');
+                }
+              }
+            })
+          );
+    }
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -106,13 +130,14 @@ const NumberVerification = () => {
             width="65%"
             margin="0 auto"
             textAlign={'center'}
-            text={`Add 6 digits verification code sent on your given phone number ${location?.state?.number?.slice(
+            text={`Add 6 digits verification code sent on your given phone number ${showNumber?.slice(
               0,
               4
             )} **** ***`}
             opacity={'0.5'}
           />
           <CommonInputField
+            autoFocus={true}
             name={'code'}
             type={'number'}
             className={'auth'}

@@ -170,6 +170,7 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Full Name'} opacity={'0.5'} />
             <CommonInputField
+              autoFocus={true}
               name="fullName"
               className={'auth'}
               placeholder={'John Smith'}
