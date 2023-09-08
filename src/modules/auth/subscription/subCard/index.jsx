@@ -70,9 +70,10 @@ const SubcriptionCard = ({ title, subData }) => {
         </Space>
         <Space direction="vertical">
           <CommonTextField
-            fontWeight={600}
             fontSize={'23px'}
-            text={`${title[0].toUpperCase()}${title.slice(1)} Tier`}
+            lineHeight={'30px'}
+            fontWeight={600}
+            text={detail[0]?.package_name}
           />
           <CommonTextField
             text={`${detail[0]?.subscribe_count} crypto/stock tracking indices`}
