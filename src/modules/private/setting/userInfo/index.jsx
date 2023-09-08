@@ -198,7 +198,13 @@ const UserInfo = () => {
               rules={EMAIL_RULE}
               disabled={true}
               suffix={
-                <Tooltip title="Please verify your email">
+                <Tooltip
+                  title={
+                    data.email_verified
+                      ? 'Email verified'
+                      : 'Please verify your email'
+                  }
+                >
                   {data.email_verified ? (
                     <img src={Images.tick} width={'20px'} height={'20px'} />
                   ) : (
