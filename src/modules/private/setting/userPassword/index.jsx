@@ -129,7 +129,7 @@ const UserPassword = () => {
             xs={{ span: 24 }}
           >
             <Space direction="vertical" className={css(AppStyles.w100)}>
-              <CommonTextField text={'Confrim Password'} />
+              <CommonTextField text={'Confirm Password'} />
               <CommonPasswordInput
                 name={'confirmPassword'}
                 placeholder={'**************'}
