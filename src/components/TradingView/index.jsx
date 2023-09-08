@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './styles.scss';
+import Loader from '../loader';
 
 let tvScriptLoadingPromise;
 
@@ -7,6 +8,11 @@ export default function TradingViewWidget() {
   const onLoadScriptRef = useRef();
 
   useEffect(() => {
+    setTimeout(() => {
+      const divElement = document.querySelector('.tradingview-loader');
+      divElement.classList.add('trading-disbale');
+    }, 5000);
+
     onLoadScriptRef.current = createWidget;
 
     if (!tvScriptLoadingPromise) {
@@ -52,6 +58,9 @@ export default function TradingViewWidget() {
   return (
     <div className="tradingview-widget-container">
       <div id="tradingview_b0cd5" />
+      <div className="tradingview-loader">
+        <Loader />
+      </div>
     </div>
   );
 }
