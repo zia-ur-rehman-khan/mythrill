@@ -45,8 +45,14 @@ const Detailes = ({ cancel, paused, detailes }) => {
 
   console.log(detailes, 'detailes');
 
-  const { amount, start_at, end_at, renewal_period, package_name } =
-    detailes ?? {};
+  const {
+    amount,
+    start_at,
+    end_at,
+    renewal_period,
+    package_name,
+    subscribe_count
+  } = detailes ?? {};
 
   return (
     <div className="subscription-main">
@@ -72,7 +78,9 @@ const Detailes = ({ cancel, paused, detailes }) => {
                   text={package_name}
                   fontWeight={600}
                 />
-                <CommonTextField text={'2 crypto/stock tracking indices'} />
+                <CommonTextField
+                  text={`${subscribe_count} crypto/stock tracking indices`}
+                />
                 <CommonTextField text={`$${amount}.00 / ${renewal_period}`} />
               </Space>
             </Space>
