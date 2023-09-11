@@ -100,7 +100,7 @@ const StockCard = ({ test, value, addIcon }) => {
           if (res.status) {
             console.log(res.status, 'res');
             toastAlert(
-              'Stock added in favourite susccessfully',
+              'Stock added in favourite sucessfully',
               ALERT_TYPES.success
             );
           } else {
@@ -122,7 +122,7 @@ const StockCard = ({ test, value, addIcon }) => {
           setIsLoading(false);
           if (res.status) {
             console.log(res.status, 'res');
-            toastAlert('Stock subscribe susccessfully', ALERT_TYPES.success);
+            toastAlert('Stock subscribe sucessfully', ALERT_TYPES.success);
           } else {
             dispatch(stockLimitExceed(true));
             console.log(res, 'error');
