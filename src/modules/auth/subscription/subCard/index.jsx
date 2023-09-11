@@ -70,6 +70,7 @@ const SubcriptionCard = ({ title, subData }) => {
         </Space>
         <Space direction="vertical">
           <CommonTextField
+            topClass={'card-title'}
             fontSize={'23px'}
             lineHeight={'30px'}
             fontWeight={600}
