@@ -52,13 +52,13 @@ const StockCard = ({ test, value, addIcon }) => {
 
   if (favourite && test === 'favourite') {
     items.push({
-      label: <CommonTextField text={'unFavorite'} fontWeight={600} />,
+      label: <CommonTextField text={'un-favorite'} fontWeight={600} />,
       onClick: () => unFavourite(stockId)
     });
   } else if (favourite) {
     items.push(
       {
-        label: <CommonTextField text={'unFavorite'} fontWeight={600} />,
+        label: <CommonTextField text={'un-favorite'} fontWeight={600} />,
         onClick: () => unFavourite(stockId)
       },
       {
@@ -100,7 +100,7 @@ const StockCard = ({ test, value, addIcon }) => {
           if (res.status) {
             console.log(res.status, 'res');
             toastAlert(
-              'Stock add in favourite susccessfully',
+              'Stock added in favourite susccessfully',
               ALERT_TYPES.success
             );
           } else {
@@ -233,7 +233,7 @@ const StockCard = ({ test, value, addIcon }) => {
                 if (res.status) {
                   console.log(res.status, 'res');
                   toastAlert(
-                    'Stock remove from favourite susccessfully',
+                    'Stock removed from favourite susccessfully',
                     ALERT_TYPES.success
                   );
                 } else {
