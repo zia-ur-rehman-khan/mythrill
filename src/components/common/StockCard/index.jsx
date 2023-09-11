@@ -38,7 +38,7 @@ const StockCard = ({ test, value, addIcon }) => {
   } = value;
   const [isLoading, setIsLoading] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavourite] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -52,13 +52,13 @@ const StockCard = ({ test, value, addIcon }) => {
 
   if (favourite && test === 'favourite') {
     items.push({
-      label: <CommonTextField text={'un-favorite'} fontWeight={600} />,
+      label: <CommonTextField text={'Un-favourite'} fontWeight={600} />,
       onClick: () => unFavourite(stockId)
     });
   } else if (favourite) {
     items.push(
       {
-        label: <CommonTextField text={'un-favorite'} fontWeight={600} />,
+        label: <CommonTextField text={'Un-favourite'} fontWeight={600} />,
         onClick: () => unFavourite(stockId)
       },
       {
@@ -72,7 +72,7 @@ const StockCard = ({ test, value, addIcon }) => {
   } else {
     items.push(
       {
-        label: <CommonTextField text={'Favorite'} fontWeight={600} />,
+        label: <CommonTextField text={'Favourite'} fontWeight={600} />,
         onClick: () => addFavourite(stockId)
       },
       {
@@ -86,7 +86,7 @@ const StockCard = ({ test, value, addIcon }) => {
   }
 
   const unFavourite = (stockId) => {
-    setIsFavorite(true);
+    setIsFavourite(true);
   };
 
   const addFavourite = (stockId) => {
@@ -219,7 +219,7 @@ const StockCard = ({ test, value, addIcon }) => {
           />
         }
         isModalVisible={isFavorite}
-        setIsModalVisible={setIsFavorite}
+        setIsModalVisible={setIsFavourite}
         discription="Do you want to remove from favourite?"
         loading={isLoading}
         onConfirm={() => {

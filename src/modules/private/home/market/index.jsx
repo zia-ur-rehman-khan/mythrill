@@ -37,7 +37,7 @@ const items = [
   },
   {
     key: '4',
-    label: `Favorites`,
+    label: `Favourites`,
     children: <StockListing test="favourite" />
   }
 ];
