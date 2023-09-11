@@ -13,7 +13,28 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
     return <CommonTextField text={'No Stocks in the list'} />;
   };
 
-  let filteredStocks = test ? stocks?.filter((d) => d?.type === test) : stocks;
+  const filterData = () => {
+    let temp;
+
+    switch (test) {
+      case 'Market':
+        temp = stocks?.filter((d) => d?.type === test);
+        break;
+      case 'CryptoCurrency':
+        temp = stocks?.filter((d) => d?.type === test);
+        break;
+      case 'favourite':
+        temp = stocks?.filter((d) => d?.favourite);
+        break;
+      default:
+        temp = stocks;
+        break;
+    }
+
+    return temp;
+  };
+
+  let filteredStocks = filterData();
 
   if (searchText) {
     filteredStocks = filteredStocks?.filter((d) =>
@@ -33,7 +54,7 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
             ))
         : filteredStocks?.length > 0
         ? filteredStocks?.map((data) => (
-            <StockCard value={data} key={Math.random()} />
+            <StockCard test={test} value={data} key={Math.random()} />
           ))
         : noStockInTheList()}
     </>

@@ -92,6 +92,50 @@ const GeneralReducer = createSlice({
       state.stocksUnSubscribe = [...state.stocksUnSubscribe, action.payload];
     },
 
+    StockFavouriteRequest() {},
+    StockFavouriteRequestSuccess(state, action) {
+      console.log(action, 'favourite');
+
+      const data = state.stocksSubscribe;
+
+      const filter = data.map((d) => {
+        const match = action.payload.nameId === d.nameId;
+
+        if (match) {
+          return {
+            ...d,
+            favourite: true
+          };
+        }
+
+        return d;
+      });
+
+      state.stocksSubscribe = filter;
+    },
+
+    StockUnFavouriteRequest() {},
+    StockUnFavouriteRequestSuccess(state, action) {
+      console.log(action, 'unFavourite');
+
+      const data = state.stocksSubscribe;
+
+      const filter = data.map((d) => {
+        const match = action.payload.nameId === d.nameId;
+
+        if (match) {
+          return {
+            ...d,
+            favourite: false
+          };
+        }
+
+        return d;
+      });
+
+      state.stocksSubscribe = filter;
+    },
+
     getSubscribeDataRealTime(state, action) {
       // console.log(action.payload, 'data');
       // console.log(current(state.stocksSubscribe), 'subscribe');
@@ -244,6 +288,12 @@ export const {
   StockSubscribeRequest,
   StockUnSubscribeRequest,
   StockUnSubscribeSuccess,
+  StockFavouriteRequest,
+  StockFavouriteRequestSuccess,
+  StockUnFavouriteRequest,
+  StockUnFavouriteRequestSuccess,
+  getFavouriteStockRequest,
+  getFavouriteStockSuccess,
   setStocksDataAction,
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,

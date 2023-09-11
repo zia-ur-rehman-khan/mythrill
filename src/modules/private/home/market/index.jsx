@@ -38,7 +38,7 @@ const items = [
   {
     key: '4',
     label: `Favorites`,
-    children: <></>
+    children: <StockListing test="favourite" />
   }
 ];
 

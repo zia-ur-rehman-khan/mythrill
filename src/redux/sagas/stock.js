@@ -3,6 +3,7 @@ import { ALERT_TYPES } from '../../constants';
 import {
   callRequest,
   FREQUENCY_DATA_REQUEST,
+  GET_FAVOURITE_STOCKS,
   GET_FREQUENCY_REQUEST,
   GET_NOTIFICATION_COUNT_REQUEST,
   GET_NOTIFICATION_READ_ALL_REQUEST,
@@ -14,20 +15,28 @@ import {
   GET_SUBSCRIBE_STOCKS,
   SEE_NOTIFICATIONS_REQUEST,
   SET_FREQUENCY_REQUEST,
+  STOCK_FAVOURITE,
   STOCK_SUBSCRIBE,
+  STOCK_UNFAVOURITE,
   STOCK_UNSUBSCRIBE,
   TRENDING_LIST_REQUEST
 } from '../../config/webService';
 import { toastAlert } from '../../services/utils';
 import {
+  StockFavouriteRequest,
+  StockFavouriteRequestSuccess,
   StockSubscribeRequest,
   StockSubscribeSuccess,
   StockSubscribeTrend,
+  StockUnFavouriteRequest,
+  StockUnFavouriteRequestSuccess,
   StockUnSubscribeRequest,
   StockUnSubscribeSuccess,
   StockUnSubscribeTrend,
   getAllStocksRequest,
   getAllStocksRequestSuccess,
+  getFavouriteStockRequest,
+  getFavouriteStockSuccess,
   getFrequencyDataRequest,
   getFrequencyRequest,
   getNotificationCountRequestSuccess,
@@ -192,6 +201,72 @@ function* StockUnSubscribe() {
         );
         yield put(socketTokenUpdate(response?.data?.data?.subscribedStocks));
         yield put(StockUnSubscribeTrend(payloadData));
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* StockFavourite() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(StockFavouriteRequest.type);
+    console.log('contactUs', payload);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        STOCK_FAVOURITE,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+      if (response?.data) {
+        if (responseCallback) responseCallback(response?.data);
+        yield put(
+          StockFavouriteRequestSuccess(
+            stocksdataManipulatorObject(response?.data?.data?.stocks_name)
+          )
+        );
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* StockUnFavourite() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(StockUnFavouriteRequest.type);
+    console.log('contactUs', payload);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        STOCK_UNFAVOURITE,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+      if (response?.data) {
+        if (responseCallback) responseCallback(response?.data);
+        yield put(
+          StockUnFavouriteRequestSuccess(
+            stocksdataManipulatorObject(response?.data?.data?.stocks_name)
+          )
+        );
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -477,6 +552,8 @@ export default function* root() {
   yield fork(getStockNames);
   yield fork(StockSubscribe);
   yield fork(StockUnSubscribe);
+  yield fork(StockFavourite);
+  yield fork(StockUnFavourite);
   yield fork(getSubscribeStocks);
   yield fork(trendingList);
   yield fork(getFrequencyData);

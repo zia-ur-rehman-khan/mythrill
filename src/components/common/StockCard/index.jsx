@@ -9,7 +9,9 @@ import { AppStyles, Images } from '../../../theme';
 import { css } from 'aphrodite';
 import CommonDropdown from '../CommonDropdown';
 import {
+  StockFavouriteRequest,
   StockSubscribeRequest,
+  StockUnFavouriteRequest,
   StockUnSubscribeRequest,
   getSubscribeStocksRequest,
   stockLimitExceed
@@ -21,11 +23,22 @@ import { toastAlert } from '../../../services/utils';
 import CommonModal from '../CommonModal';
 import CommonHeading from '../CommonHeading';
 
-const StockCard = ({ value, addIcon }) => {
-  const { title, amount, stockUpdate, color, stockId, slug, type, nameId } =
-    value;
+const StockCard = ({ test, value, addIcon }) => {
+  console.log('🚀 ~ file: index.jsx:27 ~ StockCard ~ test:', test);
+  const {
+    title,
+    amount,
+    stockUpdate,
+    color,
+    stockId,
+    slug,
+    type,
+    nameId,
+    favourite
+  } = value;
   const [isLoading, setIsLoading] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -35,18 +48,69 @@ const StockCard = ({ value, addIcon }) => {
     navigate(STOCK_DETAILE_ROUTE.replace(':id', nameId));
   };
 
-  const items = [
-    {
-      label: <CommonTextField text={'Favorite'} fontWeight={600} />
-    },
-    {
-      type: 'divider'
-    },
-    {
-      label: <CommonTextField text={'Remove'} fontWeight={600} />,
-      onClick: () => unSubscribe(stockId)
-    }
-  ];
+  const items = [];
+
+  if (favourite && test === 'favourite') {
+    items.push({
+      label: <CommonTextField text={'unFavorite'} fontWeight={600} />,
+      onClick: () => unFavourite(stockId)
+    });
+  } else if (favourite) {
+    items.push(
+      {
+        label: <CommonTextField text={'unFavorite'} fontWeight={600} />,
+        onClick: () => unFavourite(stockId)
+      },
+      {
+        type: 'divider'
+      },
+      {
+        label: <CommonTextField text={'Remove'} fontWeight={600} />,
+        onClick: () => unSubscribe(stockId)
+      }
+    );
+  } else {
+    items.push(
+      {
+        label: <CommonTextField text={'Favorite'} fontWeight={600} />,
+        onClick: () => addFavourite(stockId)
+      },
+      {
+        type: 'divider'
+      },
+      {
+        label: <CommonTextField text={'Remove'} fontWeight={600} />,
+        onClick: () => unSubscribe(stockId)
+      }
+    );
+  }
+
+  const unFavourite = (stockId) => {
+    setIsFavorite(true);
+  };
+
+  const addFavourite = (stockId) => {
+    setIsLoading(true);
+    const payloadData = { stock_id: stockId };
+    dispatch(
+      StockFavouriteRequest({
+        payloadData,
+        responseCallback: (res) => {
+          setIsLoading(false);
+          if (res.status) {
+            console.log(res.status, 'res');
+            toastAlert(
+              'Stock add in favourite susccessfully',
+              ALERT_TYPES.success
+            );
+          } else {
+            dispatch(stockLimitExceed(true));
+            console.log(res, 'error');
+          }
+        }
+      })
+    );
+  };
 
   const subscribe = (stockId) => {
     setIsLoading(true);
@@ -71,14 +135,6 @@ const StockCard = ({ value, addIcon }) => {
   const unSubscribe = (stockId) => {
     setIsRemove(true);
   };
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="stockCard-loader">
-  //       <Loader size={50} />
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="main-card-parent">
@@ -133,17 +189,55 @@ const StockCard = ({ value, addIcon }) => {
         isModalVisible={isRemove}
         setIsModalVisible={setIsRemove}
         discription="Do you want to remove the stock?"
+        loading={isLoading}
         onConfirm={() => {
+          setIsLoading(true);
           const payloadData = { stock_id: stockId, nameId: nameId };
           dispatch(
             StockUnSubscribeRequest({
               payloadData,
               responseCallback: (res) => {
+                setIsLoading(false);
+
                 if (res.status) {
                   dispatch(stockLimitExceed(false));
                   console.log(res, 'res');
                 } else {
                   console.log(res.errors, 'error');
+                }
+              }
+            })
+          );
+        }}
+      ></CommonModal>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Are you sure?'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isFavorite}
+        setIsModalVisible={setIsFavorite}
+        discription="Do you want to remove from favourite?"
+        loading={isLoading}
+        onConfirm={() => {
+          setIsLoading(true);
+          const payloadData = { stock_id: stockId };
+          dispatch(
+            StockUnFavouriteRequest({
+              payloadData,
+              responseCallback: (res) => {
+                setIsLoading(false);
+                if (res.status) {
+                  console.log(res.status, 'res');
+                  toastAlert(
+                    'Stock remove from favourite susccessfully',
+                    ALERT_TYPES.success
+                  );
+                } else {
+                  console.log(res, 'error');
                 }
               }
             })

@@ -95,7 +95,7 @@ export function stocksNameManipulator(list = []) {
       payload.changeInPercent = stock?.stocks_name?.change_in_percent ?? 'n/a';
       payload.changeInPrice = stock?.stocks_name?.change_in_price ?? 'n/a';
       payload.frequency = stock?.stocks_name?.Frequency;
-
+      payload.favourite = stock?.is_favourite;
       payload.coin = stock?.stocks_name?.coin ?? '';
       payload.currentPrice = stock?.stocks_name?.current_price ?? 'n/a';
       payload.date =

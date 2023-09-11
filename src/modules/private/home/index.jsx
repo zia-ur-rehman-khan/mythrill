@@ -31,6 +31,7 @@ import {
   stocksdataManipulatorObject
 } from '../../../manipulators/stocksName';
 import {
+  getFavouriteStockRequest,
   getNotificationRequest,
   getNotificationsCountRequest,
   getStocksNameRequest,

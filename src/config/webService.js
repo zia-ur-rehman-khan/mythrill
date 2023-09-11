@@ -223,8 +223,26 @@ export const STOCK_UNSUBSCRIBE = {
   type: REQUEST_TYPE.POST
 };
 
+export const STOCK_FAVOURITE = {
+  route: '/stock/add-favourite',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
+export const STOCK_UNFAVOURITE = {
+  route: '/stock/remove-favourite',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
 export const GET_SUBSCRIBE_STOCKS = {
   route: '/stock/all-subscribed-stocks',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
+export const GET_FAVOURITE_STOCKS = {
+  route: '/stock/list-favourite',
   access_token_required: true,
   type: REQUEST_TYPE.GET
 };
