@@ -29,6 +29,7 @@ const ChartExample = () => {
           color={data.color}
           stockId={data?.stockId}
           frequency={data?.frequency}
+          name_slug={data?.name_slug}
         />
       )}
     </>

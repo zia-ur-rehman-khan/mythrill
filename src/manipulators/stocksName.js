@@ -35,6 +35,7 @@ export function stocksdataManipulatorObject(stock = {}) {
     payload.type = stock?.type;
     payload.src = Images.bitCoin;
     payload.slug = `/stock/${stock?.name_slug}` ?? '';
+    payload.slugName = stock?.name_slug;
     payload.color =
       stock?.change_in_percent === 0
         ? 'yellow'
@@ -111,6 +112,7 @@ export function stocksNameManipulator(list = []) {
       payload.stockId = stock?.stocks_name.id ?? '';
       payload.type = stock?.stocks_name?.type;
       payload.slug = `/stock/${stock?.stocks_name?.name_slug}` ?? '';
+      payload.slugName = stock?.stocks_name?.name_slug;
       payload.id = stock?.stocks_name?.id ?? '';
       payload.amount = `$${stock?.stocks_name?.current_price ?? 'n/a'}`;
       payload.currentPrice = stock?.stocks_name?.current_price ?? 'n/a';
