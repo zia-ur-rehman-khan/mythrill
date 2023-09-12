@@ -228,6 +228,30 @@ const GeneralReducer = createSlice({
       });
 
       state.trendData = filter;
+
+      const data1 = state.stocksSubscribe;
+
+      const filter2 = data1.map((d) => {
+        const match = action.payload.nameId === d.nameId;
+
+        // console.log(match, 'match');
+
+        if (match) {
+          return {
+            ...d,
+            amount: action.payload.amount,
+            stockUpdate: action.payload.stockUpdate,
+            color: action.payload.color,
+            changeInPercent: action.payload.changeInPercent,
+            changeInPrice: action.payload.changeInPrice,
+            prevPrice: action.payload.prevPrice
+          };
+        }
+
+        return d;
+      });
+
+      state.stocksSubscribe = filter2;
     },
     getFrequencyDataRequest() {},
     setFrequencyRequest() {},
