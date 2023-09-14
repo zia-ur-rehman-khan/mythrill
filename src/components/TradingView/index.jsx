@@ -51,6 +51,7 @@ export default function TradingViewWidget({ name_slug }) {
           hide_legend: true,
           save_image: false,
           hide_volume: true,
+          hide_side_toolbar: false,
           container_id: 'tradingview_b0cd5'
         });
       }
