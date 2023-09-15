@@ -220,6 +220,7 @@ const GeneralReducer = createSlice({
             changeInPercent: updateData.changeInPercent,
             changeInPrice: updateData.changeInPrice,
             prevPrice: updateData.prevPrice,
+            currentPrice:updateData.currentPrice,
             updateDate: updateData?.updateDate
           };
         }

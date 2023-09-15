@@ -283,13 +283,13 @@ export const handleUserSignout = () => {
 export const trendingFilter = (t) => {
   switch (t) {
     case 1:
-      return 'Buy';
+      return 'Buy / Uptrend';
 
     case 2:
-      return 'Hold';
+      return 'Hold / Neutral';
 
     case 3:
-      return 'Sell';
+      return 'Sell / Downtrend';
 
     default:
       return '';

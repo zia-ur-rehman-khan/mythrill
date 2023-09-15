@@ -44,6 +44,12 @@ const columns = [
     width: '100px'
   },
   {
+    title: 'Current',
+    dataIndex: 'current',
+    key: 'current',
+    width: '100px'
+  },
+  {
     title: 'Chg',
     dataIndex: 'chg',
     key: 'chg',
@@ -75,6 +81,7 @@ const Trending = () => {
   const dispatch = useDispatch();
   const searchText = useSelector((state) => state?.user.search);
   const trend = useSelector((state) => state?.stocks?.trendData);
+  console.log("🚀 ~ file: index.jsx:84 ~ Trending ~ trend:", trend)
   const { data } = useSelector((state) => state?.user);
 
   const navigator = useNavigate();
@@ -138,6 +145,7 @@ const Trending = () => {
             </div>
           ),
           last: t.prevPrice,
+          current:t.currentPrice,
           chg: `$${t.changeInPrice}`,
           chgPer: `${t?.changeInPercent}%`,
           fg: t?.fearGreedIndex,
@@ -186,7 +194,7 @@ const Trending = () => {
           <Space>
             <CommonHeading
               level={3}
-              text={`${trendingFilter(activeTab)} / Uptrend`}
+              text={`${trendingFilter(activeTab)} `}
             />
             <img
               src={Images[trendingImage(activeTab)]}
