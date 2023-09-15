@@ -23,7 +23,7 @@ import { toastAlert } from '../../../services/utils';
 import CommonModal from '../CommonModal';
 import CommonHeading from '../CommonHeading';
 
-const StockCard = ({ test, value, addIcon }) => {
+const StockCard = ({ test, value, addIcon ,count}) => {
   console.log('🚀 ~ file: index.jsx:27 ~ StockCard ~ test:', test);
   const {
     title,
@@ -139,7 +139,9 @@ const StockCard = ({ test, value, addIcon }) => {
   return (
     <div className="main-card-parent">
       <Space className="stockCard-main">
-        <Space direction="vertical">
+        <Space align='baseline'>
+          <CommonTextField text={count}/>
+          <Space direction='vertical'>
           <CommonTextField
             text={title}
             fontWeight={600}
@@ -147,6 +149,7 @@ const StockCard = ({ test, value, addIcon }) => {
             className={'ellipsis'}
           />
           <CommonTextField text={type} color={'#626D7D'} />
+          </Space>
         </Space>
         <Space size={10}>
           <Space direction="vertical">

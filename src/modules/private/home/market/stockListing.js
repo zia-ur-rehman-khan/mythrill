@@ -49,12 +49,12 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
             ?.filter((d) =>
               d?.nameId?.toLowerCase().includes(search.toLowerCase())
             )
-            ?.map((d) => (
-              <StockCard addIcon={addIcon} value={d} key={Math.random()} />
+            ?.map((d,i) => (
+              <StockCard addIcon={addIcon} value={d} key={Math.random()} count={i + 1}/>
             ))
         : filteredStocks?.length > 0
-        ? filteredStocks?.map((data) => (
-            <StockCard test={test} value={data} key={Math.random()} />
+        ? filteredStocks?.map((data , i) => (
+            <StockCard test={test} value={data} key={Math.random()} count={i + 1} />
           ))
         : noStockInTheList()}
     </>
