@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './styles.scss';
 import { AppStyles, Images } from '../../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,6 +47,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useGoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
+  const field2Ref = useRef(null);
+  const field3Ref = useRef(null);
+  const field4Ref = useRef(null);
+  const field5Ref = useRef(null);
+
   const [loading, setLoading] = useState(false);
   const deviceToken = useSelector((state) => state?.user?.deviceToken);
 
@@ -152,6 +157,25 @@ const Register = () => {
     );
   };
 
+  const handleEnterPress = (e, nextRef, phone) => {
+    console.log(
+      '🚀 ~ file: index.jsx:161 ~ handleEnterPress ~ nextRef:',
+      nextRef
+    );
+    if (e.key === 'Enter') {
+      e.preventDefault();
+
+      if (phone === 'phone' && nextRef) {
+        const temp = nextRef.current.getElement();
+        console.log('phone', temp);
+      } else if (nextRef && nextRef.current) {
+        nextRef.current.focus();
+      } else {
+        form.submit();
+      }
+    }
+  };
+
   return (
     <AuthLayout
       className={'email'}
@@ -170,6 +194,7 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Full Name'} opacity={'0.5'} />
             <CommonInputField
+              onKeyDown={(e) => handleEnterPress(e, field2Ref)}
               autoFocus={true}
               name="fullName"
               className={'auth'}
@@ -186,6 +211,8 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Email Address'} opacity={'0.5'} />
             <CommonInputField
+              onKeyDown={(e) => handleEnterPress(e, field3Ref, 'phone')}
+              reference={field2Ref}
               name="email"
               type={'email'}
               className={'auth'}
@@ -195,11 +222,17 @@ const Register = () => {
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
-            <CommonPhoneInput name={'phoneNumber'} />
+            <CommonPhoneInput
+              name={'phoneNumber'}
+              reference={field3Ref}
+              onKeyDown={(e) => handleEnterPress(e, field4Ref)}
+            />
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'New Password'} opacity={'0.5'} />
             <CommonPasswordInput
+              onKeyDown={(e) => handleEnterPress(e, field5Ref)}
+              reference={field4Ref}
               name={'password'}
               placeholder={'**************'}
               rules={[
@@ -214,6 +247,8 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Confirm Password'} opacity={'0.5'} />
             <CommonPasswordInput
+              onKeyDown={(e) => handleEnterPress(e, null)}
+              reference={field5Ref}
               name={'newPassword'}
               placeholder={'**************'}
               rules={[
@@ -233,7 +268,6 @@ const Register = () => {
           <CommonButton
             loading={loading}
             text={'Register'}
-            htmlType="submit"
             classname={css(AppStyles.mTop20, AppStyles.mBottom10)}
           />
           <Space direction="vertical" size={15} className={css(AppStyles.w100)}>

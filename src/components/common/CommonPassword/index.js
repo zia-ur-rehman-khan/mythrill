@@ -12,11 +12,15 @@ const CommonPasswordInput = ({
   type,
   height,
   rules,
-  autoFocus
+  autoFocus,
+  reference,
+  onKeyDown
 }) => {
   return (
     <Form.Item name={name} rules={rules}>
       <Input.Password
+        onKeyDown={onKeyDown}
+        ref={reference}
         autoFocus={autoFocus}
         iconRender={(visible) =>
           visible ? <img src={Images.eye} /> : <img src={Images.crossEye} />
