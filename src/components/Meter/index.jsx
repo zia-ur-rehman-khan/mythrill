@@ -31,7 +31,13 @@ function GraphRender({ stock }) {
         dataLabels: {
           enabled: false // Disable data labels for all series
         },
-        data: [meterValue ?? 0]
+        data: [meterValue ?? 0],
+        dial: {
+          backgroundColor: 'white',
+        },
+        pivot: {
+          backgroundColor: '#7665c1'
+        },
       }
     ],
     credits: {
