@@ -140,7 +140,7 @@ const StockCard = ({ test, value, addIcon ,count}) => {
     <div className="main-card-parent">
       <Space className="stockCard-main">
         <Space align='baseline'>
-          <CommonTextField text={count}/>
+          <CommonTextField text={`${count}.`}/>
           <Space direction='vertical'>
           <CommonTextField
             text={title}
