@@ -11,7 +11,8 @@ const CommonPhoneInput = ({
   disabled,
   className,
   rules = true,
-  autoFocus
+  autoFocus,
+  onKeyDown
 }) => {
   const [phoneValid, setPhoneValid] = useState(true);
   return (
@@ -38,7 +39,8 @@ const CommonPhoneInput = ({
     >
       <PhoneInput
         inputProps={{
-          autoFocus: autoFocus
+          autoFocus: autoFocus,
+          onKeyDown: onKeyDown
         }}
         className={className}
         country={'us'}

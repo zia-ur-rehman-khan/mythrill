@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './styles.scss';
 import { AppStyles, Images } from '../../../theme';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,6 +40,8 @@ import { useGoogleLogin } from '@react-oauth/google';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 
 const Login = () => {
+  const field2Ref = useRef(null);
+
   const [loading, setLoading] = useState(false);
   const deviceToken = useSelector((state) => state?.user?.deviceToken);
 
@@ -50,8 +52,10 @@ const Login = () => {
     navigate(route);
   };
 
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
-    // setLoading(true);
+    setLoading(true);
     const { phoneNumber, password, remember } = values;
 
     const payloadData = {
@@ -141,13 +145,30 @@ const Login = () => {
     );
   };
 
+  const handleEnterPress = (e, nextRef) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+
+      if (nextRef && nextRef.current) {
+        nextRef.current.focus();
+      } else {
+        form.submit();
+      }
+    }
+  };
+
   return (
     <AuthLayout
       arrow
       className="login"
       image={<img src={Images.card3} className="login-image" />}
     >
-      <Form name="basic" onFinish={onFinish} onFinishFailed={onFinishFailed}>
+      <Form
+        form={form}
+        name="basic"
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
         <Space direction="vertical" className={css(AppStyles.w100)}>
           <Space className={css(AppStyles.w100, AppStyles.justifyCenter)}>
             <img src={Images.authLogo} width={'50px'} height={'58px'} />
@@ -160,11 +181,17 @@ const Login = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
 
-            <CommonPhoneInput name={'phoneNumber'} autoFocus={true} />
+            <CommonPhoneInput
+              name={'phoneNumber'}
+              autoFocus={true}
+              onKeyDown={(e) => handleEnterPress(e, field2Ref)}
+            />
           </Space>
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Password'} opacity={'0.5'} />
             <CommonPasswordInput
+              reference={field2Ref}
+              onKeyDown={(e) => handleEnterPress(e, null)}
               name={'password'}
               placeholder={'**************'}
               rules={[
@@ -200,7 +227,6 @@ const Login = () => {
           <CommonButton
             loading={loading}
             text={'Login'}
-            htmlType="submit"
             classname={css(AppStyles.mTop20)}
           />
           <CommonTextField textAlign={'center'} text={'or continue with'} />
