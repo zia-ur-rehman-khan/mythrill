@@ -55,7 +55,7 @@ const Login = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    // setLoading(true);
+    setLoading(true);
     const { phoneNumber, password, remember } = values;
 
     const payloadData = {

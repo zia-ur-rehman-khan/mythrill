@@ -48,7 +48,6 @@ import { useGoogleLogin } from '@react-oauth/google';
 
 const Register = () => {
   const field2Ref = useRef(null);
-  const field3Ref = useRef(null);
   const field4Ref = useRef(null);
   const field5Ref = useRef(null);
 
@@ -158,16 +157,12 @@ const Register = () => {
   };
 
   const handleEnterPress = (e, nextRef, phone) => {
-    console.log(
-      '🚀 ~ file: index.jsx:161 ~ handleEnterPress ~ nextRef:',
-      nextRef
-    );
     if (e.key === 'Enter') {
       e.preventDefault();
 
-      if (phone === 'phone' && nextRef) {
-        const temp = nextRef.current.getElement();
-        console.log('phone', temp);
+      if (phone === 'phone') {
+        const temp = document.getElementsByClassName('form-control');
+        temp[0]?.focus();
       } else if (nextRef && nextRef.current) {
         nextRef.current.focus();
       } else {
@@ -211,7 +206,7 @@ const Register = () => {
           <Space direction="vertical" className={css(AppStyles.w100)}>
             <CommonTextField text={'Email Address'} opacity={'0.5'} />
             <CommonInputField
-              onKeyDown={(e) => handleEnterPress(e, field3Ref, 'phone')}
+              onKeyDown={(e) => handleEnterPress(e, '', 'phone')}
               reference={field2Ref}
               name="email"
               type={'email'}
@@ -224,7 +219,6 @@ const Register = () => {
             <CommonTextField text={'Phone Number'} opacity={'0.5'} />
             <CommonPhoneInput
               name={'phoneNumber'}
-              reference={field3Ref}
               onKeyDown={(e) => handleEnterPress(e, field4Ref)}
             />
           </Space>
