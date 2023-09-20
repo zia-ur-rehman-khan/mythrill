@@ -52,7 +52,6 @@ const GeneralReducer = createSlice({
           frequency: stock.frequency,
           name_slug: stock.slugName,
           symbol: stock.symbol
-
         };
       }
 
@@ -80,7 +79,6 @@ const GeneralReducer = createSlice({
         frequency: action.payload.frequency,
         name_slug: action.payload.slugName,
         symbol: action.payload.symbol
-
       };
 
       state.stocksData = { ...state.stocksData };
@@ -162,7 +160,8 @@ const GeneralReducer = createSlice({
             stocks: [...d.stocks, action.payload],
             changeInPercent: action.payload.changeInPercent,
             changeInPrice: action.payload.changeInPrice,
-            prevPrice: action.payload.prevPrice
+            prevPrice: action.payload.prevPrice,
+            overallTrend: action.payload.overallTrend
           };
         }
 
@@ -224,8 +223,9 @@ const GeneralReducer = createSlice({
             changeInPercent: updateData.changeInPercent,
             changeInPrice: updateData.changeInPrice,
             prevPrice: updateData.prevPrice,
-            currentPrice:updateData.currentPrice,
-            updateDate: updateData?.updateDate
+            currentPrice: updateData.currentPrice,
+            updateDate: updateData?.updateDate,
+            overallTrend: updateData.overallTrend
           };
         }
 
