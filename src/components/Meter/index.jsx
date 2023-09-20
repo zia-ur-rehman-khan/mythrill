@@ -28,7 +28,7 @@ function GraphRender({ stock }) {
       type: 'gauge'
     },
     title: {
-      text: stock?.overallTrend,
+      text: stock?.overallTrend?.toUpperCase(),
       style: {
         color: '#1ABF17' // Specify your desired color here
       }
