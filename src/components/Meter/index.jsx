@@ -23,6 +23,17 @@ function GraphRender({ stock }) {
       ? 75
       : 37.5;
 
+  const meterColor =
+    stock?.overallTrend?.toLowerCase() === ' strong buy'
+      ? '#3DB54A'
+      : stock?.overallTrend?.toLowerCase() === ' buy'
+      ? '#3DB54A'
+      : stock?.overallTrend?.toLowerCase() === ' sell'
+      ? '#EB2127'
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? '#EB2127'
+      : '#F7EC35';
+
   const options = {
     chart: {
       type: 'gauge'
@@ -30,7 +41,7 @@ function GraphRender({ stock }) {
     title: {
       text: stock?.overallTrend?.toUpperCase(),
       style: {
-        color: '#1ABF17' // Specify your desired color here
+        color: meterColor // Specify your desired color here
       }
     },
 
