@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import './styles.scss';
 import Loader from '../loader';
+import { useParams } from 'react-router-dom';
 
 let tvScriptLoadingPromise;
 
-export default function TradingViewWidget({ name_slug ,symbol }) {
+export default function TradingViewWidget({ name_slug, symbol }) {
+  const { id } = useParams();
+
   const onLoadScriptRef = useRef();
 
   useEffect(() => {
@@ -56,7 +59,7 @@ export default function TradingViewWidget({ name_slug ,symbol }) {
         });
       }
     }
-  }, []);
+  }, [id]);
 
   return (
     <div className="tradingview-widget-container">

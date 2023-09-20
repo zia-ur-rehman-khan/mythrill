@@ -13,7 +13,7 @@ import ChartView from './chartview';
 import TradingViewWidget from '../TradingView';
 const { useBreakpoint } = Grid;
 
-const Chart = ({ name_slug, data, color, stockId, frequency ,symbol}) => {
+const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
   const [chartType, setChartType] = useState('areaspline');
   const [chartView, setChartView] = useState('myThril');
 
