@@ -13,14 +13,22 @@ function GraphRender({ stock }) {
   console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
 
   const meterValue =
-    stock?.color === 'green' ? 0 : stock?.color === 'yellow' ? 37.5 : 75;
+    stock?.overallTrend?.toLowerCase() === ' strong buy'
+      ? 0
+      : stock?.overallTrend?.toLowerCase() === ' buy'
+      ? 25
+      : stock?.overallTrend?.toLowerCase() === ' sell'
+      ? 50
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? 75
+      : 37.5;
 
   const options = {
     chart: {
       type: 'gauge'
     },
     title: {
-      text: 'BUY',
+      text: stock?.overallTrend,
       style: {
         color: '#1ABF17' // Specify your desired color here
       }
@@ -33,11 +41,11 @@ function GraphRender({ stock }) {
         },
         data: [meterValue ?? 0],
         dial: {
-          backgroundColor: 'white',
+          backgroundColor: 'white'
         },
         pivot: {
           backgroundColor: '#7665c1'
-        },
+        }
       }
     ],
     credits: {
