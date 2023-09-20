@@ -110,7 +110,7 @@ const Trending = () => {
 
     const listener1 = (...args) => {
       console.log(
-        '🚀 ~ file: index.jsx:141 ~ listener1 ~ args:',
+        'trending data',
         stocksdataManipulatorObject(JSON.parse(args).data)
       );
       dispatch(
