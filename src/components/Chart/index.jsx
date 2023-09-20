@@ -13,7 +13,7 @@ import ChartView from './chartview';
 import TradingViewWidget from '../TradingView';
 const { useBreakpoint } = Grid;
 
-const Chart = ({ name_slug, data, color, stockId, frequency }) => {
+const Chart = ({ name_slug, data, color, stockId, frequency ,symbol}) => {
   const [chartType, setChartType] = useState('areaspline');
   const [chartView, setChartView] = useState('myThril');
 
@@ -32,7 +32,7 @@ const Chart = ({ name_slug, data, color, stockId, frequency }) => {
     [chartType, color, data, chartView]
   );
   const tradingView = useMemo(
-    () => <TradingViewWidget name_slug={name_slug} />,
+    () => <TradingViewWidget name_slug={name_slug} symbol={symbol} />,
     [chartView]
   );
 

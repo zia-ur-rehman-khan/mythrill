@@ -30,6 +30,7 @@ const ChartExample = () => {
           stockId={data?.stockId}
           frequency={data?.frequency}
           name_slug={data?.name_slug}
+          symbol={data?.symbol}
         />
       )}
     </>

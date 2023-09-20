@@ -4,7 +4,7 @@ import Loader from '../loader';
 
 let tvScriptLoadingPromise;
 
-export default function TradingViewWidget({ name_slug }) {
+export default function TradingViewWidget({ name_slug ,symbol }) {
   const onLoadScriptRef = useRef();
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function TradingViewWidget({ name_slug }) {
       ) {
         new window.TradingView.widget({
           autosize: true,
-          symbol: name_slug ? name_slug : 'NASDAQ:AAPL',
+          symbol: symbol ? symbol : 'NASDAQ:AAPL',
           interval: 'D',
           timezone: 'Etc/UTC',
           theme: 'dark',

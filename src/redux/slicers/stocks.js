@@ -50,7 +50,9 @@ const GeneralReducer = createSlice({
           data: sort,
           stockId: stock.stockId,
           frequency: stock.frequency,
-          name_slug: stock.slugName
+          name_slug: stock.slugName,
+          symbol: stock.symbol
+
         };
       }
 
@@ -76,7 +78,9 @@ const GeneralReducer = createSlice({
         data: sort,
         stockId: action.payload.stockId,
         frequency: action.payload.frequency,
-        name_slug: action.payload.slugName
+        name_slug: action.payload.slugName,
+        symbol: action.payload.symbol
+
       };
 
       state.stocksData = { ...state.stocksData };
