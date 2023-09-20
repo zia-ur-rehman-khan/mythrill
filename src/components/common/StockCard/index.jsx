@@ -23,7 +23,7 @@ import { toastAlert } from '../../../services/utils';
 import CommonModal from '../CommonModal';
 import CommonHeading from '../CommonHeading';
 
-const StockCard = ({ test, value, addIcon ,count}) => {
+const StockCard = ({ test, value, addIcon, count }) => {
   console.log('🚀 ~ file: index.jsx:27 ~ StockCard ~ test:', test);
   const {
     title,
@@ -122,7 +122,7 @@ const StockCard = ({ test, value, addIcon ,count}) => {
           setIsLoading(false);
           if (res.status) {
             console.log(res.status, 'res');
-            toastAlert('Stock subscribe successfully', ALERT_TYPES.success);
+            toastAlert(`${title} subscribe successfully`, ALERT_TYPES.success);
           } else {
             dispatch(stockLimitExceed(true));
             console.log(res, 'error');
@@ -139,16 +139,16 @@ const StockCard = ({ test, value, addIcon ,count}) => {
   return (
     <div className="main-card-parent">
       <Space className="stockCard-main">
-        <Space align='baseline'>
-          <CommonTextField text={`${count}.`}/>
-          <Space direction='vertical'>
-          <CommonTextField
-            text={title}
-            fontWeight={600}
-            onClick={() => !addIcon && changeRoute()}
-            className={'ellipsis'}
-          />
-          <CommonTextField text={type} color={'#626D7D'} />
+        <Space align="baseline">
+          <CommonTextField text={`${count}.`} />
+          <Space direction="vertical">
+            <CommonTextField
+              text={title}
+              fontWeight={600}
+              onClick={() => !addIcon && changeRoute()}
+              className={'ellipsis'}
+            />
+            <CommonTextField text={type} color={'#626D7D'} />
           </Space>
         </Space>
         <Space size={10}>

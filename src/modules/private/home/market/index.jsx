@@ -66,7 +66,7 @@ const Market = ({ isLoading, width }) => {
       <Tabs activeKey={currentKey?.key} items={items} onChange={onChange} />
       <CommonButton
         width={'100%'}
-        text={'Add Stock'}
+        text={'Add Stock/Crypto'}
         background="rgba(118, 101, 193, 0.1)"
         onClick={() => setIsModal(true)}
       />
@@ -75,7 +75,7 @@ const Market = ({ isLoading, width }) => {
           width={width}
           title={
             <CommonHeading
-              text={'Add Stock'}
+              text={'Add Stock/Crypto'}
               textAlign="center"
               className={css(AppStyles.mBottom10)}
             />

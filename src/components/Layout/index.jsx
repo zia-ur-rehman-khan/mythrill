@@ -52,6 +52,7 @@ const Layout = ({ children }) => {
                 xs={{ span: 24 }}
               >
                 <CommonHeading
+                  fontSize={'20px'}
                   text={`Welcome Back ${data?.name}!`}
                   className={'ellipsis'}
                 />
@@ -63,7 +64,7 @@ const Layout = ({ children }) => {
                 xs={{ span: 24 }}
               >
                 <CommonInputField
-                  placeholder="Search Stocks."
+                  placeholder="Search Crypto/Stocks"
                   onChange={handelSearch}
                   suffix={
                     <FontAwesomeIcon

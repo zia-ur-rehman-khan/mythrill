@@ -164,7 +164,7 @@ const Stock = () => {
               textAlign={'center'}
             />
             <CommonButton
-              text={'Add Stock'}
+              text={'Add Stock/Crypto'}
               background="rgba(118, 101, 193, 0.1)"
               onClick={() => setIsModal(true)}
             />
@@ -173,7 +173,7 @@ const Stock = () => {
             <CommonModal
               title={
                 <CommonHeading
-                  text={'Add Stock'}
+                  text={'Add Stock/Crypto'}
                   textAlign="center"
                   className={css(AppStyles.mBottom10)}
                 />

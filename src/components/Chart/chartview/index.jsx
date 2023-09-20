@@ -129,7 +129,7 @@ const ChartView = ({ chartView, chartviewChange, stockId }) => {
             }}
             className={`tab ${chartView === 'trading' && 'active'}`}
           >
-            <CommonTextField text={'Trading view'} />
+            <CommonTextField text={'Chart'} />
           </Space>
         </Space>
       </Space>

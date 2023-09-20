@@ -24,10 +24,7 @@ const Suggestion = () => {
       <Space className={css([AppStyles.spaceBetween, AppStyles.w100])}>
         <Space>
           <img src={Images.fire} />
-          <CommonTextField
-            text={'Current Strong Buy Stock/Crypto'}
-            color={Colors.green}
-          />
+          <CommonTextField text={'Current Strong Buys'} color={Colors.green} />
         </Space>
         <Space align="baseline">
           <CommonTextField text={'More'} />
