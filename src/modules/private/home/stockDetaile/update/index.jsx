@@ -13,6 +13,21 @@ const Update = ({ stock }) => {
     navigate(HOME_ROUTE);
   };
 
+  const icons = () => {
+    const meterValue =
+      stock?.overallTrend?.toLowerCase() === ' strong buy'
+        ? Images.upSignLarge
+        : stock?.overallTrend?.toLowerCase() === ' buy'
+        ? Images.upSignLarge
+        : stock?.overallTrend?.toLowerCase() === ' sell'
+        ? Images.upSignLarge
+        : stock?.overallTrend?.toLowerCase() === ' strong sell'
+        ? Images.upSignLarge
+        : Images.upSignLarge;
+
+    return meterValue;
+  };
+
   return (
     <Space
       wrap={true}
@@ -32,7 +47,7 @@ const Update = ({ stock }) => {
             <CommonTextField text={stock?.title} fontWeight={600} />
             <CommonTextField text={`${stock?.amount}`} opacity={0.5} />
           </Space>
-          <img src={Images.upSignLarge} width={'24px'} height={'20px'} />
+          <img src={icons()} width={'24px'} height={'20px'} />
         </Space>
       </Space>
       <Space size={3} direction="vertical">
