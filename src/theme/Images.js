@@ -11,6 +11,8 @@ import yellow from '../assets/chart/yellow.png';
 import red from '../assets/chart/red.png';
 import upSign from '../assets/chart/upSign.png';
 import upSignLarge from '../assets/chartDetaile/upSign.png';
+import sell from '../assets/chartDetaile/sell.png';
+import neutral from '../assets/chartDetaile/neutral.png';
 import netflix from '../assets/chart/netflix.png';
 import fire from '../assets/chartDetaile/fire.png';
 import arrow from '../assets/chartDetaile/arrow.png';
@@ -69,6 +71,8 @@ export default {
   red,
   upSign,
   upSignLarge,
+  sell,
+  neutral,
   netflix,
   fire,
   arrow,

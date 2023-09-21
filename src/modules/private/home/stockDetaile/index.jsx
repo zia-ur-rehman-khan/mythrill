@@ -15,6 +15,7 @@ import { collection, db, getDocs, query, where } from '../../../../firebase';
 import { stockListManipulator } from '../../../../manipulators/stocksName';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { isEmptyValue } from '../../../../services/utils';
 
 const StockDetailes = () => {
   const { id } = useParams();
@@ -39,6 +40,16 @@ const StockDetailes = () => {
   //     : [];
 
   // console.log('🚀 ~ file: index.jsx:30 ~ StockDetailes ~ data:', chartData);
+
+  useEffect(() => {
+    const selectedStockData = stocksSubscribe.find(
+      (stock) => stock.nameId === id
+    );
+
+    if (isEmptyValue(selectedStockData)) {
+      navigate(HOME_ROUTE);
+    }
+  }, [stocksSubscribe]);
 
   return (
     <>

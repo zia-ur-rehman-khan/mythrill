@@ -20,10 +20,10 @@ const Update = ({ stock }) => {
         : stock?.overallTrend?.toLowerCase() === ' buy'
         ? Images.upSignLarge
         : stock?.overallTrend?.toLowerCase() === ' sell'
-        ? Images.upSignLarge
+        ? Images.sell
         : stock?.overallTrend?.toLowerCase() === ' strong sell'
-        ? Images.upSignLarge
-        : Images.upSignLarge;
+        ? Images.sell
+        : Images.neutral;
 
     return meterValue;
   };

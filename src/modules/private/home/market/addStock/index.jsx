@@ -66,7 +66,7 @@ const AddStock = ({ isModalVisible }) => {
   return (
     <>
       <CommonInputField
-        placeholder="Search..."
+        placeholder="Add Stock/Crypto"
         suffix={<FontAwesomeIcon icon={faSearch} />}
         onChange={(e) => setSearch(e.target.value)}
       />
