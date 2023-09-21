@@ -225,6 +225,9 @@ const Login = () => {
             </Space>
           </Space>
           <CommonButton
+            onClick={() => {
+              form.submit();
+            }}
             loading={loading}
             text={'Login'}
             classname={css(AppStyles.mTop20)}

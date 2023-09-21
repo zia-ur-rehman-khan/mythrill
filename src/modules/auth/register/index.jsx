@@ -260,6 +260,9 @@ const Register = () => {
           </Space>
 
           <CommonButton
+            onClick={() => {
+              form.submit();
+            }}
             loading={loading}
             text={'Register'}
             classname={css(AppStyles.mTop20, AppStyles.mBottom10)}
