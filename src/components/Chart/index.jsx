@@ -33,7 +33,7 @@ const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
   );
   const tradingView = useMemo(
     () => <TradingViewWidget name_slug={name_slug} symbol={symbol} />,
-    [chartView]
+    [chartView, symbol]
   );
 
   return (
