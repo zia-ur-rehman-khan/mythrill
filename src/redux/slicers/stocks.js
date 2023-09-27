@@ -169,6 +169,15 @@ const GeneralReducer = createSlice({
       });
 
       state.stocksSubscribe = filter;
+
+
+      state.stocksData[action.payload.nameId] = {
+        ...state.stocksData[action.payload.nameId],
+        color: action.payload.color,
+       
+      };
+
+      state.stocksData = { ...state.stocksData };
     },
 
     getUnSubscribeDataRealTime(state, action) {

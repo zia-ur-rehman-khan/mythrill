@@ -250,7 +250,7 @@ const ChartComponent = ({ chartType, data, color }) => {
         true,
         true
       );
-      chart.series[0].color = test.color;
+      chart.series[0].update({ color: test.color });
     };
 
     socket.on('stock_updates', listener1);
