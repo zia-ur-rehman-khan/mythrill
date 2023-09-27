@@ -38,11 +38,15 @@ export function stocksdataManipulatorObject(stock = {}) {
     payload.slugName = stock?.name_slug;
     payload.symbol = stock?.symbol;
     payload.color =
-      stock?.change_in_percent === 0
-        ? 'yellow'
-        : stock?.change_in_percent > 0
-        ? 'green'
-        : 'red';
+      stock?.overall_trend?.toLowerCase() === ' strong buy'
+        ? '#3DB54A'
+        : stock?.overall_trend?.toLowerCase() === ' buy'
+        ? '#3DB54A'
+        : stock?.overall_trend?.toLowerCase() === ' sell'
+        ? '#EB2127'
+        : stock?.overall_trend?.toLowerCase() === ' strong sell'
+        ? '#EB2127'
+        : '#F7EC35';
 
     return payload;
   } catch (error) {
@@ -68,11 +72,15 @@ export function stocksdataManipulator(list = []) {
       payload.type = stock?.type;
       payload.slug = `/stock/${stock?.name_slug}` ?? '';
       payload.color =
-        stock?.change_in_percent === 0
-          ? 'yellow'
-          : stock?.stocks_name?.change_in_percent > 0
-          ? 'green'
-          : 'red';
+        stock?.overall_trend?.toLowerCase() === ' strong buy'
+          ? '#3DB54A'
+          : stock?.overall_trend?.toLowerCase() === ' buy'
+          ? '#3DB54A'
+          : stock?.overall_trend?.toLowerCase() === ' sell'
+          ? '#EB2127'
+          : stock?.overall_trend?.toLowerCase() === ' strong sell'
+          ? '#EB2127'
+          : '#F7EC35';
 
       payload && stockList.push(payload);
     }
@@ -124,11 +132,15 @@ export function stocksNameManipulator(list = []) {
       payload.src = Images.bitCoin;
       payload.stocks = stockGraphManipulator(stock?.stocks_name?.stocks);
       payload.color =
-        stock?.stocks_name?.change_in_percent === 0
-          ? 'yellow'
-          : stock?.stocks_name?.change_in_percent > 0
-          ? 'green'
-          : 'red';
+        stock?.stocks_name?.overall_trend?.toLowerCase() === ' strong buy'
+          ? '#3DB54A'
+          : stock?.stocks_name?.overall_trend?.toLowerCase() === ' buy'
+          ? '#3DB54A'
+          : stock?.stocks_name?.overall_trend?.toLowerCase() === ' sell'
+          ? '#EB2127'
+          : stock?.stocks_name?.overall_trend?.toLowerCase() === ' strong sell'
+          ? '#EB2127'
+          : '#F7EC35';
 
       payload && stockList.push(payload);
     }
@@ -151,6 +163,8 @@ export function stockGraphManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
 
+      console.log(stock, 'stock');
+
       payload.title = stock?.name;
       payload.changeInPercent = stock?.change_in_percent ?? 'n/a';
       payload.changeInPrice = stock?.change_in_price ?? 'n/a';
@@ -166,11 +180,15 @@ export function stockGraphManipulator(list = []) {
       payload.overallTrend = stock?.overall_trend ?? '';
       payload.prevPrice = stock?.prev_price ?? 'n/a';
       payload.color =
-        stock?.change_in_percent === 0
-          ? 'yellow'
-          : stock?.change_in_percent > 0
-          ? 'green'
-          : 'red';
+        stock?.overall_trend?.toLowerCase() === ' strong buy'
+          ? '#3DB54A'
+          : stock?.overall_trend?.toLowerCase() === ' buy'
+          ? '#3DB54A'
+          : stock?.overall_trend?.toLowerCase() === ' sell'
+          ? '#EB2127'
+          : stock?.overall_trend?.toLowerCase() === ' strong sell'
+          ? '#EB2127'
+          : '#F7EC35';
 
       stockList.push(payload);
     }

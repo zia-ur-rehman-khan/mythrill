@@ -425,7 +425,7 @@ export const handlePassworNotMatch = (_, value, name) => {
 };
 
 export const forGreen = (color) => {
-  if (color === 'green') {
+  if (color === '#3DB54A') {
     return 'greenArrow';
   } else {
     return 'green';
@@ -433,15 +433,30 @@ export const forGreen = (color) => {
 };
 
 export const forRed = (color) => {
-  if (color === 'red') {
+  if (color === '#EB2127') {
     return 'redArrow';
   } else {
     return 'red';
   }
 };
 
+export const icons = (stock) => {
+  const meterValue =
+    stock?.overallTrend?.toLowerCase() === ' strong buy'
+      ? Images.upSignLarge
+      : stock?.overallTrend?.toLowerCase() === ' buy'
+      ? Images.upSignLarge
+      : stock?.overallTrend?.toLowerCase() === ' sell'
+      ? Images.sell
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? Images.sell
+      : Images.neutral;
+
+  return meterValue;
+};
+
 export const forYellow = (color) => {
-  if (color === 'yellow') {
+  if (color === '#F7EC35') {
     return 'yellowArrow';
   } else {
     return 'yellow';

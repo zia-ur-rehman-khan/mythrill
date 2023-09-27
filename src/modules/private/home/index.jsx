@@ -94,7 +94,7 @@ const Home = () => {
     );
 
     const listener1 = (...args) => {
-      console.log('home data', args);
+      console.log('home data', JSON.parse(args));
       dispatch(
         getSubscribeDataRealTime(
           stocksdataManipulatorObject(JSON.parse(args).data)

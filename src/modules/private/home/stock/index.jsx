@@ -18,6 +18,7 @@ import {
   forGreen,
   forRed,
   forYellow,
+  icons,
   signalClass
 } from '../../../../constants';
 import AddStock from '../market/addStock';
@@ -77,7 +78,7 @@ const Stock = () => {
                       <Space>
                         <CommonTextField text={stock?.title} fontWeight={600} />
                         <img
-                          src={Images.upSign}
+                          src={icons(stock)}
                           width={'13px'}
                           height={'12px'}
                         />
@@ -90,7 +91,7 @@ const Stock = () => {
                         />
                         <CommonTextField
                           text={stock?.fearGreedIndex}
-                          color={Colors.green}
+                          color={stock?.color}
                           fontSize={'8px'}
                         />
                       </Space>
@@ -102,7 +103,7 @@ const Stock = () => {
                         />
                         <CommonTextField
                           text={stock?.overallTrend}
-                          color={Colors.green}
+                          color={stock?.color}
                           fontSize={'8px'}
                         />
                       </Space>
@@ -120,14 +121,14 @@ const Stock = () => {
                         <CommonTextField text={'Chg'} />
                         <CommonTextField
                           text={stock?.changeInPrice || ' '}
-                          color={Colors.green}
+                          color={stock?.color}
                         />
                       </Space>
                       <Space size={3} direction="vertical">
                         <CommonTextField text={'Chg%'} />
                         <CommonTextField
                           text={stock?.changeInPercent || ' '}
-                          color={Colors.green}
+                          color={stock?.color}
                         />
                       </Space>
                       <Space>

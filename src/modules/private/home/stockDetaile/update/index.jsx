@@ -2,7 +2,7 @@ import React from 'react';
 import { AppStyles, Colors, Images } from '../../../../../theme';
 import { CommonTextField } from '../../../../../components';
 import { Space } from 'antd';
-import { HOME_ROUTE } from '../../../../../constants';
+import { HOME_ROUTE, icons } from '../../../../../constants';
 import { css } from 'aphrodite';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,21 +11,6 @@ const Update = ({ stock }) => {
 
   const changeRoute = () => {
     navigate(HOME_ROUTE);
-  };
-
-  const icons = () => {
-    const meterValue =
-      stock?.overallTrend?.toLowerCase() === ' strong buy'
-        ? Images.upSignLarge
-        : stock?.overallTrend?.toLowerCase() === ' buy'
-        ? Images.upSignLarge
-        : stock?.overallTrend?.toLowerCase() === ' sell'
-        ? Images.sell
-        : stock?.overallTrend?.toLowerCase() === ' strong sell'
-        ? Images.sell
-        : Images.neutral;
-
-    return meterValue;
   };
 
   return (
@@ -47,7 +32,7 @@ const Update = ({ stock }) => {
             <CommonTextField text={stock?.title} fontWeight={600} />
             <CommonTextField text={`${stock?.amount}`} opacity={0.5} />
           </Space>
-          <img src={icons()} width={'24px'} height={'20px'} />
+          <img src={icons(stock)} width={'24px'} height={'20px'} />
         </Space>
       </Space>
       <Space size={3} direction="vertical">
@@ -58,19 +43,19 @@ const Update = ({ stock }) => {
         <CommonTextField text={'Chg'} />
         <CommonTextField
           text={`$${stock?.changeInPrice}`}
-          color={Colors.green}
+          color={stock?.color}
         />
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={'Chg%'} />
         <CommonTextField
           text={`${stock?.changeInPercent}%`}
-          color={Colors.green}
+          color={stock?.color}
         />
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={'F&G idx'} />
-        <CommonTextField text={stock?.fearGreedIndex} color={Colors.green} />
+        <CommonTextField text={stock?.fearGreedIndex} color={stock?.color} />
       </Space>
       {/* <Space>
         <img src={Images.green} width={"21px"} height={"21px"} />

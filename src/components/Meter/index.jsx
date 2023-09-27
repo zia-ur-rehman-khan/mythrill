@@ -16,23 +16,12 @@ function GraphRender({ stock }) {
     stock?.overallTrend?.toLowerCase() === ' strong buy'
       ? 0
       : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? 25
+      ? 21
       : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 50
+      ? 54
       : stock?.overallTrend?.toLowerCase() === ' strong sell'
       ? 75
       : 37.5;
-
-  const meterColor =
-    stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? '#3DB54A'
-      : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? '#3DB54A'
-      : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? '#EB2127'
-      : stock?.overallTrend?.toLowerCase() === ' strong sell'
-      ? '#EB2127'
-      : '#F7EC35';
 
   const options = {
     chart: {
@@ -41,7 +30,7 @@ function GraphRender({ stock }) {
     title: {
       text: stock?.overallTrend?.toUpperCase(),
       style: {
-        color: meterColor // Specify your desired color here
+        color: stock?.color // Specify your desired color here
       }
     },
 
