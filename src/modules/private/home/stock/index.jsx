@@ -109,7 +109,12 @@ const Stock = () => {
                       </Space>
                     </Space>
                     <Space size={10} wrap={true}>
-                      <img src={stock?.src} width={'36px'} height={'36px'} />
+                      <img
+                        style={{ borderRadius: '50%' }}
+                        src={stock?.src}
+                        width={'36px'}
+                        height={'36px'}
+                      />
                       <Space size={3} direction="vertical">
                         <CommonTextField text={'Last'} opacity={0.5} />
                         <CommonTextField

@@ -483,3 +483,39 @@ export const frequencyData = (frequencyData, frequencyAlert) => {
 
 export const CACHE_NAME = 'my-cache';
 export const NOTIFICATION_KEY = 'notification';
+
+const {
+  apple,
+  bitCoinIcon,
+  invesco,
+  etherium,
+  alphabet,
+  cardano,
+  metaPlatforms,
+  tesla,
+  microsector,
+  nvidia,
+  sp,
+  microsoft,
+  amazon,
+  xrp,
+  dodge
+} = Images;
+
+export const StockIcons = {
+  apple_inc: apple,
+  bitcoin__united_states_dollar: bitCoinIcon,
+  invesco_qqq_trust_series_: invesco,
+  ether__united_states_dollar: etherium,
+  alphabet_inc: alphabet,
+  cardano__united_states_dollar: cardano,
+  meta_platforms_inc: metaPlatforms,
+  tesla_inc: tesla,
+  microsectors_fang_index_x_leveraged_etns_due_january__: microsector,
+  nvidia_corporation: nvidia,
+  sp_: sp,
+  microsoft_corporation: microsoft,
+  amazoncom_inc: amazon,
+  xrp__united_states_dollar: xrp,
+  dogecoin__united_states_dollar: dodge
+};

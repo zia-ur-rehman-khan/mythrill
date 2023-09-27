@@ -25,7 +25,12 @@ const Update = ({ stock }) => {
             onClick={changeRoute}
             className={css(AppStyles.pointer)}
           />
-          <img src={Images.bitCoin} width={'36px'} height={'36px'} />
+          <img
+            style={{ borderRadius: '50%' }}
+            src={stock?.src}
+            width={'36px'}
+            height={'36px'}
+          />
         </Space>
         <Space>
           <Space size={3} direction="vertical">

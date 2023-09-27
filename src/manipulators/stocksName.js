@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { Images } from '../theme';
 import moment from 'moment';
+import { StockIcons } from '../constants';
 
 const FORMAT = 'YYYY-MM-DDTHH:mm:ss';
 
@@ -33,7 +34,7 @@ export function stocksdataManipulatorObject(stock = {}) {
     payload.stockUpdate = `${stock?.change_in_percent ?? 'n/a'}%`;
     payload.nameId = stock?.name_id ?? '';
     payload.type = stock?.type;
-    payload.src = Images.bitCoin;
+    payload.src = StockIcons[stock?.name_id];
     payload.slug = `/stock/${stock?.name_slug}` ?? '';
     payload.slugName = stock?.name_slug;
     payload.symbol = stock?.symbol;
@@ -129,7 +130,7 @@ export function stocksNameManipulator(list = []) {
       payload.stockUpdate = `${
         stock?.stocks_name?.change_in_percent ?? 'n/a'
       }%`;
-      payload.src = Images.bitCoin;
+      payload.src = StockIcons[stock?.stocks_name?.name_id] || Images.bitCoin;
       payload.stocks = stockGraphManipulator(stock?.stocks_name?.stocks);
       payload.color =
         stock?.stocks_name?.overall_trend?.toLowerCase() === ' strong buy'

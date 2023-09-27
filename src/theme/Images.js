@@ -56,6 +56,21 @@ import emptyStock from '../assets/chart/emptyStock.png';
 import coinBase from '../assets/auth/coinBase.png';
 import notifyIcon from '../assets/notification/notifyIcon.png';
 import tick from '../assets/setting/tick.png';
+import apple from '../assets/icons/apple.svg';
+import bitCoinIcon from '../assets/icons/bitcoin.svg';
+import invesco from '../assets/icons/invesco.svg';
+import etherium from '../assets/icons/etherium.svg';
+import alphabet from '../assets/icons/alphabet.svg';
+import cardano from '../assets/icons/cardano.svg';
+import metaPlatforms from '../assets/icons/metaPlatforms.svg';
+import tesla from '../assets/icons/tesla.svg';
+import microsector from '../assets/icons/microsector.svg';
+import nvidia from '../assets/icons/nvidia.svg';
+import sp from '../assets/icons/sp.svg';
+import microsoft from '../assets/icons/microsoft.svg';
+import amazon from '../assets/icons/amazon.svg';
+import xrp from '../assets/icons/xrp.svg';
+import dodge from '../assets/icons/dodge.svg';
 
 export default {
   ErrorBackground2,
@@ -115,5 +130,20 @@ export default {
   emptyStock,
   coinBase,
   notifyIcon,
-  tick
+  tick,
+  apple,
+  bitCoinIcon,
+  invesco,
+  etherium,
+  alphabet,
+  cardano,
+  metaPlatforms,
+  tesla,
+  microsector,
+  nvidia,
+  sp,
+  microsoft,
+  amazon,
+  xrp,
+  dodge
 };
