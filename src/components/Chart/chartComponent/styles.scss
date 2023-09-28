@@ -59,3 +59,21 @@
 .highcharts-input-group {
     display: none;
 }
+
+// .bigchart div[data-highcharts-chart="1"]div:first-child::before {
+//     content: "Duration";
+//     color: #FFFFFF;
+//     font-size: 14px;
+// position: absolute;
+// top: 10px;
+// }
+
+select {
+    background: rgb(32, 35, 44) !important;
+    color: #fff;
+}
+
+option {
+    background: rgb(32, 35, 44) !important;
+    color: #fff;
+}

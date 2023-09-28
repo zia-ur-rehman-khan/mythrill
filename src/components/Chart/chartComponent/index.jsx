@@ -77,6 +77,7 @@ const ChartComponent = ({ chartType, data, color }) => {
     },
 
     chart: {
+      animation: false,
       height: 500,
       type: chartType
     },
@@ -114,14 +115,42 @@ const ChartComponent = ({ chartType, data, color }) => {
       // dateFormat: "%Y-%m-%d %H:%M",
     },
     rangeSelector: {
-      inputEnabled: false, // Disable the input box
-      buttonEnabled: false,
-      buttonTheme: {
-        width: 25
-      },
+      // inputEnabled: true, // Disable the input box
+      // x: 30,
+
       selected: 5,
 
       buttons: [
+        {
+          type: 'minute',
+          count: 5,
+          text: '5M'
+        },
+        {
+          type: 'minute',
+          count: 15,
+          text: '15M'
+        },
+        {
+          type: 'minute',
+          count: 30,
+          text: '30M'
+        },
+        {
+          type: 'hour',
+          count: 1,
+          text: '1H'
+        },
+        {
+          type: 'hour',
+          count: 4,
+          text: '4H'
+        },
+        {
+          type: 'hour',
+          count: 8,
+          text: '8H'
+        },
         {
           type: 'day',
           count: 1,
