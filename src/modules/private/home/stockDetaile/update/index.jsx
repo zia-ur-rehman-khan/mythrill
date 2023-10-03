@@ -60,7 +60,7 @@ const Update = ({ stock }) => {
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={'F&G idx'} />
-        <CommonTextField text={stock?.fearGreedIndex || " "} color={stock?.color} />
+        <CommonTextField text={stock?.fearGreedIndex} color={stock?.color} />
       </Space>
       {/* <Space>
         <img src={Images.green} width={"21px"} height={"21px"} />

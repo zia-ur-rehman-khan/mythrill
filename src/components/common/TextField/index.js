@@ -54,7 +54,8 @@ const CommonTextField = ({
         }}
         onClick={onClick}
       >
-        {text || children}
+        {text}
+        {children}
       </p>
     </div>
   );
