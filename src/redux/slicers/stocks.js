@@ -161,7 +161,8 @@ const GeneralReducer = createSlice({
             changeInPercent: action.payload.changeInPercent,
             changeInPrice: action.payload.changeInPrice,
             prevPrice: action.payload.prevPrice,
-            overallTrend: action.payload.overallTrend
+            overallTrend: action.payload.overallTrend,
+            fearGreedIndex: action.payload.fearGreedIndex
           };
         }
 
@@ -170,11 +171,9 @@ const GeneralReducer = createSlice({
 
       state.stocksSubscribe = filter;
 
-
       state.stocksData[action.payload.nameId] = {
         ...state.stocksData[action.payload.nameId],
-        color: action.payload.color,
-       
+        color: action.payload.color
       };
 
       state.stocksData = { ...state.stocksData };
@@ -234,7 +233,8 @@ const GeneralReducer = createSlice({
             prevPrice: updateData.prevPrice,
             currentPrice: updateData.currentPrice,
             updateDate: updateData?.updateDate,
-            overallTrend: updateData.overallTrend
+            overallTrend: updateData.overallTrend,
+            fearGreedIndex: updateData.fearGreedIndex
           };
         }
 
