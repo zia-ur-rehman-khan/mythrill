@@ -18,7 +18,8 @@ const GeneralReducer = createSlice({
     stockLimitExceed: false,
     trendData: [],
     notificationList: [],
-    notificationCount: 0
+    notificationCount: 0,
+    filter: ''
   },
   reducers: {
     setStocksListAction(state, action) {
@@ -316,6 +317,9 @@ const GeneralReducer = createSlice({
       state.notificationList = [{ ...newData }, ...data];
 
       state.notificationCount += 1;
+    },
+    setFilter(state, action) {
+      state.filter = action.payload;
     }
   }
 });
@@ -359,7 +363,8 @@ export const {
   getNotificationsCountRequestSuccess,
   seeNotificationsRequest,
   seeNotificationsRequestSuccess,
-  getlatestNotification
+  getlatestNotification,
+  setFilter
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

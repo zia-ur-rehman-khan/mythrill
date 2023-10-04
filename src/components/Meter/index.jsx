@@ -25,14 +25,25 @@ function GraphRender({ stock }) {
 
   const backgroundColor =
     stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? 'rgba(25, 62, 29, 0.3)'
+      ? 'rgba(25, 62, 29, 0.7)'
       : stock?.overallTrend?.toLowerCase() === ' buy'
       ? 'rgba(143, 198, 64, 0.3)'
       : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 'rgba(235, 33, 39, 0.3)'
-      : stock?.overallTrend?.toLowerCase() === ' strong sell'
       ? 'rgba(251, 176, 67, 0.3)'
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? 'rgba(235, 33, 39, 0.3)'
       : 'rgba(247, 236, 53, 0.3)';
+
+  const textColor =
+    stock?.overallTrend?.toLowerCase() === ' strong buy'
+      ? '#3DB54A'
+      : stock?.overallTrend?.toLowerCase() === ' buy'
+      ? '#8FC640'
+      : stock?.overallTrend?.toLowerCase() === ' sell'
+      ? '#FBB043'
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? '#EB2127'
+      : '#F7EC35';
 
   const options = {
     chart: {
@@ -41,7 +52,7 @@ function GraphRender({ stock }) {
     title: {
       text: stock?.overallTrend?.toUpperCase(),
       style: {
-        color: stock?.color // Specify your desired color here
+        color: textColor // Specify your desired color here
       }
     },
 

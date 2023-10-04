@@ -31,6 +31,7 @@ const Stock = () => {
   const stocksData = useSelector((state) => state?.stocks?.stocksData);
   const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
   const searchText = useSelector((state) => state?.user.search);
+  const filter = useSelector((state) => state?.stocks?.filter);
 
   const changeRoute = (id) => {
     navigate(`stock/${id}`);
@@ -68,7 +69,11 @@ const Stock = () => {
               >
                 <Space className="box" direction="vertical">
                   {data?.length > 0 && (
-                    <SmallChart color={stock?.color} data={data} />
+                    <SmallChart
+                      filter={filter}
+                      color={stock?.color}
+                      data={data}
+                    />
                   )}
                   <Space
                     direction="vertical"

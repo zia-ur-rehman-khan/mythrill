@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './styles.scss';
-import { Grid } from 'antd';
+import { Grid, Select, Space } from 'antd';
 import Market from './market';
 import { useParams, useLocation } from 'react-router-dom';
 import Stock from './stock';
@@ -37,14 +37,17 @@ import {
   getStocksNameRequest,
   getSubscribeDataRealTime,
   getSubscribeStocksRequest,
+  setFilter,
   setStocksDataAction,
   setStocksListAction
 } from '../../../redux/slicers/stocks';
-import { Loader } from '../../../components';
+import { CommonTextField, Loader } from '../../../components';
 import initializeSocket, { socket } from '../../../socket';
 import ChartExample from './stockDetaile/chart';
 import { SOCKET_URL } from '../../../config/webService';
 import { addToCache, getCachValue } from '../../../services/utils';
+import { css } from 'aphrodite';
+import { AppStyles } from '../../../theme';
 
 const { useBreakpoint } = Grid;
 
@@ -113,6 +116,10 @@ const Home = () => {
     return <Loader />;
   }
 
+  const handleChange = (value) => {
+    dispatch(setFilter(value));
+  };
+
   return (
     <>
       {!screens.lg ? (
@@ -120,14 +127,132 @@ const Home = () => {
           <div className="left-side">
             <Market isLoading={isLoading} width="90%" />
           </div>
-          <div className="right-side">{getContentByPathname}</div>
+          {pathname === HOME_ROUTE ? (
+            <div className={'home-filter'}>
+              <Space className="select-parent">
+                <CommonTextField text={'Duration'} />
+                <Select
+                  className="filter-select"
+                  defaultValue="all"
+                  style={{
+                    width: 200
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 'all',
+                      label: 'All'
+                    },
+                    {
+                      value: '5Min',
+                      label: '5 Minute'
+                    },
+                    {
+                      value: '15Min',
+                      label: '15 Minute'
+                    },
+                    {
+                      value: '30Min',
+                      label: '30 Minute'
+                    },
+                    {
+                      value: '1H',
+                      label: '1 Hour'
+                    },
+                    {
+                      value: '4H',
+                      label: '4 Hour'
+                    },
+                    {
+                      value: '8H',
+                      label: '8 Hour'
+                    },
+                    {
+                      value: '1D',
+                      label: '1 Day'
+                    },
+                    {
+                      value: '1W',
+                      label: '1 Week'
+                    },
+                    {
+                      value: '1M',
+                      label: '1 Month'
+                    }
+                  ]}
+                />
+              </Space>
+              <div className="right-home-side">{getContentByPathname}</div>
+            </div>
+          ) : (
+            <div className="right-side">{getContentByPathname}</div>
+          )}
         </div>
       ) : (
         <div className="main-home">
           <div className="left-side">
             <Market width="40%" isLoading={isLoading} />
           </div>
-          <div className="right-side">{getContentByPathname}</div>
+          {pathname === HOME_ROUTE ? (
+            <div className={'home-filter'}>
+              <Space className="select-parent">
+                <CommonTextField text={'Duration'} />
+                <Select
+                  className="filter-select"
+                  defaultValue="all"
+                  style={{
+                    width: 200
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: 'all',
+                      label: 'All'
+                    },
+                    {
+                      value: '5Min',
+                      label: '5 Minute'
+                    },
+                    {
+                      value: '15Min',
+                      label: '15 Minute'
+                    },
+                    {
+                      value: '30Min',
+                      label: '30 Minute'
+                    },
+                    {
+                      value: '1H',
+                      label: '1 Hour'
+                    },
+                    {
+                      value: '4H',
+                      label: '4 Hour'
+                    },
+                    {
+                      value: '8H',
+                      label: '8 Hour'
+                    },
+                    {
+                      value: '1D',
+                      label: '1 Day'
+                    },
+                    {
+                      value: '1W',
+                      label: '1 Week'
+                    },
+                    {
+                      value: '1M',
+                      label: '1 Month'
+                    }
+                  ]}
+                />
+              </Space>
+              <div className="right-home-side">{getContentByPathname}</div>
+            </div>
+          ) : (
+            <div className="right-side">{getContentByPathname}</div>
+          )}
         </div>
       )}
     </>
