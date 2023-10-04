@@ -20,9 +20,6 @@ const Suggestion = () => {
 
   const stocksList = useSelector((state) => state?.stocks?.allStocks);
 
-  let find = stocksList.filter(
-    (d) => d?.overallTrend?.toLowerCase() === ' strong buy'
-  );
   const navigate = useNavigate();
 
   const handelStock = (id) => {
@@ -103,8 +100,10 @@ const Suggestion = () => {
         setIsModalVisible={setIsOpen}
       >
         <CommonHeading
-          level={2}
-          text={'This stock is not in your suscribe list!!'}
+          level={3}
+          text={
+            'This stock is not in your subscribe list if you want to see detailes so please add it in your list!!'
+          }
         />
       </CommonModal>
     </Space>
