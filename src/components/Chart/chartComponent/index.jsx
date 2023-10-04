@@ -118,7 +118,7 @@ const ChartComponent = ({ chartType, data, color }) => {
       // inputEnabled: true, // Disable the input box
       // x: 30,
 
-      selected: 5,
+      // selected: 5,
 
       buttons: [
         {

@@ -1,8 +1,9 @@
 .meter {
+    border-radius: 10px;
+
     .highcharts-container {
         height: 136px !important;
-        background: #20232c;
-        border-radius: 10px;
+        // background: #20232c;
     }
     .highcharts-background {
         fill: transparent;

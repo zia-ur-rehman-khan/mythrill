@@ -14,14 +14,25 @@ function GraphRender({ stock }) {
 
   const meterValue =
     stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? 0
+      ? 12.5
       : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? 21
+      ? 38
       : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 54
+      ? 84
       : stock?.overallTrend?.toLowerCase() === ' strong sell'
-      ? 75
-      : 37.5;
+      ? 114
+      : 62;
+
+  const backgroundColor =
+    stock?.overallTrend?.toLowerCase() === ' strong buy'
+      ? 'rgba(25, 62, 29, 0.3)'
+      : stock?.overallTrend?.toLowerCase() === ' buy'
+      ? 'rgba(143, 198, 64, 0.3)'
+      : stock?.overallTrend?.toLowerCase() === ' sell'
+      ? 'rgba(235, 33, 39, 0.3)'
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? 'rgba(251, 176, 67, 0.3)'
+      : 'rgba(247, 236, 53, 0.3)';
 
   const options = {
     chart: {
@@ -41,7 +52,7 @@ function GraphRender({ stock }) {
         },
         data: [meterValue ?? 0],
         dial: {
-          backgroundColor: 'white'
+          backgroundColor: '#424244'
         },
         pivot: {
           backgroundColor: '#7665c1'
@@ -62,7 +73,7 @@ function GraphRender({ stock }) {
 
     yAxis: {
       min: 0,
-      max: 75,
+      max: 125,
       labels: {
         enabled: false // Disable the axis labels for the Y-axis
       },
@@ -76,18 +87,24 @@ function GraphRender({ stock }) {
         {
           from: 25,
           to: 50,
-          color: '#F7EC35',
+          color: '#8FC640',
           thickness: 15
         },
-        // {
-        //   from: 50,
-        //   to: 75,
-        //   color: '#F7EC35',
-        //   thickness: 15
-        // },
         {
           from: 50,
           to: 75,
+          color: '#F7EC35',
+          thickness: 15
+        },
+        {
+          from: 75,
+          to: 100,
+          color: '#FBB043',
+          thickness: 15
+        },
+        {
+          from: 100,
+          to: 125,
           color: '#EB2127',
           thickness: 15
         }
@@ -95,7 +112,12 @@ function GraphRender({ stock }) {
     }
   };
   return (
-    <div className="meter">
+    <div
+      className="meter"
+      style={{
+        backgroundColor: backgroundColor
+      }}
+    >
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
