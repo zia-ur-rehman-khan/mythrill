@@ -11,6 +11,7 @@ import {
 const GeneralReducer = createSlice({
   name: 'stocks',
   initialState: {
+    allStocks: [],
     stocks: [],
     stocksSubscribe: [],
     stocksUnSubscribe: [],
@@ -32,6 +33,7 @@ const GeneralReducer = createSlice({
 
     getAllStocksRequest() {},
     getAllStocksRequestSuccess(state, action) {
+      state.allStocks = action.payload;
       const unsubscribe = action?.payload?.filter((d) => d.subscribe === 0);
       state.stocksUnSubscribe = unsubscribe;
     },
@@ -199,6 +201,24 @@ const GeneralReducer = createSlice({
       });
 
       state.stocksUnSubscribe = filter;
+
+      const data2 = state.allStocks;
+
+      const filter2 = data2.map((d) => {
+        const match2 = action.payload.nameId === d.nameId;
+
+        if (match2) {
+          return {
+            ...d,
+            overallTrend: action.payload.overallTrend,
+            changeInPercent: action.payload.changeInPercent
+          };
+        }
+
+        return d;
+      });
+
+      state.allStocks = filter2;
     },
     stockLimitExceed(state, action) {
       state.stockLimitExceed = action.payload;
@@ -320,7 +340,8 @@ const GeneralReducer = createSlice({
     },
     setFilter(state, action) {
       state.filter = action.payload;
-    }
+    },
+    isSubscribeRequest(state, action) {}
   }
 });
 
@@ -364,7 +385,8 @@ export const {
   seeNotificationsRequest,
   seeNotificationsRequestSuccess,
   getlatestNotification,
-  setFilter
+  setFilter,
+  isSubscribeRequest
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

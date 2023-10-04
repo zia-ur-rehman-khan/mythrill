@@ -157,6 +157,12 @@ export const SEE_NOTIFICATIONS_REQUEST = {
   type: REQUEST_TYPE.GET
 };
 
+export const IS_SUBSCRIBE_REQUEST = {
+  route: 'stock/is-subscribed',
+  access_token_required: true,
+  type: REQUEST_TYPE.POST
+};
+
 export const REJISTER_REQUEST = {
   route: 'users/signup',
   access_token_required: false,

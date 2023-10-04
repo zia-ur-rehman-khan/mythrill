@@ -13,6 +13,7 @@ import {
   GET_NOTIFICATIONS_COUNT_REQUEST,
   GET_STOCK_NAMES,
   GET_SUBSCRIBE_STOCKS,
+  IS_SUBSCRIBE_REQUEST,
   SEE_NOTIFICATIONS_REQUEST,
   SET_FREQUENCY_REQUEST,
   STOCK_FAVOURITE,
@@ -56,6 +57,7 @@ import {
   getSubscribeStockesSuccess,
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
+  isSubscribeRequest,
   seeNotificationsRequest,
   seeNotificationsRequestSuccess,
   setFrequencyRequest,
@@ -548,6 +550,35 @@ function* seeNotifications() {
   }
 }
 
+function* isSubscribe() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(isSubscribeRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        IS_SUBSCRIBE_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response?.data);
+        // yield put(seeNotificationsRequestSuccess());
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
 export default function* root() {
   yield fork(getStockNames);
   yield fork(StockSubscribe);
@@ -564,4 +595,5 @@ export default function* root() {
   yield fork(getNotificationReadAll);
   yield fork(getNotificationsCount);
   yield fork(seeNotifications);
+  yield fork(isSubscribe);
 }

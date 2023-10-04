@@ -1,16 +1,49 @@
 import { Grid, Space } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { AppStyles, Colors, Images } from '../../../../../theme';
-import { CommonTextField } from '../../../../../components';
+import {
+  CommonHeading,
+  CommonModal,
+  CommonTextField
+} from '../../../../../components';
 import { css } from 'aphrodite';
 import './styles.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { isSubscribeRequest } from '../../../../../redux/slicers/stocks';
+import { useNavigate } from 'react-router-dom';
+import { STOCK_DETAILE_ROUTE } from '../../../../../constants';
 const { useBreakpoint } = Grid;
 
 const Suggestion = () => {
-  const current = [1, 2, 3, 4, 5];
-  const test = [1, 2, 3];
+  const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const screens = useBreakpoint();
+  const stocksList = useSelector((state) => state?.stocks?.allStocks);
+
+  let find = stocksList.filter(
+    (d) => d?.overallTrend?.toLowerCase() === ' strong buy'
+  );
+  const navigate = useNavigate();
+
+  const handelStock = (id) => {
+    dispatch(
+      isSubscribeRequest({
+        payloadData: { name_id: id },
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+            if (res?.data?.is_subscribe) {
+              navigate(STOCK_DETAILE_ROUTE.replace(':id', id));
+            } else {
+              setIsOpen(true);
+            }
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+  };
 
   return (
     <Space
@@ -32,34 +65,48 @@ const Suggestion = () => {
         </Space>
       </Space>
       <Space className={css([AppStyles.spaceBetween, AppStyles.w100])}>
-        {screens.lg
-          ? current.map((d) => (
-              <Space key={Math.random()}>
-                <img src={Images.netflix} width={'25px'} height={'25px'} />
-                <Space size={0} direction="vertical">
-                  <CommonTextField text={'Tesla'} />
-                  <CommonTextField
-                    text={'12.3%'}
-                    topClass={'small'}
-                    color={Colors.green}
-                  />
-                </Space>
+        {stocksList
+          ?.filter((d) => d?.overallTrend?.toLowerCase() === ' strong buy')
+          ?.slice(0, 4)
+          ?.map((t) => (
+            <Space key={Math.random()}>
+              <img
+                src={t?.src}
+                style={{ borderRadius: '50%' }}
+                width={'25px'}
+                height={'25px'}
+              />
+              <Space size={0} direction="vertical">
+                <CommonTextField
+                  className={`${css(AppStyles.ellipsisText)} text-title `}
+                  text={t.title}
+                  onClick={() => handelStock(t.nameId)}
+                />
+                <CommonTextField
+                  text={`${t.changeInPercent}%`}
+                  topClass={'small'}
+                  color={Colors.green}
+                />
               </Space>
-            ))
-          : test.map((d) => (
-              <Space key={Math.random()}>
-                <img src={Images.netflix} width={'25px'} height={'25px'} />
-                <Space size={0} direction="vertical">
-                  <CommonTextField text={'Tesla'} />
-                  <CommonTextField
-                    text={'12.3%'}
-                    topClass={'small'}
-                    color={Colors.green}
-                  />
-                </Space>
-              </Space>
-            ))}
+            </Space>
+          ))}
       </Space>
+      <CommonModal
+        title={
+          <CommonHeading
+            text={'Un Available'}
+            textAlign="center"
+            className={css(AppStyles.mTop20)}
+          />
+        }
+        isModalVisible={isOpen}
+        setIsModalVisible={setIsOpen}
+      >
+        <CommonHeading
+          level={2}
+          text={'This stock is not in your suscribe list!!'}
+        />
+      </CommonModal>
     </Space>
   );
 };

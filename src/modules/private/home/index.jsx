@@ -31,12 +31,14 @@ import {
   stocksdataManipulatorObject
 } from '../../../manipulators/stocksName';
 import {
+  getAllStocksRequest,
   getFavouriteStockRequest,
   getNotificationRequest,
   getNotificationsCountRequest,
   getStocksNameRequest,
   getSubscribeDataRealTime,
   getSubscribeStocksRequest,
+  getUnSubscribeDataRealTime,
   setFilter,
   setStocksDataAction,
   setStocksListAction
@@ -96,6 +98,19 @@ const Home = () => {
       })
     );
 
+    dispatch(
+      getAllStocksRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
+    );
+
     const listener1 = (...args) => {
       console.log('home data', JSON.parse(args));
       dispatch(
@@ -105,10 +120,20 @@ const Home = () => {
       );
     };
 
+    const listener2 = (...args) => {
+      dispatch(
+        getUnSubscribeDataRealTime(
+          stocksdataManipulatorObject(JSON.parse(args).data)
+        )
+      );
+    };
+
     socket.on('stock_updates', listener1);
+    socket.on('stock_name_updates', listener2);
 
     return () => {
       socket.off('stock_updates', listener1);
+      socket.off('stock_name_updates', listener2);
     };
   }, [data?.subscribedStocks]);
 
