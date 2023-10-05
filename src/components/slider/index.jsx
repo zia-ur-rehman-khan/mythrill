@@ -23,7 +23,7 @@ import { setCollapsedState } from '../../redux/slicers/stocks';
 
 const SideBarSlider = ({ isDrawer }) => {
   const [logout, setLogout] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
