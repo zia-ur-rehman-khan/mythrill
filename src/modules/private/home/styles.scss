@@ -7,7 +7,8 @@
 
 	.left-side {
 		background: master.$dark-color;
-		width: 30%;
+		width: 25%;
+		min-width: 290px;
 		padding: 10px;
 		border-radius: 12px;
 
@@ -63,7 +64,7 @@
 		}
 	}
 	.home-filter {
-		width: 70%;
+		width: 75%;
 		.select-parent {
 			margin-bottom: 20px;
 			display: flex;
@@ -96,7 +97,7 @@
 		background: master.$dark-color;
 		border-radius: 12px;
 		padding: 15px;
-		width: 70%;
+		width: 75%;
 
 		// overflow: hidden;
 		// transition: overflow-y 0.3s ease;

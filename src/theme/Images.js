@@ -71,6 +71,8 @@ import microsoft from '../assets/icons/microsoft.svg';
 import amazon from '../assets/icons/amazon.svg';
 import xrp from '../assets/icons/xrp.svg';
 import dodge from '../assets/icons/dodge.svg';
+import collapsed from '../assets/sidebar/collapsed.png';
+import close from '../assets/sidebar/close.png';
 
 export default {
   ErrorBackground2,
@@ -145,5 +147,7 @@ export default {
   microsoft,
   amazon,
   xrp,
-  dodge
+  dodge,
+  collapsed,
+  close
 };

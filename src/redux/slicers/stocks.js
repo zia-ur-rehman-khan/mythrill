@@ -20,7 +20,8 @@ const GeneralReducer = createSlice({
     trendData: [],
     notificationList: [],
     notificationCount: 0,
-    filter: ''
+    filter: '',
+    collapse: false
   },
   reducers: {
     setStocksListAction(state, action) {
@@ -341,7 +342,10 @@ const GeneralReducer = createSlice({
     setFilter(state, action) {
       state.filter = action.payload;
     },
-    isSubscribeRequest(state, action) {}
+    isSubscribeRequest(state, action) {},
+    setCollapsedState(state, action) {
+      state.collapse = action.payload;
+    }
   }
 });
 
@@ -386,7 +390,8 @@ export const {
   seeNotificationsRequestSuccess,
   getlatestNotification,
   setFilter,
-  isSubscribeRequest
+  isSubscribeRequest,
+  setCollapsedState
 } = GeneralReducer.actions;
 
 export default GeneralReducer.reducer;

@@ -29,6 +29,9 @@ const Stock = () => {
 
   const navigate = useNavigate();
   const stocksData = useSelector((state) => state?.stocks?.stocksData);
+  const collapse = useSelector((state) => state?.stocks?.collapse);
+  console.log('🚀 ~ file: index.jsx:33 ~ Stock ~ collapse:', collapse);
+
   const stocksList = useSelector((state) => state?.stocks?.stocksSubscribe);
   const searchText = useSelector((state) => state?.user.search);
   const filter = useSelector((state) => state?.stocks?.filter);
@@ -59,7 +62,7 @@ const Stock = () => {
 
             return (
               <Col
-                lg={{ span: 12 }}
+                lg={{ span: collapse ? 8 : 12 }}
                 md={{ span: 24 }}
                 sm={{ span: 24 }}
                 xs={{ span: 24 }}

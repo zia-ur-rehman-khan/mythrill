@@ -59,78 +59,88 @@ const Header = () => {
   ];
 
   return (
-    <header className="main-header">
-      <div className="mobile">
-        <img
-          src={Images.sidebar}
-          width={'18px'}
-          height={'18px'}
-          onClick={() => setIsMobile(true)}
-        />
-
+    <>
+      <header className="main-header">
         <div className="logo">
           <img
             src={Images.logo}
+            width={'132px'}
+            className={css(AppStyles.pointer)}
             onClick={() => changeRoute('/')}
-            width={'140px'}
           />
         </div>
-        <NotificationContent mobile />
-      </div>
-      <Space size={20} className="right-side">
-        <NotificationContent />
-        <Space className="profile" align="center" size={10}>
+        <div className="mobile">
           <img
-            src={data.profile_image || Images.profile}
-            width={'33.75px'}
-            height={'33.75px'}
-            style={{ borderRadius: '50%' }}
+            src={Images.sidebar}
+            width={'18px'}
+            height={'18px'}
+            onClick={() => setIsMobile(true)}
           />
-          <Space direction="vertical" align="baseline" size={3}>
-            <CommonTextField
-              text={data?.name}
-              fontSize={'10.5px'}
-              lineHeight={'10px'}
-              className={`${css(AppStyles.weight7)} ellipsis`}
-            />
-            <CommonTextField
-              text={data?.email}
-              fontSize={'9px'}
-              lineHeight={'10px'}
-              className={'ellipsis'}
-            />
-          </Space>
 
-          <CommonDropdown items={items}>
-            <FontAwesomeIcon
-              className={css(AppStyles.pointer)}
-              icon={faEllipsisVertical}
-            />
-          </CommonDropdown>
-        </Space>
-      </Space>
-
-      <Drawer
-        title={
           <div className="logo">
             <img
               src={Images.logo}
-              width="140px"
-              onClick={() => {
-                setIsMobile(false);
-                changeRoute('/');
-              }}
+              onClick={() => changeRoute('/')}
+              width={'140px'}
             />
           </div>
-        }
-        placement="left"
-        onClose={() => setIsMobile(false)}
-        open={isMobile}
-        width="60%"
-        className="side-drawer"
-      >
-        <SideBar isDrawer={'drawer'} />
-      </Drawer>
+          <NotificationContent mobile />
+        </div>
+        <Space size={20} className="right-side">
+          <NotificationContent />
+          <Space className="profile" align="center" size={10}>
+            <img
+              src={data.profile_image || Images.profile}
+              width={'33.75px'}
+              height={'33.75px'}
+              style={{ borderRadius: '50%' }}
+            />
+            <Space direction="vertical" align="baseline" size={3}>
+              <CommonTextField
+                text={data?.name}
+                fontSize={'10.5px'}
+                lineHeight={'10px'}
+                className={`${css(AppStyles.weight7)} ellipsis`}
+              />
+              <CommonTextField
+                text={data?.email}
+                fontSize={'9px'}
+                lineHeight={'10px'}
+                className={'ellipsis'}
+              />
+            </Space>
+
+            <CommonDropdown items={items}>
+              <FontAwesomeIcon
+                className={css(AppStyles.pointer)}
+                icon={faEllipsisVertical}
+              />
+            </CommonDropdown>
+          </Space>
+        </Space>
+
+        <Drawer
+          title={
+            <div className="logo">
+              <img
+                src={Images.logo}
+                width="140px"
+                onClick={() => {
+                  setIsMobile(false);
+                  changeRoute('/');
+                }}
+              />
+            </div>
+          }
+          placement="left"
+          onClose={() => setIsMobile(false)}
+          open={isMobile}
+          width="60%"
+          className="side-drawer"
+        >
+          <SideBar isDrawer={'drawer'} />
+        </Drawer>
+      </header>
       <CommonModal
         title={
           <CommonHeading
@@ -158,7 +168,7 @@ const Header = () => {
           );
         }}
       ></CommonModal>
-    </header>
+    </>
   );
 };
 
