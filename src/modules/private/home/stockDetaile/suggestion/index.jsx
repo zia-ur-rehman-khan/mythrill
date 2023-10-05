@@ -79,11 +79,14 @@ const Suggestion = () => {
                   text={t.title}
                   onClick={() => handelStock(t.nameId)}
                 />
-                <CommonTextField
-                  text={`${t.changeInPercent}%`}
-                  topClass={'small'}
-                  color={Colors.green}
-                />
+                <Space size={4} align="baseline">
+                  <CommonTextField
+                    text={`${t.changeInPercent}%`}
+                    topClass={'small'}
+                    color={Colors.green}
+                  />
+                  <img src={Images.up} />
+                </Space>
               </Space>
             </Space>
           ))}

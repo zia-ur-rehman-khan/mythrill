@@ -73,6 +73,7 @@ import xrp from '../assets/icons/xrp.svg';
 import dodge from '../assets/icons/dodge.svg';
 import collapsed from '../assets/sidebar/collapsed.png';
 import close from '../assets/sidebar/close.png';
+import up from '../assets/chartDetaile/up.png';
 
 export default {
   ErrorBackground2,
@@ -149,5 +150,6 @@ export default {
   xrp,
   dodge,
   collapsed,
-  close
+  close,
+  up
 };
