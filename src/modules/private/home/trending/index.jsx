@@ -81,7 +81,7 @@ const Trending = () => {
   const dispatch = useDispatch();
   const searchText = useSelector((state) => state?.user.search);
   const trend = useSelector((state) => state?.stocks?.trendData);
-  console.log("🚀 ~ file: index.jsx:84 ~ Trending ~ trend:", trend)
+  console.log('🚀 ~ file: index.jsx:84 ~ Trending ~ trend:', trend);
   const { data } = useSelector((state) => state?.user);
 
   const navigator = useNavigate();
@@ -145,12 +145,13 @@ const Trending = () => {
             </div>
           ),
           last: t.prevPrice,
-          current:t.currentPrice,
+          current: t.currentPrice,
           chg: `$${t.changeInPrice}`,
           chgPer: `${t?.changeInPercent}%`,
           fg: t?.fearGreedIndex,
           color: t?.color,
-          lastUpdated: t?.updateDate
+          lastUpdated: t?.updateDate,
+          overallTrend: t?.overallTrend
         };
 
         return data;
@@ -161,15 +162,29 @@ const Trending = () => {
   const filteredDataSource = useMemo(() => {
     switch (activeTab) {
       case 1:
-        return dataSource?.filter((t) => t.color === 'green');
+        return dataSource?.filter(
+          (t) =>
+            t.overallTrend?.toLowerCase() === ' buy' ||
+            t.overallTrend?.toLowerCase() === ' strong buy'
+        );
       case 2:
-        return dataSource?.filter((t) => t.color === 'yellow');
+        return dataSource?.filter(
+          (t) => t.overallTrend?.toLowerCase() === ' neutral'
+        );
       case 3:
-        return dataSource?.filter((t) => t.color === 'red');
+        return dataSource?.filter(
+          (t) =>
+            t.overallTrend?.toLowerCase() === ' sell' ||
+            t.overallTrend?.toLowerCase() === ' strong sell'
+        );
       default:
         return dataSource;
     }
   }, [activeTab, dataSource]);
+  console.log(
+    '🚀 ~ file: index.jsx:179 ~ filteredDataSource ~ filteredDataSource:',
+    filteredDataSource
+  );
 
   const handleTabClick = (tabIndex) => {
     setActiveTab(tabIndex);
@@ -192,10 +207,7 @@ const Trending = () => {
       <div className={`tabel-container`}>
         <div className="button-container">
           <Space>
-            <CommonHeading
-              level={3}
-              text={`${trendingFilter(activeTab)} `}
-            />
+            <CommonHeading level={3} text={`${trendingFilter(activeTab)} `} />
             <img
               src={Images[trendingImage(activeTab)]}
               width={'30px'}
