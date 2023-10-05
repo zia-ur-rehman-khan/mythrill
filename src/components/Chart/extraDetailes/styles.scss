@@ -24,6 +24,17 @@
     margin-top: 20px;
     width: 100%;
     justify-content: space-between;
+
+    .active {
+        transition: background 0.3s;
+        background: rgba(118, 101, 193, 0.1);
+        border-radius: 6px;
+        padding: 0 5px 0 5px;
+
+        svg > path {
+            fill: #7665c1;
+        }
+    }
 }
 
 .chart-view {
