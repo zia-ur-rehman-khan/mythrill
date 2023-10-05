@@ -21,7 +21,7 @@ const GeneralReducer = createSlice({
     notificationList: [],
     notificationCount: 0,
     filter: '',
-    collapse: false
+    collapse: true
   },
   reducers: {
     setStocksListAction(state, action) {
