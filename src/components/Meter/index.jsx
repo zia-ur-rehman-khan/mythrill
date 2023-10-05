@@ -8,6 +8,7 @@ HighchartsExporting(Highcharts);
 HighchartsMore(Highcharts);
 HighchartsAccessibility(Highcharts);
 import './styles.scss';
+import { CommonTextField } from '../common';
 
 function GraphRender({ stock }) {
   console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
@@ -134,6 +135,12 @@ function GraphRender({ stock }) {
       }}
     >
       <HighchartsReact highcharts={Highcharts} options={options} />
+      <CommonTextField
+        lineHeight={'30px'}
+        text={'M-trend'}
+        textAlign={'center'}
+        fontWeight={800}
+      />
     </div>
   );
 }
