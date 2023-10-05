@@ -46,6 +46,9 @@ function GraphRender({ stock }) {
       : '#F7EC35';
 
   const options = {
+    tooltip: {
+      enabled: false
+    },
     chart: {
       type: 'gauge'
     },
@@ -59,7 +62,7 @@ function GraphRender({ stock }) {
     series: [
       {
         dataLabels: {
-          enabled: false // Disable data labels for all series
+          enabled: false
         },
         data: [meterValue ?? 0],
         dial: {
@@ -70,6 +73,7 @@ function GraphRender({ stock }) {
         }
       }
     ],
+
     credits: {
       enabled: false
     },
