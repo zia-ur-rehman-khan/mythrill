@@ -88,33 +88,37 @@ function GraphRender({ stock }) {
     },
 
     yAxis: {
+      lineWidth: 0,
+
       min: 0,
       max: 125,
       labels: {
         enabled: false // Disable the axis labels for the Y-axis
       },
+      minorTickLength: 0,
+      tickLength: 0,
       plotBands: [
         {
           from: 0,
-          to: 25,
+          to: 20,
           color: '#3DB54A',
           thickness: 15
         },
         {
           from: 25,
-          to: 50,
+          to: 45,
           color: '#8FC640',
           thickness: 15
         },
         {
           from: 50,
-          to: 75,
+          to: 70,
           color: '#F7EC35',
           thickness: 15
         },
         {
           from: 75,
-          to: 100,
+          to: 95,
           color: '#FBB043',
           thickness: 15
         },

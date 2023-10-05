@@ -9,6 +9,11 @@
         fill: transparent;
     }
 
+    .greenBand {
+        stroke-width: 1px;
+        stroke: red;
+    }
+
     .highcharts-no-tooltip {
         display: none;
     }
