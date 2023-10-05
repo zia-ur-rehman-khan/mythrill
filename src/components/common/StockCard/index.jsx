@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import './styles.scss';
 import { Dropdown, Popover, Space } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AppStyles, Images } from '../../../theme';
 import { css } from 'aphrodite';
 import CommonDropdown from '../CommonDropdown';
@@ -39,6 +39,7 @@ const StockCard = ({ test, value, addIcon, count }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRemove, setIsRemove] = useState(false);
   const [isFavorite, setIsFavourite] = useState(false);
+  const { id } = useParams();
 
   const dispatch = useDispatch();
 
@@ -137,7 +138,7 @@ const StockCard = ({ test, value, addIcon, count }) => {
   };
 
   return (
-    <div className="main-card-parent">
+    <div className={`${nameId === id ? 'active' : ''} main-card-parent`}>
       <Space className="stockCard-main">
         <Space align="baseline">
           <CommonTextField text={`${count}.`} />

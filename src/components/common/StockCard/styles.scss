@@ -46,3 +46,9 @@
         background: rgb(35 37 44 / 78%);
     }
 }
+
+.active {
+    transition: all 0.3s;
+    background-color: rgba(57, 49, 98, 0.2);
+    border-radius: 10px;
+}
