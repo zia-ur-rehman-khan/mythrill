@@ -119,6 +119,7 @@ const ChartComponent = ({ chartType, data, color }) => {
       // x: 30,
 
       // selected: 5,
+      dropdown: 'always',
 
       buttons: [
         {
