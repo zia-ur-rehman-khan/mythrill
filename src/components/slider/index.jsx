@@ -57,16 +57,18 @@ const SideBarSlider = ({ isDrawer }) => {
   };
 
   const itemsss = [
-    getItem(
-      <CommonTextField text={'Home'} />,
-      '1',
-      <img width={'15px'} height={'15px'} src={Images.home} />
-    ),
-    getItem(
-      <CommonTextField text={'Setting'} />,
-      '2',
-      <img width={'15px'} height={'15px'} src={Images.setting} />
-    )
+    {
+      key: '1',
+      label: <CommonTextField text={'Home'} />,
+      icon: <img width={'15px'} height={'15px'} src={Images.home} />,
+      onClick: () => navigate('/')
+    },
+    {
+      key: '2',
+      label: <CommonTextField text={'Setting'} />,
+      icon: <img width={'15px'} height={'15px'} src={Images.setting} />,
+      onClick: () => navigate('/setting')
+    }
   ];
 
   const handelCollapsed = () => {
@@ -80,7 +82,7 @@ const SideBarSlider = ({ isDrawer }) => {
         <div className={'main-sideBars'}>
           <img
             className="collapsed-icon"
-            src={collapsed ? Images.collapsed : Images.close}
+            src={!collapsed ? Images.collapsed : Images.close}
             onClick={() => handelCollapsed()}
           />
 
