@@ -46,9 +46,9 @@ const StockDetailes = () => {
       (stock) => stock.nameId === id
     );
 
-    if (isEmptyValue(selectedStockData)) {
-      navigate(HOME_ROUTE);
-    }
+    // if (isEmptyValue(selectedStockData)) {
+    //   navigate(HOME_ROUTE);
+    // }
   }, [stocksSubscribe]);
 
   return (

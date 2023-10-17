@@ -67,10 +67,13 @@ function GraphRender({ stock }) {
         },
         data: [meterValue ?? 0],
         dial: {
-          backgroundColor: '#424244'
+          backgroundColor: '#FEFEFE',
+          baseWidth: 5
         },
         pivot: {
-          backgroundColor: '#7665c1'
+          backgroundColor: '#FEFEFE',
+          borderWidth: 10,
+          borderColor: '#FEFEFE'
         }
       }
     ],
@@ -81,9 +84,9 @@ function GraphRender({ stock }) {
 
     pane: {
       startAngle: -90,
-      endAngle: 89.9,
+      endAngle: 90,
       background: null,
-      center: ['50%', '80%'],
+      center: ['50%', '90%'],
       size: '200%'
     },
 
@@ -91,7 +94,7 @@ function GraphRender({ stock }) {
       lineWidth: 0,
 
       min: 0,
-      max: 125,
+      max: 250,
       labels: {
         enabled: false // Disable the axis labels for the Y-axis
       },
@@ -100,33 +103,74 @@ function GraphRender({ stock }) {
       plotBands: [
         {
           from: 0,
-          to: 20,
-          color: '#3DB54A',
-          thickness: 15
+          to: 50,
+          color: {
+            linearGradient: { x1: 0.1445, x2: 0.8459, y1: 0.1445, y2: 0.8459 },
+            stops: [
+              [0.1445, '#D34E4B'],
+              [0.8459, '#89100E']
+            ]
+          },
+          thickness: 45
+          // label: {
+          //   text: 'Strong Buy',
+          //   align: 'center',
+          //   style: {
+          //     color: '#ffffff',
+          //     fontSize: '8px'
+          //   },
+          //   verticalAlign: 'bottom',
+          //   y: 10,
+          //   x: 20
+          // }
         },
         {
-          from: 25,
-          to: 45,
-          color: '#8FC640',
-          thickness: 15
+          from: 55,
+          to: 100,
+          color: {
+            linearGradient: { x1: 0.1504, x2: 0.8328, y1: 0.1504, y2: 0.8328 },
+            stops: [
+              [0.1504, '#F77F3C'],
+              [0.8328, '#A33D03']
+            ]
+          },
+          thickness: 45
         },
         {
-          from: 50,
-          to: 70,
-          color: '#F7EC35',
-          thickness: 15
+          from: 105,
+          to: 150,
+          color: {
+            linearGradient: { x1: 0, x2: 1, y1: 0, y2: 0 },
+            stops: [
+              [-0.1818, '#FFCF65'],
+              [1, '#9E6D00']
+            ]
+          },
+          thickness: 45
         },
         {
-          from: 75,
-          to: 95,
-          color: '#FBB043',
-          thickness: 15
+          from: 155,
+          to: 200,
+          color: {
+            linearGradient: { x1: 0.2084, x2: 0.858, y1: 0.2084, y2: 0.858 },
+            stops: [
+              [0.2084, '#EECB39'],
+              [0.858, '#6F5900']
+            ]
+          },
+          thickness: 45
         },
         {
-          from: 100,
-          to: 125,
-          color: '#EB2127',
-          thickness: 15
+          from: 205,
+          to: 250,
+          color: {
+            linearGradient: { x1: 0.1763, x2: 0.8741, y1: 0.1763, y2: 0.8741 },
+            stops: [
+              [0.1763, '#71DF3E'],
+              [0.8741, '#2A7707']
+            ]
+          },
+          thickness: 45
         }
       ]
     }
