@@ -1,6 +1,9 @@
 @use "../../../../master.scss";
 
 .trending-main {
+    background: master.$dark-color;
+    border-radius: 12px;
+    padding: 15px;
     .tabel-container {
         background: master.$theme3-color;
         padding: 20px 15px 20px 15px;

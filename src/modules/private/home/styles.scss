@@ -68,6 +68,12 @@
 		width: 75%;
 
 		overflow-y: auto;
+
+		.detail-parent {
+			background: master.$dark-color;
+			border-radius: 12px;
+			padding: 15px;
+		}
 	}
 }
 

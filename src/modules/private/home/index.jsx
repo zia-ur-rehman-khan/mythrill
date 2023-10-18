@@ -69,10 +69,10 @@ const Home = () => {
   const getContentByPathname = useMemo(() => {
     if (pathname.startsWith('/stock/')) {
       return (
-        <>
+        <div className="detail-parent">
           <StockDetailes id={id} />
           <ChartExample />
-        </>
+        </div>
       );
     } else if (pathname === HOME_ROUTE) {
       return <Stock id={id} />;
