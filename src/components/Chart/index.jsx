@@ -15,7 +15,7 @@ const { useBreakpoint } = Grid;
 
 const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
   const [chartType, setChartType] = useState('areaspline');
-  const [chartView, setChartView] = useState('myThril');
+  const [chartView, setChartView] = useState('trading');
 
   const screens = useBreakpoint();
 

@@ -117,19 +117,19 @@ const ChartView = ({ chartView, chartviewChange, stockId }) => {
         <Space size={0} className={`view-tab ${css(AppStyles.theme3Color)}`}>
           <Space
             onClick={() => {
-              chartviewChange('myThril');
-            }}
-            className={`tab ${chartView === 'myThril' && 'active'}`}
-          >
-            <CommonTextField text={'Mythril'} />
-          </Space>
-          <Space
-            onClick={() => {
               chartviewChange('trading');
             }}
             className={`tab ${chartView === 'trading' && 'active'}`}
           >
             <CommonTextField text={'Chart'} />
+          </Space>
+          <Space
+            onClick={() => {
+              chartviewChange('myThril');
+            }}
+            className={`tab ${chartView === 'myThril' && 'active'}`}
+          >
+            <CommonTextField text={'Mythril'} />
           </Space>
         </Space>
       </Space>
