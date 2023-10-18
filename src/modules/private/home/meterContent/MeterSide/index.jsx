@@ -50,7 +50,7 @@ const MeterSide = ({ select }) => {
               />
               <Divider />
               <CommonTextField
-                text={t == null ? 'Neutral' : t}
+                text={t == null ? 'NEUTRAL' : t?.toUpperCase()}
                 fontWeight={600}
                 topClass={'small'}
               />
