@@ -145,6 +145,7 @@ const UserInfo = () => {
           profileImage={data?.profile_image}
           setFile={setFile}
           file={file}
+          setDisabled={setDisabled}
         />
 
         <Row gutter={[20, 10]}>

@@ -12,14 +12,15 @@ const getBase64 = (img, callback) => {
   reader.readAsDataURL(img);
 };
 
-const ProfileImage = ({ setFile, file, profileImage }) => {
+const ProfileImage = ({ setFile, file, profileImage, setDisabled }) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState(profileImage);
 
   const handleChange = (file) => {
     setLoading(true);
-    setFile(file?.fileList[file?.fileList.length - 1].originFileObj ?? null);
 
+    setFile(file?.fileList[file?.fileList.length - 1].originFileObj ?? null);
+    setDisabled(false);
     getBase64(
       file?.fileList[file?.fileList.length - 1].originFileObj,
       (url) => {
