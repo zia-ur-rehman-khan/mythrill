@@ -547,7 +547,7 @@ export const startFilter = (filter) => {
       start = moment().subtract(1, 'day').valueOf();
       break;
     case '1W':
-      start = moment(end).subtract(1, 'week').valueOf();
+      start = moment().subtract(1, 'week').valueOf();
       break;
     case '1M':
       start = moment().subtract(1, 'month').valueOf();

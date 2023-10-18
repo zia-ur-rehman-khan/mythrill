@@ -20,7 +20,7 @@ const GeneralReducer = createSlice({
     trendData: [],
     notificationList: [],
     notificationCount: 0,
-    filter: '',
+    filter: 'all',
     collapse: true
   },
   reducers: {
