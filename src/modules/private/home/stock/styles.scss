@@ -1,24 +1,59 @@
 @use "../../../../master.scss";
 
-.child {
-    display: flex;
-    justify-content: center;
-    .box {
-        background: #262635;
-        border-radius: 10px;
-        width: 100%;
-        cursor: pointer;
+.stock-parent {
+    .filter-select {
+        .ant-select-selector {
+            background-color: master.$dark-color !important;
+            border: none !important;
+            color: #ffffff !important;
+        }
+        .ant-select-arrow {
+            color: #ffffff !important;
+        }
+    }
+    .stock-content {
+        background: master.$dark-color;
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 20px;
+
+        .child {
+            display: flex;
+            justify-content: center;
+            .box {
+                background: #262635;
+                border-radius: 10px;
+                width: 100%;
+                cursor: pointer;
+            }
+        }
+
+        .empty-stock {
+            gap: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            button {
+                width: 225px;
+                max-width: 300px;
+            }
+        }
     }
 }
 
-.empty-stock {
-    gap: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    button {
-        width: 225px;
-        max-width: 300px;
+.ant-select-dropdown {
+    background: master.$theme3-color !important;
+    .rc-virtual-list-holder-inner {
+        gap: 5px;
+    }
+    .ant-select-item {
+        color: #ffffff !important;
+    }
+    .ant-select-item-option-active {
+        background-color: master.$theme2-color !important;
+    }
+    .ant-select-item-option-selected {
+        background-color: master.$theme2-color !important;
     }
 }

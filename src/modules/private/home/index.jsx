@@ -41,7 +41,8 @@ import {
   getUnSubscribeDataRealTime,
   setFilter,
   setStocksDataAction,
-  setStocksListAction
+  setStocksListAction,
+  trendingListRequest
 } from '../../../redux/slicers/stocks';
 import { CommonTextField, Loader } from '../../../components';
 import initializeSocket, { socket } from '../../../socket';
@@ -50,6 +51,7 @@ import { SOCKET_URL } from '../../../config/webService';
 import { addToCache, getCachValue } from '../../../services/utils';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../../theme';
+import MeterContent from './meterContent';
 
 const { useBreakpoint } = Grid;
 
@@ -81,6 +83,20 @@ const Home = () => {
   useEffect(() => {
     const socket = initializeSocket(
       `wss://${SOCKET_URL}?stocks=${data?.subscribedStocks || ''}`
+    );
+    console.log('🚀 ~ file: index.jsx:87 ~ useEffect ~ socket:', socket);
+
+    dispatch(
+      trendingListRequest({
+        payloadData: {},
+        responseCallback: (res) => {
+          if (res.status) {
+            console.log(res, 'res');
+          } else {
+            console.log(res.errors, 'error');
+          }
+        }
+      })
     );
 
     dispatch(
@@ -128,22 +144,30 @@ const Home = () => {
       );
     };
 
+    const listener3 = (...args) => {
+      console.log(
+        'trending data',
+        stocksdataManipulatorObject(JSON.parse(args).data)
+      );
+      dispatch(
+        getTrendDataRealTime(stocksdataManipulatorObject(JSON.parse(args).data))
+      );
+    };
+
     socket.on('stock_updates', listener1);
     socket.on('stock_name_updates', listener2);
+    socket.on('trending_stock_updates', listener3);
 
     return () => {
       socket.off('stock_updates', listener1);
       socket.off('stock_name_updates', listener2);
+      socket.on('trending_stock_updates', listener3);
     };
   }, [data?.subscribedStocks]);
 
   if (isLoading) {
     return <Loader />;
   }
-
-  const handleChange = (value) => {
-    dispatch(setFilter(value));
-  };
 
   return (
     <>
@@ -152,132 +176,16 @@ const Home = () => {
           <div className="left-side">
             <Market isLoading={isLoading} width="90%" />
           </div>
-          {pathname === HOME_ROUTE ? (
-            <div className={'home-filter'}>
-              <Space className="select-parent">
-                <CommonTextField text={'Duration'} />
-                <Select
-                  className="filter-select"
-                  defaultValue="all"
-                  style={{
-                    width: 200
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: 'all',
-                      label: 'All'
-                    },
-                    {
-                      value: '5Min',
-                      label: '5 Minute'
-                    },
-                    {
-                      value: '15Min',
-                      label: '15 Minute'
-                    },
-                    {
-                      value: '30Min',
-                      label: '30 Minute'
-                    },
-                    {
-                      value: '1H',
-                      label: '1 Hour'
-                    },
-                    {
-                      value: '4H',
-                      label: '4 Hour'
-                    },
-                    {
-                      value: '8H',
-                      label: '8 Hour'
-                    },
-                    {
-                      value: '1D',
-                      label: '1 Day'
-                    },
-                    {
-                      value: '1W',
-                      label: '1 Week'
-                    },
-                    {
-                      value: '1M',
-                      label: '1 Month'
-                    }
-                  ]}
-                />
-              </Space>
-              <div className="right-home-side">{getContentByPathname}</div>
-            </div>
-          ) : (
-            <div className="right-side">{getContentByPathname}</div>
-          )}
+
+          <div className="right-side">{getContentByPathname}</div>
         </div>
       ) : (
         <div className="main-home">
           <div className="left-side">
             <Market width="40%" isLoading={isLoading} />
           </div>
-          {pathname === HOME_ROUTE ? (
-            <div className={'home-filter'}>
-              <Space className="select-parent">
-                <CommonTextField text={'Duration'} />
-                <Select
-                  className="filter-select"
-                  defaultValue="all"
-                  style={{
-                    width: 200
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: 'all',
-                      label: 'All'
-                    },
-                    {
-                      value: '5Min',
-                      label: '5 Minute'
-                    },
-                    {
-                      value: '15Min',
-                      label: '15 Minute'
-                    },
-                    {
-                      value: '30Min',
-                      label: '30 Minute'
-                    },
-                    {
-                      value: '1H',
-                      label: '1 Hour'
-                    },
-                    {
-                      value: '4H',
-                      label: '4 Hour'
-                    },
-                    {
-                      value: '8H',
-                      label: '8 Hour'
-                    },
-                    {
-                      value: '1D',
-                      label: '1 Day'
-                    },
-                    {
-                      value: '1W',
-                      label: '1 Week'
-                    },
-                    {
-                      value: '1M',
-                      label: '1 Month'
-                    }
-                  ]}
-                />
-              </Space>
-              <div className="right-home-side">{getContentByPathname}</div>
-            </div>
-          ) : (
-            <div className="right-side">{getContentByPathname}</div>
-          )}
+
+          <div className="right-side">{getContentByPathname}</div>
         </div>
       )}
     </>

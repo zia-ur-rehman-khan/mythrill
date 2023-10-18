@@ -1,0 +1,29 @@
+.meterSide-parent {
+    background: #121212;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    height: 100%;
+
+    .meterSide-left {
+        width: 50%;
+
+        .list {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .ant-divider {
+            min-width: 0;
+            width: 45%;
+            border-color: #d9d9d966;
+            margin: 0;
+        }
+    }
+    .meterSide-right {
+        width: 55%;
+    }
+}

@@ -204,39 +204,84 @@ export function stockGraphManipulator(list = []) {
   }
 }
 
-// export function packagesManipulator(subscription = {}) {
-//   // console.log(stock, 'stock');
-//   try {
-//     if (_.isEmpty(subscription)) return {};
+export function trendGraphManipulator(list = []) {
+  try {
+    if (_.isEmpty(list) ?? !list?.length) {
+      return [];
+    }
 
-//     const payload = {};
+    const stockList = [];
 
-//     payload.basic = {
-//       options: subscription?.basic,
-//       title: 'Basic',
-//       stock: '10'
-//     };
+    for (const stock of list) {
+      const payload = {};
 
-//     payload.advance = {
-//       options: subscription?.advance,
-//       title: 'Advanced',
-//       stock: '25'
-//     };
+      console.log(stock, 'trendaData');
 
-//     payload.platinum = {
-//       options: subscription?.platinum,
-//       title: 'Platinum',
-//       stock: '50'
-//     };
+      payload.title = stock?.name;
+      payload.changeInPercent = stock?.change_in_percent ?? 'n/a';
+      payload.changeInPrice = stock?.change_in_price ?? 'n/a';
+      payload.coin = stock?.coin ?? '';
+      payload.currentPrice = stock?.current_price ?? 'n/a';
+      payload.date =
+        moment(new Date(stock?.createdAt)).format(FORMAT) ??
+        moment().format(FORMAT);
+      payload.updateDate = moment(new Date(stock?.updatedAt)).fromNow();
+      payload.fullName = stock?.fullName ?? '';
+      payload.fearGreedIndex = stock?.fear_greed_index ?? 'n/a';
+      payload.nameId = stock?.name_id ?? '';
+      payload.overallTrend = stock?.overall_trend ?? '';
+      payload.prevPrice = stock?.prev_price ?? 'n/a';
+      payload.src = StockIcons[stock?.name_id] || Images.bitCoin;
+      payload.preClosed = stock?.timeframe;
+      payload.preData =
+        stock?.trending_stock_data == null
+          ? []
+          : trendPreData(stock?.trending_stock_data);
+      payload.color =
+        stock?.overall_trend?.toLowerCase() === ' strong buy'
+          ? '#3DB54A'
+          : stock?.overall_trend?.toLowerCase() === ' buy'
+          ? '#3DB54A'
+          : stock?.overall_trend?.toLowerCase() === ' sell'
+          ? '#EB2127'
+          : stock?.overall_trend?.toLowerCase() === ' strong sell'
+          ? '#EB2127'
+          : '#F7EC35';
 
-//     payload.platinum = {
-//       options: subscription?.professional,
-//       title: 'Professional Tier',
-//       stock: '100'
-//     };
+      stockList.push(payload);
+    }
 
-//     return payload;
-//   } catch (error) {
-//     console.error('singleStockNameManipulator error --->>> ', error);
-//   }
-// }
+    return stockList;
+  } catch (error) {
+    console.error('trendGraphManipulator error --->>>> ', error);
+    return [];
+  }
+}
+
+export function trendPreData(list = []) {
+  try {
+    if (_.isEmpty(list) ?? !list?.length) {
+      return [];
+    }
+
+    const stockList = [];
+
+    for (const stock of list) {
+      const payload = {};
+
+      console.log(stock, 'trendaData');
+
+      payload.overallTrend = stock?.overall_trend ?? '';
+      payload.date =
+        moment(new Date(stock?.createdAt)).format(FORMAT) ??
+        moment().format(FORMAT);
+
+      stockList.push(payload);
+    }
+
+    return stockList;
+  } catch (error) {
+    console.error('trendPreData error --->>>> ', error);
+    return [];
+  }
+}

@@ -69,7 +69,8 @@ import {
   stockGraphManipulator,
   stocksNameManipulator,
   stocksdataManipulator,
-  stocksdataManipulatorObject
+  stocksdataManipulatorObject,
+  trendGraphManipulator
 } from '../../manipulators/stocksName';
 import { socketTokenUpdate } from '../slicers/user';
 
@@ -299,7 +300,7 @@ function* trendingList() {
         if (responseCallback) responseCallback(response);
         yield put(
           trendingListRequestSuccess(
-            stockGraphManipulator(response?.data?.data)
+            trendGraphManipulator(response?.data?.data)
           )
         );
       } else {

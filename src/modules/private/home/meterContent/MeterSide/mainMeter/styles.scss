@@ -1,0 +1,13 @@
+.main-meter {
+    // width: 200px;
+    // height: 200px;
+
+    :first-child {
+        display: flex;
+        justify-content: center;
+    }
+
+    .highcharts-no-tooltip {
+        display: none;
+    }
+}

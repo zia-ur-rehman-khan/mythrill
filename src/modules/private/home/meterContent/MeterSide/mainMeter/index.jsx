@@ -8,56 +8,31 @@ HighchartsExporting(Highcharts);
 HighchartsMore(Highcharts);
 HighchartsAccessibility(Highcharts);
 import './styles.scss';
-import { CommonTextField } from '../common';
+import { CommonTextField } from '../../../../../../components';
 
-function GraphRender({ stock }) {
-  console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
-
+function MainMeter({ value }) {
   const meterValue =
-    stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? 12.5
-      : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? 38
-      : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 84
-      : stock?.overallTrend?.toLowerCase() === ' strong sell'
-      ? 114
-      : 62;
-
-  const backgroundColor =
-    stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? 'rgba(25, 62, 29, 0.7)'
-      : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? 'rgba(143, 198, 64, 0.3)'
-      : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 'rgba(251, 176, 67, 0.3)'
-      : stock?.overallTrend?.toLowerCase() === ' strong sell'
-      ? 'rgba(235, 33, 39, 0.3)'
-      : 'rgba(247, 236, 53, 0.3)';
-
-  const textColor =
-    stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? '#3DB54A'
-      : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? '#8FC640'
-      : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? '#FBB043'
-      : stock?.overallTrend?.toLowerCase() === ' strong sell'
-      ? '#EB2127'
-      : '#F7EC35';
+    value?.toLowerCase() === ' strong buy'
+      ? 50
+      : value?.toLowerCase() === ' buy'
+      ? 145
+      : value?.toLowerCase() === ' sell'
+      ? 350
+      : value?.toLowerCase() === ' strong sell'
+      ? 450
+      : 250;
 
   const options = {
     tooltip: {
       enabled: false
     },
     chart: {
-      type: 'gauge'
+      type: 'gauge',
+      height: 160,
+      width: 245
     },
     title: {
-      text: stock?.overallTrend?.toUpperCase(),
-      style: {
-        color: textColor // Specify your desired color here
-      }
+      text: null
     },
 
     series: [
@@ -86,8 +61,8 @@ function GraphRender({ stock }) {
       startAngle: -90,
       endAngle: 90,
       background: null,
-      center: ['50%', '90%'],
-      size: '200%'
+      center: ['50%', '95%'],
+      size: '180%'
     },
 
     yAxis: {
@@ -176,21 +151,18 @@ function GraphRender({ stock }) {
     }
   };
   return (
-    <div
-      className="meter"
-      style={{
-        backgroundColor: backgroundColor
-      }}
-    >
+    <div className="main-meter">
       <HighchartsReact highcharts={Highcharts} options={options} />
       <CommonTextField
         lineHeight={'30px'}
         text={'M-trend'}
         textAlign={'center'}
         fontWeight={800}
+        color={'#ffffff'}
+        fontSize={'20px'}
       />
     </div>
   );
 }
 
-export default GraphRender;
+export default MainMeter;
