@@ -16,6 +16,7 @@ import {
 import { checkPasswordValidation, isEmailValid } from '../services/utils';
 import { Images } from '../theme';
 import PremiumSubscription from '../modules/private/premiumSubscription';
+import moment from 'moment';
 
 const { home, share, setting } = Images;
 
@@ -518,4 +519,40 @@ export const StockIcons = {
   amazoncom_inc: amazon,
   xrp__united_states_dollar: xrp,
   dogecoin__united_states_dollar: dodge
+};
+
+export const startFilter = (filter) => {
+  let start;
+
+  switch (filter) {
+    case '5Min':
+      start = moment().subtract(5, 'minutes').valueOf();
+      break;
+    case '15Min':
+      start = moment().subtract(15, 'minutes').valueOf();
+      break;
+    case '30Min':
+      start = moment().subtract(30, 'minutes').valueOf();
+      break;
+    case '1H':
+      start = moment().subtract(1, 'hour').valueOf();
+      break;
+    case '4H':
+      start = moment().subtract(4, 'hours').valueOf();
+      break;
+    case '8H':
+      start = moment().subtract(8, 'hours').valueOf();
+      break;
+    case '1D':
+      start = moment().subtract(1, 'day').valueOf();
+      break;
+    case '1W':
+      start = moment(end).subtract(1, 'week').valueOf();
+      break;
+    case '1M':
+      start = moment().subtract(1, 'month').valueOf();
+      break;
+  }
+
+  return start;
 };

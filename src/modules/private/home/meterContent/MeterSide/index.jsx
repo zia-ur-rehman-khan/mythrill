@@ -10,10 +10,26 @@ import { css } from 'aphrodite';
 import { AppStyles } from '../../../../../theme';
 import MainMeter from './mainMeter';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
+import { startFilter } from '../../../../../constants';
 
 const MeterSide = ({ select }) => {
   const trend = useSelector((state) => state?.stocks?.trendData);
-  console.log('🚀 ~ file: index.jsx:17 ~ MeterSide ~ trend:', trend);
+  const filter = useSelector((state) => state?.stocks?.filter);
+
+  let meterValue = trend[select]?.overallTrend;
+
+  const end = Date.now();
+
+  const filteredData = trend[select]?.preData.filter(
+    (t) =>
+      moment(t.date).valueOf() >= startFilter(filter) &&
+      moment(t.date).valueOf() <= end
+  );
+
+  if (filteredData?.length > 0) {
+    meterValue = filteredData[0]?.overallTrend;
+  }
 
   return (
     <div className="meterSide-parent">
@@ -43,7 +59,7 @@ const MeterSide = ({ select }) => {
         </div>
       </div>
       <div className="meterSide-right">
-        <MainMeter value={trend[select]?.overallTrend} />
+        <MainMeter filteredData={filteredData} value={meterValue} />
       </div>
     </div>
   );

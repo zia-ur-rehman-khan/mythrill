@@ -38,6 +38,7 @@ import {
   getStocksNameRequest,
   getSubscribeDataRealTime,
   getSubscribeStocksRequest,
+  getTrendDataRealTime,
   getUnSubscribeDataRealTime,
   setFilter,
   setStocksDataAction,

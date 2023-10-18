@@ -58,7 +58,7 @@ const Stock = () => {
   return (
     <div className="stock-parent">
       <Space className="select-parent">
-        <CommonTextField text={'Duration'} />
+        <CommonTextField text={'Timeframe:'} />
         <Select
           className="filter-select"
           defaultValue="all"
