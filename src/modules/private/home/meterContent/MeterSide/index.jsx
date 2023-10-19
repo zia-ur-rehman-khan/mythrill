@@ -21,7 +21,7 @@ const MeterSide = ({ select }) => {
 
   const end = Date.now();
 
-  const filteredData = trend[select]?.preData.filter(
+  const filteredData = trend[select]?.preData?.filter(
     (t) =>
       moment(t.date).valueOf() >= startFilter(filter) &&
       moment(t.date).valueOf() <= end
@@ -34,7 +34,15 @@ const MeterSide = ({ select }) => {
   return (
     <div className="meterSide-parent">
       <div className="meterSide-left">
-        <CommonHeading level={3} text={'NASDAQ'} />
+        <CommonHeading
+          className="title-ellip"
+          level={3}
+          text={
+            trend[select]?.title
+              ? trend[select]?.title?.toUpperCase()
+              : 'Stock Not Selected'
+          }
+        />
         <CommonTextField
           className={css(AppStyles.mTop15)}
           text={'Previous Closes'}
