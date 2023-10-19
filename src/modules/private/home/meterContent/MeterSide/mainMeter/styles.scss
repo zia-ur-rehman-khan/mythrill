@@ -7,6 +7,27 @@
         justify-content: center;
     }
 
+    .label {
+        fill: #ffffff !important;
+        font-size: 8px !important;
+        font-weight: 700;
+    }
+
+    .strong-sell {
+        transform: translate(-80px, 96px) rotate(-69deg);
+    }
+    .sell {
+        transform: translate(21px, 35px) rotate(-41deg);
+    }
+    .neutral {
+        transform: translate(-25px, 18px);
+    }
+    .buy {
+        transform: translate(63px, -181px) rotate(40deg);
+    }
+    .strong-buy {
+        transform: translate(173px, -118px) rotate(68deg);
+    }
     .highcharts-no-tooltip {
         display: none;
     }

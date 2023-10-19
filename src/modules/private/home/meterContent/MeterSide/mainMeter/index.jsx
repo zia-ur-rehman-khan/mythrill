@@ -86,18 +86,11 @@ function MainMeter({ value }) {
               [0.8459, '#89100E']
             ]
           },
-          thickness: 65
-          // label: {
-          //   text: 'Strong Buy',
-          //   align: 'center',
-          //   style: {
-          //     color: '#ffffff',
-          //     fontSize: '8px'
-          //   },
-          //   verticalAlign: 'bottom',
-          //   y: 10,
-          //   x: 20
-          // }
+          thickness: 65,
+          label: {
+            text: 'Strong Sell',
+            className: 'label strong-sell'
+          }
         },
         {
           from: 105,
@@ -109,7 +102,11 @@ function MainMeter({ value }) {
               [0.8328, '#A33D03']
             ]
           },
-          thickness: 65
+          thickness: 65,
+          label: {
+            text: 'Sell',
+            className: 'label sell'
+          }
         },
         {
           from: 205,
@@ -121,7 +118,11 @@ function MainMeter({ value }) {
               [1, '#9E6D00']
             ]
           },
-          thickness: 65
+          thickness: 65,
+          label: {
+            text: 'Neutral',
+            className: 'label neutral'
+          }
         },
         {
           from: 305,
@@ -133,7 +134,11 @@ function MainMeter({ value }) {
               [0.858, '#6F5900']
             ]
           },
-          thickness: 65
+          thickness: 65,
+          label: {
+            text: 'Strong Buy',
+            className: 'label strong-buy'
+          }
         },
         {
           from: 405,
@@ -145,7 +150,11 @@ function MainMeter({ value }) {
               [0.8741, '#2A7707']
             ]
           },
-          thickness: 65
+          thickness: 65,
+          label: {
+            text: 'Buy',
+            className: 'label buy'
+          }
         }
       ]
     }
