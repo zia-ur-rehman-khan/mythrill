@@ -5,6 +5,7 @@ import moment from 'moment';
 import './styles.scss';
 import { css } from 'aphrodite';
 import { AppStyles } from '../../../theme';
+import { startFilter } from '../../../constants';
 
 const SmallChart = ({ color, data, filter }) => {
   const options = { style: 'currency', currency: 'USD' };
@@ -191,39 +192,7 @@ const SmallChart = ({ color, data, filter }) => {
 
     const end = Date.now();
 
-    let start;
-
-    switch (filter) {
-      case '5Min':
-        start = moment().subtract(5, 'minutes').valueOf();
-        break;
-      case '15Min':
-        start = moment().subtract(15, 'minutes').valueOf();
-        break;
-      case '30Min':
-        start = moment().subtract(30, 'minutes').valueOf();
-        break;
-      case '1H':
-        start = moment().subtract(1, 'hour').valueOf();
-        break;
-      case '4H':
-        start = moment().subtract(4, 'hours').valueOf();
-        break;
-      case '8H':
-        start = moment().subtract(8, 'hours').valueOf();
-        break;
-      case '1D':
-        start = moment().subtract(1, 'day').valueOf();
-        break;
-      case '1W':
-        start = moment(end).subtract(1, 'week').valueOf();
-        break;
-      case '1M':
-        start = moment().subtract(1, 'month').valueOf();
-        break;
-    }
-
-    chart?.xAxis[0].setExtremes(start, end);
+    chart?.xAxis[0].setExtremes(startFilter(filter), end);
   }, [filter]);
 
   return (

@@ -11,6 +11,7 @@ import ChartComponent from './chartComponent';
 import ChartType from './chartview';
 import ChartView from './chartview';
 import TradingViewWidget from '../TradingView';
+import GraphFilter from '../graphFilter';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
@@ -58,17 +59,20 @@ const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
       )}
       {chartView === 'myThril' ? (
         chartType && (
-          <div className={`bigchart ${css(AppStyles.mTop20)}`}>
-            {screens.lg && (
-              <ExtraDetailes
-                color={color}
-                className="extra-detailes"
-                chartChange={chartChange}
-                chartType={chartType}
-              />
-            )}
-            {chartComponent}
-          </div>
+          <>
+            <GraphFilter />
+            <div className={`bigchart`}>
+              {screens.lg && (
+                <ExtraDetailes
+                  color={color}
+                  className="extra-detailes"
+                  chartChange={chartChange}
+                  chartType={chartType}
+                />
+              )}
+              {chartComponent}
+            </div>
+          </>
         )
       ) : (
         <>

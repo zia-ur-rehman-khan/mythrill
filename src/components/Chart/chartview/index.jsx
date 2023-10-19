@@ -101,7 +101,8 @@ const ChartView = ({ chartView, chartviewChange, stockId }) => {
         className={css(
           AppStyles.spaceBetween,
           AppStyles.w100,
-          AppStyles.mTop15
+          AppStyles.mTop15,
+          AppStyles.mBottom10
         )}
       >
         <Space

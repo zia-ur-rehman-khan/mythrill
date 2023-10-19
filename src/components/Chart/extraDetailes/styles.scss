@@ -5,6 +5,7 @@
     justify-content: flex-end;
     width: 50%;
     padding-top: 4px;
+    top: -40px;
     @media (max-width: 990px) {
         padding-top: 10px;
     }
@@ -22,6 +23,7 @@
 
 .chart-above-detailes {
     margin-top: 20px;
+    margin-bottom: 15px;
     width: 100%;
     justify-content: space-between;
 

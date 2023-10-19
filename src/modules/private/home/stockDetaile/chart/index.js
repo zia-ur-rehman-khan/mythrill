@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Chart from '../../../../../components/Chart';
+import { GraphFilter } from '../../../../../components';
 
 const ChartExample = () => {
   const { id } = useParams();

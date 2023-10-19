@@ -8,10 +8,12 @@ import { stocksdataManipulatorObject } from '../../../manipulators/stocksName';
 import initializeSocket, { socket } from '../../../socket';
 import { useSelector } from 'react-redux';
 import { SOCKET_URL } from '../../../config/webService';
+import { startFilter } from '../../../constants';
 
 const ChartComponent = ({ chartType, data, color }) => {
   const chartRef = useRef(null);
   const userData = useSelector((state) => state?.user?.data);
+  const filter = useSelector((state) => state?.stocks?.filter);
 
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
@@ -114,79 +116,82 @@ const ChartComponent = ({ chartType, data, color }) => {
       // max: Date.UTC(2023, 5, 6, 23, 29),
       // dateFormat: "%Y-%m-%d %H:%M",
     },
+    // rangeSelector: {
+    //   // inputEnabled: true, // Disable the input box
+    //   // x: 30,
+
+    //   // selected: 5,
+    //   dropdown: 'always',
+
+    //   buttons: [
+    //     {
+    //       type: 'minute',
+    //       count: 5,
+    //       text: '5M'
+    //     },
+    //     {
+    //       type: 'minute',
+    //       count: 15,
+    //       text: '15M'
+    //     },
+    //     {
+    //       type: 'minute',
+    //       count: 30,
+    //       text: '30M'
+    //     },
+    //     {
+    //       type: 'hour',
+    //       count: 1,
+    //       text: '1H'
+    //     },
+    //     {
+    //       type: 'hour',
+    //       count: 4,
+    //       text: '4H'
+    //     },
+    //     {
+    //       type: 'hour',
+    //       count: 8,
+    //       text: '8H'
+    //     },
+    //     {
+    //       type: 'day',
+    //       count: 1,
+    //       text: '1D'
+    //     },
+    //     {
+    //       type: 'day',
+    //       count: 7,
+    //       text: '7D'
+    //     },
+    //     {
+    //       type: 'month',
+    //       count: 1,
+    //       text: '1M'
+    //     },
+    //     {
+    //       type: 'month',
+    //       count: 3,
+    //       text: '3M'
+    //     },
+    //     {
+    //       type: 'year',
+    //       count: 1,
+    //       text: '1Y'
+    //     },
+    //     {
+    //       type: 'ytd',
+    //       text: 'YTD'
+    //     },
+
+    //     {
+    //       type: 'all',
+    //       text: 'ALL'
+    //     }
+    //   ]
+    // },
     rangeSelector: {
-      // inputEnabled: true, // Disable the input box
-      // x: 30,
-
-      // selected: 5,
-      dropdown: 'always',
-
-      buttons: [
-        {
-          type: 'minute',
-          count: 5,
-          text: '5M'
-        },
-        {
-          type: 'minute',
-          count: 15,
-          text: '15M'
-        },
-        {
-          type: 'minute',
-          count: 30,
-          text: '30M'
-        },
-        {
-          type: 'hour',
-          count: 1,
-          text: '1H'
-        },
-        {
-          type: 'hour',
-          count: 4,
-          text: '4H'
-        },
-        {
-          type: 'hour',
-          count: 8,
-          text: '8H'
-        },
-        {
-          type: 'day',
-          count: 1,
-          text: '1D'
-        },
-        {
-          type: 'day',
-          count: 7,
-          text: '7D'
-        },
-        {
-          type: 'month',
-          count: 1,
-          text: '1M'
-        },
-        {
-          type: 'month',
-          count: 3,
-          text: '3M'
-        },
-        {
-          type: 'year',
-          count: 1,
-          text: '1Y'
-        },
-        {
-          type: 'ytd',
-          text: 'YTD'
-        },
-
-        {
-          type: 'all',
-          text: 'ALL'
-        }
-      ]
+      enabled: false
     },
     series: [
       {
@@ -249,13 +254,13 @@ const ChartComponent = ({ chartType, data, color }) => {
             maxWidth: 500
           },
           chartOptions: {
-            rangeSelector: {
-              inputEnabled: false, // Disable the input box
-              buttonEnabled: false,
-              buttonTheme: {
-                width: 20
-              }
-            },
+            // rangeSelector: {
+            //   inputEnabled: false, // Disable the input box
+            //   buttonEnabled: false,
+            //   buttonTheme: {
+            //     width: 20
+            //   }
+            // },
             chart: {
               height: 400
             }
@@ -270,9 +275,14 @@ const ChartComponent = ({ chartType, data, color }) => {
       `wss://${SOCKET_URL}?stocks=${userData?.subscribedStocks || ''}`
     );
 
-    const listener1 = (...args) => {
-      const chart = chartRef.current.chart;
+    const chart = chartRef.current.chart;
 
+    if (filter) {
+      const end = Date.now();
+      chart?.xAxis[0].setExtremes(startFilter(filter), end);
+    }
+
+    const listener1 = (...args) => {
       const test = stocksdataManipulatorObject(JSON.parse(args).data);
 
       chart.series[0].addPoint(
@@ -288,7 +298,7 @@ const ChartComponent = ({ chartType, data, color }) => {
     return () => {
       socket.off('stock_updates', listener1);
     };
-  }, [userData?.subscribedStocks]);
+  }, [userData?.subscribedStocks, filter]);
 
   return (
     <HighchartsReact

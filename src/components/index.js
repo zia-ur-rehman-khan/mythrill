@@ -8,6 +8,7 @@ import ConfirmationModal from './confirmationModal';
 import SideBar from './SideBar';
 import Layout from './Layout';
 import AuthLayout from './AuthLayout';
+import GraphFilter from './graphFilter';
 
 import {
   StockCard,
@@ -40,5 +41,6 @@ export {
   CommonDropdown,
   SmallChart,
   CommonPopOver,
-  AuthLayout
+  AuthLayout,
+  GraphFilter
 };
