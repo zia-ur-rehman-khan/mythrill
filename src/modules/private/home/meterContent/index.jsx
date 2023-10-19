@@ -27,9 +27,9 @@ const MeterContent = () => {
                   src={t.src}
                 />
                 <CommonTextField
-                  fontWeight={i === select && 600}
+                  fontWeight={i === select && 700}
                   onClick={() => setSelect(i)}
-                  topClass={'small'}
+                  topClass={'small title-text'}
                   text={t.title}
                 />
               </Space>
