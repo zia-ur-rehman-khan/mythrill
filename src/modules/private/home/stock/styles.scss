@@ -1,6 +1,9 @@
 @use "../../../../master.scss";
 
 .stock-parent {
+    .select-parent {
+        flex-wrap: wrap;
+    }
     .filter-select {
         display: none;
         .ant-select-selector {

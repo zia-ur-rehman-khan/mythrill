@@ -5,13 +5,14 @@
     border-radius: 12px;
     padding: 15px;
     display: flex;
-    gap: 10px;
-    height: 300px;
+    // gap: 10px;
     margin-top: 10px;
+    // flex-wrap: wrap;
+
     .left-content {
         width: 20%;
         min-width: 160px;
-        height: 250px;
+        max-height: 250px;
         overflow-y: scroll;
         .title-text {
             p {
@@ -25,5 +26,19 @@
     }
     .right-content {
         width: 80%;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 700px) {
+    .meter-content-parent {
+        flex-wrap: wrap;
+        .left-content {
+            width: 100%;
+        }
+        .right-content {
+            width: 100%;
+            margin-top: 20px;
+        }
     }
 }
