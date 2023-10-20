@@ -42,19 +42,19 @@ const Update = ({ stock }) => {
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={'Last'} />
-        <CommonTextField text={`$${stock?.prevPrice}`} opacity={0.5} />
+        <CommonTextField text={`${stock?.prevPrice}`} opacity={0.5} />
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={'Chg'} />
         <CommonTextField
-          text={`$${stock?.changeInPrice}`}
+          text={`${stock?.changeInPrice}`}
           color={stock?.color}
         />
       </Space>
       <Space size={3} direction="vertical">
         <CommonTextField text={'Chg%'} />
         <CommonTextField
-          text={`${stock?.changeInPercent}%`}
+          text={`${stock?.changeInPercent}`}
           color={stock?.color}
         />
       </Space>
