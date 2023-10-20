@@ -56,10 +56,11 @@ const StockDetailes = () => {
       <Row
         wrap={true}
         gutter={[20, 20]}
-        className={css(AppStyles.justifyCenter)}
+        className={css(AppStyles.spaceBetween)}
       >
         <Col
-          lg={{ span: 16 }}
+          xl={{ span: 14 }}
+          lg={{ span: 24 }}
           md={{ span: 24 }}
           sm={{ span: 24 }}
           xs={{ span: 24 }}
@@ -68,8 +69,9 @@ const StockDetailes = () => {
           <Suggestion />
         </Col>
         <Col
-          lg={{ span: 8 }}
-          md={{ span: 6 }}
+          xl={{ span: 10 }}
+          lg={{ span: 24 }}
+          md={{ span: 24 }}
           sm={{ span: 24 }}
           xs={{ span: 24 }}
         >
