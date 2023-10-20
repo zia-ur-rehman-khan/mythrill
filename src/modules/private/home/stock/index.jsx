@@ -93,6 +93,7 @@ const Stock = () => {
                           <CommonTextField
                             text={stock?.title}
                             fontWeight={600}
+                            className={'graph-title'}
                           />
                           <img
                             src={icons(stock)}
