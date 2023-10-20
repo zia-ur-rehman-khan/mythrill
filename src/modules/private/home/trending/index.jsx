@@ -140,7 +140,12 @@ const Trending = () => {
           key: i + 1,
           name: (
             <div className="trend-name">
-              <img src={Images.netflix} width={'20px'} height={'20px'} />
+              <img
+                src={t.src}
+                style={{ borderRadius: '50%' }}
+                width={'20px'}
+                height={'20px'}
+              />
               <CommonTextField text={t.title} />
             </div>
           ),

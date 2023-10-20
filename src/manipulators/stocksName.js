@@ -233,6 +233,8 @@ export function trendGraphManipulator(list = []) {
       payload.prevPrice = stock?.prev_price ?? 'n/a';
       payload.src = StockIcons[stock?.name_id] || Images.bitCoin;
       payload.preClosed = stock?.timeframe;
+      payload.src = StockIcons[stock?.name_id] || Images.bitCoin;
+
       payload.preData =
         stock?.trending_stock_data == null
           ? []
