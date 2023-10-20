@@ -15,14 +15,14 @@ function GraphRender({ stock }) {
 
   const meterValue =
     stock?.overallTrend?.toLowerCase() === ' strong buy'
-      ? 12.5
+      ? 50
       : stock?.overallTrend?.toLowerCase() === ' buy'
-      ? 38
+      ? 145
       : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 84
+      ? 350
       : stock?.overallTrend?.toLowerCase() === ' strong sell'
-      ? 114
-      : 62;
+      ? 450
+      : 250;
 
   const backgroundColor =
     stock?.overallTrend?.toLowerCase() === ' strong buy'
