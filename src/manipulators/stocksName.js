@@ -106,8 +106,10 @@ export function stocksNameManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
       payload.stockSubscribe = stock?.stock_subscribe?.length ?? 0;
-      payload.changeInPercent = stock?.stocks_name?.change_in_percent ?? 'n/a';
-      payload.changeInPrice = stock?.stocks_name?.change_in_price ?? 'n/a';
+      payload.changeInPercent =
+        `${stock?.stocks_name?.change_in_percent}%` ?? 'n/a';
+      payload.changeInPrice =
+        `$${Math.abs(stock?.stocks_name?.change_in_price)}` ?? 'n/a';
       payload.frequency = stock?.stocks_name?.Frequency;
       payload.favourite = stock?.is_favourite;
       payload.coin = stock?.stocks_name?.coin ?? '';
@@ -119,7 +121,7 @@ export function stocksNameManipulator(list = []) {
       payload.fearGreedIndex = stock?.stocks_name?.fear_greed_index ?? 'n/a';
       payload.nameId = stock?.stocks_name?.name_id ?? '';
       payload.overallTrend = stock?.stocks_name?.overall_trend ?? '';
-      payload.prevPrice = stock?.stocks_name?.prev_price ?? 'n/a';
+      payload.prevPrice = `$${stock?.stocks_name?.prev_price}` ?? 'n/a';
 
       payload.title = stock?.stocks_name?.name ?? '';
       payload.stockId = stock?.stocks_name.id ?? '';
