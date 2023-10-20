@@ -7,8 +7,7 @@
     flex-wrap: wrap;
 
     .meterSide-left {
-        flex: 1 1 50%;
-
+        width: 50%;
         .title-ellip {
             text-overflow: ellipsis;
             white-space: nowrap !important;
@@ -30,6 +29,7 @@
         }
     }
     .meterSide-right {
+        // width: 50%;
         min-width: 260px;
         flex: 1 1 50%;
 
