@@ -12,14 +12,14 @@ import { CommonTextField } from '../../../../../../components';
 
 function MainMeter({ value }) {
   const meterValue =
-    value?.toLowerCase() === ' strong buy'
-      ? 50
-      : value?.toLowerCase() === ' buy'
-      ? 145
-      : value?.toLowerCase() === ' sell'
-      ? 350
-      : value?.toLowerCase() === ' strong sell'
+    stock?.overallTrend?.toLowerCase() === ' strong buy'
       ? 450
+      : stock?.overallTrend?.toLowerCase() === ' buy'
+      ? 350
+      : stock?.overallTrend?.toLowerCase() === ' sell'
+      ? 145
+      : stock?.overallTrend?.toLowerCase() === ' strong sell'
+      ? 50
       : 250;
 
   const options = {
