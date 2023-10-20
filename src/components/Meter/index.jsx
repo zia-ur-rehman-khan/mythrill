@@ -30,7 +30,7 @@ function GraphRender({ stock }) {
       : stock?.overallTrend?.toLowerCase() === ' buy'
       ? 'rgba(200, 170, 48, 0.3)'
       : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? 'rgba(251, 176, 67, 0.3)'
+      ? 'rgba(247, 127, 60, 0.3)'
       : stock?.overallTrend?.toLowerCase() === ' strong sell'
       ? 'rgba(235, 33, 39, 0.3)'
       : 'rgba(247, 236, 53, 0.3)';
@@ -41,7 +41,7 @@ function GraphRender({ stock }) {
       : stock?.overallTrend?.toLowerCase() === ' buy'
       ? '#DEBC31'
       : stock?.overallTrend?.toLowerCase() === ' sell'
-      ? '#FBB043'
+      ? '#E67230'
       : stock?.overallTrend?.toLowerCase() === ' strong sell'
       ? '#EB2127'
       : '#F7EC35';
