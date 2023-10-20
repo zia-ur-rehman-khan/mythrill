@@ -61,7 +61,7 @@ function MainMeter({ value }) {
       startAngle: -90,
       endAngle: 90,
       background: null,
-      center: ['50%', '95%'],
+      center: ['50%', '90%'],
       size: '180%'
     },
 
