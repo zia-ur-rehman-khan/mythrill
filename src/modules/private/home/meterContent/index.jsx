@@ -28,6 +28,7 @@ const MeterContent = () => {
                 />
                 <CommonTextField
                   fontWeight={i === select && 700}
+                  fontSize={i === select && '11px'}
                   onClick={() => setSelect(i)}
                   topClass={'small title-text'}
                   text={t.title}
