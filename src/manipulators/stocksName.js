@@ -44,7 +44,7 @@ export function stocksdataManipulatorObject(stock = {}) {
         : stock?.overall_trend?.toLowerCase() === ' buy'
         ? '#3DB54A'
         : stock?.overall_trend?.toLowerCase() === ' sell'
-        ? '#EB2127'
+        ? '#E67230'
         : stock?.overall_trend?.toLowerCase() === ' strong sell'
         ? '#EB2127'
         : '#F7EC35';
@@ -77,14 +77,14 @@ export function stocksdataManipulator(list = []) {
       payload.slug = `/stock/${stock?.name_slug}` ?? '';
       payload.color =
         stock?.overall_trend?.toLowerCase() === ' strong buy'
-          ? '#3DB54A'
+          ? '#1ABF17'
           : stock?.overall_trend?.toLowerCase() === ' buy'
-          ? '#3DB54A'
+          ? '#EECB39'
           : stock?.overall_trend?.toLowerCase() === ' sell'
-          ? '#EB2127'
+          ? '#E67230'
           : stock?.overall_trend?.toLowerCase() === ' strong sell'
           ? '#EB2127'
-          : '#F7EC35';
+          : '#FFCF65';
 
       payload && stockList.push(payload);
     }
@@ -139,14 +139,14 @@ export function stocksNameManipulator(list = []) {
       payload.stocks = stockGraphManipulator(stock?.stocks_name?.stocks);
       payload.color =
         stock?.stocks_name?.overall_trend?.toLowerCase() === ' strong buy'
-          ? '#3DB54A'
+          ? '#1ABF17'
           : stock?.stocks_name?.overall_trend?.toLowerCase() === ' buy'
-          ? '#3DB54A'
+          ? '#EECB39'
           : stock?.stocks_name?.overall_trend?.toLowerCase() === ' sell'
-          ? '#EB2127'
+          ? '#E67230'
           : stock?.stocks_name?.overall_trend?.toLowerCase() === ' strong sell'
           ? '#EB2127'
-          : '#F7EC35';
+          : '#FFCF65';
 
       payload && stockList.push(payload);
     }
@@ -187,14 +187,14 @@ export function stockGraphManipulator(list = []) {
       payload.prevPrice = stock?.prev_price ?? 'n/a';
       payload.color =
         stock?.overall_trend?.toLowerCase() === ' strong buy'
-          ? '#3DB54A'
+          ? '#1ABF17'
           : stock?.overall_trend?.toLowerCase() === ' buy'
-          ? '#3DB54A'
+          ? '#EECB39'
           : stock?.overall_trend?.toLowerCase() === ' sell'
-          ? '#EB2127'
+          ? '#E67230'
           : stock?.overall_trend?.toLowerCase() === ' strong sell'
           ? '#EB2127'
-          : '#F7EC35';
+          : '#FFCF65';
 
       stockList.push(payload);
     }
@@ -243,14 +243,14 @@ export function trendGraphManipulator(list = []) {
           : trendPreData(stock?.trending_stock_data);
       payload.color =
         stock?.overall_trend?.toLowerCase() === ' strong buy'
-          ? '#3DB54A'
+          ? '#1ABF17'
           : stock?.overall_trend?.toLowerCase() === ' buy'
-          ? '#3DB54A'
+          ? '#EECB39'
           : stock?.overall_trend?.toLowerCase() === ' sell'
-          ? '#EB2127'
+          ? '#E67230'
           : stock?.overall_trend?.toLowerCase() === ' strong sell'
           ? '#EB2127'
-          : '#F7EC35';
+          : '#FFCF65';
 
       stockList.push(payload);
     }
