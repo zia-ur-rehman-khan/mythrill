@@ -155,8 +155,12 @@ const StockCard = ({ test, value, addIcon, count }) => {
         <Space size={10}>
           <Space direction="vertical">
             <CommonTextField text={amount} fontWeight={600} />
-            <div className={`color-text ${color}`}>
-              <CommonTextField text={stockUpdate} topClass={'small'} />
+            <div className={`color-text`} style={{ background: color + 33 }}>
+              <CommonTextField
+                text={stockUpdate}
+                color={color}
+                topClass={'small'}
+              />
             </div>
           </Space>
           {addIcon ? (
