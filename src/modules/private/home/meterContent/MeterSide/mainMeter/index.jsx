@@ -13,14 +13,26 @@ import { CommonTextField } from '../../../../../../components';
 function MainMeter({ value }) {
   const meterValue =
     value?.toLowerCase() === ' strong buy'
-      ? 450
+      ? 550
       : value?.toLowerCase() === ' buy'
-      ? 350
+      ? 450
       : value?.toLowerCase() === ' sell'
       ? 145
       : value?.toLowerCase() === ' strong sell'
       ? 50
-      : 250;
+      : value?.toLowerCase() === ' neutral sell'
+      ? 250
+      : 350;
+
+  //GRADIENT COLOR FOR SLOTS
+
+  // color: {
+  //   linearGradient: { x1: 0.1504, x2: 0.8328, y1: 0.1504, y2: 0.8328 },
+  //   stops: [
+  //     [0.1504, '#F77F3C'],
+  //     [0.8328, '#A33D03']
+  //   ]
+  // },
 
   const options = {
     tooltip: {
@@ -28,8 +40,8 @@ function MainMeter({ value }) {
     },
     chart: {
       type: 'gauge',
-      height: 160,
-      width: 245
+      height: 200,
+      width: 320
     },
     title: {
       text: null
@@ -62,14 +74,14 @@ function MainMeter({ value }) {
       endAngle: 90,
       background: null,
       center: ['50%', '90%'],
-      size: '180%'
+      size: '160%'
     },
 
     yAxis: {
       lineWidth: 0,
 
       min: 0,
-      max: 500,
+      max: 600,
       labels: {
         enabled: false // Disable the axis labels for the Y-axis
       },
@@ -79,80 +91,60 @@ function MainMeter({ value }) {
         {
           from: 0,
           to: 100,
-          color: {
-            linearGradient: { x1: 0.1445, x2: 0.8459, y1: 0.1445, y2: 0.8459 },
-            stops: [
-              [0.1445, '#D34E4B'],
-              [0.8459, '#89100E']
-            ]
-          },
+          color: '#8C1912',
           thickness: 65,
           label: {
-            text: 'Strong Sell',
+            text: 'STRONG SELL',
             className: 'label strong-sell'
           }
         },
         {
           from: 105,
           to: 200,
-          color: {
-            linearGradient: { x1: 0.1504, x2: 0.8328, y1: 0.1504, y2: 0.8328 },
-            stops: [
-              [0.1504, '#F77F3C'],
-              [0.8328, '#A33D03']
-            ]
-          },
+          color: '#8C4213',
           thickness: 65,
           label: {
-            text: 'Sell',
+            text: 'SELL',
             className: 'label sell'
           }
         },
         {
           from: 205,
           to: 300,
-          color: {
-            linearGradient: { x1: 0, x2: 1, y1: 0, y2: 0 },
-            stops: [
-              [-0.1818, '#FFCF65'],
-              [1, '#9E6D00']
-            ]
-          },
+          color: '#F7AF0F',
           thickness: 65,
           label: {
-            text: 'Neutral',
-            className: 'label neutral'
+            text: 'NEUTRAL',
+            className: 'label sell-neutral'
           }
         },
         {
           from: 305,
           to: 400,
-          color: {
-            linearGradient: { x1: 0.2084, x2: 0.858, y1: 0.2084, y2: 0.858 },
-            stops: [
-              [0.2084, '#EECB39'],
-              [0.858, '#6F5900']
-            ]
-          },
+          color: '#897409',
           thickness: 65,
           label: {
-            text: 'Strong Buy',
-            className: 'label strong-buy'
+            text: 'NEUTRAL',
+            className: 'label buy-neutral'
           }
         },
         {
           from: 405,
           to: 500,
-          color: {
-            linearGradient: { x1: 0.1763, x2: 0.8741, y1: 0.1763, y2: 0.8741 },
-            stops: [
-              [0.1763, '#71DF3E'],
-              [0.8741, '#2A7707']
-            ]
-          },
+          color: '#5E7410',
           thickness: 65,
           label: {
-            text: 'Buy',
+            text: 'STRONG BUY',
+            className: 'label strong-buy'
+          }
+        },
+        {
+          from: 505,
+          to: 600,
+          color: '#2E6D14',
+          thickness: 65,
+          label: {
+            text: 'BUY',
             className: 'label buy'
           }
         }

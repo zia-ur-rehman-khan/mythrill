@@ -1,6 +1,10 @@
 .main-meter {
-    // width: 200px;
+    // width: 100%;
     // height: 200px;
+
+    .highcharts-root {
+        width: 100%;
+    }
 
     :first-child {
         display: flex;
@@ -14,19 +18,22 @@
     }
 
     .strong-sell {
-        transform: translate(-75px, 95px) rotate(-70deg);
+        transform: translate(-94px, 136px) rotate(-76deg);
     }
     .sell {
-        transform: translate(21px, 35px) rotate(-41deg);
+        transform: translate(13px, 44px) rotate(-48deg);
     }
-    .neutral {
-        transform: translate(-25px, 18px);
+    .sell-neutral {
+        transform: translate(97px, 25px) rotate(-16deg);
+    }
+    .buy-neutral {
+        transform: translate(-15px, -45px) rotate(16deg);
     }
     .buy {
-        transform: translate(63px, -181px) rotate(40deg);
+        transform: translate(119px, -237px) rotate(45deg);
     }
     .strong-buy {
-        transform: translate(184px, -125px) rotate(72deg);
+        transform: translate(265px, -168px) rotate(74deg);
     }
     .highcharts-no-tooltip {
         display: none;
