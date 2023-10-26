@@ -34,6 +34,8 @@ function MainMeter({ value }) {
   //   ]
   // },
 
+  console.log(meterValue, 'meterValue');
+
   const options = {
     tooltip: {
       enabled: false
@@ -95,7 +97,7 @@ function MainMeter({ value }) {
           thickness: 65,
           label: {
             text: 'STRONG SELL',
-            className: 'label strong-sell'
+            className: `label strong-sell ${meterValue === 50 && 'active'} `
           }
         },
         {
@@ -105,7 +107,7 @@ function MainMeter({ value }) {
           thickness: 65,
           label: {
             text: 'SELL',
-            className: 'label sell'
+            className: `label sell  ${meterValue === 145 && 'active'}`
           }
         },
         {
@@ -115,7 +117,7 @@ function MainMeter({ value }) {
           thickness: 65,
           label: {
             text: 'NEUTRAL',
-            className: 'label sell-neutral'
+            className: `label sell-neutral ${meterValue === 250 && 'active'}`
           }
         },
         {
@@ -125,7 +127,7 @@ function MainMeter({ value }) {
           thickness: 65,
           label: {
             text: 'NEUTRAL',
-            className: 'label buy-neutral'
+            className: `label buy-neutral ${meterValue === 350 && 'active'}`
           }
         },
         {
@@ -135,7 +137,7 @@ function MainMeter({ value }) {
           thickness: 65,
           label: {
             text: 'STRONG BUY',
-            className: 'label strong-buy'
+            className: `label strong-buy  ${meterValue === 550 && 'active'}`
           }
         },
         {
@@ -145,7 +147,7 @@ function MainMeter({ value }) {
           thickness: 65,
           label: {
             text: 'BUY',
-            className: 'label buy'
+            className: `label buy ${meterValue === 450 && 'active'}`
           }
         }
       ]
