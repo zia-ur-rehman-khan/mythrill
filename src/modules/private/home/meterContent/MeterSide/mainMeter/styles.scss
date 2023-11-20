@@ -15,8 +15,20 @@
     .meter-img {
         position: absolute;
         left: 50%;
-        top: 78%;
+        top: 79.5%;
         transform: translate(-50%, -50%);
+    }
+
+    @media screen and (max-width: 575px) {
+        .meter-img {
+            left: 35%;
+            top: 76.5%;
+            transform: translate(-30%, -50%);
+        }
+        .meter-title {
+            display: flex;
+            justify-content: flex-start !important;
+        }
     }
 
     .meter-title {
@@ -45,23 +57,45 @@
     }
 
     .strong-sell {
-        transform: translate(-94px, 136px) rotate(-76deg);
+        transform: translate(-107px, 155px) rotate(-76deg);
     }
     .sell {
-        transform: translate(13px, 44px) rotate(-48deg);
+        transform: translate(19px, 48px) rotate(-48deg);
     }
     .sell-neutral {
-        transform: translate(97px, 25px) rotate(-16deg);
+        transform: translate(116px, 24px) rotate(-16deg);
     }
     .buy-neutral {
-        transform: translate(-15px, -45px) rotate(16deg);
+        transform: translate(-17px, -57px) rotate(16deg);
     }
     .buy {
-        transform: translate(119px, -237px) rotate(45deg);
+        transform: translate(152px, -281px) rotate(46deg);
     }
     .strong-buy {
-        transform: translate(265px, -168px) rotate(74deg);
+        transform: translate(325px, -195px) rotate(76deg);
     }
+
+    @media screen and (max-width: 575px) {
+        .strong-sell {
+            transform: translate(-86px, 112px) rotate(-73deg);
+        }
+        .sell {
+            transform: translate(-1px, 41px) rotate(-48deg);
+        }
+        .sell-neutral {
+            transform: translate(55px, 23px) rotate(-16deg);
+        }
+        .buy-neutral {
+            transform: translate(-19px, -32px) rotate(16deg);
+        }
+        .buy {
+            transform: translate(62px, -165px) rotate(39deg);
+        }
+        .strong-buy {
+            transform: translate(203px, -129px) rotate(76deg);
+        }
+    }
+
     .highcharts-no-tooltip {
         display: none;
     }

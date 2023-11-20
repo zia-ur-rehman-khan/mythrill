@@ -10,9 +10,13 @@ HighchartsAccessibility(Highcharts);
 import './styles.scss';
 import { CommonTextField } from '../../../../../../components';
 import { Images } from '../../../../../../theme';
-import { Space } from 'antd';
+import { Grid, Space } from 'antd';
+
+const { useBreakpoint } = Grid;
 
 function MainMeter({ value, stockName }) {
+  const screens = useBreakpoint();
+
   const meterValue =
     value?.toLowerCase() === ' strong buy'
       ? 550
@@ -42,8 +46,8 @@ function MainMeter({ value, stockName }) {
     },
     chart: {
       type: 'gauge',
-      height: 200,
-      width: 320
+      height: screens.sm ? 230 : 160,
+      width: screens.sm ? 380 : 320
     },
     title: {
       text: null
@@ -75,7 +79,7 @@ function MainMeter({ value, stockName }) {
       startAngle: -90,
       endAngle: 90,
       background: null,
-      center: ['50%', '90%'],
+      center: screens.sm ? ['50%', '90%'] : ['35%', '90%'],
       size: '160%'
     },
 
@@ -137,7 +141,7 @@ function MainMeter({ value, stockName }) {
           thickness: 65,
           label: {
             text: 'STRONG BUY',
-            className: `label strong-buy  ${meterValue === 550 && 'active'}`
+            className: `label strong-buy ${meterValue === 550 && 'active'}`
           }
         },
         {

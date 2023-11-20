@@ -7,7 +7,7 @@
     flex-wrap: wrap;
 
     .meterSide-left {
-        width: 40%;
+        width: 35%;
 
         .title-ellip {
             text-overflow: ellipsis;
@@ -19,18 +19,31 @@
             justify-content: start;
             align-items: center;
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .ant-divider {
             min-width: 0;
-            width: 45%;
+            width: 40%;
             border-color: #d9d9d966;
             margin: 0;
         }
     }
     .meterSide-right {
         min-width: 320px;
-        flex: 1 1 60%;
+        flex: 1 1 65%;
+    }
+
+    @media screen and (max-width: 1185px) {
+        .meterSide-left {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 575px) {
+        .meterSide-right {
+            flex: none;
+            width: 300px;
+        }
     }
 }
