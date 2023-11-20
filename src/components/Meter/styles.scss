@@ -1,10 +1,101 @@
 .meter {
     border-radius: 10px;
-    // height: 300px;
-    min-width: 230px;
+    min-width: 320px;
+    position: relative;
+    // height: 250px;
+    width: 360px;
+
+    .meter-img {
+        position: absolute;
+        left: 50%;
+        top: 72.5%;
+        transform: translate(-50%, -50%);
+    }
+
+    // @media screen and (max-width: 575px) {
+    //     .meter-img {
+    //         left: 35%;
+    //         top: 76.5%;
+    //         transform: translate(-30%, -50%);
+    //     }
+    // }
+
+    .meter-title {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        padding-bottom: 20px;
+        .title-text {
+            text-overflow: ellipsis;
+            white-space: nowrap !important;
+            overflow: hidden;
+            width: 100%;
+            max-width: 130px;
+            min-width: 60px;
+        }
+    }
+
+    .label {
+        fill: #ffffff !important;
+        font-size: 10px !important;
+        font-weight: 700;
+        opacity: 0.7;
+        text-align: center;
+    }
+
+    .active {
+        opacity: 1;
+    }
+
+    .strong-sell {
+        transform: translate(-93px, 122px) rotate(-76deg);
+    }
+    .sell {
+        transform: translate(18px, 51px) rotate(-48deg);
+    }
+    .sell-neutral {
+        transform: translate(106px, 28px) rotate(-16deg);
+    }
+    .buy-neutral {
+        transform: translate(-17px, -50px) rotate(16deg);
+    }
+    .buy {
+        transform: translate(141px, -265px) rotate(46deg);
+    }
+    .strong-buy {
+        transform: translate(314px, -163px) rotate(76deg);
+    }
+
+    // @media screen and (max-width: 575px) {
+    //     .label {
+    //         font-size: 8px !important;
+    //     }
+    //     .strong-sell {
+    //         transform: translate(-76px, 86px) rotate(-73deg);
+    //     }
+    //     .sell {
+    //         transform: translate(-1px, 43px) rotate(-48deg);
+    //     }
+    //     .sell-neutral {
+    //         transform: translate(57px, 25px) rotate(-16deg);
+    //     }
+    //     .buy-neutral {
+    //         transform: translate(-19px, -32px) rotate(16deg);
+    //     }
+    //     .buy {
+    //         transform: translate(70px, -168px) rotate(41deg);
+    //     }
+    //     .strong-buy {
+    //         transform: translate(210px, -102px) rotate(76deg);
+    //     }
+    // }
+
+    .highcharts-no-tooltip {
+        display: none;
+    }
 
     .highcharts-container {
-        height: 176px !important;
+        // height: 176px !important;
         // background: #20232c;
     }
     .highcharts-background {
@@ -14,9 +105,5 @@
     .greenBand {
         stroke-width: 1px;
         stroke: red;
-    }
-
-    .highcharts-no-tooltip {
-        display: none;
     }
 }

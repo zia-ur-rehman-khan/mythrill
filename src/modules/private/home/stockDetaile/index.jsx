@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import Chart from '../../../../components/Chart';
-import { CommonTextField } from '../../../../components';
-import { Col, Row, Space } from 'antd';
+import { CommonHeading, CommonTextField } from '../../../../components';
+import { Col, Divider, Row, Space } from 'antd';
 import { AppStyles, Colors, Images } from '../../../../theme';
 import { css } from 'aphrodite';
 import { array } from 'prop-types';
@@ -16,18 +16,20 @@ import { stockListManipulator } from '../../../../manipulators/stocksName';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { isEmptyValue } from '../../../../services/utils';
+import './styles.scss';
 
 const StockDetailes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
   const chartData = useSelector((state) => state?.stocks.stocksData);
+  const trend = useSelector((state) => state?.stocks?.trendData);
 
   const selectedStockData = stocksSubscribe.find(
     (stock) => stock.nameId === id
   );
 
-  console.log(selectedStockData, 'selectedStockData');
+  console.log(trend, 'trend');
 
   // const data = chartData[selectedStockData?.nameId];
 
@@ -59,7 +61,7 @@ const StockDetailes = () => {
         className={css(AppStyles.spaceBetween)}
       >
         <Col
-          xl={{ span: 14 }}
+          xl={{ span: 13 }}
           lg={{ span: 24 }}
           md={{ span: 24 }}
           sm={{ span: 24 }}
@@ -67,9 +69,36 @@ const StockDetailes = () => {
         >
           <Update stock={selectedStockData} />
           <Suggestion />
+          <div className={'pre-data'}>
+            <CommonHeading
+              className="title-ellip"
+              level={3}
+              text={trend[0]?.title?.toUpperCase()}
+            />
+            <CommonTextField
+              className={css(AppStyles.mTop15)}
+              text={'Previous Closes'}
+              fontWeight={500}
+            />
+            {Object.values(trend[0]?.preClosed || {}).map((t, i) => (
+              <div className="list" key={Math.random()}>
+                <CommonTextField
+                  text={`${i + 1} Day ago`}
+                  fontWeight={400}
+                  topClass={'small'}
+                />
+                <Divider />
+                <CommonTextField
+                  text={t == null ? 'NEUTRAL' : t?.toUpperCase()}
+                  fontWeight={600}
+                  topClass={'small'}
+                />
+              </div>
+            ))}
+          </div>
         </Col>
         <Col
-          xl={{ span: 10 }}
+          xl={{ span: 11 }}
           lg={{ span: 24 }}
           md={{ span: 24 }}
           sm={{ span: 24 }}
