@@ -100,8 +100,9 @@ function MainMeter({ value, stockName }) {
           color: '#8C1912',
           thickness: 65,
           label: {
-            text: 'STRONG SELL',
-            className: `label strong-sell ${meterValue === 50 && 'active'} `
+            text: 'STRONG <br/> SELL',
+            className: `label strong-sell ${meterValue === 50 && 'active'} `,
+            textAlign: 'center'
           }
         },
         {
@@ -140,8 +141,9 @@ function MainMeter({ value, stockName }) {
           color: '#5E7410',
           thickness: 65,
           label: {
-            text: 'STRONG BUY',
-            className: `label strong-buy ${meterValue === 550 && 'active'}`
+            text: 'STRONG <br/> BUY',
+            className: `label strong-buy ${meterValue === 550 && 'active'}`,
+            textAlign: 'center'
           }
         },
         {

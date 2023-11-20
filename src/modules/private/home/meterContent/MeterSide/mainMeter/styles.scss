@@ -47,9 +47,10 @@
 
     .label {
         fill: #ffffff !important;
-        font-size: 8px !important;
+        font-size: 10px !important;
         font-weight: 700;
         opacity: 0.7;
+        text-align: center;
     }
 
     .active {
@@ -57,42 +58,45 @@
     }
 
     .strong-sell {
-        transform: translate(-107px, 155px) rotate(-76deg);
+        transform: translate(-100px, 130px) rotate(-76deg);
     }
     .sell {
-        transform: translate(19px, 48px) rotate(-48deg);
+        transform: translate(19px, 52px) rotate(-48deg);
     }
     .sell-neutral {
-        transform: translate(116px, 24px) rotate(-16deg);
+        transform: translate(114px, 28px) rotate(-16deg);
     }
     .buy-neutral {
-        transform: translate(-17px, -57px) rotate(16deg);
+        transform: translate(-17px, -53px) rotate(16deg);
     }
     .buy {
-        transform: translate(152px, -281px) rotate(46deg);
+        transform: translate(149px, -278px) rotate(46deg);
     }
     .strong-buy {
-        transform: translate(325px, -195px) rotate(76deg);
+        transform: translate(330px, -172px) rotate(76deg);
     }
 
     @media screen and (max-width: 575px) {
+        .label {
+            font-size: 8px !important;
+        }
         .strong-sell {
-            transform: translate(-86px, 112px) rotate(-73deg);
+            transform: translate(-76px, 86px) rotate(-73deg);
         }
         .sell {
-            transform: translate(-1px, 41px) rotate(-48deg);
+            transform: translate(-1px, 43px) rotate(-48deg);
         }
         .sell-neutral {
-            transform: translate(55px, 23px) rotate(-16deg);
+            transform: translate(57px, 25px) rotate(-16deg);
         }
         .buy-neutral {
             transform: translate(-19px, -32px) rotate(16deg);
         }
         .buy {
-            transform: translate(62px, -165px) rotate(39deg);
+            transform: translate(70px, -168px) rotate(41deg);
         }
         .strong-buy {
-            transform: translate(203px, -129px) rotate(76deg);
+            transform: translate(210px, -102px) rotate(76deg);
         }
     }
 
