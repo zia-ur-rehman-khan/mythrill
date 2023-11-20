@@ -85,7 +85,7 @@ function MainMeter({ value }) {
       min: 0,
       max: 600,
       labels: {
-        enabled: false // Disable the axis labels for the Y-axis
+        enabled: false
       },
       minorTickLength: 0,
       tickLength: 0,
