@@ -165,14 +165,16 @@ function MainMeter({ value, stockName }) {
       <div className="meter-title">
         <CommonTextField
           text={'M-RISK INDEX:'}
-          fontWeight={800}
+          fontWeight={700}
           color={'#ffffff'}
+          fontSize={'18px'}
         />
         <CommonTextField
           className={'title-text'}
           text={stockName}
-          fontWeight={800}
+          fontWeight={700}
           color={'#ffffff'}
+          fontSize={'18px'}
         />
       </div>
       <img
