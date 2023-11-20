@@ -57,8 +57,8 @@ function GraphRender({ stock }) {
     },
     chart: {
       type: 'gauge',
-      height: 220,
-      width: 360
+      height: 260,
+      width: 420
     },
     title: {
       text: null
@@ -176,9 +176,9 @@ function GraphRender({ stock }) {
   return (
     <div
       className="meter"
-      style={{
-        backgroundColor: Colors.theme3
-      }}
+      // style={{
+      //   backgroundColor: '#121212'
+      // }}
     >
       <HighchartsReact highcharts={Highcharts} options={options} />
       <div className="meter-title">

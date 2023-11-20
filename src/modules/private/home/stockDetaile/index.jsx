@@ -103,6 +103,7 @@ const StockDetailes = () => {
           md={{ span: 24 }}
           sm={{ span: 24 }}
           xs={{ span: 24 }}
+          className="meter-detail-side"
         >
           <GraphRender stock={selectedStockData} />
         </Col>

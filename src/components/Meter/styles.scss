@@ -1,14 +1,14 @@
 .meter {
     border-radius: 10px;
-    min-width: 320px;
+    // min-width: 320px;
     position: relative;
     // height: 250px;
-    width: 360px;
+    // width: 400px;
 
     .meter-img {
         position: absolute;
         left: 50%;
-        top: 72.5%;
+        top: 74.5%;
         transform: translate(-50%, -50%);
     }
 
@@ -48,22 +48,22 @@
     }
 
     .strong-sell {
-        transform: translate(-93px, 122px) rotate(-76deg);
+        transform: translate(-121px, 144px) rotate(-76deg);
     }
     .sell {
-        transform: translate(18px, 51px) rotate(-48deg);
+        transform: translate(18px, 54px) rotate(-48deg);
     }
     .sell-neutral {
-        transform: translate(106px, 28px) rotate(-16deg);
+        transform: translate(123px, 30px) rotate(-16deg);
     }
     .buy-neutral {
-        transform: translate(-17px, -50px) rotate(16deg);
+        transform: translate(-18px, -61px) rotate(16deg);
     }
     .buy {
-        transform: translate(141px, -265px) rotate(46deg);
+        transform: translate(172px, -314px) rotate(46deg);
     }
     .strong-buy {
-        transform: translate(314px, -163px) rotate(76deg);
+        transform: translate(373px, -188px) rotate(76deg);
     }
 
     // @media screen and (max-width: 575px) {
