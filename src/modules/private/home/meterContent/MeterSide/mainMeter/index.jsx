@@ -34,8 +34,6 @@ function MainMeter({ value }) {
   //   ]
   // },
 
-  console.log(meterValue, 'meterValue');
-
   const options = {
     tooltip: {
       enabled: false
