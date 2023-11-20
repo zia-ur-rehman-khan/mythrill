@@ -74,6 +74,7 @@ import dodge from '../assets/icons/dodge.svg';
 import collapsed from '../assets/sidebar/collapsed.png';
 import close from '../assets/sidebar/close.png';
 import up from '../assets/chartDetaile/up.png';
+import meterLogo from '../assets/meter-logo.png';
 
 export default {
   ErrorBackground2,
@@ -151,5 +152,6 @@ export default {
   dodge,
   collapsed,
   close,
-  up
+  up,
+  meterLogo
 };

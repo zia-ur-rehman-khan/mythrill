@@ -9,8 +9,10 @@ HighchartsMore(Highcharts);
 HighchartsAccessibility(Highcharts);
 import './styles.scss';
 import { CommonTextField } from '../../../../../../components';
+import { Images } from '../../../../../../theme';
+import { Space } from 'antd';
 
-function MainMeter({ value }) {
+function MainMeter({ value, stockName }) {
   const meterValue =
     value?.toLowerCase() === ' strong buy'
       ? 550
@@ -59,7 +61,7 @@ function MainMeter({ value }) {
         },
         pivot: {
           backgroundColor: '#FEFEFE',
-          borderWidth: 10,
+          borderWidth: 20,
           borderColor: '#FEFEFE'
         }
       }
@@ -154,13 +156,24 @@ function MainMeter({ value }) {
   return (
     <div className="main-meter">
       <HighchartsReact highcharts={Highcharts} options={options} />
-      <CommonTextField
-        lineHeight={'30px'}
-        text={'M-trend'}
-        textAlign={'center'}
-        fontWeight={800}
-        color={'#ffffff'}
-        fontSize={'20px'}
+      <div className="meter-title">
+        <CommonTextField
+          text={'M-RISK INDEX:'}
+          fontWeight={800}
+          color={'#ffffff'}
+        />
+        <CommonTextField
+          className={'title-text'}
+          text={stockName}
+          fontWeight={800}
+          color={'#ffffff'}
+        />
+      </div>
+      <img
+        className="meter-img"
+        src={Images.meterLogo}
+        width={'20px'}
+        height={'22px'}
       />
     </div>
   );

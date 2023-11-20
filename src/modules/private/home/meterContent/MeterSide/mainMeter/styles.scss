@@ -1,14 +1,36 @@
 .main-meter {
     // width: 100%;
     // height: 200px;
+    position: relative;
+
+    > :first-child {
+        display: flex;
+        justify-content: center;
+    }
 
     .highcharts-root {
         width: 100%;
     }
 
-    :first-child {
+    .meter-img {
+        position: absolute;
+        left: 50%;
+        top: 78%;
+        transform: translate(-50%, -50%);
+    }
+
+    .meter-title {
         display: flex;
         justify-content: center;
+        gap: 5px;
+        .title-text {
+            text-overflow: ellipsis;
+            white-space: nowrap !important;
+            overflow: hidden;
+            width: 100%;
+            max-width: 130px;
+            min-width: 60px;
+        }
     }
 
     .label {

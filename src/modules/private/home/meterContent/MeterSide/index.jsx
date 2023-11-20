@@ -67,7 +67,11 @@ const MeterSide = ({ select }) => {
         </div>
       </div>
       <div className="meterSide-right">
-        <MainMeter filteredData={filteredData} value={meterValue} />
+        <MainMeter
+          stockName={trend[select]?.title}
+          filteredData={filteredData}
+          value={meterValue}
+        />
       </div>
     </div>
   );
