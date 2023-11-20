@@ -73,7 +73,7 @@ const SideBarSlider = ({ isDrawer }) => {
 
   const handelCollapsed = () => {
     setCollapsed(!collapsed);
-    dispatch(setCollapsedState(!collapsed));
+    // dispatch(setCollapsedState(!collapsed));
   };
 
   return (

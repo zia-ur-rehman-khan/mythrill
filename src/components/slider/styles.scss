@@ -2,6 +2,10 @@
 
 .ant-layout-sider {
     background: master.$theme3-color !important;
+    position: absolute !important;
+    z-index: 999;
+    height: calc(100vh - 80px);
+
     @media (max-width: 1000px) {
         display: none;
     }
