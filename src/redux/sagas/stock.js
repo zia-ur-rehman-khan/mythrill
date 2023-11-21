@@ -14,6 +14,7 @@ import {
   GET_STOCK_NAMES,
   GET_SUBSCRIBE_STOCKS,
   IS_SUBSCRIBE_REQUEST,
+  PRE_CLOSE_REQUEST,
   SEE_NOTIFICATIONS_REQUEST,
   SET_FREQUENCY_REQUEST,
   STOCK_FAVOURITE,
@@ -58,6 +59,7 @@ import {
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
   isSubscribeRequest,
+  preCloseDataRequest,
   seeNotificationsRequest,
   seeNotificationsRequestSuccess,
   setFrequencyRequest,
@@ -303,6 +305,39 @@ function* trendingList() {
             trendGraphManipulator(response?.data?.data)
           )
         );
+      } else {
+        if (responseCallback) responseCallback(response);
+        if (response.message) toastAlert(response.message, ALERT_TYPES.error);
+      }
+    } catch (err) {
+      if (responseCallback) responseCallback(err);
+    }
+  }
+}
+
+function* preCloseData() {
+  while (true) {
+    // PAYLOAD PATTERN COMING FROM REDUX-TOOLKIT
+    const { payload } = yield take(preCloseDataRequest.type);
+    // PARAMETER SEND FROM DISPATCH WILL DESTRUCTURE THERE
+    const { payloadData, responseCallback } = payload;
+    try {
+      const response = yield call(
+        callRequest,
+        PRE_CLOSE_REQUEST,
+        payloadData,
+        '',
+        '',
+        {}
+      );
+
+      if (response.status) {
+        if (responseCallback) responseCallback(response);
+        // yield put(
+        //   trendingListRequestSuccess(
+        //     trendGraphManipulator(response?.data?.data)
+        //   )
+        // );
       } else {
         if (responseCallback) responseCallback(response);
         if (response.message) toastAlert(response.message, ALERT_TYPES.error);
@@ -597,4 +632,5 @@ export default function* root() {
   yield fork(getNotificationsCount);
   yield fork(seeNotifications);
   yield fork(isSubscribe);
+  yield fork(preCloseData);
 }

@@ -109,6 +109,12 @@ export const TRENDING_LIST_REQUEST = {
   type: REQUEST_TYPE.GET
 };
 
+export const PRE_CLOSE_REQUEST = {
+  route: 'stock/preclose',
+  access_token_required: true,
+  type: REQUEST_TYPE.GET
+};
+
 export const FREQUENCY_DATA_REQUEST = {
   route: 'stock/get-frequency-data',
   access_token_required: true,

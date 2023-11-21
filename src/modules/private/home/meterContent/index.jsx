@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
 import './styles.scss';
 import { CommonTextField } from '../../../../components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Space } from 'antd';
 import { AppStyles } from '../../../../theme';
 import { css } from 'aphrodite';
 import MeterSide from './MeterSide';
+import {
+  preCloseDataRequest,
+  trendingListRequest
+} from '../../../../redux/slicers/stocks';
+import { trendGraphManipulator } from '../../../../manipulators/stocksName';
 
 const MeterContent = () => {
-  const trend = useSelector((state) => state?.stocks?.trendData);
+  // const trend = useSelector((state) => state?.stocks?.trendData);
+  const [trendData, setTrendData] = useState(null);
+  console.log('🚀 ~ file: index.jsx:18 ~ MeterContent ~ trendData:', trendData);
   const [select, setSelect] = useState(0);
+  const dispatch = useDispatch();
+
+  dispatch(
+    preCloseDataRequest({
+      payloadData: {},
+      responseCallback: (res) => {
+        if (res.status) {
+          console.log(res, 'res');
+          setTrendData(trendGraphManipulator(res?.data?.data));
+        } else {
+          console.log(res.errors, 'error');
+        }
+      }
+    })
+  );
 
   return (
     <div className="meter-content-parent">
       <div className="left-content">
         <CommonTextField fontWeight={500} text={'Please choose your index:'} />
         <Space className={css(AppStyles.mTop10)} size={5} direction="vertical">
-          {trend.map((t, i) => (
+          {trendData?.map((t, i) => (
             <Space>
               <CommonTextField topClass={'small'} text={`${i + 1}.`} />
               <Space size={4} align="center">

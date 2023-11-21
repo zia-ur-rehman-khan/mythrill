@@ -228,6 +228,10 @@ const GeneralReducer = createSlice({
     trendingListRequestSuccess(state, action) {
       state.trendData = action.payload;
     },
+    preCloseDataRequest() {},
+    // preCloseDataRequestSuccess(state, action) {
+    //   state.trendData = action.payload;
+    // },
     StockSubscribeTrend(state, action) {
       state.trendData = [...state.trendData, action.payload];
     },
@@ -363,6 +367,7 @@ export const {
   StockUnFavouriteRequestSuccess,
   getFavouriteStockRequest,
   getFavouriteStockSuccess,
+  preCloseDataRequest,
   setStocksDataAction,
   getSubscribeStocksRequest,
   getSubscribeStocksSuccess,
