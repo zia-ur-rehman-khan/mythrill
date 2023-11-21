@@ -29,7 +29,8 @@ const StockDetailes = () => {
     (stock) => stock.nameId === id
   );
 
-  console.log(trend, 'trend');
+  const preClose = trend.find((stock) => stock.nameId === id);
+  console.log('🚀 ~ file: index.jsx:33 ~ StockDetailes ~ preClose:', preClose);
 
   // const data = chartData[selectedStockData?.nameId];
 
@@ -73,14 +74,14 @@ const StockDetailes = () => {
             <CommonHeading
               className="title-ellip"
               level={3}
-              text={trend[0]?.title?.toUpperCase()}
+              text={preClose?.title?.toUpperCase()}
             />
             <CommonTextField
               className={css(AppStyles.mTop15)}
               text={'Previous Closes'}
               fontWeight={500}
             />
-            {Object.values(trend[0]?.preClosed || {}).map((t, i) => (
+            {Object.values(preClose?.preClosed || {}).map((t, i) => (
               <div className="list" key={Math.random()}>
                 <CommonTextField
                   text={`${i + 1} Day ago`}

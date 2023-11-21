@@ -45,6 +45,7 @@ const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
         chartView={chartView}
         chartviewChange={chartviewChange}
       />
+      <GraphFilter />
 
       {!screens.lg && (
         <ExtraDetailes
@@ -60,7 +61,6 @@ const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
       {chartView === 'myThril' ? (
         chartType && (
           <>
-            <GraphFilter />
             <div className={`bigchart`}>
               {screens.lg && (
                 <ExtraDetailes
