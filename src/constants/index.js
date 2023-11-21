@@ -500,7 +500,11 @@ const {
   microsoft,
   amazon,
   xrp,
-  dodge
+  dodge,
+  nasdaq,
+  dow,
+  russel,
+  ftse
 } = Images;
 
 export const StockIcons = {
@@ -518,7 +522,11 @@ export const StockIcons = {
   microsoft_corporation: microsoft,
   amazoncom_inc: amazon,
   xrp__united_states_dollar: xrp,
-  dogecoin__united_states_dollar: dodge
+  dogecoin__united_states_dollar: dodge,
+  nasdaq_: nasdaq,
+  dow_jones_industrial_average: dow,
+  us_russel_: russel,
+  ftse_: ftse
 };
 
 export const startFilter = (filter) => {

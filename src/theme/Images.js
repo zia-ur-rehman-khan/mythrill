@@ -75,6 +75,10 @@ import collapsed from '../assets/sidebar/collapsed.png';
 import close from '../assets/sidebar/close.png';
 import up from '../assets/chartDetaile/up.png';
 import meterLogo from '../assets/meter-logo.png';
+import nasdaq from '../assets/icons/nasdaq.png';
+import dow from '../assets/icons/dow.png';
+import russel from '../assets/icons/russel.png';
+import ftse from '../assets/icons/ftse.png';
 
 export default {
   ErrorBackground2,
@@ -153,5 +157,9 @@ export default {
   collapsed,
   close,
   up,
-  meterLogo
+  meterLogo,
+  nasdaq,
+  dow,
+  russel,
+  ftse
 };
