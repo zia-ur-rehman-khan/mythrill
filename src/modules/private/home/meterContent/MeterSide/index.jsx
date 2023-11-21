@@ -13,8 +13,9 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { startFilter } from '../../../../../constants';
 
-const MeterSide = ({ select }) => {
-  const trend = useSelector((state) => state?.stocks?.trendData);
+const MeterSide = ({ select, trend }) => {
+  console.log('🚀 ~ file: index.jsx:17 ~ MeterSide ~ trend:', trend);
+  // const trend = useSelector((state) => state?.stocks?.trendData);
   const filter = useSelector((state) => state?.stocks?.filter);
 
   let meterValue = trend[select]?.overallTrend;

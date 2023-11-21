@@ -14,8 +14,7 @@ import { trendGraphManipulator } from '../../../../manipulators/stocksName';
 
 const MeterContent = () => {
   // const trend = useSelector((state) => state?.stocks?.trendData);
-  const [trendData, setTrendData] = useState(null);
-  console.log('🚀 ~ file: index.jsx:18 ~ MeterContent ~ trendData:', trendData);
+  const [trendData, setTrendData] = useState([]);
   const [select, setSelect] = useState(0);
   const dispatch = useDispatch();
 
@@ -61,7 +60,7 @@ const MeterContent = () => {
         </Space>
       </div>
       <div className="right-content">
-        <MeterSide select={select} />
+        <MeterSide select={select} trend={trendData} />
       </div>
     </div>
   );
