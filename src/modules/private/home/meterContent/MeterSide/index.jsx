@@ -53,13 +53,15 @@ const MeterSide = ({ select, trend }) => {
           {Object.values(trend[select]?.preClosed || {}).map((t, i) => (
             <div className="list" key={Math.random()}>
               <CommonTextField
+                width={'60px'}
                 text={`${i + 1} Day ago`}
                 fontWeight={400}
                 topClass={'small'}
               />
               <Divider />
               <CommonTextField
-                text={t == null ? 'NEUTRAL' : t?.toUpperCase()}
+                width={'80px'}
+                text={t == null ? 'NEUTRAL' : t?.trim()?.toUpperCase()}
                 fontWeight={600}
                 topClass={'small'}
               />
