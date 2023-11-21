@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss';
 import { CommonTextField } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,10 +7,16 @@ import { AppStyles } from '../../../../theme';
 import { css } from 'aphrodite';
 import MeterSide from './MeterSide';
 import {
+  getSubscribeDataRealTime,
   preCloseDataRequest,
   trendingListRequest
 } from '../../../../redux/slicers/stocks';
-import { trendGraphManipulator } from '../../../../manipulators/stocksName';
+import {
+  stocksdataManipulatorObject,
+  trendGraphManipulator
+} from '../../../../manipulators/stocksName';
+import initializeSocket from '../../../../socket';
+import { SOCKET_URL } from '../../../../config/webService';
 
 const MeterContent = () => {
   // const trend = useSelector((state) => state?.stocks?.trendData);
@@ -31,6 +37,36 @@ const MeterContent = () => {
       }
     })
   );
+
+  const listener1 = (...args) => {
+    console.log('preColsed', JSON.parse(args));
+
+    const newData = stocksdataManipulatorObject(JSON.parse(args).data);
+
+    const filter = trendData.map((d) => {
+      const match = newData.nameId === d.nameId;
+
+      if (match) {
+        return {
+          ...d,
+          overallTrend: newData.overallTrend
+        };
+      }
+
+      return d;
+    });
+
+    setTrendData(filter);
+  };
+
+  useEffect(() => {
+    const socket = initializeSocket(`wss://${SOCKET_URL}`);
+    socket.on('preclose_alerts', listener1);
+
+    return () => {
+      socket.off('preclose_alerts', listener1);
+    };
+  }, []);
 
   return (
     <div className="meter-content-parent">

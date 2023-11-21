@@ -50,8 +50,7 @@ function MainMeter({ value, stockName }) {
       type: 'gauge',
       height: screens.sm ? 230 : 160,
       width: screens.sm ? 380 : 320,
-      animation: false, 
-
+      animation: false
     },
     title: {
       text: null
