@@ -30,6 +30,8 @@ function MainMeter({ value, stockName }) {
       ? 250
       : 350;
 
+  console.log('🚀 ~ file: index.jsx:21 ~ MainMeter ~ meterValue:', meterValue);
+
   //GRADIENT COLOR FOR SLOTS
 
   // color: {
@@ -97,7 +99,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 0,
           to: 100,
-          color: '#8C1912',
+          color: meterValue === 50 ? '#8C1912' : '#8C191266',
           thickness: 65,
           label: {
             text: 'STRONG <br/> SELL',
@@ -108,8 +110,9 @@ function MainMeter({ value, stockName }) {
         {
           from: 105,
           to: 200,
-          color: '#8C4213',
+          color: meterValue === 145 ? '#8C4213' : '#8C421366',
           thickness: 65,
+
           label: {
             text: 'SELL',
             className: `label sell  ${meterValue === 145 && 'active'}`
@@ -118,7 +121,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 205,
           to: 300,
-          color: '#F7AF0F',
+          color: meterValue === 250 ? '#F7AF0F' : '#F7AF0F66',
           thickness: 65,
           label: {
             text: 'NEUTRAL',
@@ -128,7 +131,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 305,
           to: 400,
-          color: '#897409',
+          color: meterValue === 350 ? '#897409' : '#89740966',
           thickness: 65,
           label: {
             text: 'NEUTRAL',
@@ -138,7 +141,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 405,
           to: 500,
-          color: '#5E7410',
+          color: meterValue === 450 ? '#5E7410' : '#5E741066',
           thickness: 65,
           label: {
             text: 'STRONG <br/> BUY',
@@ -149,7 +152,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 505,
           to: 600,
-          color: '#2E6D14',
+          color: meterValue === 550 ? '#2E6D14' : '#2E6D1466',
           thickness: 65,
           label: {
             text: 'BUY',
