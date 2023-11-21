@@ -10,8 +10,12 @@ HighchartsAccessibility(Highcharts);
 import './styles.scss';
 import { CommonTextField } from '../common';
 import { Colors, Images } from '../../theme';
+import { Grid } from 'antd';
+const { useBreakpoint } = Grid;
 
 function GraphRender({ stock }) {
+  const screens = useBreakpoint();
+
   console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
 
   const meterValue =
@@ -57,8 +61,12 @@ function GraphRender({ stock }) {
     },
     chart: {
       type: 'gauge',
-      height: 260,
-      width: 420
+      
+      // height:  260,
+      // width:  420,
+      height:  200,
+      width:  380,
+      
     },
     title: {
       text: null
@@ -94,6 +102,7 @@ function GraphRender({ stock }) {
       endAngle: 90,
       background: null,
       center: ['50%', '90%'],
+
       size: '160%'
     },
 
@@ -181,6 +190,7 @@ function GraphRender({ stock }) {
       //   backgroundColor: '#121212'
       // }}
     >
+
       <HighchartsReact highcharts={Highcharts} options={options} />
       <div className="meter-title">
         <CommonTextField

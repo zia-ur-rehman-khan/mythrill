@@ -8,8 +8,81 @@
     .meter-img {
         position: absolute;
         left: 50%;
-        top: 74.5%;
+        top: 71.5%;
         transform: translate(-50%, -50%);
+    }
+   
+    @media screen and (max-width: 1300px) {
+        .meter-img {
+            position: absolute;
+        left: 50%;
+        top: 71%;
+        transform: translate(-50%, -50%);
+        }
+        
+    }
+    @media screen and (max-width: 1291px) {
+        .meter-img {
+            position: absolute;
+        left: 50%;
+        top: 71%;
+        transform: translate(-50%, -50%);
+        }
+        
+    }
+    @media screen and (max-width: 1278px) {
+        .meter-img {
+            position: absolute;
+        left: 50%;
+        top: 71%;
+        transform: translate(-50%, -50%);
+        }
+        
+    }
+    @media screen and (max-width: 1266px) {
+        .meter-img {
+            position: absolute;
+        left: 50%;
+        top: 71%;
+        transform: translate(-50%, -50%);
+        }
+        
+    }
+    // @media screen and (max-width: 1256px) {
+    //     .meter-img {
+    //         position: absolute;
+    //     left: 50%;
+    //     top: 78.5%;
+    //     transform: translate(-50%, -50%);
+    //     }
+        
+    // }
+    // @media screen and (max-width: 1244px) {
+    //     .meter-img {
+    //         position: absolute;
+    //     left: 50%;
+    //     top: 68%;
+    //     transform: translate(-50%, -50%);
+    //     }
+        
+    // }
+    // @media screen and (max-width: 1236px) {
+    //     .meter-img {
+    //         position: absolute;
+    //     left: 50%;
+    //     top: 67.5%;
+    //     transform: translate(-50%, -50%);
+    //     }
+        
+    // }
+    @media screen and (max-width: 1227px) {
+        .meter-img {
+            position: absolute;
+        left: 50%;
+        top: 71.5%;
+        transform: translate(-50%, -50%);
+        }
+        
     }
 
     // @media screen and (max-width: 575px) {
@@ -47,24 +120,45 @@
         opacity: 1;
     }
 
+    // .strong-sell {
+    //     transform: translate(-121px, 144px) rotate(-76deg);
+    // }
+    // .sell {
+    //     transform: translate(18px, 54px) rotate(-48deg);
+    // }
+    // .sell-neutral {
+    //     transform: translate(123px, 30px) rotate(-16deg);
+    // }
+    // .buy-neutral {
+    //     transform: translate(-18px, -61px) rotate(16deg);
+    // }
+    // .buy {
+    //     transform: translate(172px, -314px) rotate(46deg);
+    // }
+    // .strong-buy {
+    //     transform: translate(373px, -188px) rotate(76deg);
+    // }
     .strong-sell {
-        transform: translate(-121px, 144px) rotate(-76deg);
+        transform: translate(-57px, 116px) rotate(-76deg);
     }
     .sell {
-        transform: translate(18px, 54px) rotate(-48deg);
+        transform: translate(40px, 54px) rotate(-49deg);
     }
     .sell-neutral {
-        transform: translate(123px, 30px) rotate(-16deg);
+        transform: translate(117px, 30px) rotate(-16deg);
     }
     .buy-neutral {
-        transform: translate(-18px, -61px) rotate(16deg);
+        transform: translate(-21px, -53px) rotate(16deg);
     }
     .buy {
-        transform: translate(172px, -314px) rotate(46deg);
+        transform: translate(130px, -262px) rotate(46deg);
     }
     .strong-buy {
-        transform: translate(373px, -188px) rotate(76deg);
+        transform: translate(304px, -170px) rotate(76deg);
     }
+    // @media screen and (max-width: 575px) {
+
+    // }
 
     // @media screen and (max-width: 575px) {
     //     .label {

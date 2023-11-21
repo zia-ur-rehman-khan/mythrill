@@ -49,7 +49,9 @@ function MainMeter({ value, stockName }) {
     chart: {
       type: 'gauge',
       height: screens.sm ? 230 : 160,
-      width: screens.sm ? 380 : 320
+      width: screens.sm ? 380 : 320,
+      animation: false, 
+
     },
     title: {
       text: null
