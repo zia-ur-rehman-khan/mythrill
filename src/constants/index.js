@@ -426,7 +426,7 @@ export const handlePassworNotMatch = (_, value, name) => {
 };
 
 export const forGreen = (color) => {
-  if (color === '#3DB54A') {
+  if (color === '#00D31E') {
     return 'greenArrow';
   } else {
     return 'green';
@@ -434,7 +434,7 @@ export const forGreen = (color) => {
 };
 
 export const forRed = (color) => {
-  if (color === '#EB2127') {
+  if (color === '#FF0000') {
     return 'redArrow';
   } else {
     return 'red';
@@ -457,7 +457,7 @@ export const icons = (stock) => {
 };
 
 export const forYellow = (color) => {
-  if (color === '#F7EC35') {
+  if (color === '#DCFF00') {
     return 'yellowArrow';
   } else {
     return 'yellow';

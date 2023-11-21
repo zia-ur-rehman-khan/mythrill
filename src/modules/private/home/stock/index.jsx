@@ -44,6 +44,7 @@ const Stock = () => {
   };
 
   let stocksItems = stocksList;
+  console.log('🚀 ~ file: index.jsx:47 ~ Stock ~ stocksItems:', stocksItems);
 
   if (searchText) {
     stocksItems = stocksItems?.filter((d) =>
