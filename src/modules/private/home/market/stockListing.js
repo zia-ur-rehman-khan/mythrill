@@ -38,7 +38,7 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
 
   if (searchText) {
     filteredStocks = filteredStocks?.filter((d) =>
-      d.nameId.toLowerCase().includes(searchText.toLowerCase())
+      d?.title?.toLowerCase()?.match(searchText.toLowerCase())
     );
   }
 
@@ -46,15 +46,23 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
     <>
       {addIcon
         ? unSubstocks
-            ?.filter((d) =>
-              d?.nameId?.toLowerCase().includes(search.toLowerCase())
-            )
-            ?.map((d,i) => (
-              <StockCard addIcon={addIcon} value={d} key={Math.random()} count={i + 1}/>
+            ?.filter((d) => d?.title?.toLowerCase().match(search.toLowerCase()))
+            ?.map((d, i) => (
+              <StockCard
+                addIcon={addIcon}
+                value={d}
+                key={Math.random()}
+                count={i + 1}
+              />
             ))
         : filteredStocks?.length > 0
-        ? filteredStocks?.map((data , i) => (
-            <StockCard test={test} value={data} key={Math.random()} count={i + 1} />
+        ? filteredStocks?.map((data, i) => (
+            <StockCard
+              test={test}
+              value={data}
+              key={Math.random()}
+              count={i + 1}
+            />
           ))
         : noStockInTheList()}
     </>
