@@ -72,15 +72,15 @@ const GeneralReducer = createSlice({
       state.stocksUnSubscribe = [...filter];
       state.stocksSubscribe = [...state.stocksSubscribe, action.payload];
 
-      const sort = action.payload.stocks?.sort(
-        (a, b) => new Date(a?.date) - new Date(b?.date)
-      );
+      // const sort = action.payload.stocks?.sort(
+      //   (a, b) => new Date(a?.date) - new Date(b?.date)
+      // );
 
       const stocksData = { ...state.stocksData };
 
       stocksData[action.payload.nameId] = {
         color: action.payload.color,
-        data: sort,
+        data: action.payload.stocks,
         stockId: action.payload.stockId,
         frequency: action.payload.frequency,
         name_slug: action.payload.slugName,

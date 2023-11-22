@@ -10,24 +10,12 @@ import { useSelector } from 'react-redux';
 import { SOCKET_URL } from '../../../config/webService';
 import { startFilter } from '../../../constants';
 
-const ChartComponent = ({ chartType, data, color, filter }) => {
+const ChartComponent = ({ chartType, data, color }) => {
   const chartRef = useRef(null);
   const userData = useSelector((state) => state?.user?.data);
 
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
-
-  const end = Date.now();
-
-  const filteredData = data?.filter(
-    (t) =>
-      moment(t.date).valueOf() >= startFilter(filter) &&
-      moment(t.date).valueOf() <= end
-  );
-
-  if (filteredData?.length > 0) {
-    data = filteredData;
-  }
 
   const candlestickData = [
     [moment('2022-01-02').valueOf(), 131.39, 147.79, 130.23, 146.36],
@@ -309,7 +297,7 @@ const ChartComponent = ({ chartType, data, color, filter }) => {
     return () => {
       socket.off('stock_updates', listener1);
     };
-  }, [userData?.subscribedStocks, filter]);
+  }, [userData?.subscribedStocks]);
 
   return (
     <HighchartsReact

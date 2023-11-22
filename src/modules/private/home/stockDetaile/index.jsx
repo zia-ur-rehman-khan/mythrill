@@ -46,6 +46,8 @@ const StockDetailes = () => {
     selectedStockData = filteredData[0];
   }
 
+  console.log(selectedStockData, 'filterabove');
+
   useEffect(() => {
     const selectedStockData = stocksSubscribe.find(
       (stock) => stock.nameId === id
