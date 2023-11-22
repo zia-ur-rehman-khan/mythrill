@@ -12,7 +12,17 @@ const SmallChart = ({ color, data, filter }) => {
   const numberFormat = new Intl.NumberFormat('en-US', options);
   const chartRef = useRef(null);
 
-  console.log('🚀 ~ file: index.jsx:196 ~ SmallChart ~ filter:', filter);
+  const end = Date.now();
+
+  const filteredData = data?.filter(
+    (t) =>
+      moment(t.date).valueOf() >= startFilter(filter) &&
+      moment(t.date).valueOf() <= end
+  );
+
+  if (filteredData?.length > 0) {
+    data = filteredData;
+  }
 
   //   const test = [
   //     {
@@ -187,13 +197,14 @@ const SmallChart = ({ color, data, filter }) => {
     }
   };
 
-  useEffect(() => {
-    const chart = chartRef?.current?.chart;
+  // useEffect(() => {
+  //   const chart = chartRef?.current?.chart;
 
-    const end = Date.now();
+  //   const end = Date.now();
+  //   const start = end - 15 * 60 * 1000;
 
-    chart?.xAxis[0].setExtremes(startFilter(filter), end);
-  }, [filter]);
+  //   chart?.xAxis[0].setExtremes(start, end);
+  // }, [filter]);
 
   return (
     <div className={`smallChart`}>

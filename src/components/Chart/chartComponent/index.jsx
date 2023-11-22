@@ -18,6 +18,18 @@ const ChartComponent = ({ chartType, data, color }) => {
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
 
+  const end = Date.now();
+
+  const filteredData = data?.filter(
+    (t) =>
+      moment(t.date).valueOf() >= startFilter(filter) &&
+      moment(t.date).valueOf() <= end
+  );
+
+  if (filteredData?.length > 0) {
+    data = filteredData;
+  }
+
   const candlestickData = [
     [moment('2022-01-02').valueOf(), 131.39, 147.79, 130.23, 146.36],
     [moment('2022-01-03').valueOf(), 146.05, 153.44, 143.57, 150.52],
@@ -277,10 +289,10 @@ const ChartComponent = ({ chartType, data, color }) => {
 
     const chart = chartRef.current.chart;
 
-    if (filter) {
-      const end = Date.now();
-      chart?.xAxis[0].setExtremes(startFilter(filter), end);
-    }
+    // if (filter) {
+    //   const end = Date.now();
+    //   chart?.xAxis[0].setExtremes(startFilter(filter), end);
+    // }
 
     const listener1 = (...args) => {
       const test = stocksdataManipulatorObject(JSON.parse(args).data);
