@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
-import { CommonTextField } from '../../../../components';
+import { CommonTextField, Loader } from '../../../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { Space } from 'antd';
 import { AppStyles } from '../../../../theme';
@@ -73,30 +73,38 @@ const MeterContent = () => {
       <div className="left-content">
         <CommonTextField fontWeight={500} text={'Please choose your index:'} />
         <Space className={css(AppStyles.mTop10)} size={5} direction="vertical">
-          {trendData?.map((t, i) => (
-            <Space>
-              <CommonTextField topClass={'small'} text={`${i + 1}.`} />
-              <Space size={4} align="center">
-                <img
-                  style={{ borderRadius: '50%' }}
-                  width={'20px'}
-                  height={'20px'}
-                  src={t.src}
-                />
-                <CommonTextField
-                  fontWeight={i === select && 700}
-                  fontSize={i === select && '11px'}
-                  onClick={() => setSelect(i)}
-                  topClass={'small title-text'}
-                  text={t.title}
-                />
+          {trendData.length > 0 ? (
+            trendData?.map((t, i) => (
+              <Space>
+                <CommonTextField topClass={'small'} text={`${i + 1}.`} />
+                <Space size={4} align="center">
+                  <img
+                    style={{ borderRadius: '50%' }}
+                    width={'20px'}
+                    height={'20px'}
+                    src={t.src}
+                  />
+                  <CommonTextField
+                    fontWeight={i === select && 700}
+                    fontSize={i === select && '11px'}
+                    onClick={() => setSelect(i)}
+                    topClass={'small title-text'}
+                    text={t.title}
+                  />
+                </Space>
               </Space>
-            </Space>
-          ))}
+            ))
+          ) : (
+            <Loader />
+          )}
         </Space>
       </div>
       <div className="right-content">
-        <MeterSide select={select} trend={trendData} />
+        {trendData.length > 0 ? (
+          <MeterSide select={select} trend={trendData} />
+        ) : (
+          <Loader />
+        )}
       </div>
     </div>
   );

@@ -170,14 +170,14 @@ function MainMeter({ value, stockName }) {
       <div className="meter-title">
         <CommonTextField
           text={'M-RISK INDEX:'}
-          fontWeight={700}
+          // fontWeight={700}
           color={'#ffffff'}
           fontSize={'18px'}
         />
         <CommonTextField
           className={'title-text'}
-          text={stockName}
-          fontWeight={700}
+          text={stockName?.toUpperCase()}
+          // fontWeight={700}
           color={'#ffffff'}
           fontSize={'18px'}
         />

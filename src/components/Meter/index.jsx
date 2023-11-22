@@ -61,12 +61,11 @@ function GraphRender({ stock }) {
     },
     chart: {
       type: 'gauge',
-      
+
       // height:  260,
       // width:  420,
-      height:  200,
-      width:  380,
-      
+      height: 200,
+      width: 380
     },
     title: {
       text: null
@@ -190,19 +189,18 @@ function GraphRender({ stock }) {
       //   backgroundColor: '#121212'
       // }}
     >
-
       <HighchartsReact highcharts={Highcharts} options={options} />
       <div className="meter-title">
         <CommonTextField
           text={'M-RISK INDEX:'}
-          fontWeight={700}
+          // fontWeight={700}
           color={'#ffffff'}
           fontSize={'18px'}
         />
         <CommonTextField
           className={'title-text'}
-          text={stock?.title}
-          fontWeight={700}
+          text={stock?.title?.toUpperCase()}
+          // fontWeight={700}
           color={'#ffffff'}
           fontSize={'18px'}
         />
