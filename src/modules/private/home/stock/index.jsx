@@ -175,7 +175,7 @@ const Stock = () => {
           })}
       </Row>
     ),
-    [filteredStockItems, stocksData]
+    [filteredStockItems, stocksData, filter]
   );
 
   return (

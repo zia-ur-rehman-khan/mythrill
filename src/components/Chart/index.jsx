@@ -12,9 +12,12 @@ import ChartType from './chartview';
 import ChartView from './chartview';
 import TradingViewWidget from '../TradingView';
 import GraphFilter from '../graphFilter';
+import { useSelector } from 'react-redux';
 const { useBreakpoint } = Grid;
 
 const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
+  const filter = useSelector((state) => state?.stocks?.filter);
+
   const [chartType, setChartType] = useState('areaspline');
   const [chartView, setChartView] = useState('trading');
 
@@ -29,8 +32,15 @@ const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
   };
 
   const chartComponent = useMemo(
-    () => <ChartComponent chartType={chartType} data={data} color={color} />,
-    [chartType, color, data, chartView]
+    () => (
+      <ChartComponent
+        chartType={chartType}
+        data={data}
+        color={color}
+        filter={filter}
+      />
+    ),
+    [chartType, color, data, chartView, filter]
   );
   const tradingView = useMemo(
     () => <TradingViewWidget name_slug={name_slug} symbol={symbol} />,

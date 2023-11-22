@@ -10,10 +10,9 @@ import { useSelector } from 'react-redux';
 import { SOCKET_URL } from '../../../config/webService';
 import { startFilter } from '../../../constants';
 
-const ChartComponent = ({ chartType, data, color }) => {
+const ChartComponent = ({ chartType, data, color, filter }) => {
   const chartRef = useRef(null);
   const userData = useSelector((state) => state?.user?.data);
-  const filter = useSelector((state) => state?.stocks?.filter);
 
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
