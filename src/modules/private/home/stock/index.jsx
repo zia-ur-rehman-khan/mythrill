@@ -54,7 +54,7 @@ const Stock = () => {
 
   return (
     <div className="stock-parent">
-      <GraphFilter />
+      {/* <GraphFilter /> */}
       <MeterContent />
       <div className="stock-content">
         <Row gutter={[20, 20]}>

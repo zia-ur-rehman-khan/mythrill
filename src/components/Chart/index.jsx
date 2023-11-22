@@ -45,7 +45,7 @@ const Chart = ({ name_slug, data, color, stockId, frequency, symbol }) => {
         chartView={chartView}
         chartviewChange={chartviewChange}
       />
-      <GraphFilter />
+      {/* <GraphFilter /> */}
 
       {!screens.lg && (
         <ExtraDetailes

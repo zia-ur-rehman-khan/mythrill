@@ -45,7 +45,7 @@ import {
   setStocksListAction,
   trendingListRequest
 } from '../../../redux/slicers/stocks';
-import { CommonTextField, Loader } from '../../../components';
+import { CommonTextField, GraphFilter, Loader } from '../../../components';
 import initializeSocket, { socket } from '../../../socket';
 import ChartExample from './stockDetaile/chart';
 import { SOCKET_URL } from '../../../config/webService';
@@ -69,13 +69,21 @@ const Home = () => {
   const getContentByPathname = useMemo(() => {
     if (pathname.startsWith('/stock/')) {
       return (
-        <div className="detail-parent">
-          <StockDetailes id={id} />
-          <ChartExample />
-        </div>
+        <>
+          <GraphFilter />
+          <div className="detail-parent">
+            <StockDetailes id={id} />
+            <ChartExample />
+          </div>
+        </>
       );
     } else if (pathname === HOME_ROUTE) {
-      return <Stock id={id} />;
+      return (
+        <>
+          <GraphFilter />
+          <Stock id={id} />
+        </>
+      );
     } else if (pathname === TRENDING_ROUTE) {
       return <Trending id={id} />;
     }

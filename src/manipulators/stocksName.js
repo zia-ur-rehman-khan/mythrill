@@ -175,9 +175,10 @@ export function stockGraphManipulator(list = []) {
     for (const stock of list) {
       const payload = {};
 
-      console.log(stock, 'stock');
+      console.log(stock, 'stockGraphManipulator');
 
       payload.title = stock?.name;
+      payload.amount = `$${stock?.current_price ?? 'n/a'}`;
       payload.changeInPercent = stock?.change_in_percent ?? 'n/a';
       payload.changeInPrice = stock?.change_in_price ?? 'n/a';
       payload.coin = stock?.coin ?? '';
@@ -191,6 +192,7 @@ export function stockGraphManipulator(list = []) {
       payload.nameId = stock?.name_id ?? '';
       payload.overallTrend = stock?.overall_trend ?? '';
       payload.prevPrice = stock?.prev_price ?? 'n/a';
+      payload.src = StockIcons[stock?.name_id] || Images.bitCoin;
       payload.color =
         stock?.overall_trend?.toLowerCase() === ' strong buy'
           ? '#00D31E'

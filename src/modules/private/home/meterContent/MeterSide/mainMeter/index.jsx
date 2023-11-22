@@ -100,7 +100,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 0,
           to: 100,
-          color: meterValue === 50 ? '#8C1912' : '#8C191266',
+          color: meterValue === 50 ? '#8C1912' : '#8C1912cc',
           thickness: 65,
           label: {
             text: 'STRONG <br/> SELL',
@@ -111,7 +111,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 105,
           to: 200,
-          color: meterValue === 145 ? '#8C4213' : '#8C421366',
+          color: meterValue === 145 ? '#8C4213' : '#8C4213cc',
           thickness: 65,
 
           label: {
@@ -122,7 +122,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 205,
           to: 300,
-          color: meterValue === 250 ? '#F7AF0F' : '#F7AF0F66',
+          color: meterValue === 250 ? '#F7AF0F' : '#F7AF0Fcc',
           thickness: 65,
           label: {
             text: 'NEUTRAL',
@@ -132,7 +132,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 305,
           to: 400,
-          color: meterValue === 350 ? '#897409' : '#89740966',
+          color: meterValue === 350 ? '#897409' : '#897409cc',
           thickness: 65,
           label: {
             text: 'NEUTRAL',
@@ -142,7 +142,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 405,
           to: 500,
-          color: meterValue === 450 ? '#5E7410' : '#5E741066',
+          color: meterValue === 450 ? '#5E7410' : '#5E7410cc',
           thickness: 65,
           label: {
             text: 'STRONG <br/> BUY',
@@ -153,7 +153,7 @@ function MainMeter({ value, stockName }) {
         {
           from: 505,
           to: 600,
-          color: meterValue === 550 ? '#2E6D14' : '#2E6D1466',
+          color: meterValue === 550 ? '#2E6D14' : '#2E6D14cc',
           thickness: 65,
           label: {
             text: 'BUY',
@@ -163,6 +163,7 @@ function MainMeter({ value, stockName }) {
       ]
     }
   };
+
   return (
     <div className="main-meter">
       <HighchartsReact highcharts={Highcharts} options={options} />

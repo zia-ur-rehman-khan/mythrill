@@ -10,7 +10,7 @@ import Update from './update';
 import GraphRender from '../../../../components/Meter';
 import styles from '../../../../theme/AppStyles';
 import { useNavigate, useParams } from 'react-router-dom';
-import { HOME_ROUTE } from '../../../../constants';
+import { HOME_ROUTE, startFilter } from '../../../../constants';
 import { collection, db, getDocs, query, where } from '../../../../firebase';
 import { stockListManipulator } from '../../../../manipulators/stocksName';
 import { useSelector } from 'react-redux';
@@ -22,27 +22,29 @@ const StockDetailes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
-  const chartData = useSelector((state) => state?.stocks.stocksData);
   const trend = useSelector((state) => state?.stocks?.trendData);
+  const filter = useSelector((state) => state?.stocks?.filter);
 
-  const selectedStockData = stocksSubscribe.find(
-    (stock) => stock.nameId === id
+  let selectedStockData = stocksSubscribe.find((stock) => stock.nameId === id);
+  const preClose = trend.find((stock) => stock.nameId === id);
+
+  console.log(
+    '🚀 ~ file: index.jsx:33 ~ StockDetailes ~ selectedStockData:',
+    selectedStockData
   );
 
-  const preClose = trend.find((stock) => stock.nameId === id);
-  console.log('🚀 ~ file: index.jsx:33 ~ StockDetailes ~ preClose:', preClose);
+  const end = Date.now();
+  const filteredData = selectedStockData?.stocks?.filter(
+    (t) =>
+      moment(t.date).valueOf() >= startFilter(filter) &&
+      moment(t.date).valueOf() <= end
+  );
 
-  // const data = chartData[selectedStockData?.nameId];
+  console.log(filteredData, 'filteredData');
 
-  // const manipulatedData =
-  //   data?.length > 0
-  //     ? data?.map((item) => ({
-  //         x: Date.parse(item?.date),
-  //         y: item?.currentPrice
-  //       }))
-  //     : [];
-
-  // console.log('🚀 ~ file: index.jsx:30 ~ StockDetailes ~ data:', chartData);
+  if (filteredData?.length > 0) {
+    selectedStockData = filteredData[0];
+  }
 
   useEffect(() => {
     const selectedStockData = stocksSubscribe.find(
