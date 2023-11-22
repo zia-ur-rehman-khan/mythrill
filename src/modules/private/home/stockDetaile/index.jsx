@@ -58,36 +58,33 @@ const StockDetailes = () => {
 
   return (
     <>
-      <Row
-        wrap={true}
-        gutter={[20, 20]}
-        className={css(AppStyles.spaceBetween)}
+      <div
+        className="detaile-graph-parent"
+        // wrap={true}
+        // gutter={[20, 20]}
+        // className={css(AppStyles.spaceBetween)}
       >
-        <Col
-          xl={{ span: 13 }}
-          lg={{ span: 24 }}
-          md={{ span: 24 }}
-          sm={{ span: 24 }}
-          xs={{ span: 24 }}
-        >
+        <div className="left-side-detail">
           <Update stock={selectedStockData} />
           <Suggestion />
           <div className={'pre-data'}>
             <CommonTextField
               className="title-ellip"
-              fontWeight={600}
+              // fontWeight={600}
               text={preClose?.title?.toUpperCase()}
             />
             <CommonTextField text={'Previous Closes'} fontWeight={400} />
             {Object.values(preClose?.preClosed || {}).map((t, i) => (
               <div className="list" key={Math.random()}>
                 <CommonTextField
+                  width={'60px'}
                   text={`${i + 1} Day ago`}
                   fontWeight={400}
                   topClass={'small'}
                 />
                 <Divider />
                 <CommonTextField
+                  width={'80px'}
                   text={t == null ? 'NEUTRAL' : t?.toUpperCase()}
                   fontWeight={600}
                   topClass={'small'}
@@ -95,18 +92,11 @@ const StockDetailes = () => {
               </div>
             ))}
           </div>
-        </Col>
-        <Col
-          xl={{ span: 11 }}
-          lg={{ span: 24 }}
-          md={{ span: 24 }}
-          sm={{ span: 24 }}
-          xs={{ span: 24 }}
-          className="meter-detail-side"
-        >
+        </div>
+        <div className="meter-detail-side">
           <GraphRender stock={selectedStockData} />
-        </Col>
-      </Row>
+        </div>
+      </div>
       {/* {manipulatedData?.length > 0 && (
         <Chart data={manipulatedData} color={selectedStockData?.color} />
       )} */}
