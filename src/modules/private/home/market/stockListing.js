@@ -38,7 +38,7 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
 
   if (searchText) {
     filteredStocks = filteredStocks?.filter((d) =>
-      d?.title?.toLowerCase()?.match(searchText.toLowerCase())
+      d?.title?.toLowerCase()?.match(searchText.trim().toLowerCase())
     );
   }
 
@@ -46,7 +46,9 @@ const StockListing = ({ test, addIcon, search, ...props }) => {
     <>
       {addIcon
         ? unSubstocks
-            ?.filter((d) => d?.title?.toLowerCase().match(search.toLowerCase()))
+            ?.filter((d) =>
+              d?.title?.toLowerCase().match(search.trim().toLowerCase())
+            )
             ?.map((d, i) => (
               <StockCard
                 addIcon={addIcon}
