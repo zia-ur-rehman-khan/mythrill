@@ -61,7 +61,7 @@ const Suggestion = () => {
           <img src={Images.arrow} />
         </Space>
       </Space>
-      <Space className={css([AppStyles.spaceBetween, AppStyles.w100])}>
+      <Space size={20} className={css([AppStyles.w100])}>
         {stocksList
           ?.filter((d) => d?.overallTrend?.toLowerCase() === ' strong buy')
           ?.slice(0, 4)

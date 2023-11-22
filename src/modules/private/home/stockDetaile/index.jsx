@@ -71,16 +71,12 @@ const StockDetailes = () => {
           <Update stock={selectedStockData} />
           <Suggestion />
           <div className={'pre-data'}>
-            <CommonHeading
+            <CommonTextField
               className="title-ellip"
-              level={3}
+              fontWeight={600}
               text={preClose?.title?.toUpperCase()}
             />
-            <CommonTextField
-              className={css(AppStyles.mTop15)}
-              text={'Previous Closes'}
-              fontWeight={500}
-            />
+            <CommonTextField text={'Previous Closes'} fontWeight={400} />
             {Object.values(preClose?.preClosed || {}).map((t, i) => (
               <div className="list" key={Math.random()}>
                 <CommonTextField
