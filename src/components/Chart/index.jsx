@@ -25,9 +25,7 @@ const Chart = ({
   filter
 }) => {
   const [chartType, setChartType] = useState('areaspline');
-  const [chartView, setChartView] = useState(
-    filter !== 'all' ? 'myThril' : 'trading'
-  );
+  const [chartView, setChartView] = useState('trading');
 
   const screens = useBreakpoint();
 
