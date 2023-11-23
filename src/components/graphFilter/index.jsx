@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles.scss';
 import { Select, Space } from 'antd';
 import { CommonTextField } from '../common';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../redux/slicers/stocks';
+import { useLocation } from 'react-router-dom';
 
 const GraphFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state?.stocks?.filter);
+  const location = useLocation();
 
   const handleChange = (value) => {
     dispatch(setFilter(value));
@@ -55,6 +57,10 @@ const GraphFilter = () => {
       label: '1 Month'
     }
   ];
+
+  useEffect(() => {
+    handleChange('all');
+  }, [location]);
 
   return (
     <Space className="select-parent">
