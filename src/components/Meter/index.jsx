@@ -19,15 +19,15 @@ function GraphRender({ stock }) {
   console.log('🚀 ~ file: index.jsx:13 ~ GraphRender ~ stock:', stock);
 
   const meterValue =
-    stock?.overallTrend.toLowerCase() === ' strong buy'
+    stock?.overallTrend?.toLowerCase?.() === ' strong buy'
       ? 550
-      : stock?.overallTrend.toLowerCase() === ' buy'
+      : stock?.overallTrend?.toLowerCase?.() === ' buy'
       ? 450
-      : stock?.overallTrend.toLowerCase() === ' sell'
+      : stock?.overallTrend?.toLowerCase?.() === ' sell'
       ? 145
-      : stock?.overallTrend.toLowerCase() === ' strong sell'
+      : stock?.overallTrend?.toLowerCase?.() === ' strong sell'
       ? 50
-      : stock?.overallTrend.toLowerCase() === ' neutral sell'
+      : stock?.overallTrend?.toLowerCase?.() === ' neutral sell'
       ? 250
       : 350;
 

@@ -10,40 +10,45 @@ import { AppStyles } from '../../../../../theme';
 const ChartExample = () => {
   const { id } = useParams();
   const chartData = useSelector((state) => state?.stocks.stocksData);
-  const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
+  // const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
   const filter = useSelector((state) => state?.stocks?.filter);
 
-  const stockInfo = stocksSubscribe?.find((item) => item?.nameId === id);
-
-  // const allStocksInfo = useSelector((state) => state?.stocks?.stocksSubscribe)
+  // const stockInfo = stocksSubscribe?.find((item) => item?.nameId === id);
 
   let data = chartData[id]?.data;
 
-  console.log('simple Data', data);
-
   const end = Date.now();
 
-  let filteredData = [];
-
-  if (filter === 'all') {
-    filteredData = data;
-  } else {
-    filteredData = data?.filter(
-      (t) =>
-        moment(t.date).valueOf() >= startFilter(filter) &&
-        moment(t.date).valueOf() <= end
-    );
-  }
-
-  // if (filteredData?.length > 0) {
-  //   data = [...filteredData];
-  // }
+  const filteredData = data?.filter(
+    (t) =>
+      moment(t.date).valueOf() >= startFilter(filter) &&
+      moment(t.date).valueOf() <= end
+  );
 
   console.log('filteredData', filteredData);
 
+  if (filter !== 'all') {
+    if (filteredData?.length > 0) {
+      debugger;
+
+      if (filteredData?.length > 1) {
+        data = filteredData;
+      } else {
+        data =
+          data?.length > 0
+            ? data?.slice(data?.length - 10, data?.length)
+            : [{}];
+      }
+    } else {
+      data = data?.length > 0 ? data?.slice(0, 10) : [];
+    }
+  } else {
+    // data = data?.length > 0 ? [data[data.length - 1]] : [{}];
+  }
+
   const manipulatedData =
-    filteredData?.length > 0
-      ? filteredData?.map((item) => ({
+    data?.length > 0
+      ? data?.map((item) => ({
           x: Date.parse(item?.date),
           y: item?.currentPrice
         }))
@@ -51,23 +56,33 @@ const ChartExample = () => {
 
   // console.log(data, 'filterdown');
 
-  debugger;
   return (
     <>
-      {manipulatedData?.length > 1 ? (
+      {manipulatedData?.length > 0 && (
         <Chart
           filter={filter}
           data={manipulatedData}
-          color={filteredData[0].color}
-          stockId={filteredData[filteredData.length - 1]?.stockId}
-          frequency={filteredData[filteredData.length - 1]?.frequency}
-          name_slug={filteredData[filteredData.length - 1]?.name_slug}
-          symbol={filteredData[filteredData.length - 1]?.symbol}
-        />
-      ) : (
-        <CommonHeading
-          className={[AppStyles.mBottom20, AppStyles.textAlignCenter]}
-          text={'No Data Found'}
+          color={
+            filter !== 'all' ? data[0].color : data[data?.length - 1].color
+          }
+          stockId={
+            filter !== 'all'
+              ? data[0]?.stockId
+              : data[data?.length - 1]?.stockId
+          }
+          frequency={
+            filter !== 'all'
+              ? data[0]?.frequency
+              : data[data?.length - 1]?.frequency
+          }
+          name_slug={
+            filter !== 'all'
+              ? data[0]?.name_slug
+              : data[data?.length - 1]?.name_slug
+          }
+          symbol={
+            filter !== 'all' ? data[0]?.symbol : data[data?.length - 1]?.symbol
+          }
         />
       )}
     </>

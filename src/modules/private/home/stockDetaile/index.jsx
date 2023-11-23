@@ -21,20 +21,16 @@ import './styles.scss';
 const StockDetailes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
+  // const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
   const trend = useSelector((state) => state?.stocks?.trendData);
   const filter = useSelector((state) => state?.stocks?.filter);
-
-  let selectedStockData = stocksSubscribe.find((stock) => stock.nameId === id);
+  const chartData = useSelector((state) => state?.stocks.stocksData);
   const preClose = trend.find((stock) => stock.nameId === id);
 
-  console.log(
-    '🚀 ~ file: index.jsx:33 ~ StockDetailes ~ selectedStockData:',
-    selectedStockData
-  );
+  let data = chartData[id]?.data;
 
   const end = Date.now();
-  const filteredData = selectedStockData?.stocks?.filter(
+  const filteredData = data?.filter(
     (t) =>
       moment(t.date).valueOf() >= startFilter(filter) &&
       moment(t.date).valueOf() <= end
@@ -42,21 +38,39 @@ const StockDetailes = () => {
 
   console.log(filteredData, 'filteredData');
 
-  if (filteredData?.length > 0) {
-    selectedStockData = filteredData[0];
+  if (filter !== 'all') {
+    if (filteredData?.length > 0) {
+      // data = filteredData[0];
+      if (filteredData?.length > 1) {
+        data = filteredData[0];
+      } else {
+        const newData =
+          data?.length > 0
+            ? data?.slice(data?.length - 10, data?.length)
+            : [{}];
+        data = newData[0];
+      }
+    } else {
+      data = data?.[0] ?? {};
+    }
+  } else {
+    debugger;
+    data = data?.[data?.length - 1] ?? {};
   }
 
-  console.log(selectedStockData, 'filterabove');
+  // console.log(selectedStockData, 'filterabove');
 
-  useEffect(() => {
-    const selectedStockData = stocksSubscribe.find(
-      (stock) => stock.nameId === id
-    );
+  // useEffect(() => {
+  //   const selectedStockData = stocksSubscribe.find(
+  //     (stock) => stock.nameId === id
+  //   );
 
-    // if (isEmptyValue(selectedStockData)) {
-    //   navigate(HOME_ROUTE);
-    // }
-  }, [stocksSubscribe]);
+  //   // if (isEmptyValue(selectedStockData)) {
+  //   //   navigate(HOME_ROUTE);
+  //   // }
+  // }, [stocksSubscribe]);
+
+  console.log(data, filteredData, 'datadatadatadatadata', chartData[id]?.data);
 
   return (
     <>
@@ -67,7 +81,7 @@ const StockDetailes = () => {
         // className={css(AppStyles.spaceBetween)}
       >
         <div className="left-side-detail">
-          <Update stock={selectedStockData} />
+          <Update stock={data && data} />
           <Suggestion />
           <div className={'pre-data'}>
             <CommonTextField
@@ -96,7 +110,7 @@ const StockDetailes = () => {
           </div>
         </div>
         <div className="meter-detail-side">
-          <GraphRender stock={selectedStockData} />
+          <GraphRender stock={data} />
         </div>
       </div>
       {/* {manipulatedData?.length > 0 && (
