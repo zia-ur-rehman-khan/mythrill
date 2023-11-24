@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CommonHeading,
   CommonInputField,
@@ -16,21 +16,40 @@ import { startFilter } from '../../../../../constants';
 const MeterSide = ({ select, trend }) => {
   console.log('🚀 ~ file: index.jsx:17 ~ MeterSide ~ trend:', trend);
   // const trend = useSelector((state) => state?.stocks?.trendData);
+
   const filter = useSelector((state) => state?.stocks?.filter);
+  const [meterValue, setMeterValue] = useState({});
 
-  let meterValue = trend[select]?.overallTrend;
+  useEffect(() => {
+    filterGraphData();
+  }, [trend, filter]);
 
-  const end = Date.now();
+  const filterGraphData = () => {
+    const meterValue = trend[select]?.preData;
 
-  const filteredData = trend[select]?.preData?.filter(
-    (t) =>
-      moment(t.date).valueOf() >= startFilter(filter) &&
-      moment(t.date).valueOf() <= end
-  );
+    if (!_.isEmpty(meterValue)) {
+      const end = Date.now();
 
-  if (filteredData?.length > 0) {
-    meterValue = filteredData[0]?.overallTrend;
-  }
+      if (filter !== 'all') {
+        const filteredData = meterValue?.filter(
+          (t) =>
+            moment(t.date).valueOf() >= startFilter(filter) &&
+            moment(t.date).valueOf() <= end
+        );
+
+        if (filteredData?.length > 0) {
+          const temp = filteredData[0];
+          setMeterValue(temp);
+        } else {
+          setMeterValue(meterValue[meterValue?.length - 1]);
+        }
+      } else {
+        setMeterValue(meterValue[meterValue?.length - 1]);
+      }
+    } else {
+      setGraphDetail({});
+    }
+  };
 
   return (
     <div className="meterSide-parent">
@@ -72,8 +91,7 @@ const MeterSide = ({ select, trend }) => {
       <div className="meterSide-right">
         <MainMeter
           stockName={trend[select]?.title}
-          filteredData={filteredData}
-          value={meterValue}
+          value={meterValue.overallTrend}
         />
       </div>
     </div>

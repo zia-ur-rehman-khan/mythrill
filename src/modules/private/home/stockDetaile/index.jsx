@@ -9,7 +9,7 @@ import Suggestion from './suggestion';
 import Update from './update';
 import GraphRender from '../../../../components/Meter';
 import styles from '../../../../theme/AppStyles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { HOME_ROUTE, startFilter } from '../../../../constants';
 import { collection, db, getDocs, query, where } from '../../../../firebase';
 import { stockListManipulator } from '../../../../manipulators/stocksName';
@@ -25,12 +25,14 @@ const StockDetailes = () => {
   const filter = useSelector((state) => state?.stocks?.filter);
   const chartData = useSelector((state) => state?.stocks.stocksData);
   const [graphDetail, setGraphDetail] = useState({});
+  const location = useLocation();
+  const { pathname } = location;
 
   const preClose = trend.find((stock) => stock.nameId === id);
 
   useEffect(() => {
     filterGraphData();
-  }, [chartData, filter]);
+  }, [chartData, filter, pathname]);
 
   const filterGraphData = () => {
     const data = chartData[id]?.data;

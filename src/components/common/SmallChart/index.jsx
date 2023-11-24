@@ -7,22 +7,10 @@ import { css } from 'aphrodite';
 import { AppStyles } from '../../../theme';
 import { startFilter } from '../../../constants';
 
-const SmallChart = ({ color, data, filter }) => {
+const SmallChart = ({ color, data }) => {
   const options = { style: 'currency', currency: 'USD' };
   const numberFormat = new Intl.NumberFormat('en-US', options);
   const chartRef = useRef(null);
-
-  const end = Date.now();
-
-  const filteredData = data?.filter(
-    (t) =>
-      moment(t.date).valueOf() >= startFilter(filter) &&
-      moment(t.date).valueOf() <= end
-  );
-
-  if (filteredData?.length > 0) {
-    data = filteredData;
-  }
 
   //   const test = [
   //     {

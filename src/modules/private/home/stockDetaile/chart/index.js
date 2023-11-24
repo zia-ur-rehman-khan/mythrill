@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Chart from '../../../../../components/Chart';
@@ -15,10 +15,12 @@ const ChartExample = () => {
   const [graphDetail, setGraphDetail] = useState({});
   const chartData = useSelector((state) => state?.stocks.stocksData);
   const filter = useSelector((state) => state?.stocks?.filter);
+  const location = useLocation();
+  const { pathname } = location;
 
   useEffect(() => {
     filterGraphData();
-  }, [chartData, filter]);
+  }, [chartData, filter, pathname]);
 
   const filterGraphData = () => {
     const data = chartData[id]?.data;

@@ -10,6 +10,7 @@
         .child {
             display: flex;
             justify-content: center;
+            min-height: 200px;
             .box {
                 background: #262635;
                 border-radius: 10px;
