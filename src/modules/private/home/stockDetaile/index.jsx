@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Chart from '../../../../components/Chart';
 import { CommonHeading, CommonTextField } from '../../../../components';
 import { Col, Divider, Row, Space } from 'antd';
@@ -21,56 +21,45 @@ import './styles.scss';
 const StockDetailes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  // const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
   const trend = useSelector((state) => state?.stocks?.trendData);
   const filter = useSelector((state) => state?.stocks?.filter);
   const chartData = useSelector((state) => state?.stocks.stocksData);
+  const [graphDetail, setGraphDetail] = useState({});
+
   const preClose = trend.find((stock) => stock.nameId === id);
 
-  let data = chartData[id]?.data;
+  useEffect(() => {
+    filterGraphData();
+  }, [chartData, filter]);
 
-  const end = Date.now();
-  const filteredData = data?.filter(
-    (t) =>
-      moment(t.date).valueOf() >= startFilter(filter) &&
-      moment(t.date).valueOf() <= end
-  );
+  const filterGraphData = () => {
+    const data = chartData[id]?.data;
 
-  console.log(filteredData, 'filteredData');
+    debugger;
 
-  if (filter !== 'all') {
-    if (filteredData?.length > 0) {
-      // data = filteredData[0];
-      if (filteredData?.length > 1) {
-        data = filteredData[0];
+    if (!_.isEmpty(data)) {
+      const end = Date.now();
+
+      if (filter !== 'all') {
+        const filteredData = data?.filter(
+          (t) =>
+            moment(t.date).valueOf() >= startFilter(filter) &&
+            moment(t.date).valueOf() <= end
+        );
+
+        if (filteredData?.length > 0) {
+          const temp = filteredData[0];
+          setGraphDetail(temp);
+        } else {
+          setGraphDetail(data[data?.length - 1]);
+        }
       } else {
-        const newData =
-          data?.length > 0
-            ? data?.slice(data?.length - 10, data?.length)
-            : [{}];
-        data = newData[0];
+        setGraphDetail(data[data?.length - 1]);
       }
     } else {
-      data = data?.[0] ?? {};
+      setGraphDetail({});
     }
-  } else {
-    debugger;
-    data = data?.[data?.length - 1] ?? {};
-  }
-
-  // console.log(selectedStockData, 'filterabove');
-
-  // useEffect(() => {
-  //   const selectedStockData = stocksSubscribe.find(
-  //     (stock) => stock.nameId === id
-  //   );
-
-  //   // if (isEmptyValue(selectedStockData)) {
-  //   //   navigate(HOME_ROUTE);
-  //   // }
-  // }, [stocksSubscribe]);
-
-  console.log(data, filteredData, 'datadatadatadatadata', chartData[id]?.data);
+  };
 
   return (
     <>
@@ -81,7 +70,7 @@ const StockDetailes = () => {
         // className={css(AppStyles.spaceBetween)}
       >
         <div className="left-side-detail">
-          <Update stock={data && data} />
+          <Update stock={graphDetail && graphDetail} />
           <Suggestion />
           <div className={'pre-data'}>
             <CommonTextField
@@ -110,7 +99,7 @@ const StockDetailes = () => {
           </div>
         </div>
         <div className="meter-detail-side">
-          <GraphRender stock={data} />
+          <GraphRender stock={graphDetail} />
         </div>
       </div>
       {/* {manipulatedData?.length > 0 && (

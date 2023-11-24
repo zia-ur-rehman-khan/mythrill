@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
@@ -6,55 +6,72 @@ import Chart from '../../../../../components/Chart';
 import { CommonHeading, GraphFilter } from '../../../../../components';
 import { startFilter } from '../../../../../constants';
 import { AppStyles } from '../../../../../theme';
+import { setFilter } from '../../../../../redux/slicers/stocks';
+import _ from 'lodash';
 
 const ChartExample = () => {
   const { id } = useParams();
+  const [filterData, setFilterData] = useState([]);
+  const [graphDetail, setGraphDetail] = useState({});
   const chartData = useSelector((state) => state?.stocks.stocksData);
-  // const stocksSubscribe = useSelector((state) => state?.stocks.stocksSubscribe);
   const filter = useSelector((state) => state?.stocks?.filter);
 
-  // const stockInfo = stocksSubscribe?.find((item) => item?.nameId === id);
+  useEffect(() => {
+    filterGraphData();
+  }, [chartData, filter]);
 
-  let data = chartData[id]?.data;
+  const filterGraphData = () => {
+    const data = chartData[id]?.data;
 
-  const end = Date.now();
+    debugger;
 
-  const filteredData = data?.filter(
-    (t) =>
-      moment(t.date).valueOf() >= startFilter(filter) &&
-      moment(t.date).valueOf() <= end
-  );
+    if (!_.isEmpty(data)) {
+      const end = Date.now();
 
-  console.log('filteredData', filteredData);
+      if (filter !== 'all') {
+        const filteredData = data?.filter(
+          (t) =>
+            moment(t.date).valueOf() >= startFilter(filter) &&
+            moment(t.date).valueOf() <= end
+        );
 
-  if (filter !== 'all') {
-    if (filteredData?.length > 0) {
-      debugger;
+        // debugger;
 
-      if (filteredData?.length > 1) {
-        data = filteredData;
+        if (filteredData?.length > 0) {
+          const temp = filteredData[0];
+          setGraphDetail(temp);
+          if (filteredData?.length > 1) {
+            setFilterData(filteredData);
+          } else {
+            setFilterData(
+              data?.length > 0
+                ? data?.slice(data?.length - 10, data?.length)
+                : []
+            );
+          }
+        } else {
+          setFilterData(
+            data?.length > 0 ? data?.slice(data?.length - 10, data.length) : []
+          );
+          setGraphDetail(data[data?.length - 1]);
+        }
       } else {
-        data =
-          data?.length > 0
-            ? data?.slice(data?.length - 10, data?.length)
-            : [{}];
+        setFilterData(data);
+        setGraphDetail(data[data?.length - 1]);
       }
     } else {
-      data = data?.length > 0 ? data?.slice(0, 10) : [];
+      setFilterData([]);
     }
-  } else {
-    // data = data?.length > 0 ? [data[data.length - 1]] : [{}];
-  }
+  };
 
-  const manipulatedData =
-    data?.length > 0
-      ? data?.map((item) => ({
+  const manipulatedData = useMemo(() => {
+    return filterData?.length > 0
+      ? filterData?.map((item) => ({
           x: Date.parse(item?.date),
           y: item?.currentPrice
         }))
       : [];
-
-  // console.log(data, 'filterdown');
+  }, [filterData]);
 
   return (
     <>
@@ -62,27 +79,11 @@ const ChartExample = () => {
         <Chart
           filter={filter}
           data={manipulatedData}
-          color={
-            filter !== 'all' ? data[0].color : data[data?.length - 1].color
-          }
-          stockId={
-            filter !== 'all'
-              ? data[0]?.stockId
-              : data[data?.length - 1]?.stockId
-          }
-          frequency={
-            filter !== 'all'
-              ? data[0]?.frequency
-              : data[data?.length - 1]?.frequency
-          }
-          name_slug={
-            filter !== 'all'
-              ? data[0]?.name_slug
-              : data[data?.length - 1]?.name_slug
-          }
-          symbol={
-            filter !== 'all' ? data[0]?.symbol : data[data?.length - 1]?.symbol
-          }
+          color={graphDetail?.color}
+          stockId={graphDetail?.stockId}
+          frequency={graphDetail?.frequency}
+          name_slug={graphDetail?.name_slug}
+          symbol={graphDetail?.symbol}
         />
       )}
     </>
