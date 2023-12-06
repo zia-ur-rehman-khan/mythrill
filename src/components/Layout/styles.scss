@@ -4,10 +4,30 @@
     display: flex;
     .content {
         width: 100%;
+        margin-left: 60px;
+
+        @media (max-width: 1000px) {
+            margin: 0;
+        }
         .child-content {
-            padding: 36px 35px 35px 35px;
             background: master.$dark-color;
-            height: calc(100vh - 80px);
+            @media (min-width: 991px) {
+                height: calc(100vh - 80px);
+                padding: 36px 35px 35px 35px;
+            }
+            .top-section {
+                .trend-button {
+                    background: rgba(0, 0, 0, 0.25);
+                    box-shadow: none;
+                }
+                .ellipsis {
+                    min-width: 265px !important;
+                    width: 100% !important;
+                }
+                @media (max-width: 991px) {
+                    padding: 20px 20px 10px 20px;
+                }
+            }
 
             .welcome {
                 width: 100%;
@@ -20,6 +40,9 @@
                 margin-top: 10px;
                 padding: 30px 20px 20px 20px;
                 height: calc(100% - 60px);
+                @media (max-width: 991px) {
+                    height: 96%;
+                }
             }
         }
     }

@@ -1,0 +1,13 @@
+@use "../../../../master.scss";
+
+.user-info-main {
+    padding: 20px;
+    background-color: master.$dark-color;
+    border-radius: 20px;
+    .disable-but {
+        opacity: 0.5;
+        button {
+            cursor: not-allowed;
+        }
+    }
+}

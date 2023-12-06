@@ -1,7 +1,7 @@
-import React from "react";
-import "./styles.scss";
-import { AppStyles } from "../../../theme";
-import { css } from "aphrodite";
+import React from 'react';
+import './styles.scss';
+import { AppStyles } from '../../../theme';
+import { css } from 'aphrodite';
 
 const CommonTextField = ({
   topClass,
@@ -23,16 +23,18 @@ const CommonTextField = ({
   title,
   lineHeight,
   opacity,
+  width,
+  margin = 0
 }) => {
   return (
-    <div className={`${topClass || "paragraph-parent"}`}>
+    <div className={`${topClass && topClass}  paragraph-parent`}>
       <p
         title={title}
-        className={`${className || ""} ${
-          onClick ? css(AppStyles.pointer) : ""
+        className={`${className || ''} ${
+          onClick ? css(AppStyles.pointer) : ''
         }`}
         style={{
-          margin: 0,
+          margin: margin,
           padding: 0,
           fontFamily: font,
           fontSize,
@@ -46,12 +48,14 @@ const CommonTextField = ({
           lineHeight,
           paddingLeft,
           textDecoration,
-          whiteSpace: "pre-wrap",
+          whiteSpace: 'pre-wrap',
           opacity,
+          width
         }}
         onClick={onClick}
       >
-        {text || children}
+        {text}
+        {children}
       </p>
     </div>
   );

@@ -1,0 +1,43 @@
+@use "../../../../master.scss";
+
+.meter-content-parent {
+    background: master.$dark-color;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    // gap: 10px;
+    margin-top: 10px;
+    // flex-wrap: wrap;
+
+    .left-content {
+        width: 20%;
+        min-width: 160px;
+        max-height: 250px;
+        overflow-y: scroll;
+        .title-text {
+            p {
+                text-overflow: ellipsis;
+                white-space: nowrap !important;
+                overflow: hidden;
+                max-width: 75px;
+                min-width: 30px;
+            }
+        }
+    }
+    .right-content {
+        width: 80%;
+    }
+}
+
+@media (max-width: 700px) {
+    .meter-content-parent {
+        flex-wrap: wrap;
+        .left-content {
+            width: 100%;
+        }
+        .right-content {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+}

@@ -1,7 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { Modal } from "antd";
-import "./styles.scss";
+import { Modal, Space } from 'antd';
+import './styles.scss';
+import CommonTextField from '../TextField';
+import CommonButton from '../CommonButton';
 
 const CommonModal = ({
   setIsModalVisible,
@@ -9,7 +11,11 @@ const CommonModal = ({
   children,
   width,
   title,
-  crossIcon,
+  discription,
+  onConfirm,
+  loading,
+  className,
+  destroyOnClose
 }) => {
   const handleOk = () => {
     setIsModalVisible(false);
@@ -21,15 +27,35 @@ const CommonModal = ({
   return (
     <div>
       <Modal
+        destroyOnClose={destroyOnClose}
+        className={(discription && 'confirmation-modal') || className}
         footer={null}
         width={width}
         title={title}
         open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        className={!crossIcon && "cross"}
+        centered
       >
-        {children}
+        {discription ? (
+          <Space size={20} direction="vertical" className="confirm-content">
+            <CommonTextField text={discription} textAlign={'center'} />
+            <CommonButton
+              text={'Confirm'}
+              onClick={onConfirm}
+              loading={loading}
+            />
+            <CommonButton
+              text={'Not Now'}
+              onClick={handleOk}
+              background="none"
+              border={'1px solid #ffff'}
+              topClass={'not-now'}
+            />
+          </Space>
+        ) : (
+          children
+        )}
       </Modal>
     </div>
   );

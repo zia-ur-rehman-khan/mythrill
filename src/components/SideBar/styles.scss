@@ -2,30 +2,94 @@
 
 .main-sideBar {
     background: master.$theme3-color;
-    width: 210px;
+    min-width: 190px;
 
     .logo {
         padding: 21px 0 0px 21px;
     }
-    .content {
-        padding: 90px 5px 0 5px;
-        .content-list {
-            transition: all 0.3s;
-            cursor: pointer;
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            border-radius: 20px;
+    .sidebar-routes {
+        justify-content: space-evenly;
+        height: 80%;
+        width: 100%;
+        .content {
+            padding: 0px 5px 0 5px;
+            .content-list {
+                transition: all 0.3s;
+                cursor: pointer;
+                display: flex;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 20px;
+            }
+            .active {
+                background: #1d1f26;
+                font-weight: 600;
+            }
+            .line {
+                margin: 0 auto;
+                border-color: #ffffff;
+                opacity: 0.1;
+                width: 50%;
+                min-width: 50%;
+            }
         }
-        .active {
-            background: #1d1f26;
-        }
-    }
-    .logout {
-        padding: 0 21px 0 21px;
-    }
 
+        .logout {
+            padding: 0 21px 0 21px;
+        }
+        .profile {
+            display: none;
+        }
+    }
     @media (max-width: 1000px) {
         display: none;
+    }
+}
+.ant-drawer {
+    .ant-drawer-header {
+        padding: 20px 5px;
+
+        .ant-drawer-header-title {
+            flex-direction: row-reverse;
+        }
+    }
+    .ant-drawer-body {
+        @media (max-width: 400px) {
+            padding: 10px;
+        }
+    }
+}
+
+.drawer {
+    .sidebar-routes {
+        width: 100%;
+        justify-content: space-between;
+        .content {
+            width: 100%;
+            .content-list {
+                transition: all 0.3s;
+                cursor: pointer;
+                display: flex;
+                gap: 20px;
+                padding: 20px 0px 20px 0;
+                border-radius: 20px;
+            }
+            .active {
+                background: #1d1f26;
+                font-weight: 600;
+            }
+            .line {
+                margin: 0 auto;
+                border-color: #ffffff;
+                opacity: 0.1;
+                width: 50%;
+            }
+        }
+        .profile {
+            margin-top: 20px;
+        }
+        .logout {
+            margin-top: 20px;
+        }
     }
 }

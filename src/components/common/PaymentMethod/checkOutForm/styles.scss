@@ -1,0 +1,105 @@
+@use "../../../../master.scss";
+
+.StripeElement {
+    background: #363941;
+    height: 40px;
+    border-radius: 6px;
+    padding: 12px;
+    // .__PrivateStripeElement {
+    //     .__PrivateStripeElement-input {
+    //         // color: #ffffff;
+    //         // font-size: 12px !important;
+    //     }
+    // }
+}
+
+.subscription {
+    width: 100%;
+    .card-field {
+        position: relative;
+        .card-icons {
+            position: absolute;
+            right: 12px;
+            top: 6px;
+            @media (max-width: 800px) {
+                top: 12px;
+
+                img {
+                    width: 35px;
+                    height: 18px;
+                }
+            }
+            @media (max-width: 600px) {
+                top: 9px;
+
+                img {
+                    width: 25px;
+                    height: 13px;
+                }
+            }
+        }
+    }
+    .csv-feild {
+        width: 100%;
+        margin-top: 15px;
+    }
+    .card-but {
+        margin-top: 15px;
+    }
+    .gradient {
+        width: 25%;
+        height: 2px;
+        background: linear-gradient(90deg, #e9e9ec 0.5%, rgba(233, 233, 236, 0) 72.5%);
+    }
+    .right-border {
+        transform: rotate(-180deg);
+    }
+}
+
+.add-card {
+    width: 100%;
+    .card-field {
+        position: relative;
+        .card-icons {
+            position: absolute;
+            right: 12px;
+            top: 6px;
+            @media (max-width: 800px) {
+                top: 12px;
+
+                img {
+                    width: 35px;
+                    height: 18px;
+                }
+            }
+            @media (max-width: 600px) {
+                top: 9px;
+
+                img {
+                    width: 25px;
+                    height: 13px;
+                }
+            }
+        }
+    }
+    .expiry-section {
+        display: flex;
+        gap: 10px;
+        .csv-feild {
+            width: 100%;
+        }
+        @media (max-width: 800px) {
+            display: block !important;
+            .csv-feild {
+                margin-top: 10px;
+            }
+        }
+    }
+    .card-but {
+        text-align: center;
+        margin-top: 20px;
+        button {
+            width: 200px;
+        }
+    }
+}

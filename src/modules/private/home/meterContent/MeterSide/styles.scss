@@ -1,0 +1,49 @@
+.meterSide-parent {
+    background: #121212;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+
+    .meterSide-left {
+        width: 40%;
+
+        .title-ellip {
+            text-overflow: ellipsis;
+            white-space: nowrap !important;
+            overflow: hidden;
+        }
+        .list {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .ant-divider {
+            min-width: 0;
+            width: 50%;
+            border-color: #d9d9d966;
+            margin: 0;
+        }
+    }
+    .meterSide-right {
+        min-width: 320px;
+        flex: 1 1 60%;
+    }
+
+    @media screen and (max-width: 1223px) {
+        .meterSide-left {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 575px) {
+        .meterSide-right {
+            flex: none;
+            width: 300px;
+        }
+    }
+}

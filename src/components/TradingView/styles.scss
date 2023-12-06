@@ -1,0 +1,22 @@
+#tradingview_b0cd5 {
+    height: 1800px !important;
+    iframe {
+        display: block !important;
+    }
+}
+
+.tradingview-widget-container {
+    position: relative;
+}
+
+.tradingview-loader {
+    position: absolute;
+    background-color: #1d1f26;
+    height: 620px !important;
+    width: 100%;
+    top: 0;
+}
+
+.trading-disbale {
+    display: none !important;
+}

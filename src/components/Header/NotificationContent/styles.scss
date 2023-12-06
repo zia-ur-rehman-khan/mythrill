@@ -1,0 +1,58 @@
+@use "../../../master.scss";
+
+.main {
+    .notification-content {
+        padding: 10px 5px 10px 5px;
+        border-radius: 6px;
+        margin: 10px 0 10px 0;
+        cursor: pointer;
+
+        &:hover {
+            background-color: master.$dark-color;
+        }
+        .notify-content {
+            width: 100%;
+            max-width: 200px;
+            min-width: 80px;
+        }
+        .notify-icon {
+            min-width: 35px;
+            min-height: 35px;
+        }
+    }
+
+    .border-line {
+        margin: 5px auto;
+        border-color: #ffffff;
+        opacity: 0.1;
+        width: 90%;
+        min-width: 90%;
+    }
+}
+
+.hide {
+    .notification-content {
+        background-color: master.$dark-color;
+    }
+    .border-line {
+        display: none;
+    }
+}
+
+.notification-parent {
+    position: relative;
+    .count {
+        color: master.$white-color;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid #20232c;
+        background: #cd393a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: -8px;
+        top: -10px;
+    }
+}

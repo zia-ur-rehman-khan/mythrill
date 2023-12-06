@@ -1,15 +1,19 @@
-import { toast } from "react-toastify";
-import moment from "moment";
+import { toast } from 'react-toastify';
+import moment from 'moment';
 import {
   ALERT_POSITIONS,
   ALERT_THEMES,
   ALERT_TIMEOUT,
-  ALERT_TYPES,
-} from "../constants";
-import ApiHandler from "./ApiHandler";
-import DataHandler from "./DataHandler";
-import { BASE_URL } from "../config/webService";
-import { userSignOutSuccess, refreshToken } from "../redux/slicers/user";
+  ALERT_TYPES
+} from '../constants';
+import ApiHandler from './ApiHandler';
+import DataHandler from './DataHandler';
+import { BASE_URL } from '../config/webService';
+import {
+  userSignOutSuccess,
+  refreshToken,
+  userSignOutRequest
+} from '../redux/slicers/user';
 import {
   cloneDeep,
   filter,
@@ -19,20 +23,22 @@ import {
   isEqual,
   has,
   findIndex,
-  every,
-} from "lodash";
+  every
+} from 'lodash';
+import { Form } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 // GET CURRENT ACCESS TOKEN FROM USER REDUCER
 export const getCurrentAccessToken = () => {
-  let token = DataHandler.getStore().getState().user.data.access_token;
-  console.log("token");
+  let token = DataHandler.getStore().getState().user?.data?.access_token;
+  console.log('token');
   return token;
 };
 
 // GET CURRENT REFRESH TOKEN FROM USER REDUCER
 export const getCurrentRefreshToken = () => {
-  let token = DataHandler.getStore().getState().user.data.refresh_token;
-  console.log("ssss");
+  let token = DataHandler.getStore().getState().user?.data?.refresh_token;
+  console.log('ssss');
   return token;
 };
 
@@ -65,6 +71,13 @@ export const isEmailValid = (email) => {
   return re.test(email.trim());
 };
 
+export const checkPasswordValidation = (pass) => {
+  const regex =
+    /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/;
+
+  return pass.match(regex);
+};
+
 // CHECK IF PASSWORD LENGTH IS VALID
 export const isPasswordValid = (password) => {
   let length = 5; // u can change pass length according to your requirement
@@ -81,19 +94,19 @@ export const capitalizeFirstLetter = (string) => {
   if (string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  return "";
+  return '';
 };
 
 // FORMAT DATE ACCORDING TO PROVIDED FORMAT
 export const getFormattedDateTime = (date, format) => {
   if (date) return moment(date).format(format);
-  return "";
+  return '';
 };
 
 // FORMAT DATE ACCORDING TO PROVIDED FORMAT AND RETURN TO DATE OBJECT
 export const getDateObjectFromString = (date, format) => {
   if (date) return moment(date, format).toDate();
-  return "";
+  return '';
 };
 
 // CHECK IF MOBILE NUMBER IS VALID
@@ -110,10 +123,10 @@ export const isValidMobileNumber = (str) => {
 // CHECK IF MOBILE NUMBER IS OF UK NUMBER FORMAT
 export const isValidUKMobileNumber = (str) => {
   if (!str) return false;
-  str = str.replace(/ /g, "");
-  let mobileNumber = str.replace("+", "");
-  if (mobileNumber.charAt(0) == "4" && mobileNumber.charAt(1) == "4") {
-    mobileNumber = "0" + mobileNumber.slice(2);
+  str = str.replace(/ /g, '');
+  let mobileNumber = str.replace('+', '');
+  if (mobileNumber.charAt(0) == '4' && mobileNumber.charAt(1) == '4') {
+    mobileNumber = '0' + mobileNumber.slice(2);
   }
   return /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/.test(
     mobileNumber
@@ -180,13 +193,13 @@ export const generateGuid = () => {
   return (
     S4() +
     S4() +
-    "-" +
+    '-' +
     S4() +
-    "-" +
+    '-' +
     S4() +
-    "-" +
+    '-' +
     S4() +
-    "-" +
+    '-' +
     S4() +
     S4() +
     S4()
@@ -214,27 +227,174 @@ export const toastAlert = (
     pauseOnHover: pauseOnHover,
     draggable: draggable,
     theme: theme,
+    toastId: message
   });
 };
 
 // GENERATE REFRESH TOKEN
 export const refreshAccessToken = async () => {
-  console.log("here in refreshAccessToken");
   let data = {};
   data.token = getCurrentRefreshToken();
-  const method = "POST";
-  const _url = "auth/v1/refresh-token";
+  const method = 'POST';
+  const _url = 'users/refresh-token';
   try {
-    const response = await ApiHandler(method, _url, data, {}, BASE_URL);
+    const response = await ApiHandler(
+      method,
+      _url,
+      {},
+      {
+        Authorization: `Bearer ${data?.token}`
+      },
+      BASE_URL
+    );
     console.log({ newAccessToken: response });
-    const responseJson = await response.json();
-    console.log({ newAccessToken: responseJson.data });
-    DataHandler.getStore().dispatch(refreshToken(responseJson.data));
-    return responseJson.data.access_token;
+    // const responseJson = await response.json();
+    console.log(response.data.data, 'responce is here');
+    DataHandler.getStore().dispatch(refreshToken(response?.data?.data));
+    return response?.data?.data?.access_token;
   } catch (error) {
     toastAlert(error.response);
     console.log({ refreshTokenError: error.response });
     DataHandler.getStore().dispatch(userSignOutSuccess());
     return false;
   }
+};
+
+export const userPlatform = () => {
+  if (
+    navigator.userAgent.match(/Android/i) ||
+    navigator.userAgent.match(/webOS/i) ||
+    navigator.userAgent.match(/iPhone/i) ||
+    navigator.userAgent.match(/iPad/i) ||
+    navigator.userAgent.match(/iPod/i) ||
+    navigator.userAgent.match(/BlackBerry/i) ||
+    navigator.userAgent.match(/Windows Phone/i)
+  ) {
+    return 'mobile';
+  } else {
+    return 'web';
+  }
+};
+
+export const handleUserSignout = () => {
+  DataHandler.getStore().dispatch(userSignOutRequest());
+};
+
+export const trendingFilter = (t) => {
+  switch (t) {
+    case 1:
+      return 'Buy / Uptrend';
+
+    case 2:
+      return 'Hold / Neutral';
+
+    case 3:
+      return 'Sell / Downtrend';
+
+    default:
+      return '';
+  }
+};
+
+export const trendingImage = (t) => {
+  switch (t) {
+    case 1:
+      return 'greenArrow';
+
+    case 2:
+      return 'yellowArrow';
+
+    case 3:
+      return 'redArrow';
+
+    default:
+      return '';
+  }
+};
+
+export const cardHandel = (t) => {
+  switch (t) {
+    case 'Visa':
+      return 'visaCard';
+
+    case 'master':
+      return 'masterCard';
+
+    default:
+      return 'card';
+  }
+};
+
+export const cardfieldHandel = (t) => {
+  switch (t) {
+    case 'visa':
+      return 'visaCard';
+
+    case 'mastercard':
+      return 'masterCard';
+
+    case 'amex':
+      return 'americanExpressCard';
+
+    case 'discover':
+      return 'discoverCard';
+
+    default:
+      return 'card';
+  }
+};
+
+export const getCachValue = async (cacheName, key) => {
+  try {
+    const cache = await caches.open(cacheName);
+    const response = await cache.match(key);
+
+    if (response) {
+      const data = await response.json();
+      return data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addToCache = async (cacheName, key, value) => {
+  try {
+    const cache = await caches.open(cacheName);
+
+    // Create a Response object with the value
+    const response = new Response(JSON.stringify(value), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    // Add the Response to the cache with the specified key
+    await cache.put(key, response);
+
+    console.log('Added key:', key, 'with value:', value, 'to the cache.');
+  } catch (error) {
+    console.error('Error adding key-value pair to cache:', error);
+    throw error; // Rethrow the error for error handling
+  }
+};
+
+export const useCommonNotification = () => {
+  const navigate = useNavigate();
+
+  const navigateOnCondition = (extraDetails) => {
+    let url = '';
+    if (extraDetails.type == 'stock') {
+      url = `/stock/${extraDetails.name_id}`;
+    } else {
+      url = `/setting`;
+    }
+    navigate(url);
+  };
+
+  return {
+    navigateOnCondition
+  };
 };

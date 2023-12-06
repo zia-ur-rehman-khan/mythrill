@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
 html,
 body {
   scroll-behavior: smooth;
   min-height: 95%;
   margin: 0;
-  background-color: #fafcfe !important;
 }
 
 *,
@@ -14,7 +14,7 @@ button {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -37,7 +37,7 @@ img {
   height: 100vh;
   display: flex;
   align-items: center;
-  background: #fff;
+  background: #20232c;
   justify-content: center;
 }
 .container {

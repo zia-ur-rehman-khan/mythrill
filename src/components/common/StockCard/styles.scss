@@ -1,18 +1,46 @@
+@use "../../../master.scss";
+
 .stockCard-main {
     justify-content: space-between;
     width: 100%;
     border-bottom: 0.4px solid rgba(255, 255, 255, 0.05);
     padding: 10px 0 10px 0;
+    .ellipsis {
+        width: 150px !important;
+        max-width: 200px;
+    }
+    @media (max-width: 400px) {
+        .ellipsis {
+            width: 130px !important;
+        }
+    }
+
     .color-text {
         border-radius: 61.2328px;
         padding: 5px;
     }
-    .red {
-        background: rgba(241, 44, 44, 0.2);
-        color: #f12c2c;
+}
+
+.stockCard-loader {
+    width: 100%;
+    border-bottom: 0.4px solid rgba(255, 255, 255, 0.05);
+    padding: 10px 0 10px 0;
+}
+
+.main-card-parent {
+    position: relative;
+    .loader-main {
+        position: absolute;
+        width: 100%;
+        z-index: 4;
+        top: 0;
+        padding: 10px 0 10px 0;
+        background: rgb(35 37 44 / 78%);
     }
-    .green {
-        background: rgba(38, 171, 95, 0.2);
-        color: #26ab5f;
-    }
+}
+
+.active {
+    transition: all 0.3s;
+    background-color: rgba(57, 49, 98, 0.2);
+    border-radius: 10px;
 }

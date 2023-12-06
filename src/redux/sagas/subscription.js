@@ -1,11 +1,11 @@
-import { take, put, call, fork } from "redux-saga/effects";
+import { take, put, call, fork } from 'redux-saga/effects';
 import {
   getSubscriptionsRequest,
-  getSubscriptionsSuccess,
-} from "../slicers/subscription";
-import { ALERT_TYPES } from "../../constants";
-import { callRequest, GET_SUBSCRIPTIONS } from "../../config/webService";
-import { toastAlert } from "../../services/utils";
+  getSubscriptionsSuccess
+} from '../slicers/subscription';
+import { ALERT_TYPES } from '../../constants';
+import { callRequest, GET_SUBSCRIPTIONS } from '../../config/webService';
+import { toastAlert } from '../../services/utils';
 
 function* getSubscriptions() {
   while (true) {
@@ -18,18 +18,18 @@ function* getSubscriptions() {
         callRequest,
         GET_SUBSCRIPTIONS,
         {},
-        "",
-        "",
+        '',
+        '',
         {}
       );
       if (response.status) {
         if (responseCallback) responseCallback(response);
-        yield put(getSubscriptionsSuccess(response));
+        // yield put(getSubscriptionsSuccess(response));
       } else {
         if (responseCallback) responseCallback(response);
       }
     } catch (err) {
-      console.log("sssss", err);
+      console.log('sssss', err);
       if (responseCallback) responseCallback(err);
     }
   }

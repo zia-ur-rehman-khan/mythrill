@@ -1,0 +1,46 @@
+@use "../../../master.scss";
+
+.ant-table-wrapper {
+    .ant-table {
+        background-color: master.$theme3-color;
+        overflow: auto;
+
+        .ant-table-thead > tr > th {
+            background: #393162;
+            color: #ccc;
+            font-weight: 300;
+
+            border: none;
+            &::before {
+                display: none;
+            }
+        }
+
+        .ant-table-tbody {
+            tr:nth-child(even) {
+                background: master.$dark-color;
+            }
+            tr > td {
+                color: #ccc;
+                font-weight: 300;
+
+                border: none;
+                .trend-name {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+            }
+            tr:hover > td {
+                background: none;
+            }
+            .ant-table-placeholder {
+                background: none;
+                .ant-empty-description {
+                    color: #ccc;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}

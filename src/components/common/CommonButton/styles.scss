@@ -3,6 +3,19 @@ button.ant-btn {
     font-size: 12px;
     height: 40px;
     width: 100%;
+    min-width: 100px;
+}
+
+.ant-btn-loading-icon {
+    position: absolute;
+    left: 32%;
+    top: 35%;
+}
+
+.icon-but {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Media query for small screens */
